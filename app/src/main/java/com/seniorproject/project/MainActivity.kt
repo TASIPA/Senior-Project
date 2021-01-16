@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 //      //HELLO BITCHES
-        //FUCK U INDIAN
+
+        //HELLO NEW
     }
 }
