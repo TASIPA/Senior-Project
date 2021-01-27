@@ -131,6 +131,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/forgetBtn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -138,6 +139,7 @@
             android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/registerBtn"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
