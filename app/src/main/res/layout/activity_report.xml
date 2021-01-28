@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:text="Please Select a topic..."
             android:textAlignment="center"
-            android:textColor="#009688"
+            android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
@@ -30,9 +30,9 @@
             android:id="@+id/topicReport"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/spinner_border"
-            android:spinnerMode="dropdown"
-            android:layout_marginBottom="20dp"/>
+            android:spinnerMode="dropdown" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:text="Date(MM/DD/YYYY)"
             android:textAlignment="center"
-            android:textColor="#009688"
+            android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:text="Email"
             android:textAlignment="center"
-            android:textColor="#009688"
+            android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
@@ -90,7 +90,7 @@
             android:layout_marginTop="10dp"
             android:text="Phone Number"
             android:textAlignment="center"
-            android:textColor="#009688"
+            android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
@@ -115,7 +115,7 @@
             android:layout_marginTop="10dp"
             android:text="Description"
             android:textAlignment="center"
-            android:textColor="#009688"
+            android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
@@ -135,5 +135,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:text="Attachments"
+        android:translationX="30dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0094b7"
+        android:text="Submit"
+        android:translationX="200dp"
+        android:translationY="-47dp" />
 
 </LinearLayout>
