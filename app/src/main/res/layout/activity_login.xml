@@ -133,6 +133,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/forgetBtn"
             android:layout_width="120dp"
+            android:textColor="#009688"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Forget Password?"
@@ -144,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="New user? Register"
+            android:textColor="#009688"
             android:textAlignment="textStart"
             android:textSize="15sp"
             android:translationX="220dp"
