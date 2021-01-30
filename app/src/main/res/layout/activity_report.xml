@@ -5,15 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReportActivity"
+    android:padding="20dp"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,57 +48,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Email"
-            android:textAlignment="center"
-            android:textColor="#0094b7"
-            android:textSize="20sp">
-
-        </TextView>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailReport"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Phone Number"
-            android:textAlignment="center"
-            android:textColor="#0094b7"
-            android:textSize="20sp">
-
-        </TextView>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phoneReport"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="text"
+                android:text="CHANGE to DATE dropdown"
+                android:textColor="#E60000" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,37 +64,40 @@
             android:textSize="20sp">
 
         </TextView>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descripReport"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descripReport"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginBottom="10dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="350">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine" />
+                android:layout_height="200dp"
+                android:hint="Descibe the situation..."
+                android:gravity="top" />
 
-        </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="151dp"
-        android:layout_height="wrap_content"
-        android:text="Attachments"
-        android:translationX="30dp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="149dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#0094b7"
-        android:text="Submit"
-        android:translationX="200dp"
-        android:translationY="-47dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:text="Attachments"
+            android:translationX="30dp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0094b7"
+            android:text="Submit"
+            android:translationX="200dp"
+            android:translationY="-47dp" />
 
 </LinearLayout>
