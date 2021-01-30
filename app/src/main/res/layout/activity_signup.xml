@@ -95,6 +95,7 @@
             android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailSignupText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -110,6 +111,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passSignupText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -125,12 +127,23 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/repassSignupText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="45dp"
+            android:text="I agree to TASIPA's Term of Services">
+
+        </CheckBox>
 
         <Button
             android:id="@+id/SignupBtn"
@@ -141,7 +154,7 @@
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
             android:text="SIGN UP"
-            android:textColor="#000"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
 
@@ -167,6 +180,7 @@
             android:hint="Full Name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
@@ -183,6 +197,7 @@
             app:counterMaxLength="20">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -215,7 +230,7 @@
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
             android:text="NEXT"
-            android:textColor="#000"
+            android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
 
