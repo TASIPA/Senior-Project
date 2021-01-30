@@ -23,8 +23,25 @@ class SignupActivity : AppCompatActivity() {
         dialog= ProgressDialog(this)
         supportActionBar!!.hide()
         nextBtn.setOnClickListener {
-            first.visibility=INVISIBLE
-            second.visibility= VISIBLE
+            if(nameText.text.toString().isEmpty())
+            {
+                nameText.error = "Please input the name"
+                return@setOnClickListener
+            }
+            if(usernameText.text.toString().isEmpty())
+            {
+                usernameText.error = "Please input the username"
+                return@setOnClickListener
+            }
+            if(usernameText.text.toString().length > 20)
+            {
+                usernameText.error = "Username must not exceed 20 characters!"
+                return@setOnClickListener
+            }
+            else {
+                first.visibility = INVISIBLE
+                second.visibility = VISIBLE
+            }
         }
 
         SignupBtn.setOnClickListener {
