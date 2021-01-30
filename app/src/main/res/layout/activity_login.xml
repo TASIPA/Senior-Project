@@ -100,7 +100,8 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="nassavakasem@gmail.com" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +117,8 @@
                 android:id="@+id/passText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="1234567" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,7 +131,7 @@
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
             android:text="LOG IN"
-            android:textColor="#000"
+            android:textColor="#FFF"
             android:textStyle="bold" />
 
         <com.google.android.material.textview.MaterialTextView
