@@ -23,6 +23,7 @@
             android:id="@+id/topicReport"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/spinner_border"
             android:spinnerMode="dropdown" />
@@ -30,31 +31,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Date(MM/DD/YYYY)"
+            android:layout_marginTop="2dp"
+            android:text="Date"
             android:textAlignment="center"
             android:textColor="#0094b7"
             android:textSize="20sp">
 
         </TextView>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dateReport"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/spinner_border"
+        android:padding="10dp"
+        android:id="@+id/dateShowReport"
+        android:hint="MM/DD/YYYY"
+        android:textSize="24sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="CHANGE to DATE dropdown"
-                android:textColor="#E60000" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -68,7 +64,7 @@
                 android:id="@+id/descripReport"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="230dp"
                 android:layout_marginBottom="10dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="350">

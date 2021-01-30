@@ -31,10 +31,10 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-//        forgetBtn.setOnClickListener {
-//            val intent = Intent(this, ReportActivity::class.java)
-//            startActivity(intent)
-//        }
+        forgetBtn.setOnClickListener {
+            val intent = Intent(this, ReportActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun login() { //Login page
