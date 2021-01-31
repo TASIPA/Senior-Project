@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:layout_marginTop="60dp"
-            android:text="Arrive Time"
+            android:text="Depart Time"
             android:textColor="#000"
             android:textSize="16sp" />
 
