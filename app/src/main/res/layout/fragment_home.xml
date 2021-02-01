@@ -104,7 +104,8 @@
                        android:layout_height="wrap_content"
                        android:text="Hello,"
                        android:textAlignment="center"
-                       android:textSize="20dp" />
+                       android:textSize="20dp"
+                       android:textStyle="bold" />
 
                    <TextView
                        android:id="@+id/user12"
@@ -112,7 +113,8 @@
                        android:layout_height="wrap_content"
                        android:text="Fellas"
                        android:textAlignment="center"
-                       android:textSize="30dp" />
+                       android:textSize="30dp"
+                       android:textStyle="bold|italic" />
                </LinearLayout>
 
                <de.hdodenhof.circleimageview.CircleImageView
@@ -121,7 +123,7 @@
                    android:layout_alignParentRight="true"
                    android:layout_centerVertical="true"
                    android:src="@drawable/ic_baseline_person_24"
-                   app:civ_border_color="#FF000000"
+                   app:civ_border_color="@color/purple_700"
                    app:civ_border_width="2dp" />
            </RelativeLayout>
 
@@ -132,7 +134,9 @@
                android:layout_below="@+id/wlcmTxt"
                android:layout_marginLeft="16dp"
                android:text="Many things awaits you "
-               android:textSize="20dp" />
+               android:textAllCaps="true"
+               android:textSize="20dp"
+               android:textStyle="bold" />
 
            <LinearLayout
                android:id="@+id/resView"
@@ -151,25 +155,29 @@
                    android:layout_width="300dp"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="5dp"
+                   android:fontFamily="monospace"
                    android:text="Restaurants"
-                   android:textSize="20dp"
 
-                   />
+                   android:textColor="#000"
+                   android:textSize="20dp" />
                <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/resact"
                    android:layout_width="50dp"
                    android:layout_height="match_parent"
                    android:src="@drawable/ic_rightarrow"
-                   app:civ_border_color="#FF000000"
+                   app:civ_border_color="@color/purple_700"
                    app:civ_border_width="1dp" />
            </LinearLayout>
+
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/resrec"
-               android:orientation="horizontal"
                android:layout_width="match_parent"
                android:layout_height="150dp"
-               android:padding="5dp"
+               android:layout_below="@id/resView"
                android:layout_marginTop="5dp"
-               android:layout_below="@id/resView"/>
+               android:orientation="horizontal"
+               android:padding="5dp"
+               android:scrollbars="horizontal" />
            <LinearLayout
                android:id="@+id/eventView"
                android:layout_width="match_parent"
@@ -187,25 +195,30 @@
                    android:layout_width="300dp"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="5dp"
+                   android:fontFamily="monospace"
                    android:text="Events"
-                   android:textSize="20dp"
 
-                   />
+                   android:textColor="#000"
+                   android:textSize="20dp" />
                <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/eveact"
                    android:layout_width="50dp"
                    android:layout_height="match_parent"
                    android:src="@drawable/ic_rightarrow"
-                   app:civ_border_color="#FF000000"
+                   app:civ_border_color="@color/purple_700"
                    app:civ_border_width="1dp" />
            </LinearLayout>
+
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/everec"
                android:layout_width="match_parent"
                android:layout_height="150dp"
-               android:padding="5dp"
-               android:orientation="horizontal"
+               android:layout_below="@id/eventView"
                android:layout_marginTop="5dp"
-               android:layout_below="@id/eventView"/>
+               android:orientation="horizontal"
+               android:padding="5dp"
+               android:scrollbars="horizontal"
+                />
            <LinearLayout
                android:id="@+id/amenityView"
                android:layout_width="match_parent"
@@ -223,24 +236,31 @@
                    android:layout_width="300dp"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="5dp"
+                   android:fontFamily="monospace"
                    android:text="Amenity"
-                   android:textSize="20dp"
 
-                   />
+                   android:textColor="#000"
+                   android:textSize="20dp" />
                <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/amenact"
                    android:layout_width="50dp"
                    android:layout_height="match_parent"
                    android:src="@drawable/ic_rightarrow"
-                   app:civ_border_color="#FF000000"
+                   app:civ_border_color="@color/purple_700"
                    app:civ_border_width="1dp" />
            </LinearLayout>
+
            <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recamen"
                android:layout_width="match_parent"
                android:layout_height="150dp"
-               android:padding="5dp"
-               android:orientation="horizontal"
+               android:layout_below="@id/amenityView"
                android:layout_marginTop="5dp"
-               android:layout_below="@id/amenityView"/>
+               android:orientation="horizontal"
+               android:padding="5dp"
+               android:scrollbars="horizontal"
+               android:layout_marginBottom="50dp"
+                />
 
    </RelativeLayout>
 

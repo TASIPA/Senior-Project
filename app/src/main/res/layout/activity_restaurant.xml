@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".TrafficActivity">
 
-    <ListView
-        android:id="@+id/RestaurantList"
-        android:layout_width="405dp"
-        android:layout_height="726dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

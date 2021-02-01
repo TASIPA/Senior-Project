@@ -24,7 +24,7 @@
             android:layout_height="178dp"
             android:background="#FFFFFF"
             android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:src="@drawable/ic_emoji"/>
 
         <TextView
             android:id="@+id/textView"
