@@ -164,6 +164,7 @@
            </LinearLayout>
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/resrec"
+               android:orientation="horizontal"
                android:layout_width="match_parent"
                android:layout_height="150dp"
                android:padding="5dp"
@@ -202,6 +203,7 @@
                android:layout_width="match_parent"
                android:layout_height="150dp"
                android:padding="5dp"
+               android:orientation="horizontal"
                android:layout_marginTop="5dp"
                android:layout_below="@id/eventView"/>
            <LinearLayout
@@ -236,6 +238,7 @@
                android:layout_width="match_parent"
                android:layout_height="150dp"
                android:padding="5dp"
+               android:orientation="horizontal"
                android:layout_marginTop="5dp"
                android:layout_below="@id/amenityView"/>
 
