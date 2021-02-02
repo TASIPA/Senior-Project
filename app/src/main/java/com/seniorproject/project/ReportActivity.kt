@@ -1,6 +1,6 @@
 package com.seniorproject.project
 
-import android.annotation.SuppressLint
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +16,10 @@ class ReportActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report)
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
+        val formatted = current.format(formatter)
+        dateShowReport.text = "$formatted"
         // access the items of the list
         val languages = resources.getStringArray(R.array.Topics)
 

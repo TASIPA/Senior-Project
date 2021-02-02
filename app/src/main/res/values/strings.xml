@@ -5,12 +5,14 @@
     <string name="title_notifications">Notifications</string>
 
     <string-array name="Topics">
-        <item>Paint</item>
-        <item>Tatsu</item>
-        <item>Jerry</item>
-        <item>Lalita</item>
-        <item>Graham</item>
-        <item>Konglit</item>
+        <item>Please Select..</item>
+        <item>Transportation issues</item>
+        <item>Road issues</item>
+        <item>Lighting</item>
+        <item>Trash management</item>
+        <item>Toiletries</item>
+        <item>Residential issues</item>
+        <item>Others</item>
     </string-array>
 
 </resources>
