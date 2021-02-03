@@ -27,20 +27,20 @@ class ReportActivity : AppCompatActivity() {
         val spinner = findViewById<Spinner>(R.id.topicReport)
         if (spinner != null) {
             val adapter = ArrayAdapter(this,
-                    android.R.layout.simple_spinner_item, languages)
+                    R.layout.custom_spinner, languages)
+            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+
             spinner.adapter = adapter
 
             spinner.onItemSelectedListener = object :
                     AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>,
                                             view: View, position: Int, id: Long) {
-                 /*   Toast.makeText(this@ReportActivity,
-                            getString(R.string.selected_item) + " " +
-                                    "" + languages[position], Toast.LENGTH_SHORT).show()*/
+                 //do smth to send data
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
+                    Toast.makeText(this@ReportActivity, "Please select one of the topics", Toast.LENGTH_SHORT).show()
                 }
             }
         }
