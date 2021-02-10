@@ -19,7 +19,7 @@
             android:id="@+id/cardImage"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/logo" />
 
         <TextView
@@ -27,9 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Painty"
-            android:textSize="20dp"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="20dp" />
     </LinearLayout>
 
 
