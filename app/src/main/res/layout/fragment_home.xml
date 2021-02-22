@@ -174,18 +174,21 @@
                    android:text="@string/seemore"
 
                    android:textAlignment="center"
+                   android:textColor="#009688"
+                   android:textSize="16sp"
                    android:textStyle="bold" />
            </LinearLayout>
 
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/resrec"
                android:layout_width="match_parent"
-               android:layout_height="150dp"
+               android:layout_height="170dp"
                android:layout_below="@id/resView"
-               android:layout_marginTop="5dp"
+               android:layout_marginTop="1dp"
                android:orientation="horizontal"
                android:padding="5dp"
                android:scrollbars="horizontal" />
+
            <LinearLayout
                android:id="@+id/eventView"
                android:layout_width="match_parent"
@@ -216,19 +219,20 @@
 
                    android:text="@string/seemore"
                    android:textAlignment="center"
+                   android:textColor="#009688"
+                   android:textSize="16sp"
                    android:textStyle="bold" />
            </LinearLayout>
 
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/everec"
                android:layout_width="match_parent"
-               android:layout_height="150dp"
+               android:layout_height="170dp"
                android:layout_below="@id/eventView"
                android:layout_marginTop="5dp"
                android:orientation="horizontal"
                android:padding="5dp"
-               android:scrollbars="horizontal"
-                />
+               android:scrollbars="horizontal" />
            <LinearLayout
                android:id="@+id/amenityView"
                android:layout_width="match_parent"
@@ -259,20 +263,21 @@
 
                    android:textAlignment="center"
                    android:textAllCaps="false"
+                   android:textColor="#009688"
+                   android:textSize="16sp"
                    android:textStyle="bold" />
            </LinearLayout>
 
            <androidx.recyclerview.widget.RecyclerView
                android:id="@+id/recamen"
                android:layout_width="match_parent"
-               android:layout_height="150dp"
+               android:layout_height="170dp"
                android:layout_below="@id/amenityView"
                android:layout_marginTop="5dp"
+               android:layout_marginBottom="50dp"
                android:orientation="horizontal"
                android:padding="5dp"
-               android:scrollbars="horizontal"
-               android:layout_marginBottom="50dp"
-                />
+               android:scrollbars="horizontal" />
 
    </RelativeLayout>
 

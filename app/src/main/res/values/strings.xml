@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="selected_item">Selected item:</string>
-    <string name="seemore">View all ></string>
+    <string name="seemore">view all</string>
     <string-array name="Topics">
         <item>Please Select..</item>
         <item>Transportation issues</item>

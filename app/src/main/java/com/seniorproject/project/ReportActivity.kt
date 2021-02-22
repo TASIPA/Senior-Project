@@ -42,8 +42,9 @@ class ReportActivity : AppCompatActivity() {
 
                     button2.setOnClickListener {
                         if (position == 0){
-                            errorText.error = "You cannot select this one"
+                            errorText.error = ""
                             errorText.requestFocus()
+                            Toast.makeText(this@ReportActivity, "Please select another topics", Toast.LENGTH_SHORT).show()
                         }
                         else{
                             Toast.makeText(this@ReportActivity,
