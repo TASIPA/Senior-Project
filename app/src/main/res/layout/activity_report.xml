@@ -8,16 +8,17 @@
     android:padding="20dp"
     android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Please Select a topic..."
-            android:textAlignment="center"
-            android:textColor="#0094b7"
-            android:textSize="20sp">
+    <TextView
+        android:id="@+id/TopicShowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Please Select a topic..."
+        android:textAlignment="center"
+        android:textColor="#0094b7"
+        android:textSize="20sp">
 
-        </TextView>
+    </TextView>
 
     <Spinner
         android:id="@+id/topicReport"
@@ -30,16 +31,18 @@
         android:paddingVertical="5dp"
         android:spinnerMode="dropdown" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Date"
-            android:textAlignment="center"
-            android:textColor="#0094b7"
-            android:textSize="20sp">
 
-        </TextView>
+    <TextView
+        android:id="@+id/DateShowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Date"
+        android:textAlignment="center"
+        android:textColor="#0094b7"
+        android:textSize="20sp">
+
+    </TextView>
 
     <TextView
         android:layout_width="match_parent"
@@ -53,15 +56,16 @@
         android:textSize="24sp" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Description"
-            android:textAlignment="center"
-            android:textColor="#0094b7"
-            android:textSize="20sp">
+        android:id="@+id/DescripShowText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Description"
+        android:textAlignment="center"
+        android:textColor="#0094b7"
+        android:textSize="20sp">
 
-        </TextView>
+    </TextView>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descripReport"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -71,11 +75,12 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="350">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:hint="Descibe the situation..."
-                android:gravity="top" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/spinner_border"
+                    android:gravity="top"
+                    android:hint="Descibe the situation..." />
 
 
             </com.google.android.material.textfield.TextInputLayout>

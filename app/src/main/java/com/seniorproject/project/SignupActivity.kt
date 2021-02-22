@@ -60,7 +60,8 @@ class SignupActivity : AppCompatActivity() {
         }
         if (pass.isEmpty()) {
             passSignupText.error = "Please enter a password"
-            return}
+            return
+        }
         if (cpass.isEmpty()) {
             repassSignupText.error = "Please confirm your password"
             return
