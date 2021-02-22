@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 
-class FeedAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<FeedViewHolder>()
+class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<String>, private val mContext: Context): RecyclerView.Adapter<FeedViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
 
@@ -26,6 +26,25 @@ class FeedAdapter(private val rssObject: List<String>, private val mContext: Con
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         holder.txtTitle.text = rssObject[position].toString()
+        var result = when (rssImg[position]) {
+            "apic1" -> R.drawable.apic1
+            "apic2" -> R.drawable.apic2
+            "apic3" -> R.drawable.apic3
+            "apic4" -> R.drawable.apic4
+            "apic5"-> R.drawable.apic5
+            "epic1" -> R.drawable.epic1
+            "epic2" -> R.drawable.epic2
+            "epic3" -> R.drawable.epic3
+            "epic4" -> R.drawable.epic4
+            "epic5"-> R.drawable.epic5
+            "pic1" -> R.drawable.pic1
+            "pic2" -> R.drawable.pic2
+            "pic6" -> R.drawable.pic6
+            "pic7" -> R.drawable.pic7
+            else -> R.drawable.pic10
+        }
+        holder.img.setImageResource(result)
+
     }
     /*holder.setItemClickListener(object :
         ItemClickListener {

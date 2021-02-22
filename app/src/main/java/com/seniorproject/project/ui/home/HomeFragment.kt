@@ -37,10 +37,15 @@ class HomeFragment : Fragment() {
         super.onStart()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         resrec.layoutManager = linearLayoutManager
-        var random= listOf<String>("Hello","World","This","is","test","list")
+        var random= listOf<String>("Kope Hya Tai Kee","Beef35","Shindo Ramen","O Kra Joo Nim City branch","Yoi Tenki Shabu")
+        var img= listOf<String>("pic7","pic2","pic1","pic10","pic6")
+        var random1= listOf<String>("Central Plaza","MUIC X-Mas ","Makro","Motor Expo","Bangkok furniture fair ")
+        var img1= listOf<String>("epic1","epic2","epic3","epic4","epic5")
+        var random2= listOf<String>("PTT Gas Station","Kasikorn Bank","KrungThai Bank","Bangkok Bank","7-eleven")
+        var img2= listOf<String>("apic1","apic2","apic3","apic4","apic5")
         val adapter = context?.let {
             FeedAdapter(
-                    random,
+                    random,img,
                     it
             )
         }
@@ -53,7 +58,7 @@ class HomeFragment : Fragment() {
         everec.layoutManager = linearLayoutManager1
         val adapter1 = context?.let {
             FeedAdapter(
-                    random,
+                    random1,img1,
                     it
             )
         }
@@ -69,7 +74,7 @@ class HomeFragment : Fragment() {
         recamen.layoutManager = linearLayoutManager2
         val adapter2 = context?.let {
             FeedAdapter(
-                    random,
+                    random2,img2,
                     it
             )
         }
