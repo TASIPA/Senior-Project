@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +60,7 @@ class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnC
 
         txtTitle = itemView.findViewById(R.id.textView)
         txtTitle1 = itemView.findViewById(R.id.textView1)
-        txtTitle2 = itemView.findViewById(R.id.dis)
+        txtTitle2 = itemView.findViewById(R.id.resDistance)
         img=itemView.findViewById(R.id.imageShow)
 
 

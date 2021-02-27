@@ -49,7 +49,7 @@
             android:translationY="7dp" />
 
         <TextView
-            android:id="@+id/dis"
+            android:id="@+id/resDistance"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:text="distance from user"

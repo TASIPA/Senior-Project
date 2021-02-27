@@ -57,17 +57,17 @@
             android:translationY="12dp" />
 
         <TextView
-            android:id="@+id/dis"
+            android:id="@+id/resDistance"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
-            android:text=""
+            android:text="distance"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textColor="#0094b7"
             android:textSize="14sp"
             android:textStyle="normal|italic"
-            android:translationX="200dp"
-            android:translationY="-10dp" />
+            android:translationX="210dp"
+            android:translationY="-9dp" />
 
         <TextView
             android:id="@+id/vv12"

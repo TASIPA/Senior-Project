@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="216dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location"
             android:textAlignment="viewStart"
@@ -48,17 +48,43 @@
             android:textStyle="normal|italic"
             android:translationY="7dp" />
 
+
         <TextView
-            android:id="@+id/dis"
-            android:layout_width="155dp"
+            android:id="@+id/resDistance"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event date"
             android:textAlignment="textStart"
             android:textAllCaps="true"
             android:textColor="#000"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="normal|italic"
             android:translationY="10dp" />
+
+        <TextView
+            android:id="@+id/eventCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Event's Category"
+            android:textAlignment="viewStart"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:translationX="205dp"
+            android:translationY="-14dp" />
+        <TextView
+            android:id="@+id/eventDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Distance"
+            android:textAlignment="viewStart"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:translationX="285dp"
+            android:translationY="-67dp" />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -69,7 +95,7 @@
             android:scaleType="fitCenter"
             android:scrollbarTrackVertical="@drawable/logo"
             android:translationX="325dp"
-            android:translationY="-250dp"
+            android:translationY="-300dp"
             tools:srcCompat="@drawable/heart1" />
 
     </LinearLayout>
