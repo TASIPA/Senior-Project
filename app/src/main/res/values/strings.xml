@@ -3,8 +3,8 @@
     <string name="title_home">Home</string>
     <string name="Emergency">Emergency</string>
     <string name="Favourite">Favourite</string>
-    <string name="Promotions">Promotion</string>
-    <string name="Report">Self Report</string>
+    <string name="Promotions">Promotions</string>
+    <string name="Report">Trains</string>
     <string name="selected_item">Selected item:</string>
     <string name="seemore">view all</string>
     <string-array name="Topics">

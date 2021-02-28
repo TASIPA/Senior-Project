@@ -30,7 +30,7 @@
             android:id="@+id/showTrainNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="50dp"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="#0094b7"
@@ -51,19 +51,22 @@
 
         <TextView
             android:id="@+id/traindetail"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Train detail"
+            android:textAlignment="center"
             android:textColor="#0094b7"
             android:textSize="18sp" />
 
         <ImageView
+            android:id="@+id/depa"
             android:layout_width="55dp"
             android:layout_height="45dp"
             android:layout_marginTop="35dp"
             app:srcCompat="@drawable/flags" />
 
         <ImageView
+            android:id="@+id/dest"
             android:layout_width="55dp"
             android:layout_height="45dp"
             android:layout_marginTop="83dp"
@@ -73,7 +76,7 @@
             android:id="@+id/departuretime"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="60dp"
             android:text="Depart Time"
             android:textColor="#000"
@@ -83,7 +86,7 @@
             android:id="@+id/departstationname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="35dp"
             android:text="Departure Station"
             android:textColor="#000"
@@ -94,7 +97,7 @@
             android:id="@+id/destarrivaltime"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="110dp"
             android:text="Arrive Time"
             android:textColor="#000"
@@ -104,7 +107,7 @@
             android:id="@+id/destinationstationname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="85dp"
             android:text="Destination Station"
             android:textColor="#000"

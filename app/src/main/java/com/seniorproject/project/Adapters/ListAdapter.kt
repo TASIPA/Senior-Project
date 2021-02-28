@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 
-class ListAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<FeedViewHolders>()
+class ListAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<ListAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -44,39 +44,39 @@ class ListAdapter(private val rssObject: List<String>, private val mContext: Con
     override fun getItemCount(): Int {
         return rssObject.size
     }
-}
-class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener,View.OnLongClickListener
-{
+    class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener,View.OnLongClickListener
+    {
 
-    var txtTitle: TextView
-    var txtTitle1: TextView
-    var txtTitle2: TextView
-    var img:ImageView
-
-
-    //private var itemClickListener: ItemClickListener? = null
-
-    init {
-
-        txtTitle = itemView.findViewById(R.id.textView)
-        txtTitle1 = itemView.findViewById(R.id.textView1)
-        txtTitle2 = itemView.findViewById(R.id.resDistance)
-        img=itemView.findViewById(R.id.imageShow)
+        var txtTitle: TextView
+        var txtTitle1: TextView
+        var txtTitle2: TextView
+        var img:ImageView
 
 
+        //private var itemClickListener: ItemClickListener? = null
 
-        //itemView.setOnClickListener(this)
-        //itemView.setOnLongClickListener(this)
+        init {
+
+            txtTitle = itemView.findViewById(R.id.textView)
+            txtTitle1 = itemView.findViewById(R.id.textView1)
+            txtTitle2 = itemView.findViewById(R.id.resDistance)
+            img=itemView.findViewById(R.id.imageShow)
+
+
+
+            //itemView.setOnClickListener(this)
+            //itemView.setOnLongClickListener(this)
+
+        }
+
+        override fun onClick(v: View) {
+            //itemClickListener!!.onClick(v, adapterPosition,false)
+        }
+
+        override fun onLongClick(v: View): Boolean {
+            //itemClickListener!!.onClick(v,adapterPosition,true)
+            return true
+        }
 
     }
-
-    override fun onClick(v: View) {
-        //itemClickListener!!.onClick(v, adapterPosition,false)
-    }
-
-    override fun onLongClick(v: View): Boolean {
-        //itemClickListener!!.onClick(v,adapterPosition,true)
-        return true
-    }
-
 }
