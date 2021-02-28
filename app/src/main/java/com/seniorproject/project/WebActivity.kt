@@ -20,6 +20,6 @@ class WebActivity : AppCompatActivity() {
                 return true
             }
         }
-        Webview.loadUrl("https://www.google.com")
+        Webview.loadUrl("https://www.thailandtrains.com")
     }
 }
