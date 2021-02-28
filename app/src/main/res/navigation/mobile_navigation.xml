@@ -14,12 +14,22 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.seniorproject.project.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/Emergency"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.seniorproject.project.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/Favourite"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_promotion"
+        android:name="com.seniorproject.project.ui.promotion.PromotionFragment"
+        android:label="@string/Promotions"
+        tools:layout="@layout/promotion_fragment" />
+    <fragment
+        android:id="@+id/navigation_report"
+        android:name="com.seniorproject.project.ui.report.ReportFragment"
+        android:label="@string/Report"
+        tools:layout="@layout/report_fragment" />
 </navigation>

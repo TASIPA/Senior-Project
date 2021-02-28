@@ -8,12 +8,20 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/emergency"
+        android:title="@string/Emergency" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:icon="@drawable/ic_favorite_24"
+        android:title="@string/Favourite" />
+    <item
+        android:id="@+id/navigation_promotion"
+        android:icon="@drawable/promotions"
+        android:title="@string/Promotions" />
+    <item
+        android:id="@+id/navigation_report"
+        android:icon="@drawable/megaphone"
+        android:title="@string/Report" />
 
 </menu>
