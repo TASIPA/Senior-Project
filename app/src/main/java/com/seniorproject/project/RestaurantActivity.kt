@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Html
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.ResAdapter
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
@@ -19,12 +20,12 @@ class RestaurantActivity : AppCompatActivity() {
                         "Restaurants</font>"))
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
-        var random= listOf<String>("Hello","World","This","is","test","list")
-        val adapter =
-            ResAdapter(
-                    random,
-                    baseContext
-            )
+        var res= listOf<Restaurants>(Restaurants("Kope Hya Tai Kee","pic7","Restaurant",4.5),
+                Restaurants("Beef 35","pic2","Restaurant",4.0),
+                Restaurants("Shindo Ramen","pic1","Restaurant",5.0),
+                Restaurants("O Kra Joo NimCity","pic10","Restaurant",4.0),
+                Restaurants("Yoi-Tenki Shabu","pic6","Restaurant",3.0))
+        val adapter = ResAdapter(res, baseContext)
         resList.adapter=adapter
         }
 

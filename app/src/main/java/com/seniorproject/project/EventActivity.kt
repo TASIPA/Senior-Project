@@ -18,12 +18,13 @@ class EventActivity : AppCompatActivity() {
                         "Events</font>"))
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         eveList.layoutManager = linearLayoutManager
-        var random= listOf<String>("Hello","World","This","is","test","list")
+        //replace with event adapter
+        /*var random= listOf<String>("Hello","World","This","is","test","list")
         val adapter =
                 ResAdapter(
                         random,
                         baseContext
                 )
-        eveList.adapter=adapter
+        eveList.adapter=adapter*/
     }
     }

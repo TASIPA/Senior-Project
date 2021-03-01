@@ -60,7 +60,6 @@
             android:id="@+id/resDistance"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
-            android:text="distance"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textColor="#0094b7"
@@ -81,17 +80,14 @@
             android:translationX="80dp"
             android:translationY="-32dp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageButton"
-            android:layout_width="62dp"
-            android:layout_height="46dp"
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:scrollbarTrackVertical="@drawable/logo"
-            android:translationX="325dp"
-            android:translationY="-300dp"
-            tools:srcCompat="@drawable/heart1" />
+            android:layout_width="54dp"
+            android:layout_height="39dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/heart1"
+            android:translationX="330dp"
+            android:translationY="-300dp" />
 
     </LinearLayout>
 

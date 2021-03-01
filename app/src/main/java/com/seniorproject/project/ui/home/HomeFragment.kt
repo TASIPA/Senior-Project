@@ -15,6 +15,7 @@ import com.seniorproject.project.AmenityActivity
 import com.seniorproject.project.EventActivity
 import com.seniorproject.project.R
 import com.seniorproject.project.RestaurantActivity
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         resrec.layoutManager = linearLayoutManager
         var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
         var img= listOf<String>("pic7","pic2","pic1","pic10","pic6")
+
         var random1= listOf<String>("Central Plaza Salaya","MUIC X-Mas ","Makro Sale","Motor Expo","Bangkok furniture fair 2020 ")
         var img1= listOf<String>("epic1","epic2","epic3","epic4","epic5")
         var random2= listOf<String>("PTT Gas Station","Kasikorn Bank","KrungThai Bank","Bangkok Bank","7-eleven")

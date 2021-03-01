@@ -19,11 +19,12 @@ class AmenityActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         amenList.layoutManager = linearLayoutManager
         var random= listOf<String>("Hello","World","This","is","test","list")
-        val adapter =
+        //replace with amenity adapter
+        /*val adapter =
                 ResAdapter(
                         random,
                         baseContext
                 )
-        amenList.adapter=adapter
+        amenList.adapter=adapter*/
     }
 }

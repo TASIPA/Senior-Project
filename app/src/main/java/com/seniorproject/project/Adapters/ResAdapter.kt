@@ -10,8 +10,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
+import com.seniorproject.project.models.Restaurants
 
-class ResAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<ResAdapter.FeedViewHolders>()
+class ResAdapter(private val rssObject: List<Restaurants>, private val mContext: Context): RecyclerView.Adapter<ResAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -26,7 +27,21 @@ class ResAdapter(private val rssObject: List<String>, private val mContext: Cont
     }
 
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
-        //holder.txtTitle.text = rssObject[position]
+        holder.txtTitle.text = rssObject[position].name
+        holder.txtTitle1.text = rssObject[position].type
+        holder.txtTitle2.text = rssObject[position].rating.toString()
+        holder.rate.rating = rssObject[position].rating.toFloat()
+        var result = when (rssObject[position].pic) {
+            "pic1" -> R.drawable.pic1
+            "pic2" -> R.drawable.pic2
+            "pic6" -> R.drawable.pic6
+            "pic7" -> R.drawable.pic7
+            else -> R.drawable.pic10
+        }
+        holder.img.setImageResource(result)
+        holder.imgbtn.setImageResource(R.drawable.heart1)
+
+
     }
     /*holder.setItemClickListener(object :
         ItemClickListener {
@@ -51,8 +66,9 @@ class ResAdapter(private val rssObject: List<String>, private val mContext: Cont
         var txtTitle: TextView
         var txtTitle1: TextView
         var txtTitle2: TextView
-        var rating: RatingBar
+        var rate: RatingBar
         var img:ImageView
+        var imgbtn:ImageView
 
 
         //private var itemClickListener: ItemClickListener? = null
@@ -61,9 +77,10 @@ class ResAdapter(private val rssObject: List<String>, private val mContext: Cont
 
             txtTitle = itemView.findViewById(R.id.textView)
             txtTitle1 = itemView.findViewById(R.id.textView1)
-            txtTitle2 = itemView.findViewById(R.id.resDistance)
-            rating= itemView.findViewById(R.id.ratingBar2)
+            txtTitle2 = itemView.findViewById(R.id.vv12)
+            rate= itemView.findViewById(R.id.ratingBar2)
             img=itemView.findViewById(R.id.imageShow)
+            imgbtn=itemView.findViewById(R.id.imageButton)
 
 
 
