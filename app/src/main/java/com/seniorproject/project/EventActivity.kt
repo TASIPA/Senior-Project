@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.seniorproject.project.Adapters.FeedAdapter
-import com.seniorproject.project.Adapters.ListAdapter
+import com.seniorproject.project.Adapters.ResAdapter
 import kotlinx.android.synthetic.main.activity_event.*
-import kotlinx.android.synthetic.main.activity_restaurant.*
-import kotlinx.android.synthetic.main.activity_restaurant.resList
 
 class EventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +20,7 @@ class EventActivity : AppCompatActivity() {
         eveList.layoutManager = linearLayoutManager
         var random= listOf<String>("Hello","World","This","is","test","list")
         val adapter =
-                ListAdapter(
+                ResAdapter(
                         random,
                         baseContext
                 )

@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 
-class ListAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<ListAdapter.FeedViewHolders>()
+class ResAdapter(private val rssObject: List<String>, private val mContext: Context): RecyclerView.Adapter<ResAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
-        val itemView = inflater.inflate(R.layout.card_amenities,parent,false)
+        val itemView = inflater.inflate(R.layout.card_restaurant,parent,false)
         return FeedViewHolders(itemView)
     }
 
@@ -50,6 +51,7 @@ class ListAdapter(private val rssObject: List<String>, private val mContext: Con
         var txtTitle: TextView
         var txtTitle1: TextView
         var txtTitle2: TextView
+        var rating: RatingBar
         var img:ImageView
 
 
@@ -60,6 +62,7 @@ class ListAdapter(private val rssObject: List<String>, private val mContext: Con
             txtTitle = itemView.findViewById(R.id.textView)
             txtTitle1 = itemView.findViewById(R.id.textView1)
             txtTitle2 = itemView.findViewById(R.id.resDistance)
+            rating= itemView.findViewById(R.id.ratingBar2)
             img=itemView.findViewById(R.id.imageShow)
 
 
