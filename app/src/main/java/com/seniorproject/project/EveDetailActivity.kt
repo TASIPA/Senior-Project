@@ -9,6 +9,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_ame_detail.*
+import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
+import kotlinx.android.synthetic.main.activity_ame_detail.AmeType
+import kotlinx.android.synthetic.main.activity_eve_detail.*
 
 class EveDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -30,6 +34,19 @@ class EveDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var name = bundle?.getString("NAME").toString()
         var type = bundle?.getString("TYPE").toString()
         var pic = bundle?.getString("PICTURE").toString()
+        var rate = bundle?.getString("RATING").toString()
+
+        EveName.text = name
+        EveType.text = type
+        var result=when (pic) {
+            "epic1" -> R.drawable.epic1
+            "epic2" -> R.drawable.epic2
+            "epic3"-> R.drawable.epic3
+            "epic4"-> R.drawable.epic4
+            else -> R.drawable.epic5
+        }
+        EvePic.setImageResource(result)
+        EveratingBar.rating = rate.toDouble().toFloat()
     }
 
     /**

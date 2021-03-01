@@ -20,7 +20,7 @@
         tools:context=".MapsActivity" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/EveratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -49,7 +49,7 @@
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/EvePic" />
 
     <TextView
         android:id="@+id/textView6"
@@ -61,10 +61,10 @@
         android:textColor="#0094b7"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/EvePic" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/EvePic"
         android:layout_width="0dp"
         android:layout_height="180dp"
         app:layout_constraintEnd_toEndOf="parent"

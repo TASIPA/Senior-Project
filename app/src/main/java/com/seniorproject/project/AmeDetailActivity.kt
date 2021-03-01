@@ -9,6 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_ame_detail.*
 
 class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -30,6 +31,19 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var name = bundle?.getString("NAME").toString()
         var type = bundle?.getString("TYPE").toString()
         var pic = bundle?.getString("PICTURE").toString()
+        var rate = bundle?.getString("RATING").toString()
+
+        AmeName.text = name
+        AmeType.text = type
+        var result=when (pic) {
+            "apic1" -> R.drawable.apic1
+            "apic2" -> R.drawable.apic2
+            "apic3"-> R.drawable.apic3
+            "apic4"-> R.drawable.apic4
+            else -> R.drawable.apic5
+        }
+        AmePic.setImageResource(result)
+        AmeratingBar.rating = rate.toDouble().toFloat()
     }
 
     /**

@@ -9,6 +9,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_ame_detail.*
+import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
+import kotlinx.android.synthetic.main.activity_res_detail.*
 
 class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -30,6 +33,19 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var name = bundle?.getString("NAME").toString()
         var type = bundle?.getString("TYPE").toString()
         var pic = bundle?.getString("PICTURE").toString()
+        var rate = bundle?.getString("RATING").toString()
+
+        ResName.text = name
+        ResType.text = type
+        var result=when (pic) {
+            "pic1" -> R.drawable.pic1
+            "pic2" -> R.drawable.pic2
+            "pic3"-> R.drawable.pic3
+            "pic4"-> R.drawable.pic4
+            else -> R.drawable.pic5
+        }
+        ResPic.setImageResource(result)
+        ResratingBar.rating = rate.toDouble().toFloat()
     }
 
     /**
