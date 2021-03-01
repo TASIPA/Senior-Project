@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.seniorproject.project.Adapters.ListAdapter
+import com.seniorproject.project.Adapters.ResAdapter
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
@@ -21,7 +21,7 @@ class RestaurantActivity : AppCompatActivity() {
         resList.layoutManager = linearLayoutManager
         var random= listOf<String>("Hello","World","This","is","test","list")
         val adapter =
-            ListAdapter(
+            ResAdapter(
                     random,
                     baseContext
             )
