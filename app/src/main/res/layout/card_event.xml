@@ -50,7 +50,7 @@
 
 
         <TextView
-            android:id="@+id/resDistance"
+            android:id="@+id/eventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event date"
@@ -66,19 +66,20 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:text="Event's Category"
-            android:textAlignment="viewStart"
+            android:textAlignment="viewEnd"
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="normal"
             android:translationX="205dp"
             android:translationY="-14dp" />
+
         <TextView
             android:id="@+id/eventDistance"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:text="Distance"
-            android:textAlignment="viewStart"
+            android:textAlignment="textEnd"
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="18sp"
