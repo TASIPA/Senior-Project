@@ -40,7 +40,7 @@
             android:id="@+id/textView1"
             android:layout_width="216dp"
             android:layout_height="wrap_content"
-            android:text="Contact/Description"
+            android:text="Category"
             android:textAlignment="viewStart"
             android:textAllCaps="true"
             android:textColor="#000"
