@@ -29,6 +29,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         //use to calculate distance to User
         var name = bundle?.getString("NAME").toString()
         var type = bundle?.getString("TYPE").toString()
+        var pic = bundle?.getString("PICTURE").toString()
     }
 
     /**
