@@ -9,6 +9,7 @@ class WebActivity : AppCompatActivity() {
     private lateinit var Webview: WebView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar!!.setTitle("Web View")
         setContentView(R.layout.activity_web)
         Webview = findViewById(R.id.webVieww)
         Webview.settings.setJavaScriptEnabled(true)

@@ -3,15 +3,17 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.EventAdapter
 import com.seniorproject.project.Adapters.ResAdapter
+import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
-class EventActivity : AppCompatActivity() {
+class EventActivity : AppCompatActivity(),onItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
@@ -28,7 +30,11 @@ class EventActivity : AppCompatActivity() {
                 Events("Makro SALE","epic3","sale","Makro Salaya","17 March 2021",0.0),
                 Events("Motor Expo","epic4","exhibition","Impact Challenger Hall","23 October 2021",0.0),
                 Events("Bangkok Furniture Fair","epic5","exhibition","Bitec Bangna","28 April 2021",0.0))
-        val adapter = EventAdapter(eventmock, baseContext)
+        val adapter = EventAdapter(eventmock, baseContext,this)
         eveList.adapter=adapter
     }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this ,"Clicked",Toast.LENGTH_SHORT).show()
     }
+}

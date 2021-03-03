@@ -3,16 +3,18 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.AmenityAdapter
 import com.seniorproject.project.Adapters.EventAdapter
 import com.seniorproject.project.Adapters.ResAdapter
+import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Amenities
 import com.seniorproject.project.models.Events
 import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_event.*
 
-class AmenityActivity : AppCompatActivity() {
+class AmenityActivity : AppCompatActivity(),onItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amenity)
@@ -28,7 +30,11 @@ class AmenityActivity : AppCompatActivity() {
                 Amenities("KrungThai Bank","apic3","Bank",0.0),
                 Amenities("Bangkok Bank","apic4","Bank",0.0),
                 Amenities("7-11 The september branch","apic5","Convenient Store",0.0))
-        val adapter = AmenityAdapter(amenmock, baseContext)
+        val adapter = AmenityAdapter(amenmock, baseContext,this)
         amenList.adapter=adapter
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this ,"Clicked", Toast.LENGTH_SHORT).show()
     }
 }

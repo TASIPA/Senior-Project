@@ -1,3 +1,4 @@
+/*
 package com.seniorproject.project
 
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_res_detail)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         val bundle = intent.extras
@@ -37,18 +38,19 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
         ResName.text = name
         ResType.text = type
-        var result=when (pic) {
+        var result = when (pic) {
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
-            "pic3"-> R.drawable.pic3
-            "pic4"-> R.drawable.pic4
+            "pic3" -> R.drawable.pic3
+            "pic4" -> R.drawable.pic4
             else -> R.drawable.pic5
         }
         ResPic.setImageResource(result)
         ResratingBar.rating = rate.toDouble().toFloat()
     }
 
-    /**
+    */
+/**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
@@ -56,19 +58,20 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
-     */
+     *//*
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val bundle = intent.extras
         var pointLat = bundle?.getString("lati").toString().toDouble()
         var pointLon = bundle?.getString("longi").toString().toDouble()
         var name = bundle?.getString("NAME").toString()
-        latLng = LatLng(pointLat,pointLon)
+        latLng = LatLng(pointLat, pointLon)
         // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(name))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        if (name==null) {
+        if (name == null) {
             finish()
         }
     }
-}
+}*/
