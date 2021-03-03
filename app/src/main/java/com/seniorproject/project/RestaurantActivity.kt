@@ -1,5 +1,6 @@
 package com.seniorproject.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
+    private lateinit var res:List<Restaurants>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
@@ -22,7 +24,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                         "Restaurants</font>"))
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
-        var res= listOf<Restaurants>(Restaurants("Kope Hya Tai Kee","pic7","Restaurant",4.5),
+         res= listOf<Restaurants>(Restaurants("Kope Hya Tai Kee","pic7","Restaurant",4.5),
                 Restaurants("Beef 35","pic2","Restaurant",4.0),
                 Restaurants("Shindo Ramen","pic1","Restaurant",5.0),
                 Restaurants("O Kra Joo NimCity","pic10","Restaurant",4.0),
@@ -32,7 +34,13 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Item $position Clicked", Toast.LENGTH_SHORT).show()
+        var intent= Intent(this,ResDetailActivity::class.java)
+        intent.putExtra("name",res[position].name)
+        intent.putExtra("type",res[position].type)
+        intent.putExtra("image",res[position].pic)
+        intent.putExtra("rating",res[position].rating.toString())
+        startActivity(intent)
+
     }
 
 

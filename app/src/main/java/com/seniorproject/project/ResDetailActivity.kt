@@ -1,4 +1,3 @@
-/*
 package com.seniorproject.project
 
 import androidx.appcompat.app.AppCompatActivity
@@ -28,13 +27,13 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         val bundle = intent.extras
-        var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()
+        //var pointLat = bundle?.getString("lati").toString().toDouble()
+        //var pointLon = bundle?.getString("longi").toString().toDouble()
         //use to calculate distance to User
-        var name = bundle?.getString("NAME").toString()
-        var type = bundle?.getString("TYPE").toString()
-        var pic = bundle?.getString("PICTURE").toString()
-        var rate = bundle?.getString("RATING").toString()
+        var name = bundle?.getString("name").toString()
+        var type = bundle?.getString("type").toString()
+        var pic = bundle?.getString("image").toString()
+        var rate = bundle?.getString("rating").toString()
 
         ResName.text = name
         ResType.text = type
@@ -46,11 +45,11 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> R.drawable.pic5
         }
         ResPic.setImageResource(result)
-        ResratingBar.rating = rate.toDouble().toFloat()
+        ResratingBar.rating = rate!!.toFloat()
     }
 
-    */
-/**
+/*
+*
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
@@ -58,20 +57,21 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
-     *//*
+*/
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val bundle = intent.extras
-        var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()
-        var name = bundle?.getString("NAME").toString()
+        var pointLat = 13.7889129
+        var pointLon = 100.3233457
+        var name = "hell"
         latLng = LatLng(pointLat, pointLon)
         // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(name))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
         if (name == null) {
             finish()
         }
     }
-}*/
+}

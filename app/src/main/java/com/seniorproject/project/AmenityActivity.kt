@@ -1,5 +1,6 @@
 package com.seniorproject.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_event.*
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
+    lateinit var amenmock:List<Amenities>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amenity)
@@ -25,7 +27,7 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                         "Amenity</font>"))
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         amenList.layoutManager = linearLayoutManager
-        var amenmock= listOf<Amenities>(Amenities("PTT Gas Station","apic1","Gas",0.0),
+        amenmock= listOf<Amenities>(Amenities("PTT Gas Station","apic1","Gas",0.0),
                 Amenities("Kasikorn Bank","apic2","Bank",0.0),
                 Amenities("KrungThai Bank","apic3","Bank",0.0),
                 Amenities("Bangkok Bank","apic4","Bank",0.0),
@@ -35,6 +37,12 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this ,"Clicked", Toast.LENGTH_SHORT).show()
+        var intent= Intent(this,AmeDetailActivity::class.java)
+        intent.putExtra("name",amenmock[position].name)
+        intent.putExtra("type",amenmock[position].type)
+        intent.putExtra("image",amenmock[position].pic)
+        //intent.putExtra("rating",amenmock[position].rating.toString())
+        startActivity(intent)
+
     }
 }

@@ -25,13 +25,13 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         val bundle = intent.extras
-        var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()
+        /*var pointLat = bundle?.getString("lati").toString().toDouble()
+        var pointLon = bundle?.getString("longi").toString().toDouble()*/
         //use to calculate distance to User
-        var name = bundle?.getString("NAME").toString()
-        var type = bundle?.getString("TYPE").toString()
-        var pic = bundle?.getString("PICTURE").toString()
-        var rate = bundle?.getString("RATING").toString()
+        var name = bundle?.getString("name").toString()
+        var type = bundle?.getString("type").toString()
+        var pic = bundle?.getString("image").toString()
+
 
         AmeName.text = name
         AmeType.text = type
@@ -43,7 +43,6 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> R.drawable.apic5
         }
         AmePic.setImageResource(result)
-        AmeratingBar.rating = rate.toDouble().toFloat()
     }
 
     /**
@@ -58,9 +57,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val bundle = intent.extras
-        var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()
-        var name = bundle?.getString("NAME").toString()
+        var pointLat = 13.7889129
+        var pointLon = 100.3233457
+        var name = "hell"
         latLng = LatLng(pointLat,pointLon)
         // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(name))

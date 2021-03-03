@@ -1,5 +1,6 @@
 package com.seniorproject.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
 class EventActivity : AppCompatActivity(),onItemClickListener {
+    lateinit var eventmock:List<Events>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
@@ -25,7 +27,7 @@ class EventActivity : AppCompatActivity(),onItemClickListener {
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         eveList.layoutManager = linearLayoutManager
         //replace with event adapter
-        var eventmock= listOf<Events>(Events("Central Plaza Salaya SALE","epic1","sale","Central Plaza Salaya","23 March 2021",0.0),
+         eventmock= listOf<Events>(Events("Central Plaza Salaya SALE","epic1","sale","Central Plaza Salaya","23 March 2021",0.0),
                 Events("MUIC X-Mas","epic2","college fair","Mahidol University","25 December 2021",0.0),
                 Events("Makro SALE","epic3","sale","Makro Salaya","17 March 2021",0.0),
                 Events("Motor Expo","epic4","exhibition","Impact Challenger Hall","23 October 2021",0.0),
@@ -35,6 +37,12 @@ class EventActivity : AppCompatActivity(),onItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this ,"Clicked",Toast.LENGTH_SHORT).show()
+        var intent= Intent(this,EveDetailActivity::class.java)
+        intent.putExtra("name",eventmock[position].name)
+        intent.putExtra("type",eventmock[position].category)
+        intent.putExtra("image",eventmock[position].pic)
+        //intent.putExtra("rating",res[position].rating.toString())
+        startActivity(intent)
+
     }
 }
