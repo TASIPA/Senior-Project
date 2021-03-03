@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
         forgetBtn.setOnClickListener {
-            val intent = Intent(this, Railway::class.java)
+            val intent = Intent(this, ReportActivity::class.java)
             startActivity(intent)
         }
     }
