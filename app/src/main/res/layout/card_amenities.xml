@@ -13,14 +13,14 @@
     app:cardMaxElevation="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="274dp"
+        android:layout_width="397dp"
+        android:layout_height="260dp"
         android:layout_margin="8dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageShow"
-            android:layout_width="match_parent"
+            android:layout_width="385dp"
             android:layout_height="178dp"
             android:background="#FFFFFF"
             android:contentDescription="@string/imgdes"
@@ -35,7 +35,8 @@
             android:textAlignment="center"
             android:textColor="#0094b7"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -46,8 +47,7 @@
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="18sp"
-            android:textStyle="normal|italic"
-            android:translationY="7dp" />
+            android:textStyle="normal|italic" />
 
         <TextView
             android:id="@+id/resDistance"
@@ -58,8 +58,7 @@
             android:textAllCaps="false"
             android:textColor="#0094b7"
             android:textSize="14sp"
-            android:textStyle="normal|italic"
-            android:translationY="10dp" />
+            android:textStyle="normal|italic" />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -71,7 +70,7 @@
             android:scaleType="fitCenter"
             android:scrollbarTrackVertical="@drawable/logo"
             android:translationX="325dp"
-            android:translationY="-250dp"
+            android:translationY="-60dp"
             tools:srcCompat="@drawable/ic_heart" />
 
     </LinearLayout>
