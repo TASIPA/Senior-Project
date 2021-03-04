@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.seniorproject.project.ui.home.HomeFragment"
+        android:name="com.seniorproject.project.ui.Home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
@@ -15,21 +15,21 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.seniorproject.project.ui.Emergency.EmergencyFragment"
         android:label="@string/Emergency"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_emergency" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.seniorproject.project.ui.Favourites.FavouriteFragment"
         android:label="@string/Favourite"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/navigation_promotion"
-        android:name="com.seniorproject.project.ui.promotion.PromotionFragment"
+        android:name="com.seniorproject.project.ui.Promotion.PromotionFragment"
         android:label="@string/Promotions"
         tools:layout="@layout/promotion_fragment" />
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.seniorproject.project.ui.report.ReportFragment"
+        android:name="com.seniorproject.project.ui.Report.ReportFragment"
         android:label="@string/Report"
         tools:layout="@layout/report_fragment" />
 </navigation>

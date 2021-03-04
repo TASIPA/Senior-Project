@@ -1,12 +1,12 @@
-package com.seniorproject.project.ui.promotion
+package com.seniorproject.project.ui.Report
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class PromotionViewModel : ViewModel() {
+class ReportViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Promotion Fragment"
+        value = "This is Report Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,13 +1,11 @@
-package com.seniorproject.project.ui.home
+package com.seniorproject.project.ui.Home
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.FeedAdapter
@@ -15,7 +13,6 @@ import com.seniorproject.project.AmenityActivity
 import com.seniorproject.project.EventActivity
 import com.seniorproject.project.R
 import com.seniorproject.project.RestaurantActivity
-import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -73,7 +70,7 @@ class HomeFragment : Fragment() {
         }
 
         val linearLayoutManager2 = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-        recamen.layoutManager = linearLayoutManager2
+        recame.layoutManager = linearLayoutManager2
         val adapter2 = context?.let {
             FeedAdapter(
                     random2,img2,
@@ -81,8 +78,8 @@ class HomeFragment : Fragment() {
             )
         }
 
-        recamen.adapter=adapter2
-        amenact.setOnClickListener {
+        recame.adapter=adapter2
+        ameact.setOnClickListener {
             var intent= Intent(activity,AmenityActivity::class.java)
             startActivity(intent)
         }

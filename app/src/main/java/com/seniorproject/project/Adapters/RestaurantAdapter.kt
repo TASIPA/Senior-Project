@@ -13,7 +13,7 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 
-class ResAdapter(private val rssObject: List<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<ResAdapter.FeedViewHolders>()
+class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<RestaurantAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 

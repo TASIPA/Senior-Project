@@ -40,8 +40,8 @@
             android:label="@string/title_activity_res_detail" />
         <activity android:name=".ResDetail" />
         <activity android:name=".WebActivity" />
-        <activity android:name=".Qrcode" />
-        <activity android:name=".Railway" />
+        <activity android:name=".QrcodeActivity" />
+        <activity android:name=".RailwayActivity" />
         <activity android:name=".AmenityActivity" />
         <activity android:name=".EventActivity" />
         <activity android:name=".RestaurantActivity" />

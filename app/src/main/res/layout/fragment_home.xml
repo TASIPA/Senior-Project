@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.Home.HomeFragment">
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view1"
         android:layout_width="match_parent"
@@ -256,7 +256,7 @@
                    android:textSize="20dp" />
 
                <TextView
-                   android:id="@+id/amenact"
+                   android:id="@+id/ameact"
                    android:layout_width="80dp"
                    android:layout_height="match_parent"
                    android:text="@string/seemore"
@@ -269,7 +269,7 @@
            </LinearLayout>
 
            <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/recamen"
+               android:id="@+id/recame"
                android:layout_width="match_parent"
                android:layout_height="170dp"
                android:layout_below="@id/amenityView"

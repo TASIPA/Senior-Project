@@ -10,7 +10,7 @@ import com.seniorproject.project.models.RailwayData
 import kotlinx.android.synthetic.main.activity_railway.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class Railway : AppCompatActivity() {
+class RailwayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_railway)

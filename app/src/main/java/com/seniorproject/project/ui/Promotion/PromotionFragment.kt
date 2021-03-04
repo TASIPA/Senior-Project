@@ -1,4 +1,4 @@
-package com.seniorproject.project.ui.promotion
+package com.seniorproject.project.ui.Promotion
 
 import android.os.Bundle
 import android.view.LayoutInflater

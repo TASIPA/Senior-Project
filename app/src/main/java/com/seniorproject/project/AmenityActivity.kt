@@ -4,16 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.AmenityAdapter
-import com.seniorproject.project.Adapters.EventAdapter
-import com.seniorproject.project.Adapters.ResAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Amenities
-import com.seniorproject.project.models.Events
 import kotlinx.android.synthetic.main.activity_amenity.*
-import kotlinx.android.synthetic.main.activity_event.*
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
     lateinit var amenmock:List<Amenities>
