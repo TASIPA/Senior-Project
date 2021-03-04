@@ -7,6 +7,7 @@
     <string name="Report">Trains</string>
     <string name="selected_item">Selected item:</string>
     <string name="seemore">view all</string>
+
     <string-array name="Topics">
         <item>Please Select..</item>
         <item>Transportation issues</item>
@@ -17,6 +18,7 @@
         <item>Residential issues</item>
         <item>Others</item>
     </string-array>
+
     <string name="title_activity_res_detail">Map</string>
     <string name="title_activity_ame_detail">Map</string>
     <string name="title_activity_eve_detail">Map</string>
