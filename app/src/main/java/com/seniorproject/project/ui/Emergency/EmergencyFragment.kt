@@ -29,9 +29,9 @@ class EmergencyFragment : Fragment(), OnMapReadyCallback {
         emergencyViewModel =
                 ViewModelProvider(this).get(EmergencyViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_emergency, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        //val textView: TextView = root.findViewById(R.id.text_dashboard)
         emergencyViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            //textView.text = it
         })
         return root
     }
