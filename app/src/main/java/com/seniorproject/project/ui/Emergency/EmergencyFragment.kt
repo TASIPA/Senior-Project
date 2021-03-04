@@ -1,4 +1,4 @@
-package com.seniorproject.project.ui.notifications
+package com.seniorproject.project.ui.Emergency
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.seniorproject.project.R
 
-class NotificationsFragment : Fragment() {
+class EmergencyFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var emergencyViewModel: EmergencyViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        emergencyViewModel =
+                ViewModelProvider(this).get(EmergencyViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        emergencyViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

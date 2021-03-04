@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.seniorproject.project.ui.dashboard.DashboardFragment"
+        android:name="com.seniorproject.project.ui.Emergency.EmergencyFragment"
         android:label="@string/Emergency"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.seniorproject.project.ui.notifications.NotificationsFragment"
+        android:name="com.seniorproject.project.ui.Favourites.FavouriteFragment"
         android:label="@string/Favourite"
         tools:layout="@layout/fragment_notifications" />
     <fragment
