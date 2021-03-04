@@ -38,7 +38,7 @@ class AmenityAdapter(private val rssObject: List<Amenities>, private val mContex
             else -> R.drawable.apic5
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.heart1)
+        holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }

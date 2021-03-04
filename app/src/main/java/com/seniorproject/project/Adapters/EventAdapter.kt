@@ -40,7 +40,7 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
             else -> R.drawable.epic5
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.heart1)
+        holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }

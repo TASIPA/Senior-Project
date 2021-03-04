@@ -97,7 +97,7 @@
             android:scrollbarTrackVertical="@drawable/logo"
             android:translationX="325dp"
             android:translationY="-300dp"
-            tools:srcCompat="@drawable/heart1" />
+            tools:srcCompat="@drawable/ic_heart" />
 
     </LinearLayout>
 

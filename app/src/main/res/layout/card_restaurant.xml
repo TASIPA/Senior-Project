@@ -85,7 +85,7 @@
             android:layout_width="54dp"
             android:layout_height="39dp"
             android:scaleType="fitXY"
-            android:src="@drawable/heart1"
+            android:src="@drawable/ic_heart"
             android:translationX="330dp"
             android:translationY="-300dp" />
 

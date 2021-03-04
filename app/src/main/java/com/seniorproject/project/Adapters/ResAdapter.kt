@@ -40,7 +40,7 @@ class ResAdapter(private val rssObject: List<Restaurants>, private val mContext:
             else -> R.drawable.pic10
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.heart1)
+        holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }
