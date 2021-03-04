@@ -40,9 +40,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var result = when (pic) {
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
-            "pic3" -> R.drawable.pic3
-            "pic4" -> R.drawable.pic4
-            else -> R.drawable.pic5
+            "pic6" -> R.drawable.pic6
+            "pic7" -> R.drawable.pic7
+            else -> R.drawable.pic10
         }
         ResPic.setImageResource(result)
         ResratingBar.rating = rate!!.toFloat()
@@ -62,7 +62,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val bundle = intent.extras
+        //val bundle = intent.extras
         var pointLat = 13.7889129
         var pointLon = 100.3233457
         var name = "hell"

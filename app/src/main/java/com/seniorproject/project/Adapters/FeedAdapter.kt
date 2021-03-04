@@ -1,14 +1,17 @@
 package com.seniorproject.project.Adapters
 
 import android.content.Context
+import android.content.Intent
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
+import com.seniorproject.project.ResDetailActivity
 
 class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<String>, private val mContext: Context): RecyclerView.Adapter<FeedAdapter.FeedViewHolder>()
 {
@@ -83,6 +86,8 @@ class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<S
 
         override fun onClick(v: View) {
             //itemClickListener!!.onClick(v, adapterPosition,false)
+
+
         }
 
         override fun onLongClick(v: View): Boolean {

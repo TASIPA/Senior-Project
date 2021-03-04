@@ -56,7 +56,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val bundle = intent.extras
+        //val bundle = intent.extras
         var pointLat = 13.7889129
         var pointLon = 100.3233457
         var name = "hell"
