@@ -71,7 +71,7 @@
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="normal"
-            android:translationX="205dp"
+            android:translationX="195dp"
             android:translationY="-14dp" />
 
         <TextView
@@ -79,12 +79,12 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:text="Distance"
-            android:textAlignment="textEnd"
+            android:textAlignment="viewEnd"
             android:textAllCaps="true"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="normal"
-            android:translationX="285dp"
+            android:translationX="280dp"
             android:translationY="-67dp" />
 
         <ImageButton
@@ -96,7 +96,7 @@
             android:scaleType="fitCenter"
             android:scrollbarTrackVertical="@drawable/logo"
             android:translationX="325dp"
-            android:translationY="-300dp"
+            android:translationY="-86dp"
             tools:srcCompat="@drawable/ic_heart" />
 
     </LinearLayout>
