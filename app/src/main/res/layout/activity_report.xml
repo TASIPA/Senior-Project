@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Please Select a topic..."
+        android:text="@string/Select_Topic"
         android:textAlignment="center"
         android:textColor="#0094b7"
         android:textSize="20sp">
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="Date"
+        android:text="@string/date"
         android:textAlignment="center"
         android:textColor="#0094b7"
         android:textSize="20sp">
@@ -52,7 +52,7 @@
         android:background="@drawable/spinner_border"
         android:padding="10dp"
         android:id="@+id/dateShowReport"
-        android:hint="MM/DD/YYYY"
+        android:hint="@string/dateFormat"
         android:textSize="24sp" />
 
     <TextView
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Description"
+        android:text="@string/description"
         android:textAlignment="center"
         android:textColor="#0094b7"
         android:textSize="20sp">
@@ -80,7 +80,7 @@
                     android:layout_height="200dp"
                     android:background="@drawable/spinner_border"
                     android:gravity="top"
-                    android:hint="Descibe the situation..." />
+                    android:hint="@string/descibe_the_situation" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +89,7 @@
         android:id="@+id/button"
         android:layout_width="151dp"
         android:layout_height="wrap_content"
-        android:text="Attachments"
+        android:text="@string/attachBtn"
         android:translationX="30dp" />
 
     <Button
@@ -97,7 +97,7 @@
             android:layout_width="149dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#0094b7"
-            android:text="Submit"
+            android:text="@string/submitBtn"
             android:translationX="200dp"
             android:translationY="-47dp" />
 

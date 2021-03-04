@@ -23,14 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="178dp"
             android:background="#FFFFFF"
+            android:contentDescription="@string/imgdes"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_emoji"/>
+            android:src="@drawable/ic_emoji" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:textAlignment="center"
             android:textColor="#0094b7"
             android:textSize="24sp"
@@ -40,7 +41,7 @@
             android:id="@+id/textView1"
             android:layout_width="216dp"
             android:layout_height="wrap_content"
-            android:text="Type of Services"
+            android:text="@string/Category"
             android:textAlignment="viewStart"
             android:textAllCaps="true"
             android:textColor="#000"
@@ -52,7 +53,7 @@
             android:id="@+id/resDistance"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
-            android:text="distance from user"
+            android:text="@string/Distance"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="#0094b7"
@@ -66,6 +67,7 @@
             android:layout_height="46dp"
             android:background="#FFFFFF"
             android:backgroundTint="#FFFFFF"
+            android:contentDescription="@string/Favourite"
             android:scaleType="fitCenter"
             android:scrollbarTrackVertical="@drawable/logo"
             android:translationX="325dp"
