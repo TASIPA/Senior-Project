@@ -18,7 +18,7 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         supportActionBar?.show()
         supportActionBar?.setTitle(
                 Html.fromHtml("<font color='#FFFFFF'>" +
-                        "\t".repeat(17) +
+                        "\t".repeat(18) +
                         "Amenity</font>"))
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         amenList.layoutManager = linearLayoutManager

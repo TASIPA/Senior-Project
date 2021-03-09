@@ -12,6 +12,7 @@
         android:layout_height="240dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/imgdes"
         android:scaleType="fitXY"
         android:src="@drawable/signinup"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,21 +23,22 @@
         app:layout_constraintVertical_bias="0.002" />
 
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="140dp"
-        card_view:cardCornerRadius="30dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@+id/signup_img"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/signup_img"
         app:layout_constraintTop_toTopOf="@+id/signup_img">
+
         <ImageView
             android:id="@+id/logoimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/LogoImg"
             android:src="@drawable/logo" />
     </androidx.cardview.widget.CardView>
 
@@ -48,7 +50,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
-        android:text="Register"
+        android:text="@string/register"
         android:textAlignment="center"
         android:textColor="#009688"
         android:textSize="20sp"
@@ -92,7 +94,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email">
+            android:hint="@string/Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailSignupText"
@@ -107,7 +109,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/Password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -123,7 +125,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Re-Type Password"
+            android:hint="@string/re_password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -140,8 +142,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="45dp"
-            android:text="I agree to TASIPA's Term of Services">
+            android:layout_marginStart="45dp"
+            android:text="@string/Terms_Conditions">
 
         </CheckBox>
 
@@ -153,7 +155,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
-            android:text="SIGN UP"
+            android:text="@string/signup"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
@@ -177,7 +179,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name">
+            android:hint="@string/full_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameText"
@@ -192,7 +194,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             app:counterEnabled="true"
             app:counterMaxLength="20">
 
@@ -229,7 +231,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
-            android:text="NEXT"
+            android:text="@string/next"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 

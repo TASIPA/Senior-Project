@@ -14,6 +14,7 @@
         android:layout_height="240dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/imgdes"
         android:scaleType="fitXY"
         android:src="@drawable/signinup"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,13 +25,12 @@
         app:layout_constraintVertical_bias="0.002" />
 
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="140dp"
-        card_view:cardCornerRadius="30dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@+id/signup_img"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/signup_img"
@@ -40,6 +40,7 @@
             android:id="@+id/logoimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/imgdes"
             android:src="@drawable/logo" />
     </androidx.cardview.widget.CardView>
 
@@ -51,7 +52,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="32dp"
-        android:text="Please sign in to continue"
+        android:text="@string/SignInText"
         android:textColor="#009688"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +95,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email">
+            android:hint="@string/Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailText"
@@ -110,7 +111,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/Password"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +131,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/round1"
-            android:text="LOG IN"
+            android:text="@string/log_inBtn"
             android:textColor="#FFF"
             android:textStyle="bold" />
 
@@ -140,7 +141,7 @@
             android:textColor="#009688"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Forget Password?"
+            android:text="@string/forget_password"
             android:textSize="15sp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -148,9 +149,9 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="New user? Register"
-            android:textColor="#009688"
+            android:text="@string/newUser"
             android:textAlignment="textStart"
+            android:textColor="#009688"
             android:textSize="15sp"
             android:translationX="220dp"
             android:translationY="-30dp" />
