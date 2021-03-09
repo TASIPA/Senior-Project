@@ -68,8 +68,8 @@ class EveDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(name))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        if (name==null) {
-            finish()
-        }
+//        if (name==null) {
+//            finish()
+//        }
     }
 }
