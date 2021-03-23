@@ -57,9 +57,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         //val bundle = intent.extras
-        var pointLat = 13.7889129
-        var pointLon = 100.3233457
-        var name = "hell"
+        var pointLat = 13.7998783
+        var pointLon = 100.3113113
+        var name = "7-11"
         latLng = LatLng(pointLat,pointLon)
         // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(name))
