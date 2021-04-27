@@ -21,10 +21,6 @@ class PromotionFragment : Fragment() {
         promotionViewModel =
             ViewModelProvider(this).get(PromotionViewModel::class.java)
         val root = inflater.inflate(R.layout.promotion_fragment, container, false)
-        val textView: TextView = root.findViewById(R.id.text_promotion)
-        promotionViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }
