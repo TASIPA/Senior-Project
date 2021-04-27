@@ -33,6 +33,8 @@ class EmergencyFragment : Fragment(), OnMapReadyCallback {
     private lateinit var latLng3: LatLng
     private lateinit var latLng4: LatLng
 
+    private var showHos = 0
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -75,22 +77,6 @@ class EmergencyFragment : Fragment(), OnMapReadyCallback {
         latLng2 = LatLng(hos2lat, hos2lon)
         latLng3 = LatLng(hos3lat, hos3lon)
         latLng4 = LatLng(hos4lat, hos4lon)
-
-//        HospitalShowBtn.setOnClickListener {
-//            var hos1lat = 13.786933
-//            var hos1lon = 100.321401
-//            var hos2lat = 13.804747
-//            var hos2lon = 100.303758
-//            var hos3lat = 13.798655
-//            var hos3lon = 100.288209
-//            var hos4lat = 13.805051
-//            var hos4lon = 100.284710
-//
-//            latLng1 = LatLng(hos1lat, hos1lon)
-//            latLng2 = LatLng(hos2lat, hos2lon)
-//            latLng3 = LatLng(hos3lat, hos3lon)
-//            latLng4 = LatLng(hos4lat, hos4lon)
-//        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -100,15 +86,17 @@ class EmergencyFragment : Fragment(), OnMapReadyCallback {
         //val bundle = intent.extras
         var pointLat = 13.7889129
         var pointLon = 100.3233457
-        var name = "hell"
+        var name = showHos.toString()
         latLng = LatLng(pointLat, pointLon)
 
-        mMap.addMarker(MarkerOptions().position(latLng).title(name))
+        HospitalShowBtn.setOnClickListener {
+            mMap.addMarker(MarkerOptions().position(latLng1).title("Maha Chakri Sirindhorn Dental Hospital)"))
+            mMap.addMarker(MarkerOptions().position(latLng2).title("Salaya Hospital"))
+            mMap.addMarker(MarkerOptions().position(latLng3).title("Surawan Health Promoting Hospital"))
+            mMap.addMarker(MarkerOptions().position(latLng4).title("Phutthamonthon Hospital"))
+        }
 
-        mMap.addMarker(MarkerOptions().position(latLng1).title("Maha Chakri Sirindhorn Dental Hospital)"))
-        mMap.addMarker(MarkerOptions().position(latLng2).title("Salaya Hospital"))
-        mMap.addMarker(MarkerOptions().position(latLng3).title("Surawan Health Promoting Hospital"))
-        mMap.addMarker(MarkerOptions().position(latLng4).title("Phutthamonthon Hospital"))
+        mMap.addMarker(MarkerOptions().position(latLng).title(name))
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
 
