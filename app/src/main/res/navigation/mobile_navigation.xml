@@ -29,7 +29,7 @@
         tools:layout="@layout/promotion_fragment" />
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.seniorproject.project.ui.Report.ReportFragment"
-        android:label="@string/Report"
-        tools:layout="@layout/report_fragment" />
+        android:name="com.seniorproject.project.ui.ProfileFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

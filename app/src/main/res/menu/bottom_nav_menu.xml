@@ -21,7 +21,7 @@
         android:title="@string/Promotions" />
     <item
         android:id="@+id/navigation_report"
-        android:icon="@drawable/ic_train_24"
-        android:title="@string/Report" />
+        android:icon="@drawable/ic_hamburger"
+        android:title="Menu" />
 
 </menu>
