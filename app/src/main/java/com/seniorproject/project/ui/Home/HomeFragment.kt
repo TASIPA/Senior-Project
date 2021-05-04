@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         resrec.layoutManager = linearLayoutManager
         var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
