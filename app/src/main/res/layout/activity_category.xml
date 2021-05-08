@@ -7,6 +7,7 @@
     tools:context=".Allcategories">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -17,6 +18,7 @@
             android:layout_height="?actionBarSize">
 
             <ImageView
+                android:id="@+id/back_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -40,6 +42,7 @@
             >
 
             <RelativeLayout
+                android:id="@+id/cat_res"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -72,6 +75,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_eve"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -104,6 +108,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_att"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -135,6 +140,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_ame"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -168,6 +174,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_train"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -199,6 +206,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_rep"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -232,6 +240,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_eme"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -265,6 +274,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_pro"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
@@ -297,6 +307,7 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/qr"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_centerInParent="true"
