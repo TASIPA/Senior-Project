@@ -35,6 +35,26 @@ class HomeFragment : Fragment() {
             var intent= Intent(activity, Allcategories::class.java)
             startActivity(intent)
         }
+        all_fea.setOnClickListener {
+            var intent= Intent(activity, FeaturedActivity::class.java)
+            startActivity(intent)
+        }
+        all_pro.setOnClickListener {
+            var intent= Intent(activity, PromtionActivity::class.java)
+            startActivity(intent)
+        }
+        res_list.setOnClickListener {
+            var intent= Intent(activity, RestaurantActivity::class.java)
+            startActivity(intent)
+        }
+        eve_list.setOnClickListener {
+            var intent= Intent(activity, EventActivity::class.java)
+            startActivity(intent)
+        }
+        ame_list.setOnClickListener {
+            var intent= Intent(activity, AmenityActivity::class.java)
+            startActivity(intent)
+        }
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         recycler.layoutManager = linearLayoutManager
         var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")

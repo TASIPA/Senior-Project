@@ -7,11 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
-import com.seniorproject.project.ui.Emergency.EmergencyFragment
+
 import com.seniorproject.project.ui.Favourites.FavouriteFragment
 import com.seniorproject.project.ui.Home.HomeFragment
 import com.seniorproject.project.ui.ProfileFragment
-import com.seniorproject.project.ui.Promotion.PromotionFragment
+
 
 
 

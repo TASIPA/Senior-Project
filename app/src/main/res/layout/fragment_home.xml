@@ -347,6 +347,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/res_list"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
@@ -377,6 +378,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/eve_list"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
@@ -407,6 +409,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
@@ -437,6 +440,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/ame_list"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
@@ -482,6 +486,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/all_pro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -558,6 +563,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/all_fea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
