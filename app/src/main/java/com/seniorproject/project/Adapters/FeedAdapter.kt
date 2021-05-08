@@ -17,7 +17,7 @@ class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<S
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
 
-        val itemView = inflater.inflate(R.layout.home_card,parent,false)
+        val itemView = inflater.inflate(R.layout.card_rcy,parent,false)
         return FeedViewHolder(itemView)
     }
 
@@ -30,16 +30,6 @@ class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<S
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         holder.txtTitle.text = rssObject[position].toString()
         var result = when (rssImg[position]) {
-            "apic1" -> R.drawable.apic1
-            "apic2" -> R.drawable.apic2
-            "apic3" -> R.drawable.apic3
-            "apic4" -> R.drawable.apic4
-            "apic5"-> R.drawable.apic5
-            "epic1" -> R.drawable.epic1
-            "epic2" -> R.drawable.epic2
-            "epic3" -> R.drawable.epic3
-            "epic4" -> R.drawable.epic4
-            "epic5"-> R.drawable.epic5
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
             "pic6" -> R.drawable.pic6
@@ -70,14 +60,14 @@ class FeedAdapter(private val rssObject: List<String>,private val rssImg: List<S
     {
 
         var txtTitle: TextView
-        lateinit var img:ImageView
+        var img:ImageView
 
         //private var itemClickListener: ItemClickListener? = null
 
         init {
 
-            txtTitle = itemView.findViewById(R.id.cardText)
-            img=itemView.findViewById(R.id.cardImage)
+            txtTitle = itemView.findViewById(R.id.card_name)
+            img=itemView.findViewById(R.id.card_img)
 
             //itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
