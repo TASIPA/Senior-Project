@@ -325,6 +325,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:id="@+id/all_cat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

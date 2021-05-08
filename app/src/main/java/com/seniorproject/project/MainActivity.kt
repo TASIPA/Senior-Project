@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         supportActionBar!!.hide()
         val  bottomNavigation: MeowBottomNavigation = findViewById(R.id.nav_view)
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home_black_24dp))

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.seniorproject.project.Allcategories
 
 import com.seniorproject.project.Profile
 import com.seniorproject.project.R

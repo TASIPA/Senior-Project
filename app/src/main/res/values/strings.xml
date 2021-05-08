@@ -5,7 +5,8 @@
     <string name="Favourite">Favourite</string>
     <string name="Promotions">Promotions</string>
     <string name="Attraction">Attractions</string>
-    <string name="Report">Trains</string>
+    <string name="Trains">Trains</string>
+    <string name="Report">Report</string>
     <string name="selected_item">Selected item:</string>
     <string name="seemore">view all</string>
     <string name="textView">TextView</string>

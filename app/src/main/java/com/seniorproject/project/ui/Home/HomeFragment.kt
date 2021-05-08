@@ -9,11 +9,8 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FeedAdapter
-import com.seniorproject.project.AmenityActivity
-import com.seniorproject.project.EventActivity
-import com.seniorproject.project.R
-import com.seniorproject.project.RestaurantActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -34,7 +31,10 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
+        all_cat.setOnClickListener {
+            var intent= Intent(activity, Allcategories::class.java)
+            startActivity(intent)
+        }
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         recycler.layoutManager = linearLayoutManager
         var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
