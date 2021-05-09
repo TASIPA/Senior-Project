@@ -52,7 +52,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/register"
         android:textAlignment="center"
-        android:textColor="#009688"
+        android:textColor="@color/primary_dark"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -141,8 +141,8 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="30dp"
             android:text="@string/Terms_Conditions">
 
         </CheckBox>
@@ -219,8 +219,6 @@
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>-->
-
-
 
 
         <Button
