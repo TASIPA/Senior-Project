@@ -40,7 +40,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             "apic2" -> R.drawable.apic2
             "apic3"-> R.drawable.apic3
             "apic4"-> R.drawable.apic4
-            else -> R.drawable.apic5
+            else -> R.drawable.epic5
         }
         AmePic.setImageResource(result)
     }

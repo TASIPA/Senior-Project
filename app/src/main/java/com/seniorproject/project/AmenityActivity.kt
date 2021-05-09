@@ -3,23 +3,24 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.AmenityAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Amenities
 import kotlinx.android.synthetic.main.activity_amenity.*
+import kotlinx.android.synthetic.main.activity_amenity.back_btn
+
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
     lateinit var amenmock:List<Amenities>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amenity)
-        supportActionBar?.show()
-        supportActionBar?.setTitle(
-                Html.fromHtml("<font color='#FFFFFF'>" +
-                        "\t".repeat(18) +
-                        "Amenity</font>"))
+       supportActionBar?.hide()
+        back_btn.setOnClickListener {
+            finish()
+        }
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         amenList.layoutManager = linearLayoutManager
         amenmock= listOf<Amenities>(Amenities("PTT Gas Station","apic1","Gas",0.0),

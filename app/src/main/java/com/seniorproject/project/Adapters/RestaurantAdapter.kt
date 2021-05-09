@@ -31,7 +31,7 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
         holder.txtTitle.text = rssObject[position].name
         holder.txtTitle1.text = rssObject[position].type
         holder.txtTitle2.text = rssObject[position].rating.toString()
-        holder.rate.rating = rssObject[position].rating.toFloat()
+       // holder.rate.rating = rssObject[position].rating.toFloat()
         var result = when (rssObject[position].pic) {
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
@@ -40,7 +40,7 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
             else -> R.drawable.pic10
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.ic_heart)
+        //holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }
@@ -54,9 +54,9 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
         var txtTitle: TextView
         var txtTitle1: TextView
         var txtTitle2: TextView
-        var rate: RatingBar
+      //  var rate: RatingBar
         var img:ImageView
-        var imgbtn:ImageView
+       // var imgbtn:ImageView
 
 
         //private var itemClickListener: ItemClickListener? = null
@@ -66,9 +66,9 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
             txtTitle = itemView.findViewById(R.id.textView)
             txtTitle1 = itemView.findViewById(R.id.textView1)
             txtTitle2 = itemView.findViewById(R.id.vv12)
-            rate= itemView.findViewById(R.id.ratingBar2)
+          //  rate= itemView.findViewById(R.id.ratingBar2)
             img=itemView.findViewById(R.id.imageShow)
-            imgbtn=itemView.findViewById(R.id.imageButton)
+          //  imgbtn=itemView.findViewById(R.id.imageButton)
 
 
 

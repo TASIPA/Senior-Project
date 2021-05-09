@@ -3,23 +3,23 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.EventAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Events
 import kotlinx.android.synthetic.main.activity_event.*
 
+
 class EventActivity : AppCompatActivity(),onItemClickListener {
     lateinit var eventmock:List<Events>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-        supportActionBar?.show()
-        supportActionBar?.setTitle(
-                Html.fromHtml("<font color='#FFFFFF'>" +
-                        "\t".repeat(20) +
-                        "Events</font>"))
+        supportActionBar?.hide()
+        back_btn.setOnClickListener {
+            finish()
+        }
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         eveList.layoutManager = linearLayoutManager
         //replace with event adapter

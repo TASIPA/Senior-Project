@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.RestaurantAdapter
 import com.seniorproject.project.Interface.onItemClickListener
@@ -16,11 +17,10 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
-        supportActionBar?.show()
-        supportActionBar?.setTitle(
-                Html.fromHtml("<font color='#FFFFFF'>" +
-                        "\t".repeat(17) +
-                        "Restaurants</font>"))
+        supportActionBar?.hide()
+        back_btn.setOnClickListener {
+            finish()
+        }
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
          res= listOf<Restaurants>(Restaurants("Kope Hya Tai Kee","pic7","Restaurant",4.5),

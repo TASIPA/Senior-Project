@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Amenities
-import com.seniorproject.project.models.Events
 
 class AmenityAdapter(private val rssObject: List<Amenities>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<AmenityAdapter.FeedViewHolders>()
 {
@@ -35,10 +34,10 @@ class AmenityAdapter(private val rssObject: List<Amenities>, private val mContex
             "apic2" -> R.drawable.apic2
             "apic3" -> R.drawable.apic3
             "apic4" -> R.drawable.apic4
-            else -> R.drawable.apic5
+            else -> R.drawable.epic5
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.ic_heart)
+        //holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }
@@ -52,7 +51,7 @@ class AmenityAdapter(private val rssObject: List<Amenities>, private val mContex
         var txtTitle1: TextView
         var txtTitle2: TextView
         var img:ImageView
-        var imgbtn:ImageView
+       // var imgbtn:ImageView
 
 
         init {
@@ -61,7 +60,7 @@ class AmenityAdapter(private val rssObject: List<Amenities>, private val mContex
             txtTitle1 = itemView.findViewById(R.id.textView1)
             txtTitle2 = itemView.findViewById(R.id.resDistance)
             img=itemView.findViewById(R.id.imageShow)
-            imgbtn=itemView.findViewById(R.id.imageButton)
+//            imgbtn=itemView.findViewById(R.id.imageButton)
 
 
 

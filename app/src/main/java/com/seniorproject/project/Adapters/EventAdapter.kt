@@ -29,7 +29,7 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = rssObject[position].name
         holder.txtTitle1.text = rssObject[position].location
-        holder.txtTitle2.text = rssObject[position].category
+        //holder.txtTitle2.text = rssObject[position].category
         holder.txtTitle3.text = rssObject[position].date
         holder.txtTitle4.text = rssObject[position].distance.toString()
         var result = when (rssObject[position].pic) {
@@ -40,7 +40,7 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
             else -> R.drawable.epic5
         }
         holder.img.setImageResource(result)
-        holder.imgbtn.setImageResource(R.drawable.ic_heart)
+       // holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }
@@ -53,11 +53,11 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
 
         var txtTitle: TextView
         var txtTitle1: TextView
-        var txtTitle2: TextView
+       // var txtTitle2: TextView
         var txtTitle3: TextView
         var txtTitle4: TextView
         var img:ImageView
-        var imgbtn:ImageView
+       // var imgbtn:ImageView
 
 
         //private var itemClickListener: ItemClickListener? = null
@@ -66,11 +66,11 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
 
             txtTitle = itemView.findViewById(R.id.textView)
             txtTitle1 = itemView.findViewById(R.id.textView1)
-            txtTitle2 = itemView.findViewById(R.id.eventCategory)
+            //txtTitle2 = itemView.findViewById(R.id.eventCategory)
             txtTitle3 = itemView.findViewById(R.id.eventDate)
             txtTitle4 = itemView.findViewById(R.id.eventDistance)
             img=itemView.findViewById(R.id.imageShow)
-            imgbtn=itemView.findViewById(R.id.imageButton)
+           // imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
 
