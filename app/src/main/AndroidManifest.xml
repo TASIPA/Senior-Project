@@ -15,14 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Senior_project">
-        <activity android:name=".SplashScreen"
+        <activity android:name=".AttDetailActivity"></activity>
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -45,8 +46,6 @@
         <activity
             android:name=".ResDetailActivity"
             android:label="@string/title_activity_res_detail" />
-
-
         <activity android:name=".WebActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".QrcodeActivity" />
@@ -61,8 +60,7 @@
         <activity android:name=".Allcategories" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

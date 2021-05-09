@@ -2,6 +2,7 @@ package com.seniorproject.project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -11,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
+import kotlinx.android.synthetic.main.activity_eve_detail.*
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
 class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -23,8 +25,30 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_res_detail)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.resmap) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        resdetailLayout.visibility = View.VISIBLE
+        resreviewLayout.visibility = View.GONE
+        resmapLayout.visibility = View.GONE
+
+        resbutton2.setOnClickListener {
+            resdetailLayout.visibility = View.VISIBLE
+            resreviewLayout.visibility = View.GONE
+            resmapLayout.visibility = View.GONE
+        }
+
+        resbutton3.setOnClickListener {
+            resdetailLayout.visibility = View.GONE
+            resreviewLayout.visibility = View.VISIBLE
+            resmapLayout.visibility = View.GONE
+        }
+
+        resbutton4.setOnClickListener {
+            resdetailLayout.visibility = View.GONE
+            resreviewLayout.visibility = View.GONE
+            resmapLayout.visibility = View.VISIBLE
+        }
 
         val bundle = intent.extras
         //var pointLat = bundle?.getString("lati").toString().toDouble()
@@ -36,7 +60,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var rate = bundle?.getString("rating").toString()
 
         ResName.text = name
-        ResType.text = type
+        //ResType.text = type
         var result = when (pic) {
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
@@ -45,7 +69,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> R.drawable.pic10
         }
         ResPic.setImageResource(result)
-        ResratingBar.rating = rate!!.toFloat()
+        //ResratingBar.rating = rate!!.toFloat()
     }
 
 /*

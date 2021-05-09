@@ -33,8 +33,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        //change to attractiondetailpage too
-        var intent= Intent(this,EveDetailActivity::class.java)
+        var intent= Intent(this,AttDetailActivity::class.java)
         intent.putExtra("name",attmock[position].name)
         intent.putExtra("type",attmock[position].category)
         intent.putExtra("loc",attmock[position].location)

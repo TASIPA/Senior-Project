@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".ResDetailActivity">
+    tools:context=".AttDetailActivity">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -14,10 +14,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ResPic"
+            android:id="@+id/AttPic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:srcCompat="@drawable/pic10" />
+            tools:srcCompat="@drawable/attpic5" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/ResName"
+            android:id="@+id/AttName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -44,7 +44,7 @@
             android:textSize="24sp" />
 
         <RelativeLayout
-            android:id="@+id/resdetailLayout"
+            android:id="@+id/attdetailLayout"
             android:layout_width="match_parent"
             android:layout_height="460dp"
             android:layout_alignParentStart="true"
@@ -54,7 +54,7 @@
             android:visibility="invisible">
 
             <Button
-                android:id="@+id/resbutton"
+                android:id="@+id/attbutton"
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/resreviewLayout"
+            android:id="@+id/attreviewLayout"
             android:layout_width="match_parent"
             android:layout_height="460dp"
             android:layout_alignParentStart="true"
@@ -96,7 +96,7 @@
             android:visibility="invisible">
 
             <Button
-                android:id="@+id/resbuttonn"
+                android:id="@+id/attbuttonn"
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/resmapLayout"
+            android:id="@+id/attmapLayout"
             android:layout_width="match_parent"
             android:layout_height="460dp"
             android:layout_alignParentStart="true"
@@ -124,7 +124,7 @@
             android:visibility="invisible">
 
             <Button
-                android:id="@+id/resbuttonnn"
+                android:id="@+id/attbuttonnn"
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 app:icon="@android:drawable/ic_menu_mapmode" />
 
             <fragment
-                android:id="@+id/resmap"
+                android:id="@+id/attmap"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -173,7 +173,7 @@
                 android:background="@color/black" />
 
             <Button
-                android:id="@+id/resbutton2"
+                android:id="@+id/attbutton2"
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:layout_alignParentStart="true"
@@ -184,24 +184,24 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/resbutton3"
+                android:id="@+id/attbutton3"
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="135dp"
-                android:layout_toEndOf="@+id/resbutton2"
+                android:layout_toEndOf="@+id/attbutton2"
                 android:background="#00FFFFFF"
                 android:text="Reviews"
                 android:textColor="#673AB7"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/resbutton4"
+                android:id="@+id/attbutton4"
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/resbutton3"
+                android:layout_toEndOf="@+id/attbutton3"
                 android:background="#00FFFFFF"
                 android:text="Map"
                 android:textColor="#673AB7"
@@ -210,6 +210,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

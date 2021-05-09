@@ -3,7 +3,6 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,41 +10,48 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_ame_detail.*
-import kotlinx.android.synthetic.main.activity_res_detail.*
+import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
+import kotlinx.android.synthetic.main.activity_ame_detail.amebutton2
+import kotlinx.android.synthetic.main.activity_ame_detail.amebutton3
+import kotlinx.android.synthetic.main.activity_ame_detail.amebutton4
+import kotlinx.android.synthetic.main.activity_ame_detail.amedetailLayout
+import kotlinx.android.synthetic.main.activity_ame_detail.amemapLayout
+import kotlinx.android.synthetic.main.activity_ame_detail.amereviewLayout
+import kotlinx.android.synthetic.main.activity_att_detail.*
 
-class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
+class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var latLng: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ame_detail)
+        setContentView(R.layout.activity_att_detail)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.amemap) as SupportMapFragment
+            .findFragmentById(R.id.attmap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        amedetailLayout.visibility = View.VISIBLE
-        amereviewLayout.visibility = View.GONE
-        amemapLayout.visibility = View.GONE
+        attdetailLayout.visibility = View.VISIBLE
+        attreviewLayout.visibility = View.GONE
+        attmapLayout.visibility = View.GONE
 
-        amebutton2.setOnClickListener {
-            amedetailLayout.visibility = View.VISIBLE
-            amereviewLayout.visibility = View.GONE
-            amemapLayout.visibility = View.GONE
+        attbutton2.setOnClickListener {
+            attdetailLayout.visibility = View.VISIBLE
+            attreviewLayout.visibility = View.GONE
+            attmapLayout.visibility = View.GONE
         }
 
-        amebutton3.setOnClickListener {
-            amedetailLayout.visibility = View.GONE
-            amereviewLayout.visibility = View.VISIBLE
-            amemapLayout.visibility = View.GONE
+        attbutton3.setOnClickListener {
+            attdetailLayout.visibility = View.GONE
+            attreviewLayout.visibility = View.VISIBLE
+            attmapLayout.visibility = View.GONE
         }
 
-        amebutton4.setOnClickListener {
-            amedetailLayout.visibility = View.GONE
-            amereviewLayout.visibility = View.GONE
-            amemapLayout.visibility = View.VISIBLE
+        attbutton4.setOnClickListener {
+            attdetailLayout.visibility = View.GONE
+            attreviewLayout.visibility = View.GONE
+            attmapLayout.visibility = View.VISIBLE
         }
 
         val bundle = intent.extras
@@ -57,16 +63,15 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var pic = bundle?.getString("image").toString()
 
 
-        AmeName.text = name
-        //AmeType.text = type
+        AttName.text = name
         var result=when (pic) {
-            "apic1" -> R.drawable.apic1
-            "apic2" -> R.drawable.apic2
-            "apic3"-> R.drawable.apic3
-            "apic4"-> R.drawable.apic4
-            else -> R.drawable.epic5
+            "attpic1" -> R.drawable.attpic1
+            "attpic2" -> R.drawable.attpic2
+            "attpic3"-> R.drawable.attpic3
+            "attpic4"-> R.drawable.attpic5
+            else -> R.drawable.epic2
         }
-        AmePic.setImageResource(result)
+        AttPic.setImageResource(result)
     }
 
     /**
