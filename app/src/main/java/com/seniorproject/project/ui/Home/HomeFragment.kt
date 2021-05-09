@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FeedAdapter
+import kotlinx.android.synthetic.main.activity_attraction.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -53,6 +54,10 @@ class HomeFragment : Fragment() {
         }
         ame_list.setOnClickListener {
             var intent= Intent(activity, AmenityActivity::class.java)
+            startActivity(intent)
+        }
+        att_list.setOnClickListener {
+            var intent= Intent(activity, AttractionActivity::class.java)
             startActivity(intent)
         }
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)

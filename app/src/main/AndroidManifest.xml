@@ -46,11 +46,13 @@
             android:name=".ResDetailActivity"
             android:label="@string/title_activity_res_detail" />
 
+
         <activity android:name=".WebActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".QrcodeActivity" />
         <activity android:name=".RailwayActivity" />
         <activity android:name=".AmenityActivity" />
+        <activity android:name=".AttractionActivity" />
         <activity android:name=".EventActivity" />
         <activity android:name=".RestaurantActivity" />
         <activity android:name=".Profile" />

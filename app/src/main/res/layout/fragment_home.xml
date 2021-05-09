@@ -411,6 +411,7 @@
                     <RelativeLayout
 
                         android:layout_width="60dp"
+                        android:id="@+id/att_list"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/circle"

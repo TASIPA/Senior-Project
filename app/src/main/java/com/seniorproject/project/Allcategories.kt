@@ -20,6 +20,10 @@ class Allcategories : AppCompatActivity() {
             startActivity(intent)
 
         }
+        cat_att.setOnClickListener {
+            var intent= Intent(this,AttractionActivity::class.java)
+            startActivity(intent)
+        }
         cat_eve.setOnClickListener {
             var intent= Intent(this,EventActivity::class.java)
             startActivity(intent)
