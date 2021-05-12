@@ -96,23 +96,23 @@ public class EmergencyActivity extends FragmentActivity implements
                             for (int i = 0; i < addressList.size(); i++) {
                                 Address userAddress = addressList.get(i);
                                 LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
-
+                                latitude=userAddress.getLatitude();
+                                longitude=userAddress.getLongitude();
                                 userMarkerOptions.position(latLng);
                                 userMarkerOptions.title(address);
                                 userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
                                 mMap.addMarker(userMarkerOptions);
+                               mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
 
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                                mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
                             }
                         } else {
-                            Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Location is not found", Toast.LENGTH_SHORT).show();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast.makeText(this, "Please write location name...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Please write the valid location name...", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -132,8 +132,8 @@ public class EmergencyActivity extends FragmentActivity implements
                 transferData[0] = mMap;
                 transferData[1] = url;
                 getNearbyPlaces.execute(transferData);
-                Toast.makeText(this, "Searching for nearby Police", Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "Showing nearby Police", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Searching for nearby Police station", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Showing nearby Police station", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -188,7 +188,7 @@ public class EmergencyActivity extends FragmentActivity implements
                         mMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permission is Denied, please turn on location access", Toast.LENGTH_SHORT).show();
                 }
         }
     }
