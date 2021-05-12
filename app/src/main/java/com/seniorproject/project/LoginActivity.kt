@@ -23,6 +23,13 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         dialog = ProgressDialog(this)
 
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         LoginBtn.setOnClickListener {
             login()
         }

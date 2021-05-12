@@ -101,7 +101,7 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sirendra99@gmail.com"
+                android:text="jj@gmail.com"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -116,7 +116,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passText"
-                android:text="1234567"
+                android:text="jerry123"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />

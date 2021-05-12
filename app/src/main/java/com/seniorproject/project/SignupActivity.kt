@@ -1,6 +1,8 @@
 package com.seniorproject.project
 
+import android.app.Application
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,21 +10,50 @@ import android.util.Patterns
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_profile.*
 
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.activity_signup.name
 
 class SignupActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+
     private lateinit var dialog:ProgressDialog
+    lateinit var auth: FirebaseAuth
+    var database: FirebaseDatabase? = null
+    var dbReference: DatabaseReference? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
         auth= FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        dbReference = database?.reference!!.child("profile")
+
         dialog= ProgressDialog(this)
         supportActionBar!!.hide()
         nextBtn.setOnClickListener {
+
+//            database?.reference!!.orderByChild("username").equalTo(usernameText.text.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+//
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if(snapshot.exists()){
+//                        usernameText.error = "Please input the username"
+//                        SignupBtn.text = "PAINTTTTT"
+//                        //Toast.makeText(Context,"This Username already exists!!!",Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//
+//                }
+//            })
+
             if(nameText.text.toString().isEmpty())
             {
                 nameText.error = "Please input the name"
@@ -94,6 +125,11 @@ class SignupActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, pass) //function to create the account by passing the value that we collected
             .addOnCompleteListener(this, OnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val currentUser = auth.currentUser
+                    val currentUserDB = dbReference?.child(currentUser?.uid!!)
+                    currentUserDB?.child("name")?.setValue(nameText.text.toString())
+                    currentUserDB?.child("username")?.setValue(usernameText.text.toString())
+
                     dialog.cancel()//stop the dialog running when created account in the authentication successfully
                     Toast.makeText(this, "Account Created", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, LoginActivity::class.java)//back to the login page
