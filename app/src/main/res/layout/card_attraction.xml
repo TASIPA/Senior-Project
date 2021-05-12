@@ -30,17 +30,18 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView1"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="-11dp"
             android:fontFamily="@font/brandon_grotesque_black"
             android:text="@string/name"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="216dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginBottom="-5dp"
             android:layout_above="@+id/textView2"
             android:fontFamily="@font/brandon_grotesque_light"
             android:text="@string/location"
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/brandon_grotesque_light"
             android:text="Category"
             android:textColor="@color/white"
@@ -67,7 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/Distance"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
@@ -79,7 +80,6 @@
             android:layout_height="20dp"
             android:src="@drawable/star"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
             android:layout_above="@+id/attdistance"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>

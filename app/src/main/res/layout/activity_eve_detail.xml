@@ -17,6 +17,7 @@
             android:id="@+id/EvePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/epic4" />
     </RelativeLayout>
 
@@ -24,6 +25,7 @@
         android:layout_width="360dp"
         android:layout_height="550dp"
         android:layout_marginTop="140dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/roundcorner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,14 +34,16 @@
 
         <TextView
             android:id="@+id/EveName"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:text="EVENT NAME"
-            android:textSize="24sp" />
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:id="@+id/detailLayout"
@@ -68,22 +72,6 @@
                     android:text="siafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdc" />
 
             </ScrollView>
-
-            <Button
-                android:id="@+id/button"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/roundcorner"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_baseline_favorite_24" />
 
 
         </RelativeLayout>
