@@ -52,8 +52,10 @@ public class EmergencyActivity extends FragmentActivity implements
     private Location lastlocation;
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
-    private double latitude,longitude;
+    private double latitude,longitude,s_latitude,s_longitude;
     private LatLng currentLatLng;
+    private int value=0;
+    private int value1=0;
     private int ProximityRadius = 10000;
 
     @Override
@@ -72,6 +74,7 @@ public class EmergencyActivity extends FragmentActivity implements
     }
 
     public void onClick(View v) {
+
 
         String hospital = "hospital", police = "police";
         Object transferData[] = new Object[2];
@@ -96,12 +99,15 @@ public class EmergencyActivity extends FragmentActivity implements
                             for (int i = 0; i < addressList.size(); i++) {
                                 Address userAddress = addressList.get(i);
                                 LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
-                                latitude=userAddress.getLatitude();
-                                longitude=userAddress.getLongitude();
+                                s_latitude=userAddress.getLatitude();
+                                s_longitude=userAddress.getLongitude();
+                                value=7;
+                                value1=7;
                                 userMarkerOptions.position(latLng);
                                 userMarkerOptions.title(address);
                                 userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
                                 mMap.addMarker(userMarkerOptions);
+
                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
 
                             }
@@ -118,7 +124,14 @@ public class EmergencyActivity extends FragmentActivity implements
 
             case R.id.hospital_nearby:
                 mMap.clear();
-                String url = getUrl(latitude,longitude,hospital);
+                String url = "";
+                if(value==7){
+                    url = getUrl(s_latitude,s_longitude,hospital);
+                    value=0;
+                }
+                else{
+                    url = getUrl(latitude,longitude,hospital);
+                }
                 transferData[0] = mMap;
                 transferData[1] = url;
                 getNearbyPlaces.execute(transferData);
@@ -128,7 +141,13 @@ public class EmergencyActivity extends FragmentActivity implements
 
             case R.id.police_nearby:
                 mMap.clear();
-                url = getUrl(latitude,longitude,police);
+                if(value1==7){
+                    url = getUrl(s_latitude,s_longitude,police);
+                    value1=0;
+                }
+                else{
+                    url = getUrl(latitude,longitude,police);
+                }
                 transferData[0] = mMap;
                 transferData[1] = url;
                 getNearbyPlaces.execute(transferData);
@@ -159,6 +178,7 @@ public class EmergencyActivity extends FragmentActivity implements
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
+
         }
     }
 
@@ -200,6 +220,7 @@ public class EmergencyActivity extends FragmentActivity implements
                 .addApi(LocationServices.API)
                 .build();
         googleApiClient.connect();
+
     }
 
     @Override
@@ -237,6 +258,7 @@ public class EmergencyActivity extends FragmentActivity implements
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+
         }
 
     }

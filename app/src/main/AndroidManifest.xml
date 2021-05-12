@@ -17,8 +17,8 @@
         android:theme="@style/Theme.Senior_project">
         <activity android:name=".AttDetailActivity"></activity>
         <activity
-            android:name=".EmergencyService.EmergencyActivity"
-            >
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +52,7 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".Allcategories" />
-<!--        <activity android:name=".EmergencyService.EmergencyActivity" />-->
+        <activity android:name=".EmergencyService.EmergencyActivity" />
 
         <activity
             android:name=".LoginActivity"
