@@ -71,6 +71,7 @@ public class EmergencyActivity extends FragmentActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     public void onClick(View v) {
@@ -154,7 +155,9 @@ public class EmergencyActivity extends FragmentActivity implements
                 Toast.makeText(this, "Searching for nearby Police station", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Police station", Toast.LENGTH_SHORT).show();
                 break;
-
+            case R.id.back_btn:
+                finish();
+                break;
         }
     }
 

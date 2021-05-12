@@ -21,6 +21,9 @@ class Profile : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         dbReference = database?.reference!!.child("profile")
+        cancel.setOnClickListener {
+            finish()
+        }
 
         loadProfile()
     }

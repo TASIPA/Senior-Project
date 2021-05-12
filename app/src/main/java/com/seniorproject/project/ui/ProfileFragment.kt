@@ -66,7 +66,7 @@ class ProfileFragment : Fragment() {
         userref?.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                profile_name.text = snapshot.child("name").value.toString()
+                profile_name.text = snapshot.child("username").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
