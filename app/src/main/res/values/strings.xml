@@ -22,9 +22,7 @@
         <item>Others</item>
     </string-array>
     <string name="Distance">Distance</string>
-    <string name="title_activity_res_detail">Map</string>
-    <string name="title_activity_ame_detail">Map</string>
-    <string name="title_activity_eve_detail">Map</string>
+
     <string name="SignInText">Please sign in to continue</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
