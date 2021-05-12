@@ -3,6 +3,7 @@ package com.seniorproject.project
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.seniorproject.project.EmergencyService.EmergencyActivity
 
 import kotlinx.android.synthetic.main.activity_category.*
 
@@ -53,5 +54,9 @@ class Allcategories : AppCompatActivity() {
             var intent= Intent(this,PromtionActivity::class.java)
             startActivity(intent)
 
+        }
+        cat_eme.setOnClickListener {
+            var intent= Intent(this,EmergencyActivity::class.java)
+            startActivity(intent)
         }
     }}
