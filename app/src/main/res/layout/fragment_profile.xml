@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ProfileFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.ProfileFragment">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -83,6 +83,7 @@
         android:paddingStart="20dp"
         android:text="About Us"
         android:textAlignment="textStart" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -91,30 +92,29 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="20dp"
         android:text="Follow us"
-        android:textSize="16dp"
         android:textAlignment="center"
-        android:layout_gravity="center"
-        />
+        android:textSize="16dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="30dp"
-            android:src="@drawable/fb"
-            />
+            android:src="@drawable/fb" />
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="30dp"
-            android:src="@drawable/ig"
-            />
+            android:src="@drawable/ig" />
 
 
     </LinearLayout>
@@ -123,9 +123,11 @@
         android:id="@+id/signoutBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/round2"
+        android:backgroundTint="@color/primary"
         android:text="SIGN OUT" />
 
 </LinearLayout>
