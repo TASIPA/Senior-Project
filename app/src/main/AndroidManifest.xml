@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Senior_project">
-        <activity android:name=".UpdatePassword"></activity>
+        <activity android:name=".SucessForgetPassword"></activity>
+        <activity android:name=".UpdatePassword" />
         <activity android:name=".AttDetailActivity" />
         <activity
             android:name=".SplashScreen"
