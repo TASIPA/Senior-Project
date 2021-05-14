@@ -37,7 +37,7 @@
     <string name="TODO">CHANGE TO SCROLL VIEW</string>
     <string name="addbtn">addbtn</string>
     <string name="Select_Topic">Please Select a topic...</string>
-    <string name="date">Date</string>
+    <string name="date">Incident Date</string>
     <string name="dateFormat">MM/DD/YYYY</string>
     <string name="description">Description</string>
     <string name="descibe_the_situation">Descibe the situation...</string>

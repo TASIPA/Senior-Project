@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/Select_Topic"
         android:textAlignment="center"
-        android:textColor="#0094b7"
+        android:textColor="@color/primary"
         android:textSize="20sp">
 
     </TextView>
@@ -39,7 +39,7 @@
         android:layout_marginTop="2dp"
         android:text="@string/date"
         android:textAlignment="center"
-        android:textColor="#0094b7"
+        android:textColor="@color/primary"
         android:textSize="20sp">
 
     </TextView>
@@ -62,7 +62,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/description"
         android:textAlignment="center"
-        android:textColor="#0094b7"
+        android:textColor="@color/primary"
         android:textSize="20sp">
 
     </TextView>
@@ -75,6 +75,7 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="350">
 
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
@@ -84,21 +85,29 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/attachIMG"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
+
 
     <Button
         android:id="@+id/button"
         android:layout_width="151dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/attachIMG"
         android:text="@string/attachBtn"
-        android:translationX="30dp" />
-
+        android:translationX="30dp"
+        android:translationY="47dp"/>
     <Button
-            android:id="@+id/button2"
-            android:layout_width="149dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#0094b7"
-            android:text="@string/submitBtn"
-            android:translationX="200dp"
-            android:translationY="-47dp" />
+        android:id="@+id/button2"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/attachIMG"
+        android:backgroundTint="@color/primary"
+        android:text="@string/submitBtn"
+        android:translationX="200dp"/>
 
 </LinearLayout>
