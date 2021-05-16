@@ -3,9 +3,8 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
-import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.seniorproject.project.Adapters.RestaurantAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants

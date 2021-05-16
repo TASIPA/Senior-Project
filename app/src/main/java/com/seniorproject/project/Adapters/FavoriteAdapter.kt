@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
-import com.seniorproject.project.models.Restaurants
+import com.seniorproject.project.models.Favorite
 
-class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<RestaurantAdapter.FeedViewHolders>()
+
+class FavoriteAdapter(private val rssObject: ArrayList<Favorite>, private val mContext: Context): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -30,8 +30,18 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
         holder.txtTitle.text = rssObject[position].name
         holder.txtTitle1.text = rssObject[position].type
         holder.txtTitle2.text = rssObject[position].rating.toString()
-       // holder.rate.rating = rssObject[position].rating.toFloat()
+        // holder.rate.rating = rssObject[position].rating.toFloat()
         var result = when (rssObject[position].pic) {
+            "apic1" -> R.drawable.apic1
+            "apic2" -> R.drawable.apic2
+            "apic3" -> R.drawable.apic3
+            "apic4" -> R.drawable.apic4
+            "apic5"-> R.drawable.apic5
+            "epic1" -> R.drawable.epic1
+            "epic2" -> R.drawable.epic2
+            "epic3" -> R.drawable.epic3
+            "epic4" -> R.drawable.epic4
+            "epic5"-> R.drawable.epic5
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
             "pic6" -> R.drawable.pic6
@@ -53,9 +63,9 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
         var txtTitle: TextView
         var txtTitle1: TextView
         var txtTitle2: TextView
-      //  var rate: RatingBar
+        //  var rate: RatingBar
         var img:ImageView
-       // var imgbtn:ImageView
+        // var imgbtn:ImageView
 
 
         //private var itemClickListener: ItemClickListener? = null
@@ -65,9 +75,9 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
             txtTitle = itemView.findViewById(R.id.textView)
             txtTitle1 = itemView.findViewById(R.id.textView1)
             txtTitle2 = itemView.findViewById(R.id.vv12)
-          //  rate= itemView.findViewById(R.id.ratingBar2)
+            //  rate= itemView.findViewById(R.id.ratingBar2)
             img=itemView.findViewById(R.id.imageShow)
-          //  imgbtn=itemView.findViewById(R.id.imageButton)
+            //  imgbtn=itemView.findViewById(R.id.imageButton)
 
 
 
@@ -76,13 +86,15 @@ class RestaurantAdapter(private val rssObject: List<Restaurants>, private val mC
 
         }
 
-        override fun onClick(v: View) {
-            listener.onItemClick(adapterPosition)
+        override fun onClick(v: View?) {
+            TODO("Not yet implemented")
         }
+
+//        override fun onClick(v: View) {
+//            listener.onItemClick(adapterPosition)
+//        }
 
 
 
     }
-
-
 }
