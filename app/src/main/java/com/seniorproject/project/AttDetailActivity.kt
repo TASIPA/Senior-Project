@@ -3,12 +3,14 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.seniorproject.project.models.FavObj
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
 import kotlinx.android.synthetic.main.activity_ame_detail.amebutton2
@@ -62,7 +64,10 @@ class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
         var name = bundle?.getString("name").toString()
         var type = bundle?.getString("type").toString()
         var pic = bundle?.getString("image").toString()
-
+        fav_attBtn.setOnClickListener {
+            fav_attBtn.setColorFilter(ContextCompat.getColor(baseContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
+            FavObj.addData(name,pic,type)
+        }
 
         AttName.text = name
         var result=when (pic) {

@@ -55,23 +55,19 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
-            android:visibility="invisible">
+            android:visibility="visible">
 
-            <Button
-                android:id="@+id/amebutton"
-                style="@style/Widget.MaterialComponents.Button.Icon"
+            <ImageView
+                android:id="@+id/fav_ameBtn"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/roundcorner"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_baseline_favorite_24" />
+                android:src="@drawable/ic_baseline_favorite_24"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -127,9 +123,8 @@
             android:layout_marginTop="0dp"
             android:visibility="invisible">
 
-            <Button
-                android:id="@+id/amebuttonnn"
-                style="@style/Widget.MaterialComponents.Button.Icon"
+            <ImageView
+                android:id="@+id/fav_ame"
                 android:layout_width="51dp"
                 android:layout_height="48dp"
                 android:layout_alignParentTop="true"
@@ -138,10 +133,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="19dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/roundcorner"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:icon="@android:drawable/ic_menu_mapmode" />
+                android:background="@drawable/star"
+                android:tint="@color/white"/>
 
             <fragment
                 android:id="@+id/amemap"

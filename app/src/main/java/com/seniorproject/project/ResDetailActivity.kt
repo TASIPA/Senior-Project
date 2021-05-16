@@ -3,6 +3,7 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.seniorproject.project.models.FavObj
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
 import kotlinx.android.synthetic.main.activity_eve_detail.*
@@ -59,7 +61,10 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         var type = bundle?.getString("type").toString()
         var pic = bundle?.getString("image").toString()
         var rate = bundle?.getString("rating").toString()
-
+        fav_resBtn.setOnClickListener {
+            fav_resBtn.setColorFilter(ContextCompat.getColor(baseContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
+            FavObj.addData(name,pic,type)
+        }
         ResName.text = name
         //ResType.text = type
         var result = when (pic) {
