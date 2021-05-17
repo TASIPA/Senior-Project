@@ -12,7 +12,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Favorite
 
 
-class FavoriteAdapter(private val rssObject: ArrayList<Favorite>, private val mContext: Context): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
+class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContext: Context): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -37,11 +37,11 @@ class FavoriteAdapter(private val rssObject: ArrayList<Favorite>, private val mC
             "apic3" -> R.drawable.apic3
             "apic4" -> R.drawable.apic4
             "apic5"-> R.drawable.apic5
-            "epic1" -> R.drawable.epic1
-            "epic2" -> R.drawable.epic2
-            "epic3" -> R.drawable.epic3
-            "epic4" -> R.drawable.epic4
-            "epic5"-> R.drawable.epic5
+            "attpic1" -> R.drawable.attpic1
+            "attpic2" -> R.drawable.attpic2
+            "attpic3" -> R.drawable.attpic3
+            "attpic4" -> R.drawable.attpic5
+            "attpic5"-> R.drawable.epic2
             "pic1" -> R.drawable.pic1
             "pic2" -> R.drawable.pic2
             "pic6" -> R.drawable.pic6

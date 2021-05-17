@@ -1,7 +1,9 @@
 package com.seniorproject.project
 
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -10,21 +12,20 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.seniorproject.project.models.FavObj
-import kotlinx.android.synthetic.main.activity_ame_detail.*
-import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
-import kotlinx.android.synthetic.main.activity_ame_detail.amebutton2
-import kotlinx.android.synthetic.main.activity_ame_detail.amebutton3
-import kotlinx.android.synthetic.main.activity_ame_detail.amebutton4
-import kotlinx.android.synthetic.main.activity_ame_detail.amedetailLayout
-import kotlinx.android.synthetic.main.activity_ame_detail.amemapLayout
-import kotlinx.android.synthetic.main.activity_ame_detail.amereviewLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.seniorproject.project.models.Favorite
 import kotlinx.android.synthetic.main.activity_att_detail.*
 
-class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
+class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback, ValueEventListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var latLng: LatLng
+
+    var rootNode: FirebaseDatabase? = null
+    var reference: DatabaseReference? = null
+    var auth: FirebaseAuth? = null
+    var checked: Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,20 @@ class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
             .findFragmentById(R.id.attmap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //firebase hooks
+        auth = FirebaseAuth.getInstance()
+        var currentuser = auth!!.currentUser!!.uid
+        rootNode = FirebaseDatabase.getInstance()
+        reference = rootNode!!.getReference("favorite").child(currentuser)
+        //intent value
+        val bundle = intent.extras
+        var name = bundle?.getString("name").toString()
+        var type = bundle?.getString("type").toString()
+        var pic = bundle?.getString("image").toString()
+        //calls onDataChanged()
+        reference!!.child(pic).addListenerForSingleValueEvent(this)
+
+        //Layout
         attdetailLayout.visibility = View.VISIBLE
         attreviewLayout.visibility = View.GONE
         attmapLayout.visibility = View.GONE
@@ -57,16 +72,40 @@ class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
             attmapLayout.visibility = View.VISIBLE
         }
 
-        val bundle = intent.extras
-        /*var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()*/
-        //use to calculate distance to User
-        var name = bundle?.getString("name").toString()
-        var type = bundle?.getString("type").toString()
-        var pic = bundle?.getString("image").toString()
+
         fav_attBtn.setOnClickListener {
-            fav_attBtn.setColorFilter(ContextCompat.getColor(baseContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
-            FavObj.addData(name,pic,type)
+            if (!checked) {
+                fav_attBtn.setColorFilter(
+                    ContextCompat.getColor(baseContext, R.color.red), PorterDuff.Mode.SRC_IN
+                )
+                reference!!.child(pic).setValue(
+                    Favorite(
+                        name,
+                        pic,
+                        type,
+                        rating = 4.5,
+                        distance = 0.0
+                    )
+                )
+                checked=true
+            }
+            else{
+                fav_attBtn.colorFilter = null
+                checked=false
+
+                reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (appleSnapshot in snapshot.children) {
+                            appleSnapshot.ref.removeValue()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d("Error","Failed to remove")
+                    }
+                })
+            }
         }
 
         AttName.text = name
@@ -102,5 +141,19 @@ class AttDetailActivity : AppCompatActivity() , OnMapReadyCallback {
         if (name==null) {
             finish()
         }
+    }
+
+    override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.value !== null) {
+            fav_attBtn.setColorFilter(
+                ContextCompat.getColor(baseContext, R.color.red),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            );
+            checked=true
+        }
+    }
+
+    override fun onCancelled(error: DatabaseError) {
+        Log.d("Error","Failed to load")
     }
 }
