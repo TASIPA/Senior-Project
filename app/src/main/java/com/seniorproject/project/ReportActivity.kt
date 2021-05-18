@@ -65,7 +65,6 @@ class ReportActivity : AppCompatActivity() {
         inreporttime = findViewById<View>(id.dateShowReport) as EditText
         indescription = findViewById<View>(id.DescText) as EditText
         ID = UUID.randomUUID().toString()
-        val gg = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/"
         //inimage =
 //        button2!!.setOnClickListener {
 //            topic = intopicName
@@ -87,7 +86,6 @@ class ReportActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(layout.custom_spinner_dropdown)
 
             spinner.adapter = adapter
-            var set:Int
 
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
@@ -100,7 +98,7 @@ class ReportActivity : AppCompatActivity() {
                         if (position == 0){
                             errorText.error = ""
                             errorText.requestFocus()
-                            Toast.makeText(this@ReportActivity, "Please select another topics", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ReportActivity, "Please select one topic", Toast.LENGTH_SHORT).show()
                         }
                         else{
                             topic = intopicName
@@ -108,7 +106,7 @@ class ReportActivity : AppCompatActivity() {
                             reporttime = inreporttime!!.text.toString()
                             description = indescription!!.text.toString()
 //                          imageURL = inimage!!.text.toString()
-                            imageURL = gg+"reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
+                            imageURL = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
                             Log.d("ABC",imageURL.toString())
                             SendRequest().execute()
                         }
