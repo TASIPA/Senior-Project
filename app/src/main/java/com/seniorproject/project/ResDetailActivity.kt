@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.models.Favorite
+
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
 class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
@@ -35,7 +36,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         supportActionBar?.hide()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.resmap) as SupportMapFragment
+                .findFragmentById(R.id.res_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         //firebase hooks
         auth = FirebaseAuth.getInstance()
@@ -50,33 +51,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         var rate = bundle?.getString("rating").toString()
         //calls onDataChanged()
         reference!!.child(pic).addListenerForSingleValueEvent(this)
-
-        resdetailLayout.visibility = View.VISIBLE
-        resreviewLayout.visibility = View.GONE
-        resmapLayout.visibility = View.GONE
-
-        resbutton2.setOnClickListener {
-            resdetailLayout.visibility = View.VISIBLE
-            resreviewLayout.visibility = View.GONE
-            resmapLayout.visibility = View.GONE
-        }
-
-        resbutton3.setOnClickListener {
-            resdetailLayout.visibility = View.GONE
-            resreviewLayout.visibility = View.VISIBLE
-            resmapLayout.visibility = View.GONE
-        }
-
-        resbutton4.setOnClickListener {
-            resdetailLayout.visibility = View.GONE
-            resreviewLayout.visibility = View.GONE
-            resmapLayout.visibility = View.VISIBLE
-        }
-
-
-        fav_resBtn.setOnClickListener {
+        res_favBtn.setOnClickListener {
             if (!checked) {
-                fav_resBtn.setColorFilter(
+                res_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, R.color.red), PorterDuff.Mode.SRC_IN
                 )
                 reference!!.child(pic).setValue(
@@ -91,7 +68,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 checked=true
             }
             else{
-                fav_resBtn.colorFilter = null
+                res_favBtn.colorFilter = null
                 checked=false
 
                 reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -109,7 +86,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             }
         }
 
-        ResName.text = name
+        res_name.text = name
         //ResType.text = type
         var result = when (pic) {
             "pic1" -> R.drawable.pic1
@@ -118,22 +95,40 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             "pic7" -> R.drawable.pic7
             else -> R.drawable.pic10
         }
-        ResPic.setImageResource(result)
+        res_pic.setImageResource(result)
         //ResratingBar.rating = rate!!.toFloat()
     }
 
-/*
-*
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-*/
+    fun onClick(v: View) {
+        res_detailLayout.visibility = View.GONE
+        res_reviewLayout.visibility = View.GONE
+        res_mapLayout.visibility = View.GONE
+        res_mapBtn.visibility = View.GONE
+        res_favBtn.visibility = View.GONE
+        res_button3.setBackgroundResource(R.color.white)
+        res_button2.setBackgroundResource(R.color.white)
+        res_button4.setBackgroundResource(R.color.white)
+        when (v.id) {
+            R.id.res_button2 -> {
+                res_detailLayout.visibility = View.VISIBLE
+                res_favBtn.visibility = View.VISIBLE
+                res_button2.setBackgroundResource(R.color.secondary)
+            }
+            R.id.res_button4 -> {
+                res_mapLayout.visibility = View.VISIBLE
+                res_mapBtn.visibility = View.VISIBLE
+                res_favBtn.visibility = View.GONE
+                res_button4.setBackgroundResource(R.color.secondary)
+            }
+            R.id.res_button3 -> {
+                res_reviewLayout.visibility = View.VISIBLE
+                res_button3.setBackgroundResource(R.color.secondary)
+            }
+
+        }
 
 
+    }
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         //val bundle = intent.extras
@@ -151,7 +146,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.value !== null) {
-            fav_resBtn.setColorFilter(
+            res_favBtn.setColorFilter(
                 ContextCompat.getColor(baseContext, R.color.red),
                 android.graphics.PorterDuff.Mode.SRC_IN
             );

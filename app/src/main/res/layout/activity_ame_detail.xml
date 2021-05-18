@@ -1,212 +1,328 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context=".AmeDetailActivity">
 
     <RelativeLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="235dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/AmePic"
+            android:id="@+id/ame_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:srcCompat="@drawable/epic5" />
+            tools:srcCompat="@drawable/attpic5" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="360dp"
-        android:layout_height="553dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/roundcorner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/AmeName"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Amenity Name"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/detail_corner"
+        android:backgroundTint="@color/white">
         <RelativeLayout
-            android:id="@+id/amedetailLayout"
+            android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:visibility="visible">
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white">
+            <TextView
+                android:id="@+id/ame_name"
+                android:text="Mc Donald-Al Rayan"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="40dp"
+                android:layout_width="280dp"
+                android:fontFamily="@font/brandon_grotesque_black"
+                android:textSize="24sp"
+                />
+            <TextView
+                android:id="@+id/ame_type"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:background="@color/lightWhite"
+                android:text="@string/amenity"/>
+            <TextView
+                android:id="@+id/ame_loc"
+                android:layout_toRightOf="@+id/ame_type"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:background="@color/lightWhite"
+                android:text="@string/location"/>
 
             <ImageView
-                android:id="@+id/fav_ameBtn"
+                android:id="@+id/ame_favBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"
                 android:src="@drawable/ic_baseline_favorite_24"/>
-
-            <TextView
-                android:id="@+id/textView2"
+            <ImageView
+                android:id="@+id/ame_mapBtn"
+                android:visibility="invisible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/send"/>
+            <RatingBar
+                android:id="@+id/ame_rat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="50dp"
-                android:text="siafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdcsiafhweohufhfhaehfuoefreedbsahlieiw;icflwgifucleawfcdc" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/amereviewLayout"
-            android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
-            android:visibility="invisible">
-
-            <Button
-                android:id="@+id/amebuttonn"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="50dp"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:numStars="5"
+                android:rating="5"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_alignParentBottom="true"/>
+            <TextView
+                android:id="@+id/ame_ratVal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/roundcorner"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:icon="@android:drawable/btn_star" />
+                android:layout_toRightOf="@+id/ame_rat"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:text="5.0"/>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/div1"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/top"
+            android:background="@color/lightWhite" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/all_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/div1"
+            android:background="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="12dp">
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <Button
+                    android:id="@+id/ame_button2"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/secondary"
+                    android:onClick="onClick"
+                    android:text="Detail"
+                    android:textColor="@color/primary_dark"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/ame_button3"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="135dp"
+                    android:layout_toEndOf="@+id/ame_button4"
+                    android:background="#00FFFFFF"
+                    android:onClick="onClick"
+                    android:text="Reviews"
+                    android:textColor="@color/primary_dark"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/ame_button4"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/ame_button2"
+                    android:background="#00FFFFFF"
+                    android:onClick="onClick"
+                    android:text="Map"
+                    android:textColor="@color/primary_dark"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/ame_detailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/all_btn"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/ame_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/brandon_grotesque_black"
+                android:gravity="center_vertical"
+                android:text="Description"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/ame_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ame_head"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"
+                android:fontFamily="@font/brandon_grotesque_medium_italic"
+                android:text="This is just a dummy text. It is used for testing UI. It doesn't mean anything. The sole purpose of this text is to see how our text will look like once data is added."
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/amemapLayout"
+            android:id="@+id/ame_mapLayout"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/all_btn"
             android:visibility="invisible">
 
-            <ImageView
-                android:id="@+id/fav_ame"
-                android:layout_width="51dp"
-                android:layout_height="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="19dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/star"
-                android:tint="@color/white"/>
-
-            <fragment
-                android:id="@+id/amemap"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="90dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="20dp"
-                android:defaultFocusHighlightEnabled="false"
-                android:fadingEdge="none"
-                android:paddingHorizontal="10pt"
-                android:paddingVertical="10pt"
-                tools:context=".MainActivity" />
+                android:layout_height="350dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="12dp">
+
+                <fragment
+                    android:id="@+id/ame_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:defaultFocusHighlightEnabled="false"
+                    android:fadingEdge="none"
+                    android:paddingHorizontal="10pt"
+                    android:paddingVertical="10pt"
+                    tools:context=".MainActivity" />
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/ame_reviewLayout"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="0dp">
-
-            <View
-                android:id="@+id/divider"
+            android:layout_height="460dp"
+            android:layout_below="@+id/all_btn"
+            android:visibility="invisible"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/rate_txt"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="80dp"
-                android:background="@color/black" />
+                android:layout_height="wrap_content"
+                android:text="Rate this place"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/brandon_grotesque_black"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:id="@+id/rate_txt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rate_txt"
+                android:text="Tell others what you think"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/brandon_grotesque_medium_italic"
+                android:textSize="16sp"
+                />
 
-            <Button
-                android:id="@+id/amebutton2"
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:background="#00FFFFFF"
-                android:text="Detail"
-                android:textColor="@color/primary_dark"
-                android:textStyle="bold" />
+            <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                android:id="@+id/user_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srb_starSize="40dp"
+                app:srb_numberOfStars="5"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/rate_txt2"
+                app:srb_starsSeparation="35dp"
+                app:srb_rating="3"
+                app:srb_stepSize="0.5"
+                app:srb_borderColor="@color/grey"
+                app:srb_fillColor="@color/primary"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ame_cmntDes"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="280dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                app:counterEnabled="true"
+                android:layout_below="@+id/user_rate"
+                app:counterMaxLength="350">
 
-            <Button
-                android:id="@+id/amebutton3"
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="135dp"
-                android:layout_toEndOf="@+id/amebutton2"
-                android:background="#00FFFFFF"
-                android:text="Reviews"
-                android:textColor="@color/primary_dark"
-                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/amebutton4"
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/amebutton3"
-                android:background="#00FFFFFF"
-                android:text="Map"
-                android:textColor="@color/primary_dark"
-                android:textStyle="bold" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:id="@+id/DescText"
+                    android:gravity="top"
+                    android:hint="Write a review" />
 
+            </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/send_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/send"
+                android:layout_toRightOf="@+id/ame_cmntDes"
+                android:layout_below="@+id/user_rate"
+                android:layout_marginTop="30dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Comments"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/brandon_grotesque_black"
+                android:layout_below="@+id/ame_cmntDes"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                />
         </RelativeLayout>
+
+
 
     </RelativeLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

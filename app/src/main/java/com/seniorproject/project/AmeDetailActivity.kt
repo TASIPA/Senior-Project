@@ -34,7 +34,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         supportActionBar?.hide()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.amemap) as SupportMapFragment
+            .findFragmentById(R.id.ame_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         auth = FirebaseAuth.getInstance()
         var currentuser = auth!!.currentUser!!.uid
@@ -48,31 +48,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         reference!!.child(pic).addListenerForSingleValueEvent(this)
 
-        amedetailLayout.visibility = View.VISIBLE
-        amereviewLayout.visibility = View.GONE
-        amemapLayout.visibility = View.GONE
-
-        amebutton2.setOnClickListener {
-            amedetailLayout.visibility = View.VISIBLE
-            amereviewLayout.visibility = View.GONE
-            amemapLayout.visibility = View.GONE
-        }
-
-        amebutton3.setOnClickListener {
-            amedetailLayout.visibility = View.GONE
-            amereviewLayout.visibility = View.VISIBLE
-            amemapLayout.visibility = View.GONE
-        }
-
-        amebutton4.setOnClickListener {
-            amedetailLayout.visibility = View.GONE
-            amereviewLayout.visibility = View.GONE
-            amemapLayout.visibility = View.VISIBLE
-        }
-
-        fav_ameBtn.setOnClickListener {
+        ame_favBtn.setOnClickListener {
             if (!checked) {
-                fav_ameBtn.setColorFilter(
+                ame_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, R.color.red), PorterDuff.Mode.SRC_IN
                 )
                 reference!!.child(pic).setValue(
@@ -87,7 +65,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 checked=true
             }
             else{
-                fav_ameBtn.colorFilter = null
+                ame_favBtn.colorFilter = null
                 checked=false
                 reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -103,7 +81,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             }
         }
 
-        AmeName.text = name
+        ame_name.text = name
         //AmeType.text = type
         var result = when (pic) {
             "apic1" -> R.drawable.apic1
@@ -112,31 +90,52 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             "apic4" -> R.drawable.apic4
             else -> R.drawable.epic5
         }
-        AmePic.setImageResource(result)
+        ame_pic.setImageResource(result)
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.value !== null) {
-            fav_ameBtn.setColorFilter(
+            ame_favBtn.setColorFilter(
                 ContextCompat.getColor(baseContext, R.color.red),
                 android.graphics.PorterDuff.Mode.SRC_IN
             );
             checked=true
         }
     }
+    fun onClick(v: View) {
+        ame_detailLayout.visibility = View.GONE
+        ame_reviewLayout.visibility = View.GONE
+        ame_mapLayout.visibility = View.GONE
+        ame_mapBtn.visibility = View.GONE
+        ame_favBtn.visibility = View.GONE
+        ame_button3.setBackgroundResource(R.color.white)
+        ame_button2.setBackgroundResource(R.color.white)
+        ame_button4.setBackgroundResource(R.color.white)
+        when (v.id) {
+            R.id.ame_button2 -> {
+                ame_detailLayout.visibility = View.VISIBLE
+                ame_favBtn.visibility = View.VISIBLE
+                ame_button2.setBackgroundResource(R.color.secondary)
+            }
+            R.id.ame_button4 -> {
+                ame_mapLayout.visibility = View.VISIBLE
+                ame_mapBtn.visibility = View.VISIBLE
+                ame_favBtn.visibility = View.GONE
+                ame_button4.setBackgroundResource(R.color.secondary)
+            }
+            R.id.ame_button3 -> {
+                ame_reviewLayout.visibility = View.VISIBLE
+                ame_button3.setBackgroundResource(R.color.secondary)
+            }
 
+        }
+
+
+    }
     override fun onCancelled(error: DatabaseError) {
         Log.d("Error","Failed to load")
     }
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         //val bundle = intent.extras

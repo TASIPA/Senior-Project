@@ -3,15 +3,9 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_ame_detail.*
-import kotlinx.android.synthetic.main.activity_ame_detail.AmeName
+
 import kotlinx.android.synthetic.main.activity_eve_detail.*
 
 class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
@@ -37,7 +31,7 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
         var pic = bundle?.getString("image").toString()
 
 
-        EveName.text = name
+        eve_name.text = name
         //EveType.text = type
         var result=when (pic) {
             "epic1" -> R.drawable.epic1
@@ -46,31 +40,28 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
             "epic4"-> R.drawable.epic4
             else -> R.drawable.epic5
         }
-        EvePic.setImageResource(result)
+        eve_pic.setImageResource(result)
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-//    override fun onMapReady(googleMap: GoogleMap) {
-//        mMap = googleMap
-//        //val bundle = intent.extras
-//        var pointLat = 13.9118536
-//        var pointLon = 100.5463905
-//        var name = "Impact Challenger"
-//        latLng = LatLng(pointLat,pointLon)
-//        // Add a marker in Sydney and move the camera
-//        mMap.addMarker(MarkerOptions().position(latLng).title(name))
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-////        if (name==null) {
-////            finish()
-////        }
-//    }
+    fun onClick(v: View) {
+        eve_detailLayout.visibility = View.GONE
+        eve_reviewLayout.visibility = View.GONE
+        eve_button3.setBackgroundResource(R.color.white)
+        eve_button2.setBackgroundResource(R.color.white)
+
+        when (v.id) {
+            R.id.eve_button2 -> {
+                eve_detailLayout.visibility = View.VISIBLE
+                eve_button2.setBackgroundResource(R.color.secondary)
+            }
+
+            R.id.eve_button3 -> {
+                eve_reviewLayout.visibility = View.VISIBLE
+                eve_button3.setBackgroundResource(R.color.secondary)
+            }
+
+        }
+
+    }
 }
