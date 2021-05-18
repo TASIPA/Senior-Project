@@ -33,13 +33,13 @@ class LoginActivity : AppCompatActivity() {
         LoginBtn.setOnClickListener {
             login()
         }
-        registerBtn.setOnClickListener {//change to signup page once user clicks
+        registerBtn.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
         forgetBtn.setOnClickListener {
-            val intent = Intent(this, ReportActivity::class.java)
-            startActivity(intent)
+            val intent2 = Intent(this, ForgetPassActivity::class.java)
+            startActivity(intent2)
         }
     }
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ReportActivity"
     android:paddingHorizontal="20dp"
-    android:paddingVertical="5dp"
+    android:paddingVertical="10dp"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -120,7 +120,7 @@
     <ImageView
         android:id="@+id/attachIMG"
         android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_height="70dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
         tools:srcCompat="@tools:sample/avatars" />
@@ -128,7 +128,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="151dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/attachIMG"
         android:text="@string/attachBtn"
@@ -136,11 +136,12 @@
         android:translationY="47dp"/>
     <Button
         android:id="@+id/button2"
-        android:layout_width="149dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/attachIMG"
         android:backgroundTint="@color/primary"
         android:text="@string/submitBtn"
+        android:layout_marginBottom="10dp"
         android:translationX="200dp"/>
 
 </LinearLayout>

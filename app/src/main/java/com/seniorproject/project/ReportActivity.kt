@@ -52,13 +52,15 @@ class ReportActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(layout.activity_report)
         supportActionBar?.hide()
+
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
         val formatted = current.format(formatter)
-        setContentView(layout.activity_report)
+
         buttonsend = findViewById<View>(id.button2) as Button
         inreporttime = findViewById<View>(id.dateShowReport) as EditText
         indescription = findViewById<View>(id.DescText) as EditText
@@ -86,7 +88,6 @@ class ReportActivity : AppCompatActivity() {
 
             spinner.adapter = adapter
             var set:Int
-
 
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
