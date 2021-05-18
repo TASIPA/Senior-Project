@@ -1,5 +1,6 @@
 package com.seniorproject.project
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,25 +10,31 @@ import kotlinx.android.synthetic.main.activity_report.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.app.ProgressDialog
+import android.net.Uri
 import android.os.AsyncTask
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.solver.widgets.Snapshot
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.seniorproject.project.R.*
+import kotlinx.android.synthetic.main.activity_report.back_btn
+import kotlinx.android.synthetic.main.activity_restaurant.*
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.util.*
 import javax.net.ssl.HttpsURLConnection
 class ReportActivity : AppCompatActivity() {
 
     private val PICK_IMAGE_REQUEST = 1234
+    private var filePath: Uri? = null
     private val progress: ProgressDialog? = null
     var intopicName: String? = null
     var inreporttime: TextView? = null
@@ -39,9 +46,15 @@ class ReportActivity : AppCompatActivity() {
     var reporttime: String? = null
     var description: String? = null
     var imageURL: String? = null
+    var ID:String?=null
+    internal var storage:FirebaseStorage? = null
+    internal var storageReference: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage!!.reference
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
         val formatted = current.format(formatter)
@@ -49,16 +62,19 @@ class ReportActivity : AppCompatActivity() {
         buttonsend = findViewById<View>(id.button2) as Button
         inreporttime = findViewById<View>(id.dateShowReport) as EditText
         indescription = findViewById<View>(id.DescText) as EditText
+        ID = UUID.randomUUID().toString()
+        val gg = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/"
         //inimage =
-        button2!!.setOnClickListener {
-            topic = intopicName
-            timestamp = "$formatted"
-            reporttime = inreporttime!!.text.toString()
-            description = indescription!!.text.toString()
-//            imageURL = inimage!!.text.toString()
-            imageURL = "testURL"
-            SendRequest().execute()
-        }
+//        button2!!.setOnClickListener {
+//            topic = intopicName
+//            timestamp = "$formatted"
+//            reporttime = inreporttime!!.text.toString()
+//            description = indescription!!.text.toString()
+////            imageURL = inimage!!.text.toString()
+//            imageURL = gg+"reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
+//            Log.d("ABC",imageURL.toString())
+//            SendRequest().execute()
+//        }
         val languages = resources.getStringArray(array.Topics)
 
         // access the spinner
@@ -79,18 +95,23 @@ class ReportActivity : AppCompatActivity() {
                     val errorText = topicReport.selectedView as TextView
                     intopicName = topicReport.selectedItem.toString()
 
-//                    button2.setOnClickListener {
-//                        if (position == 0){
-//                            errorText.error = ""
-//                            errorText.requestFocus()
-//                            Toast.makeText(this@ReportActivity, "Please select another topics", Toast.LENGTH_SHORT).show()
-//                        }
-//                        else{
-//                            Toast.makeText(this@ReportActivity,
-//                                getString(string.selected_item) + " " +
-//                                        "" + languages[position], Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
+                    button2.setOnClickListener {
+                        if (position == 0){
+                            errorText.error = ""
+                            errorText.requestFocus()
+                            Toast.makeText(this@ReportActivity, "Please select another topics", Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            topic = intopicName
+                            timestamp = "$formatted"
+                            reporttime = inreporttime!!.text.toString()
+                            description = indescription!!.text.toString()
+//                          imageURL = inimage!!.text.toString()
+                            imageURL = gg+"reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
+                            Log.d("ABC",imageURL.toString())
+                            SendRequest().execute()
+                        }
+                    }
 
                     return
                 }
@@ -104,6 +125,9 @@ class ReportActivity : AppCompatActivity() {
             button.setOnClickListener{
                 showPhoto()
             }
+        }
+        back_btn.setOnClickListener {
+            finish()
         }
     }
         inner class SendRequest :
@@ -192,12 +216,43 @@ class ReportActivity : AppCompatActivity() {
         //dateShowReport.text = "$formatted"
         // access the items of the list
 
+        private fun uploadFile() {
+        if (filePath != null){//so that know the picture location
+            Toast.makeText(applicationContext, "Uploading...", Toast.LENGTH_SHORT).show()
+            val imageRef = storageReference!!.child("reportimages/"+ ID)
+            //directory name on the firebase name image...+ the unique ID creation so make sure it is not having the same name
+            imageRef.putFile(filePath!!)//upload file function!! "filepath" is the picture location
+                .addOnSuccessListener {
+                    Toast.makeText(applicationContext, "File uploaded", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener{
+                    Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+                }
+                .addOnProgressListener { taskSnapshot ->
+                    val progress = 100.0 * taskSnapshot.bytesTransferred/taskSnapshot.totalByteCount //calculate the progress!
+                    Toast.makeText(applicationContext, "Uploaded "+progress.toInt()+"%..",Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
     private fun showPhoto() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select a photo"),PICK_IMAGE_REQUEST)
         //first argument = target (in this case, its var intent)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {//picture return as the 'data'
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data!=null && data.data!=null)
+            filePath = data.data
+        try {
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath) //to get bitmap
+            attachIMG.setImageBitmap(bitmap) //xml
+            uploadFile()
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
     }
 
 
