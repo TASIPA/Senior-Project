@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Favorite
 
 
-class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContext: Context): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
+class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -65,10 +66,7 @@ class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContex
         var txtTitle2: TextView
         //  var rate: RatingBar
         var img:ImageView
-        // var imgbtn:ImageView
 
-
-        //private var itemClickListener: ItemClickListener? = null
 
         init {
 
@@ -79,22 +77,13 @@ class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContex
             img=itemView.findViewById(R.id.imageShow)
             //  imgbtn=itemView.findViewById(R.id.imageButton)
 
-
-
             itemView.setOnClickListener(this)
-            //itemView.setOnLongClickListener(this)
 
         }
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+            listener.onItemClick(adapterPosition)
         }
-
-//        override fun onClick(v: View) {
-//            listener.onItemClick(adapterPosition)
-//        }
-
-
 
     }
 }

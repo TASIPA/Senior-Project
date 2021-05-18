@@ -38,7 +38,6 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         intent.putExtra("image",res[position].pic)
         intent.putExtra("rating",res[position].rating.toString())
         startActivity(intent)
-
     }
 
 

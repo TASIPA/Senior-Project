@@ -45,7 +45,6 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         var currentuser = auth!!.currentUser!!.uid
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode!!.getReference("favorite").child(currentuser)
-
         //intent value
         val bundle = intent.extras
         var name = bundle?.getString("name").toString()
@@ -60,20 +59,13 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 att_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, red), PorterDuff.Mode.SRC_IN
                 )
-                reference!!.child(pic).setValue(
-                    Favorite(
-                        name,
-                        pic,
-                        type,
-                        rating = 4.5,
-                        distance = 0.0
-                    )
-                )
+                reference!!.child(pic).setValue(Favorite(name,pic, type, rating = 4.5, distance = 0.0,
+                    id = "Attraction"
+                ))
                 checked = true
             } else {
                 att_favBtn.colorFilter = null
                 checked = false
-
                 reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(snapshot: DataSnapshot) {

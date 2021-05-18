@@ -62,7 +62,8 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                         pic,
                         type,
                         rating = 4.5,
-                        distance = 0.0
+                        distance = 0.0,
+                        id = "Restaurant"
                     )
                 )
                 checked=true
