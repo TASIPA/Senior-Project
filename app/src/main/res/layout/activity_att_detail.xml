@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,11 +8,9 @@
     tools:context=".AttDetailActivity">
 
     <RelativeLayout
+        android:id="@+id/att_picholder"
         android:layout_width="match_parent"
-        android:layout_height="235dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="235dp">
 
         <ImageView
             android:id="@+id/att_pic"
@@ -20,12 +18,40 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             tools:srcCompat="@drawable/attpic5" />
+
     </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/attBtn_holder"
+           android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle"
+            android:layout_marginTop="180dp"
+            android:layout_marginRight="30dp"
+            android:elevation="8dp">
+            <ImageView
+                android:id="@+id/att_favBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_baseline_favorite_24"/>
+            <ImageView
+                android:id="@+id/att_mapBtn"
+                android:visibility="invisible"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/send"/>
+
+        </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-30dp"
+        android:layout_below="@+id/att_picholder"
         android:background="@drawable/detail_corner"
         android:backgroundTint="@color/white">
         <RelativeLayout
@@ -67,23 +93,7 @@
                 android:background="@color/lightWhite"
                 android:text="@string/location"/>
 
-            <ImageView
-                android:id="@+id/att_favBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/ic_baseline_favorite_24"/>
-            <ImageView
-                android:id="@+id/att_mapBtn"
-                android:visibility="invisible"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/send"/>
+
             <RatingBar
                 android:id="@+id/att_rat"
                 android:layout_width="wrap_content"
@@ -328,4 +338,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

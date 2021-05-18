@@ -107,6 +107,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         ame_reviewLayout.visibility = View.GONE
         ame_mapLayout.visibility = View.GONE
         ame_mapBtn.visibility = View.GONE
+        ameBtn_holder.visibility = View.GONE
         ame_favBtn.visibility = View.GONE
         ame_button3.setBackgroundResource(R.color.white)
         ame_button2.setBackgroundResource(R.color.white)
@@ -114,13 +115,14 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         when (v.id) {
             R.id.ame_button2 -> {
                 ame_detailLayout.visibility = View.VISIBLE
+                ameBtn_holder.visibility = View.VISIBLE
                 ame_favBtn.visibility = View.VISIBLE
                 ame_button2.setBackgroundResource(R.color.secondary)
             }
             R.id.ame_button4 -> {
                 ame_mapLayout.visibility = View.VISIBLE
+                ameBtn_holder.visibility = View.VISIBLE
                 ame_mapBtn.visibility = View.VISIBLE
-                ame_favBtn.visibility = View.GONE
                 ame_button4.setBackgroundResource(R.color.secondary)
             }
             R.id.ame_button3 -> {

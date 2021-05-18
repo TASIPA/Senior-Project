@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.*
 import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -101,28 +102,31 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     }
 
     fun onClick(v: View) {
-        res_detailLayout.visibility = View.GONE
-        res_reviewLayout.visibility = View.GONE
-        res_mapLayout.visibility = View.GONE
-        res_mapBtn.visibility = View.GONE
-        res_favBtn.visibility = View.GONE
+        res_detailLayout.visibility = GONE
+        res_reviewLayout.visibility = GONE
+        res_mapLayout.visibility = GONE
+        resbtn_holder.visibility= GONE
+        res_mapBtn.visibility = GONE
+        res_favBtn.visibility = GONE
         res_button3.setBackgroundResource(R.color.white)
         res_button2.setBackgroundResource(R.color.white)
         res_button4.setBackgroundResource(R.color.white)
         when (v.id) {
             R.id.res_button2 -> {
-                res_detailLayout.visibility = View.VISIBLE
-                res_favBtn.visibility = View.VISIBLE
+                res_detailLayout.visibility = VISIBLE
+                resbtn_holder.visibility= VISIBLE
+                res_favBtn.visibility = VISIBLE
                 res_button2.setBackgroundResource(R.color.secondary)
             }
             R.id.res_button4 -> {
-                res_mapLayout.visibility = View.VISIBLE
-                res_mapBtn.visibility = View.VISIBLE
-                res_favBtn.visibility = View.GONE
+                res_mapLayout.visibility = VISIBLE
+                resbtn_holder.visibility= VISIBLE
+                res_mapBtn.visibility = VISIBLE
+                res_favBtn.visibility = GONE
                 res_button4.setBackgroundResource(R.color.secondary)
             }
             R.id.res_button3 -> {
-                res_reviewLayout.visibility = View.VISIBLE
+                res_reviewLayout.visibility = VISIBLE
                 res_button3.setBackgroundResource(R.color.secondary)
             }
 

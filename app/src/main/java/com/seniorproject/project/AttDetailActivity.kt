@@ -18,6 +18,7 @@ import com.google.firebase.database.*
 import com.seniorproject.project.R.color
 import com.seniorproject.project.R.color.*
 import com.seniorproject.project.models.Favorite
+import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
 
 
@@ -99,6 +100,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         attreviewLayout.visibility = GONE
         attmapLayout.visibility = GONE
         att_mapBtn.visibility = GONE
+        attBtn_holder.visibility =GONE
         att_favBtn.visibility = GONE
         attbutton3.setBackgroundResource(white)
         attbutton2.setBackgroundResource(white)
@@ -106,13 +108,14 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         when (v.id) {
             R.id.attbutton2 -> {
                 attdetailLayout.visibility = VISIBLE
+                attBtn_holder.visibility = VISIBLE
                 att_favBtn.visibility = VISIBLE
                 attbutton2.setBackgroundResource(secondary)
             }
             R.id.attbutton4 -> {
                 attmapLayout.visibility = VISIBLE
+                attBtn_holder.visibility = VISIBLE
                 att_mapBtn.visibility = VISIBLE
-                att_favBtn.visibility = GONE
                 attbutton4.setBackgroundResource(secondary)
             }
             R.id.attbutton3 -> {
