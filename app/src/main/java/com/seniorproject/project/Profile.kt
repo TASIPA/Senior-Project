@@ -60,7 +60,6 @@ class Profile : AppCompatActivity() {
         DoneBtn.setOnClickListener {
             addPictoDB()
         }
-
         loadProfile()
     }
     

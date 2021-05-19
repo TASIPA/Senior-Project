@@ -79,7 +79,7 @@ public class EmergencyActivity extends FragmentActivity implements
 
         String hospital = "hospital", police = "police";
         Object transferData[] = new Object[2];
-        com.seniorproject.project.EmergencyService.GetNearbyPlaces getNearbyPlaces = new com.seniorproject.project.EmergencyService.GetNearbyPlaces();
+        GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
 
 
         switch (v.getId()) {
