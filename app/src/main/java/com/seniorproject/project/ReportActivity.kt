@@ -46,6 +46,7 @@ class ReportActivity : AppCompatActivity() {
     var reporttime: String? = null
     var description: String? = null
     var imageURL: String? = null
+    var imageURL1: String? = null
     var ID:String?=null
     internal var storage:FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
@@ -57,6 +58,7 @@ class ReportActivity : AppCompatActivity() {
 
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
+
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
         val formatted = current.format(formatter)
@@ -106,8 +108,9 @@ class ReportActivity : AppCompatActivity() {
                             reporttime = inreporttime!!.text.toString()
                             description = indescription!!.text.toString()
 //                          imageURL = inimage!!.text.toString()
-                            imageURL = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
-                            Log.d("ABC",imageURL.toString())
+//                            imageURL = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
+//                            Log.d("ABC",imageURL.toString())
+                            imageURL = imageURL1
                             SendRequest().execute()
                         }
                     }
@@ -223,6 +226,9 @@ class ReportActivity : AppCompatActivity() {
             imageRef.putFile(filePath!!)//upload file function!! "filepath" is the picture location
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext, "File uploaded", Toast.LENGTH_SHORT).show()
+                    imageRef.downloadUrl.addOnSuccessListener {
+                        imageURL1 = it.toString()
+                    }
                 }
                 .addOnFailureListener{
                     Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
