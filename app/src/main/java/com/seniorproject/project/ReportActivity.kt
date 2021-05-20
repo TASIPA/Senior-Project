@@ -19,9 +19,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.solver.widgets.Snapshot
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.seniorproject.project.R.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_report.back_btn
 import kotlinx.android.synthetic.main.activity_restaurant.*
 import org.json.JSONObject
@@ -48,6 +51,12 @@ class ReportActivity : AppCompatActivity() {
     var imageURL: String? = null
     var imageURL1: String? = null
     var ID:String?=null
+    var TatsuReallyWantsThisEmail: String? = null //ถ้าอยากให้ email ถูกเก็บไปใน variable นี้ก้ call function "loadProfile"
+
+    lateinit var auth: FirebaseAuth
+    var database: FirebaseDatabase? = null
+    var dbReference: DatabaseReference? = null
+
     internal var storage:FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
 
@@ -55,6 +64,10 @@ class ReportActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_report)
         supportActionBar?.hide()
+
+        auth= FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        dbReference = database?.reference!!.child("profile")
 
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
@@ -260,6 +273,23 @@ class ReportActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadProfile(){
+
+        val user = auth.currentUser
+        val userref = dbReference?.child(user?.uid!!)
+
+        userref?.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                var TatsuReallyWantsThisEmail = snapshot.child("email").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
 
 }
 

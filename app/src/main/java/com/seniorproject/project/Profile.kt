@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +28,7 @@ class Profile : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1234
     private var filePath: Uri? = null
     var imageURL: String? = null
+    var imageURL2: String? = null
     var ID:String?=null
     var gg:String?=null
     internal var storage: FirebaseStorage? = null
@@ -59,6 +61,7 @@ class Profile : AppCompatActivity() {
         }
         DoneBtn.setOnClickListener {
             addPictoDB()
+            finish()
         }
         loadProfile()
     }
@@ -90,6 +93,10 @@ class Profile : AppCompatActivity() {
             imageRef.putFile(filePath!!)//upload file function!! "filepath" is the picture location
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext, "File uploaded", Toast.LENGTH_SHORT).show()
+                    imageRef.downloadUrl.addOnSuccessListener {
+                        imageURL2 = it.toString()
+                        //Log.d("aa",it.toString())
+                    }
                 }
                 .addOnFailureListener{
                     Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
@@ -121,12 +128,12 @@ class Profile : AppCompatActivity() {
         }
     }
     private fun addPictoDB(){
-        val gg = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/"
-        imageURL = gg+"reportimages%2F"+ID+"?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
+//        val gg = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/"
+//        imageURL = gg+"reportimages%2F"+ID+"?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
 
         val currentUser = auth.currentUser
         val currentUserDB = dbReference?.child(currentUser?.uid!!)
-        currentUserDB?.child("picurl")?.setValue(imageURL)
+        currentUserDB?.child("picurl")?.setValue(imageURL2)
     }
     
 }

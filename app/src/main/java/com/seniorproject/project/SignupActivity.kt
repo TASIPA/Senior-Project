@@ -130,6 +130,7 @@ class SignupActivity : AppCompatActivity() {
                     val currentUserDB = dbReference?.child(currentUser?.uid!!)
                     currentUserDB?.child("name")?.setValue(nameText.text.toString())
                     currentUserDB?.child("username")?.setValue(usernameText.text.toString())
+                    currentUserDB?.child("email")?.setValue(emailSignupText.text.toString())
 
                     dialog.cancel()//stop the dialog running when created account in the authentication successfully
                     Toast.makeText(this, "Account Created", Toast.LENGTH_LONG).show()

@@ -1,11 +1,14 @@
 package com.seniorproject.project.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.Allcategories
@@ -13,6 +16,7 @@ import com.seniorproject.project.LoginActivity
 
 import com.seniorproject.project.Profile
 import com.seniorproject.project.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.profile
@@ -67,6 +71,17 @@ class ProfileFragment : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 profile_name.text = snapshot.child("username").value.toString()
+                var profilePic = snapshot.child("picurl").value.toString()
+
+                if (profilePic!=null){
+                    //profile_img.visibility = INVISIBLE
+                    Picasso.get().load(profilePic).into(profile_img)
+                    profile_name.setTextColor(Color.parseColor("#F44336"))
+
+                    //profile_name.text = profilePic
+
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
