@@ -42,7 +42,6 @@ class ReportActivity : AppCompatActivity() {
     var intopicName: String? = null
     var inreporttime: TextView? = null
     var indescription: TextView? = null
-    var inimage: TextView? = null
     var buttonsend: Button? = null
     var topic: String? = null
     var timestamp: String? = null
@@ -51,7 +50,8 @@ class ReportActivity : AppCompatActivity() {
     var imageURL: String? = null
     var imageURL1: String? = null
     var ID:String?=null
-    var TatsuReallyWantsThisEmail: String? = null //ถ้าอยากให้ email ถูกเก็บไปใน variable นี้ก้ call function "loadProfile"
+    var INUserEmail: String? = null
+    var userEmail : String? = null
 
     lateinit var auth: FirebaseAuth
     var database: FirebaseDatabase? = null
@@ -80,18 +80,9 @@ class ReportActivity : AppCompatActivity() {
         inreporttime = findViewById<View>(id.dateShowReport) as EditText
         indescription = findViewById<View>(id.DescText) as EditText
         ID = UUID.randomUUID().toString()
-        //inimage =
-//        button2!!.setOnClickListener {
-//            topic = intopicName
-//            timestamp = "$formatted"
-//            reporttime = inreporttime!!.text.toString()
-//            description = indescription!!.text.toString()
-////            imageURL = inimage!!.text.toString()
-//            imageURL = gg+"reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
-//            Log.d("ABC",imageURL.toString())
-//            SendRequest().execute()
-//        }
+
         val languages = resources.getStringArray(array.Topics)
+        loadProfile()
 
         // access the spinner
         val spinner = findViewById<Spinner>(id.topicReport)
@@ -120,10 +111,8 @@ class ReportActivity : AppCompatActivity() {
                             timestamp = "$formatted"
                             reporttime = inreporttime!!.text.toString()
                             description = indescription!!.text.toString()
-//                          imageURL = inimage!!.text.toString()
-//                            imageURL = "https://firebasestorage.googleapis.com/v0/b/senior-project-c45a0.appspot.com/o/reportimages%2F6a1b9bac-86c3-4d63-bd91-801407a12831?alt=media"+"&token=9bc2f931-c8fa-4de7-b7fb-f1b1cfc53fd2"
-//                            Log.d("ABC",imageURL.toString())
                             imageURL = imageURL1
+                            userEmail = INUserEmail
                             SendRequest().execute()
                         }
                     }
@@ -162,9 +151,6 @@ class ReportActivity : AppCompatActivity() {
                     // https://script.google.com/macros/s/AKfycbyuAu6jWNYMiWt9X5yp63-hypxQPlg5JS8NimN6GEGmdKZcIFh0/exec
                     val postDataParams = JSONObject()
 
-                    //int i;
-                    //for(i=1;i<=70;i++)
-
 
                     //    String usn = Integer.toString(i);
                     val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
@@ -174,6 +160,7 @@ class ReportActivity : AppCompatActivity() {
                     postDataParams.put("desc", description)
                     postDataParams.put("img", imageURL)
                     postDataParams.put("id", id)
+                    postDataParams.put(("email"),userEmail)
                     Log.e("params", postDataParams.toString())
                     val conn = url.openConnection() as HttpURLConnection
                     conn.readTimeout = 15000
@@ -225,14 +212,8 @@ class ReportActivity : AppCompatActivity() {
             return result.toString()
         }
 
-//        val current = LocalDateTime.now()
-//        val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
-//        val formatted = current.format(formatter)
-        //dateShowReport.text = "$formatted"
-        // access the items of the list
-
         private fun uploadFile() {
-        if (filePath != null){//so that know the picture location
+        if (filePath != null){
             Toast.makeText(applicationContext, "Uploading...", Toast.LENGTH_SHORT).show()
             val imageRef = storageReference!!.child("reportimages/"+ ID)
             //directory name on the firebase name image...+ the unique ID creation so make sure it is not having the same name
@@ -282,7 +263,7 @@ class ReportActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                var TatsuReallyWantsThisEmail = snapshot.child("email").value.toString()
+                INUserEmail = snapshot.child("email").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
