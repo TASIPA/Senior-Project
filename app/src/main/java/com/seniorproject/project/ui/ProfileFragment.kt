@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.seniorproject.project.Allcategories
-import com.seniorproject.project.LoginActivity
-
-import com.seniorproject.project.Profile
+import com.seniorproject.project.*
+import com.seniorproject.project.EmergencyService.EmergencyActivity
 import com.seniorproject.project.R
+
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -52,6 +51,18 @@ class ProfileFragment : Fragment() {
         super.onStart()
         profile.setOnClickListener {
             var intent= Intent(activity, Profile::class.java)
+            startActivity(intent)
+        }
+        set_emergencyBtn.setOnClickListener {
+            var intent= Intent(activity, EmergencyActivity::class.java)
+            startActivity(intent)
+        }
+        set_allCat.setOnClickListener {
+            var intent= Intent(activity, Allcategories::class.java)
+            startActivity(intent)
+        }
+        repBtn.setOnClickListener {
+            var intent= Intent(activity, ReportActivity::class.java)
             startActivity(intent)
         }
 
