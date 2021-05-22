@@ -3,16 +3,31 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 import com.seniorproject.project.Adapters.RestaurantAdapter
 import com.seniorproject.project.Interface.onItemClickListener
+
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_restaurant.*
+import java.util.*
 
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
-    private lateinit var res:List<Restaurants>
+    lateinit var resdata: MutableList<Restaurants>
+    private lateinit var mDatabase:DatabaseReference
+   lateinit var db:FirebaseFirestore
+   lateinit var adapter:RestaurantAdapter
+   var flag=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
@@ -20,23 +35,72 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         back_btn.setOnClickListener {
             finish()
         }
+        resdata= mutableListOf()
+        db= FirebaseFirestore.getInstance()
+        mDatabase = FirebaseDatabase.getInstance().reference;
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
-         res= listOf<Restaurants>(Restaurants("Kope Hya Tai Kee","pic7","Restaurant",4.5),
-                Restaurants("Beef 35","pic2","Restaurant",4.0),
-                Restaurants("Shindo Ramen","pic1","Restaurant",5.0),
-                Restaurants("O Kra Joo NimCity","pic10","Restaurant",4.0),
-                Restaurants("Yoi-Tenki Shabu","pic6","Restaurant",3.0))
-        val adapter = RestaurantAdapter(res, baseContext,this)
-        resList.adapter=adapter
+        val docRef = db.collection("Restaurants")
+        docRef.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    resdata!!.clear()
+                    resdata = snapShot.toObjects(Restaurants::class.java)
+                    adapter = RestaurantAdapter(resdata!!, baseContext,this)
+                    resList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read message", Toast.LENGTH_SHORT).show()
+
+            }
+
+         search_button.setOnClickListener {
+             if (flag){
+                 search_view.visibility= View.VISIBLE
+                 flag=false
+             }
+             else{
+                 search_view.visibility= View.GONE
+                 flag=true
+             }
+
+         }
+        res_search.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                adapter.getFilter().filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
         }
 
     override fun onItemClick(position: Int) {
         var intent= Intent(this,ResDetailActivity::class.java)
-        intent.putExtra("name",res[position].name)
-        intent.putExtra("type",res[position].type)
-        intent.putExtra("image",res[position].pic)
-        intent.putExtra("rating",res[position].rating.toString())
+        intent.putExtra("Obj",resdata[position])
+
         startActivity(intent)
     }
 

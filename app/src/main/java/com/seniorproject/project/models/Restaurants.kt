@@ -1,4 +1,14 @@
 package com.seniorproject.project.models
 
-class Restaurants(val name: String,val pic:String, val type: String, val rating: Double, val distance:Double=0.0) {
+import java.io.Serializable
+
+class Restaurants(
+    val id: Int, val Name: String,
+    val imageURL:String, val Category: String, val Rating: Double,
+    var Description:String, val distance:Double,
+    val Latitude:Double,
+    val Longitude:Double,
+    val Telephone: String
+): Serializable {
+    constructor(): this(0,"","","",0.0,"",0.0,0.0,0.0,"012-9999-1000")
 }

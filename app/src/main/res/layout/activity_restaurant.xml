@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/home_background"
-    tools:context=".TrafficActivity">
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".RestaurantActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
@@ -18,23 +20,25 @@
             android:padding="15dp"
             android:src="@drawable/ic_baseline_arrow_back_24"
             android:tint="@color/primary_dark" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/brandon_grotesque_black"
             android:text="@string/restaurants"
-            android:textColor="@color/primary_dark"
             android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textColor="@color/primary_dark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="15dp"
-            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_search"
             android:tint="@color/primary_dark" />
     </RelativeLayout>
@@ -44,6 +48,31 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
+
+    <RelativeLayout
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/circle"
+        android:elevation="8dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/res_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:backgroundTint="#FFFFFF"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:hint="Search here"
+            android:textColor="#3f3f3f" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resList"
