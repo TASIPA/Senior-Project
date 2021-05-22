@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollIndicators="none"
+    android:scrollbars="none"
     tools:context=".ui.ProfileFragment">
 
     <LinearLayout
@@ -227,7 +227,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="111dp"
                 android:background="?android:attr/listDivider" />
 
             <TextView

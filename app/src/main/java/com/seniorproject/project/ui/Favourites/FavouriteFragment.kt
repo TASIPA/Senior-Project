@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavouriteFragment : Fragment(),onItemClickListener {
 
-    var data: ArrayList<Favorite>? = ArrayList<Favorite>()
+    var data: ArrayList<Favorite>? = ArrayList()
     var rootNode: FirebaseDatabase? = null
     var user: FirebaseAuth? = null
     var reference: DatabaseReference? = null

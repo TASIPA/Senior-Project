@@ -43,14 +43,11 @@ class ProfileFragment : Fragment() {
         auth= FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         dbReference = database?.reference!!.child("profile")
-
         getProfile()
-
     }
 
     override fun onStart() {
         super.onStart()
-
         profile.setOnClickListener {
             var intent= Intent(activity, Profile::class.java)
             startActivity(intent)
