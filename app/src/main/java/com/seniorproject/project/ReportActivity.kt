@@ -1,6 +1,7 @@
 package com.seniorproject.project
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,9 +11,11 @@ import kotlinx.android.synthetic.main.activity_report.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import android.app.ProgressDialog
+import android.app.TimePickerDialog
 import android.net.Uri
 import android.os.AsyncTask
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -32,6 +35,7 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 class ReportActivity : AppCompatActivity() {
@@ -59,6 +63,9 @@ class ReportActivity : AppCompatActivity() {
 
     internal var storage:FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
+
+    var dateFormat = SimpleDateFormat("dd/MM/YYYY", Locale.ENGLISH)
+    var timeFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,89 +137,122 @@ class ReportActivity : AppCompatActivity() {
                 showPhoto()
             }
         }
+
+        dateShowReport.setInputType(InputType.TYPE_NULL)
+        dateShowReport.setOnClickListener {
+            val now = Calendar.getInstance()
+            val datePicker = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(Calendar.YEAR, year)
+                selectedDate.set(Calendar.MONTH, month)
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                val date = dateFormat.format(selectedDate.time)
+
+                val now = Calendar.getInstance()
+                val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+
+                    val selectedTime = Calendar.getInstance()
+                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                    selectedDate.set(Calendar.MINUTE, minute)
+                    val time = timeFormat.format(selectedTime.time)
+                    Toast.makeText(this, "selected time: "+time,Toast.LENGTH_SHORT).show()
+
+
+                },
+                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
+                timePicker.show()
+
+                Toast.makeText(this, "U select: "+date, Toast.LENGTH_SHORT).show()
+            },
+                now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+            datePicker.show()
+        }
+
         back_btn.setOnClickListener {
             finish()
         }
     }
-        inner class SendRequest :
-            AsyncTask<String?, Void?, String>() {
-            override fun onPreExecute() {}
-            override fun onPostExecute(result: String) {
-                Toast.makeText(
-                    applicationContext, result,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
 
-            override fun doInBackground(vararg params: String?): String {
-                return try {
-                    val url =
-                        URL("https://script.google.com/macros/s/AKfycbxFPYDlxlvIsff8hRBVxyPSMoWA3ZhNIrPb1EgsmX-6phH4dbDHwIT3sv3DACfmwQx6fw/exec")
-                    // https://script.google.com/macros/s/AKfycbyuAu6jWNYMiWt9X5yp63-hypxQPlg5JS8NimN6GEGmdKZcIFh0/exec
-                    val postDataParams = JSONObject()
+    inner class SendRequest :
+        AsyncTask<String?, Void?, String>() {
+        override fun onPreExecute() {}
+        override fun onPostExecute(result: String) {
+            Toast.makeText(
+                applicationContext, result,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        override fun doInBackground(vararg params: String?): String {
+            return try {
+                val url =
+                    URL("https://script.google.com/macros/s/AKfycbxFPYDlxlvIsff8hRBVxyPSMoWA3ZhNIrPb1EgsmX-6phH4dbDHwIT3sv3DACfmwQx6fw/exec")
+                // https://script.google.com/macros/s/AKfycbyuAu6jWNYMiWt9X5yp63-hypxQPlg5JS8NimN6GEGmdKZcIFh0/exec
+                val postDataParams = JSONObject()
 
 
-                    //    String usn = Integer.toString(i);
-                    val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
-                    postDataParams.put("topic", topic)
-                    postDataParams.put("timestamp", timestamp)
-                    postDataParams.put("reporttime", reporttime)
-                    postDataParams.put("desc", description)
-                    postDataParams.put("img", imageURL)
-                    postDataParams.put("id", id)
-                    postDataParams.put(("email"),userEmail)
-                    Log.e("params", postDataParams.toString())
-                    val conn = url.openConnection() as HttpURLConnection
-                    conn.readTimeout = 15000
-                    conn.connectTimeout = 15000
-                    conn.requestMethod = "POST"
-                    conn.doInput = true
-                    conn.doOutput = true
-                    val os = conn.outputStream
-                    val writer = BufferedWriter(
-                        OutputStreamWriter(os, "UTF-8")
-                    )
-                    writer.write(getPostDataString(postDataParams))
-                    writer.flush()
-                    writer.close()
-                    os.close()
-                    val responseCode = conn.responseCode
-                    if (responseCode == HttpsURLConnection.HTTP_OK) {
-                        val `in` = BufferedReader(InputStreamReader(conn.inputStream))
-                        val sb = StringBuffer("")
-                        var line: String? = ""
-                        while (`in`.readLine().also { line = it } != null) {
-                            sb.append(line)
-                            break
-                        }
-                        `in`.close()
-                        sb.toString()
-                    } else {
-                        return("false : $responseCode")
+                //    String usn = Integer.toString(i);
+                val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
+                postDataParams.put("topic", topic)
+                postDataParams.put("timestamp", timestamp)
+                postDataParams.put("reporttime", reporttime)
+                postDataParams.put("desc", description)
+                postDataParams.put("img", imageURL)
+                postDataParams.put("id", id)
+                postDataParams.put(("email"),userEmail)
+                Log.e("params", postDataParams.toString())
+                val conn = url.openConnection() as HttpURLConnection
+                conn.readTimeout = 15000
+                conn.connectTimeout = 15000
+                conn.requestMethod = "POST"
+                conn.doInput = true
+                conn.doOutput = true
+                val os = conn.outputStream
+                val writer = BufferedWriter(
+                    OutputStreamWriter(os, "UTF-8")
+                )
+                writer.write(getPostDataString(postDataParams))
+                writer.flush()
+                writer.close()
+                os.close()
+                val responseCode = conn.responseCode
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    val `in` = BufferedReader(InputStreamReader(conn.inputStream))
+                    val sb = StringBuffer("")
+                    var line: String? = ""
+                    while (`in`.readLine().also { line = it } != null) {
+                        sb.append(line)
+                        break
                     }
-                } catch (e: Exception) {
-                    return("Exception: " + e.message)
+                    `in`.close()
+                    sb.toString()
+                } else {
+                    return("false : $responseCode")
                 }
+            } catch (e: Exception) {
+                return("Exception: " + e.message)
             }
         }
+    }
 
-        @Throws(Exception::class)
-        fun getPostDataString(params: JSONObject): String {
-            val result = StringBuilder()
-            var first = true
-            val itr = params.keys()
-            while (itr.hasNext()) {
-                val key = itr.next()
-                val value = params[key]
-                if (first) first = false else result.append("&")
-                result.append(URLEncoder.encode(key, "UTF-8"))
-                result.append("=")
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"))
-            }
-            return result.toString()
+    @Throws(Exception::class)
+    fun getPostDataString(params: JSONObject): String {
+        val result = StringBuilder()
+        var first = true
+        val itr = params.keys()
+        while (itr.hasNext()) {
+            val key = itr.next()
+            val value = params[key]
+            if (first) first = false else result.append("&")
+            result.append(URLEncoder.encode(key, "UTF-8"))
+            result.append("=")
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"))
         }
+        return result.toString()
+    }
 
-        private fun uploadFile() {
+    private fun uploadFile() {
         if (filePath != null){
             Toast.makeText(applicationContext, "Uploading...", Toast.LENGTH_SHORT).show()
             val imageRef = storageReference!!.child("reportimages/"+ ID)

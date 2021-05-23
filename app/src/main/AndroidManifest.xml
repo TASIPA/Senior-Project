@@ -54,6 +54,8 @@
         <activity android:name=".Allcategories" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".ForgetPassActivity" />
+        <activity android:name=".FeaturedActivity" />
+        <activity android:name=".PromtionActivity" />
         <activity android:name=".EmergencyService.EmergencyActivity" />
 
 <!--        <activity-->
