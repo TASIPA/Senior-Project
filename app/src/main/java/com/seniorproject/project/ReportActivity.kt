@@ -65,7 +65,7 @@ class ReportActivity : AppCompatActivity() {
     internal var storageReference: StorageReference? = null
 
     var dateFormat = SimpleDateFormat("dd/MM/YYYY", Locale.ENGLISH)
-    var timeFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
+    var timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +84,7 @@ class ReportActivity : AppCompatActivity() {
         val formatted = current.format(formatter)
 
         buttonsend = findViewById<View>(id.button2) as Button
-        inreporttime = findViewById<View>(id.dateShowReport) as EditText
+        inreporttime = findViewById<View>(id.dateShowReport) as TextView
         indescription = findViewById<View>(id.DescText) as EditText
         ID = UUID.randomUUID().toString()
 
@@ -138,7 +138,7 @@ class ReportActivity : AppCompatActivity() {
             }
         }
 
-        dateShowReport.setInputType(InputType.TYPE_NULL)
+        //dateShowReport.setInputType(InputType.TYPE_NULL)
         dateShowReport.setOnClickListener {
             val now = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -158,12 +158,12 @@ class ReportActivity : AppCompatActivity() {
                     val time = timeFormat.format(selectedTime.time)
                     Toast.makeText(this, "selected time: "+time,Toast.LENGTH_SHORT).show()
 
-
+                    dateShowReport.text = date+" "+time
                 },
-                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),false)
+                    now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
                 timePicker.show()
 
-                Toast.makeText(this, "U select: "+date, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "selected date: "+date, Toast.LENGTH_SHORT).show()
             },
                 now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
