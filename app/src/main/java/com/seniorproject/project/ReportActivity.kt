@@ -220,6 +220,9 @@ class ReportActivity : AppCompatActivity() {
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
                     val `in` = BufferedReader(InputStreamReader(conn.inputStream))
                     val sb = StringBuffer("")
+                    val intent = Intent(this@ReportActivity,ReportSucess::class.java)
+                    intent.putExtra("ReportID", ID)
+                    startActivity(intent)
                     var line: String? = ""
                     while (`in`.readLine().also { line = it } != null) {
                         sb.append(line)
