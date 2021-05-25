@@ -3,16 +3,24 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.AttractionAdapter
 import com.seniorproject.project.Interface.onItemClickListener
-import com.seniorproject.project.models.Attraction
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_attraction.*
+import kotlinx.android.synthetic.main.activity_attraction.back_btn
+import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
 class AttractionActivity : AppCompatActivity(),onItemClickListener {
-    lateinit var attmock:List<Attraction>
+    lateinit var attdata:MutableList<Restaurants>
+    lateinit var db: FirebaseFirestore
+    lateinit var adapter: AttractionAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attraction)
@@ -20,25 +28,36 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         back_btn.setOnClickListener {
             finish()
         }
+        attdata= mutableListOf()
+        db= FirebaseFirestore.getInstance()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         attList.layoutManager = linearLayoutManager
         //replace with event adapter
-        attmock= listOf<Attraction>(Attraction("Lumphini Park","attpic1","Park","Lumphini, Bangkok",0.0),
-            Attraction("Grand Palace","attpic2","Sightseeing","Dusit, Bangkok",0.0),
-            Attraction("Bang KraJao","attpic3","Park","Phra Pradaeng, Samut Prakan",0.0),
-            Attraction("Erawan National Park","attpic4","Sightseeing","Tha Kradan, Kanjanaburi",0.0),
-            Attraction("Mahidol University","attpic5","Educational institute","Salaya, Nakhon Pathom",0.0))
-        val adapter = AttractionAdapter(attmock, baseContext,this)
-        attList.adapter=adapter
+        val docRef = db.collection("Attractions")
+        docRef.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    attdata!!.clear()
+                    attdata = snapShot.toObjects(Restaurants::class.java)
+                    adapter = AttractionAdapter(attdata, baseContext,this)
+                    attList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
     }
 
     override fun onItemClick(position: Int) {
         var intent= Intent(this,AttDetailActivity::class.java)
-        intent.putExtra("name",attmock[position].name)
-        intent.putExtra("type",attmock[position].category)
-        intent.putExtra("loc",attmock[position].location)
-        intent.putExtra("image",attmock[position].pic)
-        //intent.putExtra("rating",res[position].rating.toString())
+        intent.putExtra("attObj",attdata[position])
         startActivity(intent)
 
     }

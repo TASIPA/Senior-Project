@@ -16,12 +16,13 @@ import com.seniorproject.project.Adapters.FavoriteAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Favorite
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 
 class FavouriteFragment : Fragment(),onItemClickListener {
 
-    var data: ArrayList<Favorite>? = ArrayList()
+    lateinit var data: MutableList<Restaurants>
     var rootNode: FirebaseDatabase? = null
     var user: FirebaseAuth? = null
     var reference: DatabaseReference? = null
@@ -37,6 +38,7 @@ class FavouriteFragment : Fragment(),onItemClickListener {
         user = FirebaseAuth.getInstance()
         var currentuser = user!!.currentUser?.uid
         reference = rootNode!!.getReference("favorite").child(currentuser!!)
+        data= mutableListOf()
         return root
     }
 
@@ -45,17 +47,23 @@ class FavouriteFragment : Fragment(),onItemClickListener {
         reference!!.get().addOnSuccessListener {
             data?.clear()
             it.children?.forEach { i ->
-                var name = it.child(i.key.toString()).child("name").value.toString()
-                var pic = it.child(i.key.toString()).child("pic").value.toString()
-                var type = it.child(i.key.toString()).child("type").value.toString()
+                var category = it.child(i.key.toString()).child("category").value.toString()
+                var description= it.child(i.key.toString()).child("description").value.toString()
+                var img = it.child(i.key.toString()).child("imageURL").value.toString()
                 var rating =
                     it.child(i.key.toString()).child("rating").value.toString().toDouble()
                 var distance =
                     it.child(i.key.toString()).child("distance").value.toString()
                         .toDouble()
                 var id =
-                    it.child(i.key.toString()).child("id").value.toString()
-                data?.add(Favorite(name, pic, type, rating, distance, id))
+                    it.child(i.key.toString()).child("id").value.toString().toInt()
+                   var lat= it.child(i.key.toString()).child("latitude").value.toString().toDouble()
+                   var long= it.child(i.key.toString()).child("longitude").value.toString().toDouble()
+                   var name= it.child(i.key.toString()).child("name").value.toString()
+                   var tel= it.child(i.key.toString()).child("telephone").value.toString()
+                   var loc= it.child(i.key.toString()).child("location").value.toString()
+
+                data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel))
             }
             if (data != null) {
                 val linearLayoutManager =
@@ -79,16 +87,18 @@ class FavouriteFragment : Fragment(),onItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-       var intent:Intent=when(data!![position].id){
-           "Restaurant" -> Intent(activity, ResDetailActivity::class.java)
-           "Amenity" -> Intent(activity, AmeDetailActivity::class.java)
-           else -> Intent(activity, AttDetailActivity::class.java)
+       when(data!![position].id/1000){
+           1 -> {var intent=Intent(activity, ResDetailActivity::class.java)
+               intent.putExtra("Obj",data[position])
+                startActivity(intent)}
+           4 -> {var intent=Intent(activity, AmeDetailActivity::class.java)
+               intent.putExtra("ameObj",data[position])
+               startActivity(intent)}
+           else -> {var intent=Intent(activity, AttDetailActivity::class.java)
+               intent.putExtra("attObj",data[position])
+               startActivity(intent)}
        }
-        intent.putExtra("name", data!![position].name)
-        intent.putExtra("type", data!![position].type)
-        intent.putExtra("image", data!![position].pic)
-        intent.putExtra("rating", data!![position].rating.toString())
-        startActivity(intent)
+
     }
 
 }

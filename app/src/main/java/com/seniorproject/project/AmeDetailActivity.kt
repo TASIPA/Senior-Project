@@ -21,8 +21,13 @@ import com.google.firebase.database.*
 import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.Adapters.FavoriteAdapter
 import com.seniorproject.project.models.Favorite
+import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
 import kotlinx.android.synthetic.main.activity_ame_detail.*
+import kotlinx.android.synthetic.main.activity_ame_detail.send_btn
+import kotlinx.android.synthetic.main.activity_ame_detail.user_rate
+import kotlinx.android.synthetic.main.activity_att_detail.*
+import kotlinx.android.synthetic.main.activity_res_detail.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 
@@ -35,6 +40,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var reference: DatabaseReference? = null
     var reviewReference: DatabaseReference?=null
     var userReference:DatabaseReference?=null
+    lateinit var obj: Restaurants
 
     var auth: FirebaseAuth? = null
     var checked: Boolean=false
@@ -53,17 +59,15 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         auth = FirebaseAuth.getInstance()
         var currentuser = auth!!.currentUser!!.uid
         rootNode = FirebaseDatabase.getInstance()
+
+        obj= intent.getSerializableExtra("ameObj") as Restaurants
+
         reference = rootNode!!.getReference("favorite").child(currentuser)
         userReference=rootNode!!.getReference("profile").child(currentuser)
 
 
-        val bundle = intent.extras
-        var name = bundle?.getString("name").toString()
-        var type = bundle?.getString("type").toString()
-        var pic = bundle?.getString("image").toString()
-
-        reviewReference = rootNode!!.getReference("review").child(pic)
-        reference!!.child(pic).addListenerForSingleValueEvent(this)
+        reviewReference = rootNode!!.getReference("review").child(obj.imageURL)
+        reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
 
  //       reviewReference!!.child(pic).addListenerForSingleValueEvent(this)
 
@@ -82,21 +86,14 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 ame_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, R.color.red), PorterDuff.Mode.SRC_IN
                 )
-                reference!!.child(pic).setValue(
-                    Favorite(
-                        name,
-                        pic,
-                        type,
-                        rating = 4.5,
-                        distance = 0.0,
-                        id="Amenity")
-                )
+               // reference!!.child(pic).setValue()
+                reference!!.child(obj.id.toString()).setValue(obj)
                 checked=true
             }
             else{
                 ame_favBtn.colorFilter = null
                 checked=false
-                reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
+                reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (appleSnapshot in snapshot.children) {
                             appleSnapshot.ref.removeValue()
@@ -118,15 +115,20 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             cmtSec.visibility=View.GONE
         }
         //AmeType.text = type
-        ame_name.text = name
-        var result = when (pic) {
+        ame_name.text = obj.Name
+        ame_desc.text=obj.Description
+        var result = when (obj.imageURL) {
             "apic1" -> R.drawable.apic1
             "apic2" -> R.drawable.apic2
             "apic3" -> R.drawable.apic3
             "apic4" -> R.drawable.apic4
-            else -> R.drawable.epic5
+            else -> R.drawable.epic2
         }
         ame_pic.setImageResource(result)
+        ame_rat.rating = obj.Rating.toFloat()
+        ame_ratVal.text=obj.Rating.toString()
+        ame_type.text=obj.Category
+        ame_loc.text=obj.Location
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
@@ -211,20 +213,10 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        //val bundle = intent.extras
-        var pointLat = 13.7998783
-        var pointLon = 100.3113113
-        var name = "7-11"
-        latLng = LatLng(pointLat, pointLon)
-        // Add a marker in Sydney and move the camera
-        mMap.addMarker(MarkerOptions().position(latLng).title(name))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        if (name == null) {
-            finish()
-        }
+        latLng = LatLng(obj.Latitude,obj.Longitude)
+        mMap.addMarker(MarkerOptions().position(latLng).title(obj.Name))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
     }
-
-
 }
 
 

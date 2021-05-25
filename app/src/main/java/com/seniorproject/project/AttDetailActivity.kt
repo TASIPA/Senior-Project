@@ -18,8 +18,10 @@ import com.google.firebase.database.*
 import com.seniorproject.project.R.color
 import com.seniorproject.project.R.color.*
 import com.seniorproject.project.models.Favorite
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
+import kotlinx.android.synthetic.main.activity_res_detail.*
 
 
 class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
@@ -31,6 +33,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var reference: DatabaseReference? = null
     var auth: FirebaseAuth? = null
     var checked: Boolean = false
+    lateinit var obj: Restaurants
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,28 +49,27 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         var currentuser = auth!!.currentUser!!.uid
         rootNode = FirebaseDatabase.getInstance()
         reference = rootNode!!.getReference("favorite").child(currentuser)
+        obj= intent.getSerializableExtra("attObj") as Restaurants
         //intent value
-        val bundle = intent.extras
-        var name = bundle?.getString("name").toString()
-        var type = bundle?.getString("type").toString()
-        var pic = bundle?.getString("image").toString()
+
 
         //calls onDataChanged()
-        reference!!.child(pic).addListenerForSingleValueEvent(this)
+        reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
 
         att_favBtn.setOnClickListener {
             if (!checked) {
                 att_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, red), PorterDuff.Mode.SRC_IN
                 )
-                reference!!.child(pic).setValue(Favorite(name,pic, type, rating = 4.5, distance = 0.0,
-                    id = "Attraction"
-                ))
+//                reference!!.child(pic).setValue(Favorite(name,pic, type, rating = 4.5, distance = 0.0,
+//                    id = "Attraction"
+//                ))
+                reference!!.child(obj.id.toString()).setValue(obj)
                 checked = true
             } else {
                 att_favBtn.colorFilter = null
                 checked = false
-                reference!!.child(pic).addListenerForSingleValueEvent(object : ValueEventListener {
+                reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (appleSnapshot in snapshot.children) {
@@ -82,10 +84,10 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             }
         }
 
-        att_name.text = name
-        att_loc.text = "Salaya"
-        att_type.text = type
-        var result = when (pic) {
+        att_name.text = obj.Name
+        att_loc.text = obj.Location
+        att_type.text = obj.Category
+        var result = when (obj.imageURL) {
             "attpic1" -> R.drawable.attpic1
             "attpic2" -> R.drawable.attpic2
             "attpic3" -> R.drawable.attpic3
@@ -93,6 +95,10 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             else -> R.drawable.epic2
         }
         att_pic.setImageResource(result)
+        att_rat.rating = obj.Rating.toFloat()
+        att_ratVal.text=obj.Rating.toString()
+        att_type.text=obj.Category
+        att_loc.text=obj.Location
     }
 
     fun onClick(v: View) {
@@ -130,17 +136,10 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        //val bundle = intent.extras
-        var pointLat = 13.7998783
-        var pointLon = 100.3113113
-        var name = "7-11"
-        latLng = LatLng(pointLat, pointLon)
+        latLng = LatLng(obj.Latitude,obj.Longitude)
         // Add a marker in Sydney and move the camera
-        mMap.addMarker(MarkerOptions().position(latLng).title(name))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-        if (name == null) {
-            finish()
-        }
+        mMap.addMarker(MarkerOptions().position(latLng).title(obj.Name))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {

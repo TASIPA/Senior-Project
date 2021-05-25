@@ -3,17 +3,24 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.AmenityAdapter
 import com.seniorproject.project.Interface.onItemClickListener
-import com.seniorproject.project.models.Amenities
+import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_amenity.back_btn
+import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
-    lateinit var amenmock:List<Amenities>
+    lateinit var amedata:MutableList<Restaurants>
+    lateinit var db: FirebaseFirestore
+    lateinit var adapter: AmenityAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_amenity)
@@ -23,21 +30,34 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         }
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         amenList.layoutManager = linearLayoutManager
-        amenmock= listOf<Amenities>(Amenities("PTT Gas Station","apic1","Gas",0.0),
-                Amenities("Kasikorn Bank","apic2","Bank",0.0),
-                Amenities("KrungThai Bank","apic3","Bank",0.0),
-                Amenities("Bangkok Bank","apic4","Bank",0.0),
-                Amenities("7-11 The september branch","apic5","Convenient Store",0.0))
-        val adapter = AmenityAdapter(amenmock, baseContext,this)
-        amenList.adapter=adapter
+        amedata= mutableListOf()
+        db= FirebaseFirestore.getInstance()
+
+        val docRef = db.collection("Amenities")
+        docRef.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    amedata!!.clear()
+                    amedata = snapShot.toObjects(Restaurants::class.java)
+                    adapter = AmenityAdapter(amedata, baseContext,this)
+                    amenList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
     }
 
     override fun onItemClick(position: Int) {
         var intent= Intent(this,AmeDetailActivity::class.java)
-        intent.putExtra("name",amenmock[position].name)
-        intent.putExtra("type",amenmock[position].type)
-        intent.putExtra("image",amenmock[position].pic)
-        //intent.putExtra("rating",amenmock[position].rating.toString())
+        intent.putExtra("ameObj",amedata[position])
         startActivity(intent)
 
     }

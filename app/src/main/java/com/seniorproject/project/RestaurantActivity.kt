@@ -24,7 +24,7 @@ import java.util.*
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var resdata: MutableList<Restaurants>
-    private lateinit var mDatabase:DatabaseReference
+   // private lateinit var mDatabase:DatabaseReference
    lateinit var db:FirebaseFirestore
    lateinit var adapter:RestaurantAdapter
    var flag=true
@@ -37,7 +37,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         }
         resdata= mutableListOf()
         db= FirebaseFirestore.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference;
+       // mDatabase = FirebaseDatabase.getInstance().reference;
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
         val docRef = db.collection("Restaurants")
@@ -57,7 +57,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     "Fail:",
                     exception
                 )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read message", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
             }
 

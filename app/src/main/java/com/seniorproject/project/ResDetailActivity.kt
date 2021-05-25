@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
+import kotlinx.android.synthetic.main.activity_ame_detail.*
+import kotlinx.android.synthetic.main.activity_att_detail.*
 
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
@@ -48,29 +50,20 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         //get value
         obj= intent.getSerializableExtra("Obj") as Restaurants
         //calls onDataChanged()
-        reference!!.child(obj.imageURL).addListenerForSingleValueEvent(this)
+        reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
         res_favBtn.setOnClickListener {
             if (!checked) {
                 res_favBtn.setColorFilter(
                     ContextCompat.getColor(baseContext, R.color.red), PorterDuff.Mode.SRC_IN
                 )
-                reference!!.child(obj.imageURL).setValue(
-                    Favorite(
-                        obj.Name,
-                        obj.imageURL,
-                        obj.Category,
-                        obj.Rating,
-                       obj.distance,
-                        id = "Restaurant"
-                    )
-                )
+                reference!!.child(obj.id.toString()).setValue(obj)
                 checked=true
             }
             else{
                 res_favBtn.colorFilter = null
                 checked=false
 
-                reference!!.child(obj.imageURL).addListenerForSingleValueEvent(object : ValueEventListener {
+                reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (appleSnapshot in snapshot.children) {
@@ -97,6 +90,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         }
         res_pic.setImageResource(result)
         res_rat.rating = obj.Rating.toFloat()
+        res_ratVal.text=obj.Rating.toString()
+        res_type.text=obj.Category
+        res_loc.text=obj.Location
     }
 
     fun onClick(v: View) {

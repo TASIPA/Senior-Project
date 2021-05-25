@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Favorite
+import com.seniorproject.project.models.Restaurants
 
 
-class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
+class FavoriteAdapter(private val rssObject: List<Restaurants>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -28,11 +29,11 @@ class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContex
     }
 
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
-        holder.txtTitle.text = rssObject[position].name
-        holder.txtTitle1.text = rssObject[position].type
-        holder.txtTitle2.text = rssObject[position].rating.toString()
+        holder.txtTitle.text = rssObject[position].Name
+        holder.txtTitle1.text = rssObject[position].Category
+        holder.txtTitle2.text = rssObject[position].Rating.toString()
         // holder.rate.rating = rssObject[position].rating.toFloat()
-        var result = when (rssObject[position].pic) {
+        var result = when (rssObject[position].imageURL) {
             "apic1" -> R.drawable.apic1
             "apic2" -> R.drawable.apic2
             "apic3" -> R.drawable.apic3
@@ -47,7 +48,7 @@ class FavoriteAdapter(private val rssObject: List<Favorite>, private val mContex
             "pic2" -> R.drawable.pic2
             "pic6" -> R.drawable.pic6
             "pic7" -> R.drawable.pic7
-            else -> R.drawable.pic10
+            else -> R.drawable.epic2
         }
         holder.img.setImageResource(result)
         //holder.imgbtn.setImageResource(R.drawable.ic_heart)

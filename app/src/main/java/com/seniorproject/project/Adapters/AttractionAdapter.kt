@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
-import com.seniorproject.project.models.Attraction
+import com.seniorproject.project.models.Restaurants
 
-class AttractionAdapter(private val rssObject: List<Attraction>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<AttractionAdapter.FeedViewHolders>()
+class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AttractionAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -27,12 +27,13 @@ class AttractionAdapter(private val rssObject: List<Attraction>, private val mCo
     }
 
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
-        holder.txtTitle.text = rssObject[position].name
-        holder.txtTitle1.text = rssObject[position].location
-        holder.txtTitle2.text = rssObject[position].category
+        holder.txtTitle.text = rssObject[position].Name
+        holder.txtTitle1.text = rssObject[position].Location
+        holder.txtTitle2.text = rssObject[position].Category
         //holder.txtTitle3.text = rssObject[position].date
         holder.txtTitle4.text = rssObject[position].distance.toString()
-        var result = when (rssObject[position].pic) {
+        holder.txtTitle5.text = rssObject[position].Rating.toString()
+        var result = when (rssObject[position].imageURL) {
             "attpic1" -> R.drawable.attpic1
             "attpic2" -> R.drawable.attpic2
             "attpic3" -> R.drawable.attpic3
@@ -56,6 +57,7 @@ class AttractionAdapter(private val rssObject: List<Attraction>, private val mCo
         var txtTitle2: TextView
         //var txtTitle3: TextView
         var txtTitle4: TextView
+        var txtTitle5: TextView
         var img:ImageView
         // var imgbtn:ImageView
 
@@ -69,6 +71,7 @@ class AttractionAdapter(private val rssObject: List<Attraction>, private val mCo
             txtTitle2 = itemView.findViewById(R.id.textView2)
             //txtTitle3 = itemView.findViewById(R.id.eventDate)
             txtTitle4 = itemView.findViewById(R.id.attdistance)
+            txtTitle5 = itemView.findViewById(R.id.ratetxtatt)
             img=itemView.findViewById(R.id.imageShow)
             // imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)

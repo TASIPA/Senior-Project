@@ -75,13 +75,24 @@
             android:textSize="14sp" />
 
         <ImageView
-            android:id="@+id/fav"
+            android:id="@+id/rateimg"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/star"
             android:layout_marginRight="10dp"
             android:layout_above="@+id/attdistance"
             android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/ratetxtatt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.0"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_toLeftOf="@+id/rateimg"
+            android:layout_above="@+id/attdistance"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
