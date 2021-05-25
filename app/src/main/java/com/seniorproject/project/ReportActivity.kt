@@ -154,7 +154,7 @@ class ReportActivity : AppCompatActivity() {
 
                     val selectedTime = Calendar.getInstance()
                     selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                    selectedDate.set(Calendar.MINUTE, minute)
+                    selectedTime.set(Calendar.MINUTE, minute)
                     val time = timeFormat.format(selectedTime.time)
                     Toast.makeText(this, "selected time: "+time,Toast.LENGTH_SHORT).show()
 

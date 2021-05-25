@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_signup.*
 import java.io.IOException
 import java.util.*
 
-class Profile : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     var database: FirebaseDatabase? = null

@@ -3,13 +3,10 @@ package com.seniorproject.project.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_RED
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.*
@@ -17,8 +14,6 @@ import com.seniorproject.project.EmergencyService.EmergencyActivity
 import com.seniorproject.project.R
 
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.profile
 
@@ -50,7 +45,7 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         profile.setOnClickListener {
-            var intent= Intent(activity, Profile::class.java)
+            var intent= Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
         set_emergencyBtn.setOnClickListener {
