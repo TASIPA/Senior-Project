@@ -45,7 +45,7 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
     }
 
     override fun getItemCount(): Int {
-        return rssObject.size
+        return filteredData.size
     }
     inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {

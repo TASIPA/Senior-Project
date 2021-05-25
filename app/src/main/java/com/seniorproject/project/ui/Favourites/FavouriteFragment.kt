@@ -71,7 +71,7 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                 favList.layoutManager = linearLayoutManager
                 var adapter1 = context?.let {
                     FavoriteAdapter(
-                        data!!,
+                        data,
                         it, this
                     )
                 }!!

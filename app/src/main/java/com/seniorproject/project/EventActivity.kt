@@ -101,9 +101,9 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
 
     override fun onItemClick(position: Int, data: MutableList<Events>) {
         var intent= Intent(this,EveDetailActivity::class.java)
-        intent.putExtra("name",evedata[position].Name)
-        intent.putExtra("type",evedata[position].Category)
-        intent.putExtra("image",evedata[position].imageURL)
+        intent.putExtra("name",data[position].Name)
+        intent.putExtra("type",data[position].Category)
+        intent.putExtra("image",data[position].imageURL)
         //intent.putExtra("rating",res[position].rating.toString())
         startActivity(intent)
     }
