@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 
 class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AttractionAdapter.FeedViewHolders>()
-{
+{   private var filteredData=rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
         val itemView = inflater.inflate(R.layout.card_attraction,parent,false)
@@ -27,13 +28,13 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
     }
 
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
-        holder.txtTitle.text = rssObject[position].Name
-        holder.txtTitle1.text = rssObject[position].Location
-        holder.txtTitle2.text = rssObject[position].Category
+        holder.txtTitle.text = filteredData[position].Name
+        holder.txtTitle1.text = filteredData[position].Location
+        holder.txtTitle2.text = filteredData[position].Category
         //holder.txtTitle3.text = rssObject[position].date
-        holder.txtTitle4.text = rssObject[position].distance.toString()
-        holder.txtTitle5.text = rssObject[position].Rating.toString()
-        var result = when (rssObject[position].imageURL) {
+        holder.txtTitle4.text = filteredData[position].distance.toString()
+        holder.txtTitle5.text = filteredData[position].Rating.toString()
+        var result = when (filteredData[position].imageURL) {
             "attpic1" -> R.drawable.attpic1
             "attpic2" -> R.drawable.attpic2
             "attpic3" -> R.drawable.attpic3
@@ -47,7 +48,7 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
     }
 
     override fun getItemCount(): Int {
-        return rssObject.size
+        return filteredData.size
     }
     inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {
@@ -84,6 +85,34 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
         }
 
 
+
+    }
+    fun getFilter(): Filter {
+        return object: Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                var st=constraint.toString()
+                if (st.isEmpty()){
+                    filteredData=rssObject
+                }
+                else{
+                    var lst= mutableListOf<Restaurants>()
+                    for (row in rssObject){
+                        if (row.Name.toLowerCase().contains(st.toLowerCase()))
+                            lst.add(row)
+                    }
+                    filteredData=lst
+                }
+
+                var filterResults= FilterResults()
+                filterResults.values=filteredData
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredData=results!!.values as MutableList<Restaurants>
+                notifyDataSetChanged()
+            }
+        }
 
     }
 }

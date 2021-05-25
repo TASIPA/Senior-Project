@@ -3,7 +3,10 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +16,14 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_amenity.back_btn
-import kotlinx.android.synthetic.main.activity_restaurant.*
+
 
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
     lateinit var amedata:MutableList<Restaurants>
     lateinit var db: FirebaseFirestore
     lateinit var adapter: AmenityAdapter
+    var flag=true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +41,7 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
-                    amedata!!.clear()
+                    amedata.clear()
                     amedata = snapShot.toObjects(Restaurants::class.java)
                     adapter = AmenityAdapter(amedata, baseContext,this)
                     amenList.adapter=adapter
@@ -53,6 +57,40 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                 Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
             }
+        search_button.setOnClickListener {
+            if (flag){
+                search_view.visibility= View.VISIBLE
+                flag=false
+            }
+            else{
+                search_view.visibility= View.GONE
+                flag=true
+            }
+
+        }
+        ame_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                adapter.getFilter().filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
     }
 
     override fun onItemClick(position: Int) {

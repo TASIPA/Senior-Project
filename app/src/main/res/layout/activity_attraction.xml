@@ -44,7 +44,30 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
+<RelativeLayout
+    android:id="@+id/search_view"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/circle"
+    android:elevation="8dp"
+    android:visibility="gone">
 
+    <EditText
+        android:id="@+id/att_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:backgroundTint="#FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:hint="Search here"
+        android:textColor="#3f3f3f" />
+
+</RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/attList"
         android:layout_width="match_parent"

@@ -61,7 +61,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
             }
 
-         search_button.setOnClickListener {
+        search_button.setOnClickListener {
              if (flag){
                  search_view.visibility= View.VISIBLE
                  flag=false
