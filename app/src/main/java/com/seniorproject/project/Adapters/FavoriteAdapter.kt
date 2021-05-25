@@ -14,7 +14,7 @@ import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 
 
-class FavoriteAdapter(private val rssObject: List<Restaurants>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
+class FavoriteAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -83,7 +83,7 @@ class FavoriteAdapter(private val rssObject: List<Restaurants>, private val mCon
         }
 
         override fun onClick(v: View?) {
-            listener.onItemClick(adapterPosition)
+            listener.onItemClick(adapterPosition, rssObject)
         }
 
     }

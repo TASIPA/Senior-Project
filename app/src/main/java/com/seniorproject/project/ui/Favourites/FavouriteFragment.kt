@@ -86,7 +86,7 @@ class FavouriteFragment : Fragment(),onItemClickListener {
         }
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
        when(data!![position].id/1000){
            1 -> {var intent=Intent(activity, ResDetailActivity::class.java)
                intent.putExtra("Obj",data[position])

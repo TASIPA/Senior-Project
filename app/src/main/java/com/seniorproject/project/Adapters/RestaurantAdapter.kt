@@ -71,7 +71,7 @@ class RestaurantAdapter(private val rssObject: MutableList<Restaurants>, private
         }
 
         override fun onClick(v: View) {
-            listener.onItemClick(adapterPosition)
+            listener.onItemClick(adapterPosition,filteredData)
         }
 
 

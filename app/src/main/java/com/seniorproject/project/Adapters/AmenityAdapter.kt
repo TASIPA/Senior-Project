@@ -69,7 +69,7 @@ class AmenityAdapter(private val rssObject: MutableList<Restaurants>, private va
         }
 
         override fun onClick(v: View) {
-            listener.onItemClick(adapterPosition)
+            listener.onItemClick(adapterPosition,filteredData)
         }
 
 

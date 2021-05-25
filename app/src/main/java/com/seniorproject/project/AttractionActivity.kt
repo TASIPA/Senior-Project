@@ -93,9 +93,9 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         })
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
         var intent= Intent(this,AttDetailActivity::class.java)
-        intent.putExtra("attObj",attdata[position])
+        intent.putExtra("attObj",data[position])
         startActivity(intent)
 
     }

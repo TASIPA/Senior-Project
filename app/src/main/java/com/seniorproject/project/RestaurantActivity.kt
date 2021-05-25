@@ -24,6 +24,7 @@ import java.util.*
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var resdata: MutableList<Restaurants>
+
    // private lateinit var mDatabase:DatabaseReference
    lateinit var db:FirebaseFirestore
    lateinit var adapter:RestaurantAdapter
@@ -97,10 +98,9 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         })
         }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
         var intent= Intent(this,ResDetailActivity::class.java)
-        intent.putExtra("Obj",resdata[position])
-
+        intent.putExtra("Obj",data[position])
         startActivity(intent)
     }
 

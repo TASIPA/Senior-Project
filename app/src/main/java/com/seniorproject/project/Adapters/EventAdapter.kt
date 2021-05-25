@@ -5,34 +5,33 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.Interface.onItemClickListener
+import com.seniorproject.project.Interface.onItemClickListener1
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Events
+import com.seniorproject.project.models.Restaurants
 
-class EventAdapter(private val rssObject: List<Events>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
-{
+class EventAdapter(private val rssObject: MutableList<Events>, private val mContext: Context,private val listener: onItemClickListener1): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
+{   private var filteredData=rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
         val itemView = inflater.inflate(R.layout.card_event,parent,false)
         return FeedViewHolders(itemView)
     }
 
-    private val inflater: LayoutInflater
-
-    init{
-        inflater = LayoutInflater.from(mContext)
-    }
+    private val inflater: LayoutInflater = LayoutInflater.from(mContext)
 
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
-        holder.txtTitle.text = rssObject[position].name
-        holder.txtTitle1.text = rssObject[position].location
+        holder.txtTitle.text = filteredData[position].Name
+        holder.txtTitle1.text = filteredData[position].Location
         //holder.txtTitle2.text = rssObject[position].category
-        holder.txtTitle3.text = rssObject[position].date
-        holder.txtTitle4.text = rssObject[position].distance.toString()
-        var result = when (rssObject[position].pic) {
+        holder.txtTitle3.text =filteredData[position].Date
+        holder.txtTitle4.text = filteredData[position].distance.toString()
+        var result = when (filteredData[position].imageURL) {
             "epic1" -> R.drawable.epic1
             "epic2" -> R.drawable.epic2
             "epic3" -> R.drawable.epic3
@@ -77,10 +76,38 @@ class EventAdapter(private val rssObject: List<Events>, private val mContext: Co
         }
 
         override fun onClick(v: View) {
-           listener.onItemClick(adapterPosition)
+           listener.onItemClick(adapterPosition,filteredData)
         }
 
 
+
+    }
+    fun getFilter(): Filter {
+        return object: Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                var st=constraint.toString()
+                if (st.isEmpty()){
+                    filteredData=rssObject
+                }
+                else{
+                    var lst= mutableListOf<Events>()
+                    for (row in rssObject){
+                        if (row.Name.toLowerCase().contains(st.toLowerCase()))
+                            lst.add(row)
+                    }
+                    filteredData=lst
+                }
+
+                var filterResults= FilterResults()
+                filterResults.values=filteredData
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredData=results!!.values as MutableList<Events>
+                notifyDataSetChanged()
+            }
+        }
 
     }
 }

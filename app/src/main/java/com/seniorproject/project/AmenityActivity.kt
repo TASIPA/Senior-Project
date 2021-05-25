@@ -93,9 +93,9 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         })
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
         var intent= Intent(this,AmeDetailActivity::class.java)
-        intent.putExtra("ameObj",amedata[position])
+        intent.putExtra("ameObj",data[position])
         startActivity(intent)
 
     }
