@@ -194,12 +194,14 @@ class ReportActivity : AppCompatActivity() {
 
                 //    String usn = Integer.toString(i);
                 val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
+                val reportID = UUID.randomUUID().toString()
                 postDataParams.put("topic", topic)
                 postDataParams.put("timestamp", timestamp)
                 postDataParams.put("reporttime", reporttime)
                 postDataParams.put("desc", description)
                 postDataParams.put("img", imageURL)
                 postDataParams.put("id", id)
+                postDataParams.put("reportID", reportID)
                 postDataParams.put(("email"),userEmail)
                 Log.e("params", postDataParams.toString())
                 val conn = url.openConnection() as HttpURLConnection
@@ -221,7 +223,7 @@ class ReportActivity : AppCompatActivity() {
                     val `in` = BufferedReader(InputStreamReader(conn.inputStream))
                     val sb = StringBuffer("")
                     val intent = Intent(this@ReportActivity,ReportSucess::class.java)
-                    intent.putExtra("ReportID", ID)
+                    intent.putExtra("ReportID", reportID)
                     startActivity(intent)
                     var line: String? = ""
                     while (`in`.readLine().also { line = it } != null) {
