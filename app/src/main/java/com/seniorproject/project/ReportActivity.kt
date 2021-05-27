@@ -166,6 +166,11 @@ class ReportActivity : AppCompatActivity() {
                 Toast.makeText(this, "selected date: "+date, Toast.LENGTH_SHORT).show()
             },
                 now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+            //datePicker.datePicker.minDate
+            now.add(Calendar.DAY_OF_MONTH, -15)
+            datePicker.getDatePicker().setMinDate(now.timeInMillis)
+            now.add(Calendar.DAY_OF_MONTH, 15)
+            datePicker.getDatePicker().setMaxDate(now.timeInMillis)
             datePicker.show()
         }
 
