@@ -46,12 +46,14 @@ class ReportActivity : AppCompatActivity() {
     var intopicName: String? = null
     var inreporttime: TextView? = null
     var indescription: TextView? = null
+    var inlocation: TextView? = null
     var buttonsend: Button? = null
     var topic: String? = null
     var timestamp: String? = null
     var reporttime: String? = null
     var description: String? = null
     var imageURL: String? = null
+    var locationdesc: String? = null
     var imageURL1: String? = null
     var ID:String?=null
     var INUserEmail: String? = null
@@ -86,6 +88,7 @@ class ReportActivity : AppCompatActivity() {
         buttonsend = findViewById<View>(id.button2) as Button
         inreporttime = findViewById<View>(id.dateShowReport) as TextView
         indescription = findViewById<View>(id.DescText) as EditText
+        inlocation = findViewById<View>(id.LocaText) as EditText
         ID = UUID.randomUUID().toString()
 
         val languages = resources.getStringArray(array.Topics)
@@ -118,6 +121,7 @@ class ReportActivity : AppCompatActivity() {
                             timestamp = "$formatted"
                             reporttime = inreporttime!!.text.toString()
                             description = indescription!!.text.toString()
+                            locationdesc = inlocation!!.text.toString()
                             imageURL = imageURL1
                             userEmail = INUserEmail
                             SendRequest().execute()
@@ -205,6 +209,7 @@ class ReportActivity : AppCompatActivity() {
                 postDataParams.put("reporttime", reporttime)
                 postDataParams.put("desc", description)
                 postDataParams.put("img", imageURL)
+                postDataParams.put("location", locationdesc)
                 postDataParams.put("id", id)
                 postDataParams.put("reportID", reportID)
                 postDataParams.put(("email"),userEmail)
