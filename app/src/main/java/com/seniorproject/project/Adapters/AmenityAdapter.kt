@@ -1,6 +1,7 @@
 package com.seniorproject.project.Adapters
 
 import android.content.Context
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,12 @@ import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 
-class AmenityAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AmenityAdapter.FeedViewHolders>()
+class AmenityAdapter(private val currentLatLng: LatLng, private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AmenityAdapter.FeedViewHolders>()
 {   private var filteredData=rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -29,8 +31,25 @@ class AmenityAdapter(private val rssObject: MutableList<Restaurants>, private va
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
-        holder.txtTitle2.text = filteredData[position].distance.toString()
+        //holder.txtTitle2.text = filteredData[position].distance.toString()
         holder.txtTitle3.text = filteredData[position].Rating.toString()
+
+        var evelat = filteredData[position].Latitude.toString()
+        var evelong = filteredData[position].Longitude.toString()
+
+        val loc1 = Location("")
+        loc1.setLatitude(currentLatLng.latitude)
+        loc1.setLongitude(currentLatLng.longitude)
+
+        val loc2 = Location("")
+        loc2.setLatitude(evelat.toDouble())
+        loc2.setLongitude(evelong.toDouble())
+
+        val distanceInMeters: Float = loc1.distanceTo(loc2)
+        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+
+        holder.txtTitle2.text = distanceInKm.toString() + "km"
+
         var result = when (filteredData[position].imageURL) {
             "apic1" -> R.drawable.apic1
             "apic2" -> R.drawable.apic2
@@ -58,10 +77,6 @@ class AmenityAdapter(private val rssObject: MutableList<Restaurants>, private va
 
 
         init {
-
-            //            imgbtn=itemView.findViewById(R.id.imageButton)
-
-
 
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)

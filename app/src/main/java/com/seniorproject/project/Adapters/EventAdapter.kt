@@ -28,11 +28,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
 
-private lateinit var locationManager: LocationManager
-private lateinit var locationListener: LocationListener
-private lateinit var currentLatLng: LatLng
-
-class EventAdapter(private val rssObject: MutableList<Events>, private val mContext: Context,private val listener: onItemClickListener1): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
+class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: MutableList<Events>, private val mContext: Context,private val listener: onItemClickListener1): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
 {   private var filteredData=rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -48,13 +44,13 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
         holder.txtTitle1.text = filteredData[position].Location
         //holder.txtTitle2.text = rssObject[position].category
         holder.txtTitle3.text =filteredData[position].Date
-        holder.txtTitle4.text = filteredData[position].distance.toString()
+        //holder.txtTitle4.text = filteredData[position].distance.toString()
         var evelat = filteredData[position].Latitude.toString()
         var evelong = filteredData[position].Longitude.toString()
 
         val loc1 = Location("")
-//        loc1.setLatitude(currentLatLon.latitude)
-//        loc1.setLongitude(currentLatLon.longitude)
+        loc1.setLatitude(currentLatLng.latitude)
+        loc1.setLongitude(currentLatLng.longitude)
 
         val loc2 = Location("")
         loc2.setLatitude(evelat.toDouble())
@@ -63,7 +59,7 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
         val distanceInMeters: Float = loc1.distanceTo(loc2)
         var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
 
-        //holder.txtTitle4.text = distanceInKm.toString() + "km"
+        holder.txtTitle4.text = distanceInKm.toString() + "km"
 
         var result = when (filteredData[position].imageURL) {
             "epic1" -> R.drawable.epic1
@@ -84,12 +80,12 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
     inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {
 
-        var txtTitle: TextView
-        var txtTitle1: TextView
+        var txtTitle: TextView  = itemView.findViewById(R.id.textView)
+        var txtTitle1: TextView  = itemView.findViewById(R.id.textView1)
        // var txtTitle2: TextView
-        var txtTitle3: TextView
-        var txtTitle4: TextView
-        var img:ImageView
+        var txtTitle3: TextView = itemView.findViewById(R.id.eventDate)
+        var txtTitle4: TextView = itemView.findViewById(R.id.eventDistance)
+        var img:ImageView = itemView.findViewById(R.id.imageShow)
        // var imgbtn:ImageView
 
 
@@ -97,12 +93,6 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
 
         init {
 
-            txtTitle = itemView.findViewById(R.id.textView)
-            txtTitle1 = itemView.findViewById(R.id.textView1)
-            //txtTitle2 = itemView.findViewById(R.id.eventCategory)
-            txtTitle3 = itemView.findViewById(R.id.eventDate)
-            txtTitle4 = itemView.findViewById(R.id.eventDistance)
-            img=itemView.findViewById(R.id.imageShow)
            // imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
@@ -144,63 +134,5 @@ class EventAdapter(private val rssObject: MutableList<Events>, private val mCont
         }
 
     }
-    /*fun getUserLocation(){
-        currentLatLng = LatLng(0.0,0.0)
 
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationListener = object : LocationListener {
-            override fun onLocationChanged(location: Location) {
-                if (location == null){
-                    //Toast.makeText(applicationContext, "Location Not Found",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    currentLatLng = LatLng(location.latitude,location.longitude)
-
-                }
-            }
-
-//            override fun onProviderDisabled(provider: String) {
-//                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-//                startActivity(intent)
-//            }
-        }
-        requestLocation()
-    }
-
-    private fun requestLocation() {
-        if (ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),10)
-            }
-            return
-        }
-        locationManager.requestLocationUpdates("gps",5000,0f,locationListener)
-//        gpsBtn.setOnClickListener{
-//            if (currentLatLng!=null){
-//                latText.setText(currentLatLng.latitude.toString())
-//                longText.setText(currentLatLng.longitude.toString())
-//            }
-//        }
-    }
-
-    *//**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     *//*
-
-    fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode){
-            10 -> requestLocation()
-            else -> Toast.makeText(mContext,"Do not nothing (becuz the requestCode != 10)", Toast.LENGTH_SHORT).show()
-        }
-    }*/
 }

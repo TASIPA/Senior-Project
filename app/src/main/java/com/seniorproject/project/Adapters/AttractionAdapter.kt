@@ -1,6 +1,7 @@
 package com.seniorproject.project.Adapters
 
 import android.content.Context
+import android.location.Location
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,12 @@ import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 
-class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AttractionAdapter.FeedViewHolders>()
+class AttractionAdapter(private val currentLatLng: LatLng, private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AttractionAdapter.FeedViewHolders>()
 {   private var filteredData=rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
@@ -32,8 +34,25 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
         holder.txtTitle1.text = filteredData[position].Location
         holder.txtTitle2.text = filteredData[position].Category
         //holder.txtTitle3.text = rssObject[position].date
-        holder.txtTitle4.text = filteredData[position].distance.toString()
+        //holder.txtTitle4.text = filteredData[position].distance.toString()
         holder.txtTitle5.text = filteredData[position].Rating.toString()
+
+        var evelat = filteredData[position].Latitude.toString()
+        var evelong = filteredData[position].Longitude.toString()
+
+        val loc1 = Location("")
+        loc1.setLatitude(currentLatLng.latitude)
+        loc1.setLongitude(currentLatLng.longitude)
+
+        val loc2 = Location("")
+        loc2.setLatitude(evelat.toDouble())
+        loc2.setLongitude(evelong.toDouble())
+
+        val distanceInMeters: Float = loc1.distanceTo(loc2)
+        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+
+        holder.txtTitle4.text = distanceInKm.toString() + "km"
+
         var result = when (filteredData[position].imageURL) {
             "attpic1" -> R.drawable.attpic1
             "attpic2" -> R.drawable.attpic2
@@ -53,13 +72,13 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
     inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {
 
-        var txtTitle: TextView
-        var txtTitle1: TextView
-        var txtTitle2: TextView
+        var txtTitle: TextView = itemView.findViewById(R.id.textView)
+        var txtTitle1: TextView = itemView.findViewById(R.id.textView1)
+        var txtTitle2: TextView = itemView.findViewById(R.id.textView2)
         //var txtTitle3: TextView
-        var txtTitle4: TextView
-        var txtTitle5: TextView
-        var img:ImageView
+        var txtTitle4: TextView = itemView.findViewById(R.id.attdistance)
+        var txtTitle5: TextView = itemView.findViewById(R.id.ratetxtatt)
+        var img:ImageView = itemView.findViewById(R.id.imageShow)
         // var imgbtn:ImageView
 
 
@@ -67,13 +86,6 @@ class AttractionAdapter(private val rssObject: MutableList<Restaurants>, private
 
         init {
 
-            txtTitle = itemView.findViewById(R.id.textView)
-            txtTitle1 = itemView.findViewById(R.id.textView1)
-            txtTitle2 = itemView.findViewById(R.id.textView2)
-            //txtTitle3 = itemView.findViewById(R.id.eventDate)
-            txtTitle4 = itemView.findViewById(R.id.attdistance)
-            txtTitle5 = itemView.findViewById(R.id.ratetxtatt)
-            img=itemView.findViewById(R.id.imageShow)
             // imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
