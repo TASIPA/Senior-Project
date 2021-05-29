@@ -96,11 +96,38 @@
         android:hint="@string/dateFormat"
         android:textSize="24sp" />
 
+            <TextView
+                android:id="@+id/LocaShowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location Brief Description"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textSize="20sp">
+
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/LocaReport"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="80">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:id="@+id/LocaText"
+                    android:gravity="top"
+                    android:hint="Descibe the place briefly" />
+
+            </com.google.android.material.textfield.TextInputLayout>
     <TextView
         android:id="@+id/DescripShowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:text="@string/description"
         android:textAlignment="center"
         android:textColor="@color/primary"
@@ -112,7 +139,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="0dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="350">
 
