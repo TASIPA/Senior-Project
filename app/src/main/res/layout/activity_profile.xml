@@ -87,12 +87,12 @@
             android:id="@+id/info1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Firstname"
             android:textSize="22dp"
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/Firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
@@ -108,6 +108,29 @@
         android:padding="10dp">
         <TextView
             android:id="@+id/info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lastname"
+            android:textSize="22dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/Lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:text="Developer"
+            android:textSize="22dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/info3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
@@ -130,7 +153,7 @@
         android:layout_height="50dp"
         android:padding="10dp">
         <TextView
-            android:id="@+id/info3"
+            android:id="@+id/info4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone"
@@ -138,11 +161,11 @@
             android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/phone"
+            android:id="@+id/phoneNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:text="0929299292"
+            android:text="0987654321"
             android:textSize="22dp" />
     </RelativeLayout>
     <RelativeLayout

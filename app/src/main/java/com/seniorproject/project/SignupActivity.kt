@@ -19,7 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_profile.*
 
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.activity_signup.name
 
 class SignupActivity : AppCompatActivity() {
 
@@ -55,9 +54,14 @@ class SignupActivity : AppCompatActivity() {
 //                }
 //            })
 
-            if(nameText.text.toString().isEmpty())
+            if(firstnameText.text.toString().isEmpty())
             {
-                nameText.error = "Please input the name"
+                firstnameText.error = "Please input the firstname"
+                return@setOnClickListener
+            }
+            if(lastnameText.text.toString().isEmpty())
+            {
+                lastnameText.error = "Please input the lastname"
                 return@setOnClickListener
             }
             if(usernameText.text.toString().isEmpty())
@@ -68,6 +72,16 @@ class SignupActivity : AppCompatActivity() {
             if(usernameText.text.toString().length > 20)
             {
                 usernameText.error = "Username must not exceed 20 characters!"
+                return@setOnClickListener
+            }
+            if(phoneText.text.toString().isEmpty())
+            {
+                phoneText.error = "Please input the phone number"
+                return@setOnClickListener
+            }
+            if(phoneText.text.toString().length > 10)
+            {
+                phoneText.error = "Phone number must not exceed 10 characters!"
                 return@setOnClickListener
             }
             else {
@@ -128,9 +142,11 @@ class SignupActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val currentUser = auth.currentUser
                     val currentUserDB = dbReference?.child(currentUser?.uid!!)
-                    currentUserDB?.child("name")?.setValue(nameText.text.toString())
+                    currentUserDB?.child("firstname")?.setValue(firstnameText.text.toString())
+                    currentUserDB?.child("lastname")?.setValue(lastnameText.text.toString())
                     currentUserDB?.child("username")?.setValue(usernameText.text.toString())
                     currentUserDB?.child("email")?.setValue(emailSignupText.text.toString())
+                    currentUserDB?.child("phone")?.setValue(phoneText.text.toString())
 
                     dialog.cancel()//stop the dialog running when created account in the authentication successfully
                     Toast.makeText(this, "Account Created", Toast.LENGTH_LONG).show()

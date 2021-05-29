@@ -13,9 +13,6 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_profile.name
-import kotlinx.android.synthetic.main.activity_report.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import java.io.IOException
 import java.util.*
 
@@ -75,8 +72,10 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                name.text = snapshot.child("name").value.toString()
+                Firstname.text = snapshot.child("firstname").value.toString()
+                Lastname.text = snapshot.child("lastname").value.toString()
                 username.text = snapshot.child("username").value.toString()
+                phoneNum.text = snapshot.child("phone").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {

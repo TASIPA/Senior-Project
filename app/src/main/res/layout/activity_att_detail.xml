@@ -248,7 +248,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/attreviewLayout"
+            android:id="@+id/att_reviewLayout"
             android:layout_width="match_parent"
             android:layout_height="460dp"
             android:layout_below="@+id/all_btn"
@@ -333,7 +333,6 @@
                 android:layout_marginTop="10dp"
                 />
         </RelativeLayout>
-
 
 
     </RelativeLayout>

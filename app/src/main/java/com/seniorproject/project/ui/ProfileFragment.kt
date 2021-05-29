@@ -75,16 +75,14 @@ class ProfileFragment : Fragment() {
         userref?.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                profile_name.text = snapshot.child("username").value.toString()
+                profile_firstname.text = snapshot.child("firstname").value.toString()
+                profile_lastname.text = snapshot.child("lastname").value.toString()
                 var profilePic = snapshot.child("picurl").value.toString()
 
                 if (profilePic!=null){
                     //profile_img.visibility = INVISIBLE
                     Picasso.get().load(profilePic).into(profile_img)
-                    profile_name.setTextColor(Color.parseColor("#F44336"))
-
-                    //profile_name.text = profilePic
-
+                    //profile_firstname.setTextColor(Color.parseColor("#F44336"))
                 }
 
             }

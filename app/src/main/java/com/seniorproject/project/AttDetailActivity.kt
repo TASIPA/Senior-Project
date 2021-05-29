@@ -103,7 +103,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
     fun onClick(v: View) {
         attdetailLayout.visibility = GONE
-        attreviewLayout.visibility = GONE
+        att_reviewLayout.visibility = GONE
         attmapLayout.visibility = GONE
         att_mapBtn.visibility = GONE
         attBtn_holder.visibility =GONE
@@ -125,7 +125,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 attbutton4.setBackgroundResource(secondary)
             }
             R.id.attbutton3 -> {
-                attreviewLayout.visibility = VISIBLE
+                att_reviewLayout.visibility = VISIBLE
                 attbutton3.setBackgroundResource(secondary)
             }
 

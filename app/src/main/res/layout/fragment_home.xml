@@ -38,9 +38,9 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/brandon_grotesque_black"
             android:text="TASIPA"
-            android:textStyle="bold"
+            android:textSize="20dp"
 
-            android:textSize="20dp" />
+            android:textStyle="bold" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -63,19 +63,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
                 app:cardCornerRadius="15dp">
 
                 <LinearLayout
@@ -88,8 +91,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="-5dp">
+                        android:layout_marginTop="-5dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -116,9 +119,9 @@
                                 android:id="@+id/tempNowShow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:layout_marginLeft="-10dp"
                                 android:layout_alignParentRight="true"
+                                android:layout_marginLeft="-10dp"
+                                android:layout_marginTop="0dp"
                                 android:text="25 C"
                                 android:textColor="#FFFFFF"
                                 android:textSize="22sp" />
@@ -137,10 +140,10 @@
                             android:id="@+id/dateTimeShow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="-5dp"
                             android:fontFamily="@font/brandon_grotesque_medium_italic"
                             android:text="Android Developer"
                             android:textColor="#ffff"
-                            android:layout_marginTop="-5dp"
                             android:textSize="24dp" />
 
                         <RelativeLayout
@@ -346,7 +349,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -392,8 +398,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
-                            android:tint="@color/primary_dark"
-                            android:src="@drawable/ic_restaurant" />
+                            android:src="@drawable/ic_restaurant"
+                            android:tint="@color/primary_dark" />
 
                     </RelativeLayout>
 
@@ -423,8 +429,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
-                            android:tint="@color/primary_dark"
-                            android:src="@drawable/ic_event" />
+                            android:src="@drawable/ic_event"
+                            android:tint="@color/primary_dark" />
 
                     </RelativeLayout>
 
@@ -444,8 +450,8 @@
 
                     <RelativeLayout
 
-                        android:layout_width="60dp"
                         android:id="@+id/att_list"
+                        android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/circle"
@@ -455,8 +461,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
-                            android:tint="@color/primary_dark"
-                            android:src="@drawable/ic_attraction" />
+                            android:src="@drawable/ic_attraction"
+                            android:tint="@color/primary_dark" />
 
                     </RelativeLayout>
 
@@ -486,8 +492,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerInParent="true"
-                            android:tint="@color/primary_dark"
-                            android:src="@drawable/ic_amenity" />
+                            android:src="@drawable/ic_amenity"
+                            android:tint="@color/primary_dark" />
 
                     </RelativeLayout>
 
@@ -506,10 +512,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
                 android:layout_marginTop="20dp"
-                >
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -539,8 +544,7 @@
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -548,9 +552,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_marginLeft="16dp"
                             android:layout_width="150dp"
                             android:layout_height="160dp"
+                            android:layout_marginLeft="16dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/prom1" />
 
@@ -572,9 +576,9 @@
                             android:layout_width="150dp"
                             android:layout_height="160dp"
                             android:layout_marginLeft="15dp"
+                            android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/prom1"
-                            android:layout_marginRight="10dp"/>
+                            android:src="@drawable/prom1" />
                     </LinearLayout>
                 </HorizontalScrollView>
             </LinearLayout>
@@ -583,10 +587,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="7dp"
                 android:layout_marginTop="16dp"
-                >
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="7dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -608,11 +611,11 @@
                     android:textSize="18dp" />
 
             </RelativeLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
-                />
+                android:layout_height="170dp" />
         </LinearLayout>
     </ScrollView>
 
