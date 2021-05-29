@@ -83,10 +83,7 @@ class ProfileFragment : Fragment() {
                     //profile_img.visibility = INVISIBLE
                     Picasso.get().load(profilePic).into(profile_img)
                     //profile_firstname.setTextColor(Color.parseColor("#F44336"))
-                }else{
-                    profile_img.setBackgroundResource(R.drawable.ic_baseline_person_24)
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
