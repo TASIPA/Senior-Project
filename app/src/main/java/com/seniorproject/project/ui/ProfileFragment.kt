@@ -48,19 +48,6 @@ class ProfileFragment : Fragment() {
             var intent= Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
-        set_emergencyBtn.setOnClickListener {
-            var intent= Intent(activity, EmergencyActivity::class.java)
-            startActivity(intent)
-        }
-        set_allCat.setOnClickListener {
-            var intent= Intent(activity, Allcategories::class.java)
-            startActivity(intent)
-        }
-        repBtn.setOnClickListener {
-            var intent= Intent(activity, ReportActivity::class.java)
-            startActivity(intent)
-        }
-
         signoutBtn.setOnClickListener {
             auth.signOut()
             var intent= Intent(activity, LoginActivity::class.java)

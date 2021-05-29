@@ -57,7 +57,13 @@ class ReportActivity : AppCompatActivity() {
     var imageURL1: String? = null
     var ID:String?=null
     var INUserEmail: String? = null
+    var INUserTel: String? = null
+    var INUserFName: String? = null
+    var INUserLName: String? = null
     var userEmail : String? = null
+    var userTel : String? = null
+    var userFirst : String? = null
+    var userLast : String? = null
 
     lateinit var auth: FirebaseAuth
     var database: FirebaseDatabase? = null
@@ -124,6 +130,10 @@ class ReportActivity : AppCompatActivity() {
                             locationdesc = inlocation!!.text.toString()
                             imageURL = imageURL1
                             userEmail = INUserEmail
+                            userFirst = INUserFName
+                            userLast = INUserLName
+                            userTel = INUserTel
+
                             SendRequest().execute()
                         }
                     }
@@ -213,6 +223,9 @@ class ReportActivity : AppCompatActivity() {
                 postDataParams.put("id", id)
                 postDataParams.put("reportID", reportID)
                 postDataParams.put(("email"),userEmail)
+                postDataParams.put(("fname"),userFirst)
+                postDataParams.put(("lname"),userLast)
+                postDataParams.put(("tele"),userTel)
                 Log.e("params", postDataParams.toString())
                 val conn = url.openConnection() as HttpURLConnection
                 conn.readTimeout = 15000
@@ -319,6 +332,9 @@ class ReportActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 INUserEmail = snapshot.child("email").value.toString()
+                INUserFName = snapshot.child("firstname").value.toString()
+                INUserLName = snapshot.child("lastname").value.toString()
+                INUserTel = snapshot.child("phone").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -328,4 +344,5 @@ class ReportActivity : AppCompatActivity() {
     }
 
 }
+
 
