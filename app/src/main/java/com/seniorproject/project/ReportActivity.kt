@@ -27,6 +27,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.seniorproject.project.R.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_report.back_btn
 import kotlinx.android.synthetic.main.activity_restaurant.*
@@ -118,9 +119,22 @@ class ReportActivity : AppCompatActivity() {
 
                     button2.setOnClickListener {
                         if (position == 0){
-                            errorText.error = ""
+                            errorText.error = "Please select one topic"
                             errorText.requestFocus()
                             Toast.makeText(this@ReportActivity, "Please select one topic", Toast.LENGTH_SHORT).show()
+                        }
+                        else if (inreporttime!!.text.toString().isEmpty()){
+                            dateShowReport.error = "Please select date and time"
+                        }
+                        else if (inlocation!!.text.toString().length > 80){
+                            LocaText.error = "Characters must not be more than 80"
+
+                        }
+                        else if (indescription!!.text.toString().length > 350){
+                            DescText.error = "Characters must not be more than 350"
+
+                        }else if (indescription!!.text.toString().isEmpty()){
+                            DescText.error = "Please enter some description"
                         }
                         else{
                             topic = intopicName
@@ -142,7 +156,6 @@ class ReportActivity : AppCompatActivity() {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    Toast.makeText(this@ReportActivity, "Please select one of the topics", Toast.LENGTH_SHORT).show()
 
                 }
             }
@@ -170,14 +183,12 @@ class ReportActivity : AppCompatActivity() {
                     selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
                     selectedTime.set(Calendar.MINUTE, minute)
                     val time = timeFormat.format(selectedTime.time)
-                    Toast.makeText(this, "selected time: "+time,Toast.LENGTH_SHORT).show()
 
                     dateShowReport.text = date+" "+time
                 },
                     now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
                 timePicker.show()
 
-                Toast.makeText(this, "selected date: "+date, Toast.LENGTH_SHORT).show()
             },
                 now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
             //datePicker.datePicker.minDate
