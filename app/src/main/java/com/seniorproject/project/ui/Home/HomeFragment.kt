@@ -3,15 +3,17 @@ package com.seniorproject.project.ui.Home
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FeedAdapter
+import com.seniorproject.project.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -26,6 +28,10 @@ class HomeFragment : Fragment() {
     private var SalayaLat = "13.800663"
     private var SalayaLong = "100.323823"
     private var API = "4282f657d89f45f71218e7bba5f90b1c"
+
+    lateinit var auth: FirebaseAuth
+    var database: FirebaseDatabase? = null
+    var dbReference: DatabaseReference? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -44,6 +50,11 @@ class HomeFragment : Fragment() {
 
         weatherTask().execute()
 
+        auth= FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        dbReference = database?.reference!!.child("profile")
+
+        getProfile()
 
         all_cat.setOnClickListener {
             var intent= Intent(activity, Allcategories::class.java)
@@ -162,7 +173,6 @@ class HomeFragment : Fragment() {
                 val tempNext5hr = next5hr.getString("temp")+"°C "
 
                 tempNowShow.text = tempNow
-                dateTimeShow.text = dateTimeText
                 conditionNowShow.text = conditionNow
 
                 next1tempShow.text = tempNext1hr
@@ -188,4 +198,28 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun getProfile(){
+
+        val user = auth.currentUser
+        val userref = dbReference?.child(user?.uid!!)
+
+        userref?.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                usernameShow.text = snapshot.child("username").value.toString()
+                var profilePic = snapshot.child("picurl").value.toString()
+
+                if (profilePic!=null){
+                    //profile_img.visibility = INVISIBLE
+                    Picasso.get().load(profilePic).into(profile_image)
+                    //profile_firstname.setTextColor(Color.parseColor("#F44336"))
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
 }
