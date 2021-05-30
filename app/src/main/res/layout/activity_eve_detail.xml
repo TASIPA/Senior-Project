@@ -31,7 +31,7 @@
         <RelativeLayout
             android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/white">
@@ -48,7 +48,7 @@
             <TextView
                 android:id="@+id/eve_type"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="30dp"
                 android:padding="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="50dp"
@@ -59,7 +59,7 @@
                 android:id="@+id/eve_loc"
                 android:layout_toRightOf="@+id/eve_type"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="30dp"
                 android:padding="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="50dp"
@@ -67,24 +67,6 @@
                 android:background="@color/lightWhite"
                 android:text="@string/location"/>
 
-            <RatingBar
-                android:id="@+id/eve_rat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:numStars="5"
-                android:rating="5"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_alignParentBottom="true"/>
-            <TextView
-                android:id="@+id/eve_ratVal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/eve_rat"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:text="5.0"/>
         </RelativeLayout>
 
         <View

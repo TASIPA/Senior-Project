@@ -3,16 +3,15 @@ package com.seniorproject.project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
+
+import com.seniorproject.project.models.Events
+import com.seniorproject.project.models.Restaurants
+
 
 import kotlinx.android.synthetic.main.activity_eve_detail.*
 
 class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
-
-    private lateinit var mMap: GoogleMap
-    private lateinit var latLng: LatLng
-
+    lateinit var obj: Events
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eve_detail)
@@ -21,25 +20,21 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
 //        val mapFragment = supportFragmentManager
 //            .findFragmentById(R.id.map) as SupportMapFragment
 //        mapFragment.getMapAsync(this)
-
-        val bundle = intent.extras
-       /* var pointLat = bundle?.getString("lati").toString().toDouble()
-        var pointLon = bundle?.getString("longi").toString().toDouble()*/
-        //use to calculate distance to User
-        var name = bundle?.getString("name").toString()
-        var type = bundle?.getString("type").toString()
-        var pic = bundle?.getString("image").toString()
+       obj= intent.getSerializableExtra("eveObj") as Events
 
 
-        eve_name.text = name
+        eve_name.text = obj.Name
         //EveType.text = type
-        var result=when (pic) {
+        var result=when (obj.imageURL) {
             "epic1" -> R.drawable.epic1
             "epic2" -> R.drawable.epic2
             "epic3"-> R.drawable.epic3
             "epic4"-> R.drawable.epic4
             else -> R.drawable.epic5
         }
+        eve_desc.text=obj.Description
+        eve_loc.text=obj.Location
+        eve_type.text=obj.Category
         eve_pic.setImageResource(result)
 
     }
