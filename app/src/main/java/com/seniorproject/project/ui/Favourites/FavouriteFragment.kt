@@ -62,8 +62,9 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                    var name= it.child(i.key.toString()).child("name").value.toString()
                    var tel= it.child(i.key.toString()).child("telephone").value.toString()
                    var loc= it.child(i.key.toString()).child("location").value.toString()
+                   var ratNo= it.child(i.key.toString()).child("location").value.toString().toInt()
 
-                data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel))
+                data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel,ratNo))
             }
             if (data != null) {
                 val linearLayoutManager =

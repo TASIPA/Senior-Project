@@ -59,6 +59,7 @@ class FavoriteAdapter(private val rssObject: MutableList<Restaurants>, private v
     override fun getItemCount(): Int {
         return rssObject.size
     }
+
     inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
     {
 

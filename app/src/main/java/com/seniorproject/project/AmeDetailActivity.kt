@@ -66,7 +66,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         userReference=rootNode!!.getReference("profile").child(currentuser)
 
 
-        reviewReference = rootNode!!.getReference("review").child(obj.imageURL)
+        reviewReference = rootNode!!.getReference("review").child(obj.id.toString())
         reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
 
  //       reviewReference!!.child(pic).addListenerForSingleValueEvent(this)
