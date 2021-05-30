@@ -3,6 +3,7 @@ package com.seniorproject.project.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,12 +65,9 @@ class ProfileFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 profile_firstname.text = snapshot.child("firstname").value.toString()
                 profile_lastname.text = snapshot.child("lastname").value.toString()
-                var profilePic = snapshot.child("picurl").value.toString()
-
-                if (profilePic!=null){
-                    //profile_img.visibility = INVISIBLE
+                if (snapshot.child("picurl").exists()){
+                    var profilePic = snapshot.child("picurl").value.toString()
                     Picasso.get().load(profilePic).into(profile_img)
-                    //profile_firstname.setTextColor(Color.parseColor("#F44336"))
                 }
             }
 
