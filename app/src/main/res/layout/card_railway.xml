@@ -27,7 +27,7 @@
             android:layout_marginStart="5dp"
             android:contentDescription="@string/imgdes"
             android:padding="10dp"
-            app:srcCompat="@drawable/scheduletrain" />
+           android:src="@drawable/train" />
 
         <TextView
             android:id="@+id/showTrainNumber"
