@@ -191,7 +191,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/all_btn"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/ame_head"
@@ -411,7 +411,9 @@
                     android:id="@+id/cmt_rcy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/heading" />
+                    android:layout_below="@+id/heading"
+                    android:scrollbars="none"
+                    android:nestedScrollingEnabled="false"/>
             </LinearLayout>
         </ScrollView>
 

@@ -179,18 +179,19 @@
 
 
         <ScrollView
+            android:id="@+id/res_detailLayout"
             android:layout_width="match_parent"
             android:layout_marginTop="165dp"
             android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:visibility="visible">
 
 
         <RelativeLayout
-            android:id="@+id/res_detailLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/all_btn"
-            android:visibility="visible">
+            >
 
 
             <TextView
@@ -421,92 +422,169 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <ScrollView
             android:id="@+id/res_reviewLayout"
             android:layout_width="match_parent"
-            android:layout_height="460dp"
+            android:layout_height="match_parent"
             android:layout_below="@+id/all_btn"
-            android:visibility="invisible"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/rate_txt"
+            android:visibility="invisible"
+            android:scrollbars="none">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rate this place"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/brandon_grotesque_black"
-                android:layout_alignParentTop="true"
-                android:textSize="20sp"
-                />
-            <TextView
-                android:id="@+id/rate_txt2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rate_txt"
-                android:text="Tell others what you think"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/brandon_grotesque_medium_italic"
-                android:textSize="16sp"
-                />
-
-            <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                android:id="@+id/user_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srb_starSize="40dp"
-                app:srb_numberOfStars="5"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/rate_txt2"
-                app:srb_starsSeparation="35dp"
-                app:srb_rating="3"
-                app:srb_stepSize="0.5"
-                app:srb_borderColor="@color/grey"
-                app:srb_fillColor="@color/primary"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/res_cmntDes"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="280dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                app:counterEnabled="true"
-                android:layout_below="@+id/user_rate"
-                app:counterMaxLength="350">
-
-
-                <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/res_aftCmt"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:id="@+id/DescText"
-                    android:gravity="top"
-                    android:hint="Write a review" />
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/white"
+                    android:visibility="gone">
+                    <RelativeLayout
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <ImageView
-                android:id="@+id/send_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/send"
-                android:layout_toRightOf="@+id/res_cmntDes"
-                android:layout_below="@+id/user_rate"
-                android:layout_marginTop="30dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Comments"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/brandon_grotesque_black"
-                android:layout_below="@+id/res_cmntDes"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
-                />
-        </RelativeLayout>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        >
+                        <TextView
+                            android:id="@+id/noUse1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:text="Your Review"
+                            android:fontFamily="@font/brandon_grotesque_black"/>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/res_cmtUsrPic"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_below="@+id/noUse1"
+                            android:src="@drawable/levi"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"/>
+                        <TextView
+                            android:id="@+id/res_cmtUsrName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/res_cmtUsrPic"
+                            android:layout_marginTop="50dp"
+                            android:text="Profile Name"
+                            android:paddingStart="10dp"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/brandon_grotesque_black"/>
+                        <RatingBar
+                            android:id="@+id/res_cmtUsrRatVal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_below="@id/res_cmtUsrName"
+                            android:layout_toRightOf="@id/res_cmtUsrPic"
+                            android:layout_marginLeft="10dp"/>
+                        <TextView
+                            android:id="@+id/res_cmtUsrReview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/res_cmtUsrPic"
+                            android:text="test"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/brandon_grotesque_medium_italic"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <RelativeLayout
+                    android:id="@+id/res_cmtSec"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/rate_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/brandon_grotesque_black"
+                        android:text="Rate this place"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/rate_txt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rate_txt"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/brandon_grotesque_medium_italic"
+                        android:text="Tell others what you think"
+                        android:textSize="16sp" />
+
+                    <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                        android:id="@+id/res_usrRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rate_txt2"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:srb_borderColor="@color/grey"
+                        app:srb_fillColor="@color/primary"
+                        app:srb_numberOfStars="5"
+                        app:srb_rating="3"
+                        app:srb_starSize="40dp"
+                        app:srb_starsSeparation="35dp"
+                        app:srb_stepSize="0.5" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/res_cmtDes"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="280dp"
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/res_usrRate"
+                        android:layout_margin="10dp"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="350">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/res_desTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:gravity="top"
+                            android:hint="Write a review" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/res_sendBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/res_usrRate"
+                        android:layout_marginTop="30dp"
+                        android:layout_toRightOf="@+id/res_cmtDes"
+                        android:src="@drawable/send" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cmtSec"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/brandon_grotesque_black"
+                    android:text="All Comments"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/res_cmtRcy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_below="@+id/heading" />
+            </LinearLayout>
+        </ScrollView>
 
 
 

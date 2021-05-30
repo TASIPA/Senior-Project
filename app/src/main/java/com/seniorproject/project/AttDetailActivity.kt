@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.*
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,10 +16,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.R.color
 import com.seniorproject.project.R.color.*
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
+import com.seniorproject.project.models.Review
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
 import kotlinx.android.synthetic.main.activity_res_detail.*
@@ -31,9 +34,14 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
     var rootNode: FirebaseDatabase? = null
     var reference: DatabaseReference? = null
+    var reviewReference: DatabaseReference?=null
+    var userReference:DatabaseReference?=null
     var auth: FirebaseAuth? = null
+
+    var data: ArrayList<Review>? = ArrayList()
     var checked: Boolean = false
     lateinit var obj: Restaurants
+    var uname:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +59,20 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         reference = rootNode!!.getReference("favorite").child(currentuser)
         obj= intent.getSerializableExtra("attObj") as Restaurants
         //intent value
-
+        userReference=rootNode!!.getReference("profile").child(currentuser)
+        reviewReference = rootNode!!.getReference("review").child(obj.id.toString())
 
         //calls onDataChanged()
         reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
+
+        userReference!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                uname = snapshot.child("username").value.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("error", "username Error")
+            }
+        })
 
         att_favBtn.setOnClickListener {
             if (!checked) {
@@ -83,7 +101,13 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 })
             }
         }
+        att_sendBtn.setOnClickListener {
 
+            var usrCmt= att_desTxt.text.toString()
+            var userrate= att_usrRate.rating.toDouble()
+            reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
+            att_cmtSec.visibility=GONE
+        }
         att_name.text = obj.Name
         att_loc.text = obj.Location
         att_type.text = obj.Category
@@ -127,6 +151,42 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             R.id.attbutton3 -> {
                 att_reviewLayout.visibility = VISIBLE
                 attbutton3.setBackgroundResource(secondary)
+                reviewReference!!.addValueEventListener(object: ValueEventListener{
+                    override fun onDataChange(it: DataSnapshot) {
+                        data?.clear()
+                        it.children?.forEach { i ->
+
+                            var name = it.child(i.key.toString()).child("username").value.toString()
+                            var rev = it.child(i.key.toString()).child("comment").value.toString()
+                            var rating = it.child(i.key.toString()).child("rating").value.toString().toDouble()
+                            if (i.key.toString().equals(auth!!.currentUser!!.uid)){
+                                att_cmtSec.visibility=GONE
+                                att_aftCmt.visibility=VISIBLE
+                                att_cmtUsrName.text=name
+                                att_cmtUsrReview.text=rev
+                                att_cmtUsrRatVal.rating=rating.toFloat()
+
+                            }
+                            else{
+                                data?.add(Review(name,rev,rating))
+                            }
+
+                        }
+                        if (data != null) {
+                            val linearLayoutManager =
+                                LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
+                            att_cmtRcy.layoutManager = linearLayoutManager
+                            var adapter1= CommentAdapter(data!!,baseContext)
+
+                            att_cmtRcy.adapter = adapter1
+                        } else {
+                            att_cmtRcy.visibility= INVISIBLE
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d("error", "Comment  Error")
+                    }
+                })
             }
 
         }

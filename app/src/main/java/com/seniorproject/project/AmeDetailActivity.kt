@@ -1,11 +1,10 @@
 package com.seniorproject.project
 
-import android.app.ProgressDialog
+
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,20 +14,15 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.Adapters.CommentAdapter
-import com.seniorproject.project.Adapters.FavoriteAdapter
-import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.send_btn
 import kotlinx.android.synthetic.main.activity_ame_detail.user_rate
-import kotlinx.android.synthetic.main.activity_att_detail.*
-import kotlinx.android.synthetic.main.activity_res_detail.*
-import kotlinx.android.synthetic.main.fragment_favorite.*
+
 
 
 class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
