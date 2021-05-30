@@ -13,7 +13,8 @@ data class Restaurants(
     val RatingNo: Int,
     val Menu1:String="",
     val Menu2:String="",
-    val Menu3:String=""
+    val Menu3:String="",
+    var CalculatedDis:Float=0.0f
 ): Serializable {
-    constructor(): this(0,"","","",0.0,"",0.0,0.0,0.0,"","N/A",0,"","","")
+    constructor(): this(0,"","","",0.0,"",0.0,0.0,0.0,"","N/A",0,"","","",0.0f)
 }

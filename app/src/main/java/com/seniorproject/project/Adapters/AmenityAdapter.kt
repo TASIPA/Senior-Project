@@ -31,24 +31,24 @@ class AmenityAdapter(private val currentLatLng: LatLng, private val rssObject: M
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
-        //holder.txtTitle2.text = filteredData[position].distance.toString()
+        holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
         holder.txtTitle3.text = filteredData[position].Rating.toString()
-
-        var evelat = filteredData[position].Latitude.toString()
-        var evelong = filteredData[position].Longitude.toString()
-
-        val loc1 = Location("")
-        loc1.setLatitude(currentLatLng.latitude)
-        loc1.setLongitude(currentLatLng.longitude)
-
-        val loc2 = Location("")
-        loc2.setLatitude(evelat.toDouble())
-        loc2.setLongitude(evelong.toDouble())
-
-        val distanceInMeters: Float = loc1.distanceTo(loc2)
-        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-
-        holder.txtTitle2.text = distanceInKm.toString() + "km"
+//
+//        var evelat = filteredData[position].Latitude.toString()
+//        var evelong = filteredData[position].Longitude.toString()
+//
+//        val loc1 = Location("")
+//        loc1.setLatitude(currentLatLng.latitude)
+//        loc1.setLongitude(currentLatLng.longitude)
+//
+//        val loc2 = Location("")
+//        loc2.setLatitude(evelat.toDouble())
+//        loc2.setLongitude(evelong.toDouble())
+//
+//        val distanceInMeters: Float = loc1.distanceTo(loc2)
+//        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+//
+//        holder.txtTitle2.text = distanceInKm.toString() + "km"
 
         var result = when (filteredData[position].imageURL) {
             "apic1" -> R.drawable.apic1

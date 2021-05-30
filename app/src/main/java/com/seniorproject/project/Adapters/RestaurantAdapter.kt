@@ -31,22 +31,23 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
         holder.txtTitle3.text = filteredData[position].Rating.toString()
+        holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
 
-        var evelat = filteredData[position].Latitude.toString()
-        var evelong = filteredData[position].Longitude.toString()
+//        var evelat = filteredData[position].Latitude.toString()
+//        var evelong = filteredData[position].Longitude.toString()
+//
+//        val loc1 = Location("")
+//        loc1.setLatitude(currentLatLng.latitude)
+//        loc1.setLongitude(currentLatLng.longitude)
+//
+//        val loc2 = Location("")
+//        loc2.setLatitude(evelat.toDouble())
+//        loc2.setLongitude(evelong.toDouble())
+//
+//        val distanceInMeters: Float = loc1.distanceTo(loc2)
+//        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
 
-        val loc1 = Location("")
-        loc1.setLatitude(currentLatLng.latitude)
-        loc1.setLongitude(currentLatLng.longitude)
-
-        val loc2 = Location("")
-        loc2.setLatitude(evelat.toDouble())
-        loc2.setLongitude(evelong.toDouble())
-
-        val distanceInMeters: Float = loc1.distanceTo(loc2)
-        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-
-        holder.txtTitle2.text = distanceInKm.toString() + "km"
+ //       holder.txtTitle2.text = distanceInKm.toString() + "km"
 
         var result = when (filteredData[position].imageURL) {
             "pic1" -> R.drawable.pic1

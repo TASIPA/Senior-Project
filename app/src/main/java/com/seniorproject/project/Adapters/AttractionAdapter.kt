@@ -34,24 +34,24 @@ class AttractionAdapter(private val currentLatLng: LatLng, private val rssObject
         holder.txtTitle1.text = filteredData[position].Location
         holder.txtTitle2.text = filteredData[position].Category
         //holder.txtTitle3.text = rssObject[position].date
-        //holder.txtTitle4.text = filteredData[position].distance.toString()
+        holder.txtTitle4.text = filteredData[position].CalculatedDis.toString()+" km"
         holder.txtTitle5.text = filteredData[position].Rating.toString()
 
-        var evelat = filteredData[position].Latitude.toString()
-        var evelong = filteredData[position].Longitude.toString()
-
-        val loc1 = Location("")
-        loc1.setLatitude(currentLatLng.latitude)
-        loc1.setLongitude(currentLatLng.longitude)
-
-        val loc2 = Location("")
-        loc2.setLatitude(evelat.toDouble())
-        loc2.setLongitude(evelong.toDouble())
-
-        val distanceInMeters: Float = loc1.distanceTo(loc2)
-        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-
-        holder.txtTitle4.text = distanceInKm.toString() + "km"
+//        var evelat = filteredData[position].Latitude.toString()
+//        var evelong = filteredData[position].Longitude.toString()
+//
+//        val loc1 = Location("")
+//        loc1.setLatitude(currentLatLng.latitude)
+//        loc1.setLongitude(currentLatLng.longitude)
+//
+//        val loc2 = Location("")
+//        loc2.setLatitude(evelat.toDouble())
+//        loc2.setLongitude(evelong.toDouble())
+//
+//        val distanceInMeters: Float = loc1.distanceTo(loc2)
+//        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+//
+//        holder.txtTitle4.text = distanceInKm.toString() + "km"
 
         var result = when (filteredData[position].imageURL) {
             "attpic1" -> R.drawable.attpic1

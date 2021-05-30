@@ -56,6 +56,23 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                 if (snapShot != null) {
                     amedata.clear()
                     amedata = snapShot.toObjects(Restaurants::class.java)
+                    var i=0
+                    for (ame in amedata ){
+
+                        val loc1 = Location("")
+                        loc1.setLatitude(currentLatLng.latitude)
+                        loc1.setLongitude(currentLatLng.longitude)
+
+                        val loc2 = Location("")
+                        loc2.setLatitude(ame.Latitude)
+                        loc2.setLongitude(ame.Longitude)
+
+                        val distanceInMeters: Float = loc1.distanceTo(loc2)
+                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+                        amedata[i].CalculatedDis=distanceInKm
+                        i+=1
+                    }
+                    amedata.sortBy { it.CalculatedDis }
                     adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                     amenList.adapter=adapter
                 }
@@ -135,12 +152,6 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
             return
         }
         locationManager.requestLocationUpdates("gps",1000,0f,locationListener)
-//        gpsBtn.setOnClickListener{
-//            if (currentLatLng!=null){
-//                latText.setText(currentLatLng.latitude.toString())
-//                longText.setText(currentLatLng.longitude.toString())
-//            }
-//        }
     }
 
     override fun onRequestPermissionsResult(
