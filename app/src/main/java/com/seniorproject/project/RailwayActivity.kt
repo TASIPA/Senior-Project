@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seniorproject.project.Adapters.RailwayAdapter
 import com.seniorproject.project.models.RailwayData
+import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_railway.RailList
 import kotlinx.android.synthetic.main.activity_railway.webBTN
 
@@ -19,6 +20,10 @@ class RailwayActivity : AppCompatActivity() {
         webBTN.setOnClickListener {
             val intent = Intent(this, WebActivity::class.java)//back to the login page
             startActivity(intent)
+        }
+
+        back_btn.setOnClickListener {
+            finish()
         }
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         RailList.layoutManager = linearLayoutManager
