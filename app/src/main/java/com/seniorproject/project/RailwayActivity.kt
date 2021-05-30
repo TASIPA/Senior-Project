@@ -14,6 +14,7 @@ class RailwayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_railway)
+        supportActionBar?.hide()
 
         webBTN.setOnClickListener {
             val intent = Intent(this, WebActivity::class.java)//back to the login page

@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Report.ReportFragment">
+    tools:context=".RailwayActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RailList"
-        android:layout_width="412dp"
-        android:layout_height="614dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="408dp"
+        android:layout_height="675dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
