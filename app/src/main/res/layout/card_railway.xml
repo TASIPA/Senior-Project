@@ -65,7 +65,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="35dp"
             android:contentDescription="@string/flag"
-            app:srcCompat="@drawable/flags" />
+            android:src="@drawable/flags" />
 
         <ImageView
             android:id="@+id/dest"
@@ -73,7 +73,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="83dp"
             android:contentDescription="@string/flag"
-            app:srcCompat="@drawable/endflag" />
+            android:src="@drawable/endflag" />
 
         <TextView
             android:id="@+id/departuretime"
