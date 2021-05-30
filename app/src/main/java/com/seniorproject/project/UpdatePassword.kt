@@ -18,6 +18,7 @@ class UpdatePassword : AppCompatActivity() {
         setContentView(R.layout.activity_update_password)
 
         auth = FirebaseAuth.getInstance()
+        supportActionBar!!.hide()
 
         set_new_password_btn.setOnClickListener {
 
