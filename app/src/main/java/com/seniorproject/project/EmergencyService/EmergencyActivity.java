@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class EmergencyActivity extends FragmentActivity implements
     private LatLng currentLatLng;
     private int value=0;
     private int value1=0;
+    Button btn,btn1;
     private int ProximityRadius = 10000;
 
     @Override
@@ -66,7 +68,8 @@ public class EmergencyActivity extends FragmentActivity implements
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
         }
-
+        btn = (Button) findViewById(R.id.hospital_nearby);
+        btn1 = (Button) findViewById(R.id.police_nearby);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -78,7 +81,7 @@ public class EmergencyActivity extends FragmentActivity implements
 
 
         String hospital = "hospital", police = "police";
-        Object transferData[] = new Object[2];
+        Object transferData[] = new Object[3];
         GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
 
 
@@ -126,6 +129,9 @@ public class EmergencyActivity extends FragmentActivity implements
             case R.id.hospital_nearby:
                 mMap.clear();
                 String url = "";
+
+                btn1.setBackgroundResource(R.color.white);
+                btn.setBackgroundResource(R.color.secondary);
                 if(value==7){
                     url = getUrl(s_latitude,s_longitude,hospital);
                     value=0;
@@ -135,12 +141,16 @@ public class EmergencyActivity extends FragmentActivity implements
                 }
                 transferData[0] = mMap;
                 transferData[1] = url;
+                transferData[2]=hospital;
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching for nearby Hospitals", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Hospitals", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.police_nearby:
+
+                btn.setBackgroundResource(R.color.white);
+                btn1.setBackgroundResource(R.color.secondary);
                 mMap.clear();
                 if(value1==7){
                     url = getUrl(s_latitude,s_longitude,police);
@@ -151,6 +161,7 @@ public class EmergencyActivity extends FragmentActivity implements
                 }
                 transferData[0] = mMap;
                 transferData[1] = url;
+                transferData[2]=police;
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching for nearby Police station", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Police station", Toast.LENGTH_SHORT).show();
@@ -167,7 +178,7 @@ public class EmergencyActivity extends FragmentActivity implements
         googleURL.append("&radius="+ProximityRadius);
         googleURL.append("&type="+nearbyPlace);
         googleURL.append("&sensor=true");
-        googleURL.append("&key=XX"+ getResources().getString(R.string.google_maps_key) );
+        googleURL.append("&key="+ getResources().getString(R.string.google_maps_key) );
 
         Log.d("GoogleMapsActivity","url = "+googleURL.toString());
 
