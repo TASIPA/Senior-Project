@@ -178,7 +178,7 @@ public class EmergencyActivity extends FragmentActivity implements
         googleURL.append("&radius="+ProximityRadius);
         googleURL.append("&type="+nearbyPlace);
         googleURL.append("&sensor=true");
-        googleURL.append("&key="+ getResources().getString(R.string.google_maps_key) );
+        googleURL.append("&key=XX"+ getResources().getString(R.string.google_maps_key) );
 
         Log.d("GoogleMapsActivity","url = "+googleURL.toString());
 
