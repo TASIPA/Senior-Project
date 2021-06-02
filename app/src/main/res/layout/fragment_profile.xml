@@ -86,7 +86,7 @@
             app:cardCornerRadius="4dp">
 
             <TextView
-                android:id="@+id/profile"
+                android:id="@+id/proAct_img"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@color/white"

@@ -1,7 +1,6 @@
 package com.seniorproject.project.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,19 +10,18 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seniorproject.project.*
-import com.seniorproject.project.EmergencyService.EmergencyActivity
 import com.seniorproject.project.R
 
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.profile
+import kotlinx.android.synthetic.main.fragment_profile.proAct_img
 
 
 class ProfileFragment : Fragment() {
 
     lateinit var auth: FirebaseAuth
-    var database: FirebaseDatabase? = null
-    var dbReference: DatabaseReference? = null
+    lateinit var database: FirebaseDatabase
+    lateinit var dbReference: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,13 +37,14 @@ class ProfileFragment : Fragment() {
 
         auth= FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        dbReference = database?.reference!!.child("profile")
-        getProfile()
+        dbReference = database.reference.child("profile")
+
     }
 
     override fun onStart() {
         super.onStart()
-        profile.setOnClickListener {
+        getProfile()
+        proAct_img.setOnClickListener {
             var intent= Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
         }
@@ -54,13 +53,14 @@ class ProfileFragment : Fragment() {
             var intent= Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
+
     }
     private fun getProfile(){
 
         val user = auth.currentUser
-        val userref = dbReference?.child(user?.uid!!)
+        val userref = dbReference.child(user?.uid!!)
 
-        userref?.addValueEventListener(object : ValueEventListener {
+        userref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 profile_firstname.text = snapshot.child("firstname").value.toString()

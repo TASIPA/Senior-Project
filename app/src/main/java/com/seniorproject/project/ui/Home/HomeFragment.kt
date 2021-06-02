@@ -98,7 +98,6 @@ class HomeFragment : Fragment() {
         recycler.adapter = adapter
 
     }
-
     inner class weatherTask(): AsyncTask<String, Void, String>() {
 
         override fun onPreExecute() {
@@ -197,13 +196,12 @@ class HomeFragment : Fragment() {
         }
 
     }
-
     private fun getProfile(){
 
         val user = auth.currentUser
         val userref = dbReference?.child(user?.uid!!)
 
-        userref?.addValueEventListener(object : ValueEventListener {
+        userref?.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 usernameShow.text = snapshot.child("username").value.toString()
