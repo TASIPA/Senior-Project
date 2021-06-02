@@ -198,6 +198,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
         resList.adapter=adapter
     }
+    
     fun rat_sorting(view: View) {
         dialog.dismiss()
         db.collection("Restaurants").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {

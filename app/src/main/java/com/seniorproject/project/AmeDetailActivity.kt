@@ -16,13 +16,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.send_btn
 import kotlinx.android.synthetic.main.activity_ame_detail.user_rate
-
+import kotlinx.android.synthetic.main.activity_att_detail.*
 
 
 class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
@@ -35,6 +36,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var reviewReference: DatabaseReference?=null
     var userReference:DatabaseReference?=null
     lateinit var obj: Restaurants
+
+    lateinit var dataReference: FirebaseFirestore
+    lateinit var docID:String
 
     var auth: FirebaseAuth? = null
     var checked: Boolean=false
@@ -107,6 +111,27 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             var userrate= user_rate.rating.toDouble()
              reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
             cmtSec.visibility=View.GONE
+
+            var newRate = (((obj.Rating * obj.RatingNo) + user_rate.rating.toDouble()) / (obj.RatingNo + 1))
+            var newRating = String.format("%.2f",newRate).toDouble()
+            //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
+            var newRateNo = obj.RatingNo + 1
+
+            dataReference = FirebaseFirestore.getInstance()
+            //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
+
+            var query= dataReference.collection("Amenities")!!.whereEqualTo("id",obj.id)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it){
+                        docID = document.id.toString()
+                        //Log.d("Painty", "Rating = "+newRating.toString())
+
+                        dataReference.collection("Amenities").document(docID).update("RatingNo", (newRateNo))
+                        dataReference.collection("Amenities").document(docID).update("Rating", (newRating))
+                    }
+                }
+
         }
         //AmeType.text = type
         ame_name.text = obj.Name

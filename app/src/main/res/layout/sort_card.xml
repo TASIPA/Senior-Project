@@ -18,17 +18,18 @@
                 android:paddingStart="10dp"
                 android:fontFamily="@font/brandon_grotesque_black"
                 android:textSize="25dp"/>
+
             <TextView
                 android:id="@+id/sort_rate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:onClick="rat_sorting"
-                android:text="Sort by rating "
-                android:gravity="center_vertical"
                 android:layout_marginTop="20dp"
-                android:paddingStart="10dp"
                 android:fontFamily="@font/brandon_grotesque_light"
-                android:textSize="25dp"/>
+                android:gravity="center_vertical"
+                android:onClick="rat_sorting"
+                android:paddingStart="10dp"
+                android:text="Sort by Rating "
+                android:textSize="25dp" />
             <TextView
                 android:id="@+id/sort_dist"
                 android:onClick="dis_sorting"

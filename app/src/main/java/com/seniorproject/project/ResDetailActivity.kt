@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
@@ -25,6 +26,8 @@ import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
 
 import kotlinx.android.synthetic.main.activity_res_detail.*
+import java.lang.String.format
+import java.text.DecimalFormat
 
 class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
 
@@ -36,6 +39,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var reviewReference: DatabaseReference?=null
     var userReference:DatabaseReference?=null
     var auth: FirebaseAuth? = null
+
+    lateinit var dataReference: FirebaseFirestore
+    lateinit var docID:String
 
     var data: ArrayList<Review>? = ArrayList()
     var checked: Boolean = false
@@ -100,10 +106,31 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         }
         res_sendBtn.setOnClickListener {
 
-            var usrCmt= res_desTxt.text.toString()
-            var userrate= res_usrRate.rating.toDouble()
-            reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
-            res_cmtSec.visibility=GONE
+            var usrCmt = res_desTxt.text.toString()
+            var userrate = res_usrRate.rating.toDouble()
+            reviewReference!!.child(auth!!.currentUser!!.uid)
+                .setValue(Review(uname, usrCmt, userrate))
+            res_cmtSec.visibility = GONE
+
+            var newRate = (((obj.Rating * obj.RatingNo) + res_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
+            var newRating = String.format("%.2f",newRate).toDouble()
+            var newRateNo = obj.RatingNo + 1
+
+            dataReference = FirebaseFirestore.getInstance()
+            //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
+
+            var query= dataReference.collection("Restaurants")!!.whereEqualTo("id",obj.id)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it){
+                        docID = document.id.toString()
+                        //Log.d("Painty", "Rating = "+newRating.toString())
+
+                        dataReference.collection("Restaurants").document(docID).update("RatingNo", (newRateNo))
+                        dataReference.collection("Restaurants").document(docID).update("Rating", (newRating))
+                    }
+                }
+
         }
 
         res_name.text = obj.Name
@@ -117,7 +144,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             else -> R.drawable.pic10
         }
         res_pic.setImageResource(result)
-        res_rat.rating = obj.Rating.toFloat()
+        res_rat.rating=obj.Rating.toFloat()
         res_ratVal.text=obj.Rating.toString()
         res_type.text=obj.Category
         res_loc.text=obj.Location

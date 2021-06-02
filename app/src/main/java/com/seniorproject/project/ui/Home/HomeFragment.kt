@@ -1,6 +1,7 @@
 package com.seniorproject.project.ui.Home
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,18 +42,22 @@ class HomeFragment : Fragment() {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        //getProfile()
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         return root
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        getProfile()
+//    }
 
     override fun onStart() {
         super.onStart()
 
         weatherTask().execute()
-
-        auth= FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        dbReference = database?.reference!!.child("profile")
 
         getProfile()
 
@@ -198,6 +203,10 @@ class HomeFragment : Fragment() {
     }
     private fun getProfile(){
 
+        auth= FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        dbReference = database?.reference!!.child("profile")
+
         val user = auth.currentUser
         val userref = dbReference?.child(user?.uid!!)
 
@@ -210,7 +219,6 @@ class HomeFragment : Fragment() {
                 if (profilePic!=null){
                     //profile_img.visibility = INVISIBLE
                     Picasso.get().load(profilePic).into(profile_image)
-                    //profile_firstname.setTextColor(Color.parseColor("#F44336"))
                 }
 
             }

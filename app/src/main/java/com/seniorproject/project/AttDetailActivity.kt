@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.R.color
 import com.seniorproject.project.R.color.*
@@ -37,6 +38,9 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var reviewReference: DatabaseReference?=null
     var userReference:DatabaseReference?=null
     var auth: FirebaseAuth? = null
+
+    lateinit var dataReference: FirebaseFirestore
+    lateinit var docID:String
 
     var data: ArrayList<Review>? = ArrayList()
     var checked: Boolean = false
@@ -107,6 +111,27 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             var userrate= att_usrRate.rating.toDouble()
             reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
             att_cmtSec.visibility=GONE
+
+            var newRate = (((obj.Rating * obj.RatingNo) + att_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
+            var newRating = String.format("%.2f",newRate).toDouble()
+            var newRateNo = obj.RatingNo + 1
+
+            dataReference = FirebaseFirestore.getInstance()
+            //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
+
+            var query= dataReference.collection("Attractions")!!.whereEqualTo("id",obj.id)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it){
+                        docID = document.id.toString()
+                        //Log.d("Painty", "Rating = "+newRating.toString())
+
+                        dataReference.collection("Attractions").document(docID).update("RatingNo", (newRateNo))
+                        dataReference.collection("Attractions").document(docID).update("Rating", (newRating))
+                    }
+                }
+
+
         }
         att_name.text = obj.Name
         att_loc.text = obj.Location
@@ -190,8 +215,6 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             }
 
         }
-
-
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
