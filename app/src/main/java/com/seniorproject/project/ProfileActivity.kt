@@ -101,13 +101,12 @@ class ProfileActivity : AppCompatActivity() {
             //directory name on the firebase name image...+ the unique ID creation so make sure it is not having the same name
             imageRef.putFile(filePath!!)//upload file function!! "filepath" is the picture location
                 .addOnSuccessListener {
-                    dialog.hide()
+                    dialog.dismiss()
                     imageRef.downloadUrl.addOnSuccessListener {
                         imageURL2 = it.toString()
                         val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
                         currentUserDB.child("picurl").setValue(imageURL2)
                     }
-
                 }
                 .addOnFailureListener{
                     Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
@@ -121,6 +120,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
         }
     }
+
 
     private fun showPhoto() {
         val intent = Intent()

@@ -1,8 +1,11 @@
 package com.seniorproject.project
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -20,11 +23,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.seniorproject.project.Adapters.AttractionAdapter
+
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants
+
+
 import kotlinx.android.synthetic.main.activity_attraction.*
-import kotlinx.android.synthetic.main.activity_attraction.back_btn
 
 
 
@@ -33,6 +39,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
     lateinit var db: FirebaseFirestore
     lateinit var adapter: AttractionAdapter
     var flag=true
+    private lateinit var dialog: Dialog
 
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
@@ -47,6 +54,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         }
         attdata= mutableListOf()
         db= FirebaseFirestore.getInstance()
+        dialog = Dialog(this)
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         attList.layoutManager = linearLayoutManager
         //replace with event adapter
@@ -56,23 +64,6 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                 if (snapShot != null) {
                     attdata!!.clear()
                     attdata = snapShot.toObjects(Restaurants::class.java)
-                    var i=0
-                    for (ame in attdata ){
-
-                        val loc1 = Location("")
-                        loc1.setLatitude(currentLatLng.latitude)
-                        loc1.setLongitude(currentLatLng.longitude)
-
-                        val loc2 = Location("")
-                        loc2.setLatitude(ame.Latitude)
-                        loc2.setLongitude(ame.Longitude)
-
-                        val distanceInMeters: Float = loc1.distanceTo(loc2)
-                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-                        attdata[i].CalculatedDis=distanceInKm
-                        i+=1
-                    }
-                    attdata.sortBy { it.CalculatedDis }
                     adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                     attList.adapter=adapter
                 }
@@ -96,6 +87,12 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                 search_view.visibility= View.GONE
                 flag=true
             }
+
+        }
+        sort_button.setOnClickListener {
+            dialog.setContentView(R.layout.sort_card)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
 
         }
         att_search.addTextChangedListener(object : TextWatcher {
@@ -175,6 +172,52 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         super.onPause()
         locationManager.removeUpdates(locationListener)
         Log.i("GPS Status","pause")
+    }
+
+    fun dis_sorting(view: View) {
+        dialog.dismiss()
+        var i=0
+        for (ame in attdata ){
+
+            val loc1 = Location("")
+            loc1.setLatitude(currentLatLng.latitude)
+            loc1.setLongitude(currentLatLng.longitude)
+
+            val loc2 = Location("")
+            loc2.setLatitude(ame.Latitude)
+            loc2.setLongitude(ame.Longitude)
+
+            val distanceInMeters: Float = loc1.distanceTo(loc2)
+            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+            attdata[i].CalculatedDis=distanceInKm
+            i+=1
+        }
+        attdata.sortBy { it.CalculatedDis }
+        adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+        attList.adapter=adapter
+    }
+    fun rat_sorting(view: View) {
+        dialog.dismiss()
+        db.collection("Attractions").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
+            if (it != null) {
+                attdata.clear()
+                attdata = it.toObjects(Restaurants::class.java)
+                adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                attList.adapter=adapter
+            }
+
+        }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+
+
     }
 
     override fun onItemClick(position: Int,data:MutableList<Restaurants>) {

@@ -1,8 +1,12 @@
 package com.seniorproject.project
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -16,20 +20,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-
+import com.google.firebase.firestore.Query
 import com.seniorproject.project.Adapters.RestaurantAdapter
 import com.seniorproject.project.Interface.onItemClickListener
-
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_restaurant.*
-import java.util.*
-
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var resdata: MutableList<Restaurants>
@@ -38,6 +36,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var db:FirebaseFirestore
     lateinit var adapter:RestaurantAdapter
     var flag=true
+    private lateinit var dialog: Dialog
 
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
@@ -52,6 +51,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         }
         resdata= mutableListOf()
         db= FirebaseFirestore.getInstance()
+        dialog = Dialog(this)
        // mDatabase = FirebaseDatabase.getInstance().reference;
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
@@ -61,23 +61,6 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                 if (snapShot != null) {
                     resdata!!.clear()
                     resdata = snapShot.toObjects(Restaurants::class.java)
-                    var i=0
-                    for (ame in resdata ){
-
-                        val loc1 = Location("")
-                        loc1.setLatitude(currentLatLng.latitude)
-                        loc1.setLongitude(currentLatLng.longitude)
-
-                        val loc2 = Location("")
-                        loc2.setLatitude(ame.Latitude)
-                        loc2.setLongitude(ame.Longitude)
-
-                        val distanceInMeters: Float = loc1.distanceTo(loc2)
-                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-                        resdata[i].CalculatedDis=distanceInKm
-                        i+=1
-                    }
-                    resdata.sortBy { it.CalculatedDis }
                     adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                     resList.adapter=adapter
                 }
@@ -127,7 +110,12 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
             }
         })
+        sort_button.setOnClickListener {
+            dialog.setContentView(R.layout.sort_card)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
 
+        }
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
@@ -141,7 +129,6 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
                 }
             }
-
             override fun onProviderDisabled(provider: String) {
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
@@ -187,6 +174,52 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         var intent= Intent(this,ResDetailActivity::class.java)
         intent.putExtra("Obj",data[position])
         startActivity(intent)
+    }
+
+    fun dis_sorting(view: View) {
+        dialog.dismiss()
+        var i=0
+        for (ame in resdata ){
+
+            val loc1 = Location("")
+            loc1.setLatitude(currentLatLng.latitude)
+            loc1.setLongitude(currentLatLng.longitude)
+
+            val loc2 = Location("")
+            loc2.setLatitude(ame.Latitude)
+            loc2.setLongitude(ame.Longitude)
+
+            val distanceInMeters: Float = loc1.distanceTo(loc2)
+            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+            resdata[i].CalculatedDis=distanceInKm
+            i+=1
+        }
+        resdata.sortBy { it.CalculatedDis }
+        adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+        resList.adapter=adapter
+    }
+    fun rat_sorting(view: View) {
+        dialog.dismiss()
+        db.collection("Restaurants").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
+            if (it != null) {
+                resdata.clear()
+                resdata = it.toObjects(Restaurants::class.java)
+                adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                resList.adapter=adapter
+            }
+
+        }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+
+
     }
 
 
