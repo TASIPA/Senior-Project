@@ -89,6 +89,11 @@ class HomeFragment : Fragment() {
             var intent= Intent(activity, AttractionActivity::class.java)
             startActivity(intent)
         }
+        profile_image.setOnClickListener {
+            var intent= Intent(activity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         recycler.layoutManager = linearLayoutManager
         var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")

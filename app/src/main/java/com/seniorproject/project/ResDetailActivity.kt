@@ -114,6 +114,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
             var newRate = (((obj.Rating * obj.RatingNo) + res_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
             var newRating = String.format("%.2f",newRate).toDouble()
+            //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
             var newRateNo = obj.RatingNo + 1
 
             dataReference = FirebaseFirestore.getInstance()

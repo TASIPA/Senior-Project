@@ -64,6 +64,11 @@ class ProfileActivity : AppCompatActivity() {
             showPhoto()
         }
         DoneBtn.setOnClickListener {
+
+            if (imageURL2 != null){
+                val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
+                currentUserDB.child("picurl").setValue(imageURL2)
+            }
             finish()
         }
         loadProfile()
@@ -104,8 +109,7 @@ class ProfileActivity : AppCompatActivity() {
                     dialog.dismiss()
                     imageRef.downloadUrl.addOnSuccessListener {
                         imageURL2 = it.toString()
-                        val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
-                        currentUserDB.child("picurl").setValue(imageURL2)
+//
                     }
                 }
                 .addOnFailureListener{
@@ -121,7 +125,6 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-
     private fun showPhoto() {
         val intent = Intent()
         intent.type = "image/*"
@@ -129,13 +132,14 @@ class ProfileActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Select a photo"),PICK_IMAGE_REQUEST)
         //first argument = target (in this case, its var intent)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {//picture return as the 'data'
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data!=null && data.data!=null)
             filePath = data.data
         try {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath) //to get bitmap
-            //profile.setImageBitmap(bitmap) //xml
+            proAct_img.setImageBitmap(bitmap) //xml
             uploadFile()
         }catch (e: IOException){
             e.printStackTrace()
