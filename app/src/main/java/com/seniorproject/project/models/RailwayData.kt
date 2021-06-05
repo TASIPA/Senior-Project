@@ -1,5 +1,6 @@
 package com.seniorproject.project.models
 
-class RailwayData (val TrainNo: String, val detail: String, val departureStation: String, val DepartureTime:String,
-                    val destinationStation: String,val destinationTime: String){
+class RailwayData (val TrainNo: Int, val Type: String, val DepStation: String, val DepTime:String,
+                    val DestStation: String,val DestTime: String){
+    constructor(): this(0,"","","","","")
 }

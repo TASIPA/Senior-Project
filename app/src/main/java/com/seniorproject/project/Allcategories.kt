@@ -45,11 +45,6 @@ class Allcategories : AppCompatActivity() {
             startActivity(intent)
 
         }
-        qr.setOnClickListener {
-            var intent= Intent(this,QrcodeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
         cat_pro.setOnClickListener {
             var intent= Intent(this,PromtionActivity::class.java)
             startActivity(intent)

@@ -188,6 +188,42 @@
             android:layout_height="170dp">
 
             <RelativeLayout
+                android:id="@+id/cat_eme"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:elevation="8dp"
+                android:background="@drawable/cat_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/brandon_grotesque_bold_italic"
+                    android:padding="30dp"
+                    android:text="@string/Emergency"
+                    android:textSize="32sp" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:elevation="9dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/emergencynew" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp">
+
+            <RelativeLayout
                 android:id="@+id/cat_train"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -258,42 +294,6 @@
             android:layout_height="170dp">
 
             <RelativeLayout
-                android:id="@+id/cat_eme"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:elevation="8dp"
-                android:background="@drawable/cat_card">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/brandon_grotesque_bold_italic"
-                    android:padding="30dp"
-                    android:text="@string/Emergency"
-                    android:textSize="32sp" />
-
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="25dp"
-                android:elevation="9dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/emergencynew" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp">
-
-            <RelativeLayout
                 android:id="@+id/cat_pro"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -322,42 +322,6 @@
                 android:scaleType="fitXY"
                 android:elevation="9dp"
                 android:src="@drawable/promo1" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp">
-
-            <RelativeLayout
-                android:id="@+id/qr"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="10dp"
-                android:elevation="8dp"
-                android:background="@drawable/cat_card">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/brandon_grotesque_bold_italic"
-                    android:padding="30dp"
-                    android:text="QR Code"
-                    android:textSize="32sp" />
-
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:scaleType="fitCenter"
-                android:elevation="9dp"
-                android:src="@drawable/qr"
-               />
         </RelativeLayout>
 
     </LinearLayout>
