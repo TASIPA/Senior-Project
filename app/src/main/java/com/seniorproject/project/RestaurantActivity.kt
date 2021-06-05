@@ -179,25 +179,9 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     }
     fun rat_sorting(view: View) {
         dialog.dismiss()
-        db.collection("Restaurants").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
-            if (it != null) {
-                resdata.clear()
-                resdata = it.toObjects(Restaurants::class.java)
-                adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
-                resList.adapter=adapter
-            }
-
-        }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-
+        resdata.sortByDescending { it.Rating }
+        adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+        resList.adapter=adapter
 
     }
     fun readAll() {
