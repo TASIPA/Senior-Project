@@ -57,7 +57,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         dialog = Dialog(this)
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         attList.layoutManager = linearLayoutManager
-        //replace with event adapter
+
         val docRef = db.collection("Attractions")
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot

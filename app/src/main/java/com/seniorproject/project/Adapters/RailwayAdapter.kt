@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 import com.seniorproject.project.models.RailwayData
 
-class RailwayAdapter(private val rssObject: List<RailwayData>, private val mContext: Context): RecyclerView.Adapter<RailwayAdapter.RailwayViewHolder>()
+class RailwayAdapter(private val rssObject: MutableList<RailwayData>, private val mContext: Context): RecyclerView.Adapter<RailwayAdapter.RailwayViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RailwayViewHolder {
 
@@ -26,12 +26,12 @@ class RailwayAdapter(private val rssObject: List<RailwayData>, private val mCont
     }
 
     override fun onBindViewHolder(holder: RailwayViewHolder, position: Int) {
-        holder.TrainNo.text=rssObject[position].TrainNo
-        holder.TrainDetail.text=rssObject[position].detail
-        holder.depStation.text=rssObject[position].departureStation
-        holder.depTime.text=rssObject[position].DepartureTime
-        holder.desStation.text=rssObject[position].destinationStation
-        holder.desTime.text=rssObject[position].destinationTime
+        holder.TrainNo.text=rssObject[position].TrainNo.toString()
+        holder.TrainDetail.text=rssObject[position].Type
+        holder.depStation.text=rssObject[position].DepStation
+        holder.depTime.text=rssObject[position].DepTime
+        holder.desStation.text=rssObject[position].DestStation
+        holder.desTime.text=rssObject[position].DestTime
         //holder.txtTitle.text = rssObject[position].toString()
 
         //holder.img.setImageResource(result)
