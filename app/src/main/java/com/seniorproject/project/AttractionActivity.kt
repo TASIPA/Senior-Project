@@ -198,26 +198,9 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
     }
     fun rat_sorting(view: View) {
         dialog.dismiss()
-        db.collection("Attractions").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
-            if (it != null) {
-                attdata.clear()
-                attdata = it.toObjects(Restaurants::class.java)
-                adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                attList.adapter=adapter
-            }
-
-        }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-
-
+        attdata.sortByDescending { it.Rating }
+        adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+        attList.adapter=adapter
     }
 
     override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
