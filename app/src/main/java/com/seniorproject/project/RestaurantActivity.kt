@@ -1,7 +1,6 @@
 package com.seniorproject.project
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -55,27 +54,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
        // mDatabase = FirebaseDatabase.getInstance().reference;
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
-        val docRef = db.collection("Restaurants")
-        docRef.get()//ordering ...
-            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
-                if (snapShot != null) {
-                    resdata!!.clear()
-                    resdata = snapShot.toObjects(Restaurants::class.java)
-                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
-                    resList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-
+        readAll()
         search_button.setOnClickListener {
              if (flag){
                  search_view.visibility= View.VISIBLE
@@ -198,10 +177,51 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
         resList.adapter=adapter
     }
-    
     fun rat_sorting(view: View) {
         dialog.dismiss()
-        db.collection("Restaurants").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
+        resdata.sortByDescending { it.Rating }
+        adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+        resList.adapter=adapter
+
+    }
+    fun readAll() {
+        all_txt.setBackgroundResource(R.color.secondary)
+        cafe_txt.setBackgroundResource(R.color.white)
+        res_txt.setBackgroundResource(R.color.white)
+        des_txt.setBackgroundResource(R.color.white)
+         db.collection("Restaurants")
+            .get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    resdata!!.clear()
+                    resdata = snapShot.toObjects(Restaurants::class.java)
+                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                    resList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+
+    }
+    fun filterbyAll(view: View){
+        readAll()
+    }
+    fun filterbyCafe(view: View){
+        all_txt.setBackgroundResource(R.color.white)
+        cafe_txt.setBackgroundResource(R.color.secondary)
+        res_txt.setBackgroundResource(R.color.white)
+        des_txt.setBackgroundResource(R.color.white)
+        db.collection("Restaurants").whereEqualTo("Category","Cafe")
+            .get()
+            .addOnSuccessListener {
             if (it != null) {
                 resdata.clear()
                 resdata = it.toObjects(Restaurants::class.java)
@@ -219,8 +239,58 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                 Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
             }
+    }
+    fun filterbyRestaurant(view: View){
+        all_txt.setBackgroundResource(R.color.white)
+        cafe_txt.setBackgroundResource(R.color.white)
+        res_txt.setBackgroundResource(R.color.secondary)
+        des_txt.setBackgroundResource(R.color.white)
+        db.collection("Restaurants").whereEqualTo("Category","Restaurant")
+            .get()
+            .addOnSuccessListener {
+                if (it != null) {
+                    resdata.clear()
+                    resdata = it.toObjects(Restaurants::class.java)
+                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                    resList.adapter=adapter
+                }
 
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
+            }
+    }
+    fun filterbyDessert(view: View){
+        all_txt.setBackgroundResource(R.color.white)
+        cafe_txt.setBackgroundResource(R.color.white)
+        res_txt.setBackgroundResource(R.color.white)
+        des_txt.setBackgroundResource(R.color.secondary)
+        db.collection("Restaurants").whereEqualTo("Category","Dessert")
+            .get()
+            .addOnSuccessListener {
+                if (it != null) {
+                    resdata.clear()
+                    resdata = it.toObjects(Restaurants::class.java)
+                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                    resList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
     }
 
 

@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class ForgetPassActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_forget_pass)
 
         SubmitBtn.setOnClickListener {

@@ -120,13 +120,12 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             dataReference = FirebaseFirestore.getInstance()
             //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
 
-            var query= dataReference.collection("Amenities")!!.whereEqualTo("id",obj.id)
+             dataReference.collection("Amenities")!!.whereEqualTo("id",obj.id)
                 .get()
                 .addOnSuccessListener {
                     for (document in it){
                         docID = document.id.toString()
                         //Log.d("Painty", "Rating = "+newRating.toString())
-
                         dataReference.collection("Amenities").document(docID).update("RatingNo", (newRateNo))
                         dataReference.collection("Amenities").document(docID).update("Rating", (newRating))
                     }

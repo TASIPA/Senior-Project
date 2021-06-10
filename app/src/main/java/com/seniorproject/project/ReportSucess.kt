@@ -16,9 +16,8 @@ class ReportSucess : AppCompatActivity() {
         ReportID.text = ID
 
         HomeBtn.setOnClickListener {
-            finish()
-//            val intent = Intent(this,HomeViewModel::class.java)
-//            startActivity(intent)
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }

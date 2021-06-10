@@ -193,25 +193,9 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
     }
     fun rat_sorting(view: View) {
         dialog.dismiss()
-        db.collection("Amenities").orderBy("Rating", Query.Direction.DESCENDING).get().addOnSuccessListener {
-            if (it != null) {
-                amedata.clear()
-                amedata = it.toObjects(Restaurants::class.java)
-                adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                amenList.adapter=adapter
-            }
-
-        }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-
+        amedata.sortByDescending { it.Rating }
+        adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+        amenList.adapter=adapter
 
     }
 
