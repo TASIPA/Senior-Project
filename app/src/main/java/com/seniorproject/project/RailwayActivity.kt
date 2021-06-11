@@ -45,7 +45,7 @@ class RailwayActivity : AppCompatActivity() {
         RailList.layoutManager = linearLayoutManager
 
         val docRef = db.collection("Train")
-        docRef.get()//ordering ...
+        docRef.orderBy("DepTime").get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     traindata!!.clear()

@@ -218,41 +218,6 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/emergencynew" />
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="170dp">
-
-            <RelativeLayout
-                android:id="@+id/cat_train"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_centerInParent="true"
-                android:elevation="8dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/cat_card">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/brandon_grotesque_bold_italic"
-                    android:padding="30dp"
-                    android:text="@string/Trains"
-                    android:textSize="32sp" />
-
-
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="220dp"
-                android:layout_height="150dp"
-                android:layout_alignParentRight="true"
-                android:elevation="9dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/train1" />
-        </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="170dp">
@@ -288,6 +253,41 @@
                 android:elevation="9dp"
                 android:src="@drawable/reportnew" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp">
+
+            <RelativeLayout
+                android:id="@+id/cat_train"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:elevation="8dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/cat_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/brandon_grotesque_bold_italic"
+                    android:padding="30dp"
+                    android:text="@string/Trains"
+                    android:textSize="32sp" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="220dp"
+                android:layout_height="150dp"
+                android:layout_alignParentRight="true"
+                android:elevation="9dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/train1" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

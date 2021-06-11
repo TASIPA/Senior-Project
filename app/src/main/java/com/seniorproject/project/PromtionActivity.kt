@@ -23,6 +23,7 @@ class PromtionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_promtion)
+        supportActionBar?.hide()
 
         promodata= mutableListOf()
         db= FirebaseFirestore.getInstance()
