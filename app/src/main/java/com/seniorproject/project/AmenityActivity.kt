@@ -59,27 +59,7 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         amedata= mutableListOf()
         dialog = Dialog(this)
         db= FirebaseFirestore.getInstance()
-
-        val docRef = db.collection("Amenities")
-        docRef.get()//ordering ...
-            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
-                if (snapShot != null) {
-                    amedata.clear()
-                    amedata = snapShot.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
+        readAll()
         sort_button.setOnClickListener {
             dialog.setContentView(R.layout.sort_card)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -168,6 +148,28 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         super.onPause()
         locationManager.removeUpdates(locationListener)
         Log.i("GPS Status","pause")
+    }
+    fun readAll(){
+        val docRef = db.collection("Amenities")
+        docRef.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    amedata.clear()
+                    amedata = snapShot.toObjects(Restaurants::class.java)
+                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                    amenList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
     }
     fun dis_sorting(view: View) {
         dialog.dismiss()
