@@ -98,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.RatingBar.Small"
+                android:progressTint="@color/primary_dark"
                 android:numStars="5"
                 android:rating="5"
                 android:layout_marginTop="5dp"
@@ -150,7 +151,7 @@
 
                 <Button
                     android:id="@+id/res_button3"
-                    android:layout_width="120dp"
+                    android:layout_width="130dp"
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
@@ -168,7 +169,7 @@
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toEndOf="@+id/res_button2"
-                    android:background="#00FFFFFF"
+                    android:background="00FFFFFF"
                     android:onClick="onClick"
                     android:text="Map"
                     android:textColor="@color/primary_dark"
@@ -185,7 +186,7 @@
             android:layout_marginTop="165dp"
             android:scrollbars="none"
             android:visibility="visible"
-            tools:visibility="invisible">
+            tools:visibility="visible">
 
 
             <RelativeLayout
@@ -256,16 +257,39 @@
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/foodmenu1"
                                     android:layout_width="170dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="37dp"
+                                    android:layout_height="57dp"
+                                    android:layout_marginTop="10dp"
                                     android:fontFamily="@font/brandon_grotesque_black"
-                                    android:text="Food Menu 1"
-                                    android:textSize="20dp" />
+                                    android:text="Menu1"
+                                    android:textSize="20dp"
+                                    android:gravity="center_vertical"/>
+                                <TextView
+                                    android:id="@+id/foodmenu1lab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="Price:"
+                                    android:textSize="20dp"
+                                    android:layout_below="@id/foodmenu1"
+                                    />
+                                <TextView
+                                    android:id="@+id/foodmenu1price"
+                                    android:layout_width="115dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-28dp"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="XXXXTHB"
+                                    android:textSize="20dp"
+                                    android:layout_toRightOf="@+id/foodmenu1lab"
+                                    android:layout_marginLeft="50dp"
+                                    android:textColor="@color/primary_dark"
+                                   />
                             </LinearLayout>
 
                             <RelativeLayout
@@ -273,12 +297,13 @@
                                 android:layout_height="match_parent">
 
                                 <ImageView
+                                    android:id="@+id/menuimg1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="15dp"
-                                    android:scaleType="center"
-                                    android:src="@drawable/epic1" />
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/epic2" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -312,12 +337,34 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/foodmenu2"
                                     android:layout_width="170dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="37dp"
+                                    android:layout_height="57dp"
+                                    android:layout_marginTop="10dp"
                                     android:fontFamily="@font/brandon_grotesque_black"
-                                    android:text="Food Menu 2"
-                                    android:textSize="20dp" />
+                                    android:text="Menu2"
+                                    android:textSize="20dp"
+                                    android:gravity="center_vertical"/>
+                                <TextView
+                                    android:id="@+id/foodmenu2lab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="Price:"
+                                    android:textSize="20dp"
+                                    android:layout_below="@id/foodmenu2"
+                                    />
+                                <TextView
+                                    android:id="@+id/foodmenu2price"
+                                    android:layout_width="115dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-28dp"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="XXXXTHB"
+                                    android:textSize="20dp"
+                                    android:layout_marginLeft="50dp"
+                                    android:textColor="@color/primary_dark"
+                                    />
                             </LinearLayout>
 
                             <RelativeLayout
@@ -325,12 +372,13 @@
                                 android:layout_height="match_parent">
 
                                 <ImageView
+                                    android:id="@+id/menuimg2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="15dp"
-                                    android:scaleType="center"
-                                    android:src="@drawable/epic1" />
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/epic2" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -364,12 +412,34 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/foodmenu3"
                                     android:layout_width="170dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="37dp"
+                                    android:layout_height="57dp"
+                                    android:layout_marginTop="10dp"
                                     android:fontFamily="@font/brandon_grotesque_black"
-                                    android:text="Food Menu 3"
-                                    android:textSize="20dp" />
+                                    android:text="Menu3"
+                                    android:textSize="20dp"
+                                    android:gravity="center_vertical"/>
+                                <TextView
+                                    android:id="@+id/foodmenu3lab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="Price:"
+                                    android:textSize="20dp"
+                                    android:layout_below="@id/foodmenu3"
+                                    />
+                                <TextView
+                                    android:id="@+id/foodmenu3price"
+                                    android:layout_width="115dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-28dp"
+                                    android:fontFamily="@font/brandon_grotesque_black"
+                                    android:text="XXXXTHB"
+                                    android:textSize="20dp"
+                                    android:layout_marginLeft="50dp"
+                                    android:textColor="@color/primary_dark"
+                                    />
                             </LinearLayout>
 
                             <RelativeLayout
@@ -377,12 +447,13 @@
                                 android:layout_height="match_parent">
 
                                 <ImageView
+                                    android:id="@+id/menuimg3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="15dp"
-                                    android:scaleType="center"
-                                    android:src="@drawable/epic1" />
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/epic2" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -434,7 +505,7 @@
             android:layout_marginRight="20dp"
             android:scrollbars="none"
             android:visibility="invisible"
-            tools:visibility="visible">
+            tools:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"

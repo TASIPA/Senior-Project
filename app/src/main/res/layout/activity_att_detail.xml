@@ -99,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.RatingBar.Small"
+                android:progressTint="@color/primary_dark"
                 android:numStars="5"
                 android:rating="5"
                 android:layout_marginTop="5dp"
@@ -151,7 +152,7 @@
 
                 <Button
                     android:id="@+id/attbutton3"
-                    android:layout_width="120dp"
+                    android:layout_width="130dp"
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
