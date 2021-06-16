@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/home_background"
-    tools:context=".TrafficActivity">
+    tools:context=".AmenityActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
@@ -58,6 +58,7 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         >
         <RelativeLayout
             android:id="@+id/ame_filter"
