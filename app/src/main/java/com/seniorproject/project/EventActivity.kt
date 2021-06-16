@@ -42,7 +42,7 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
 
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
-    private lateinit var currentLatLng: LatLng
+    private  var currentLatLng: LatLng= LatLng(0.0,0.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

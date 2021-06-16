@@ -39,7 +39,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
-    private lateinit var currentLatLng: LatLng
+    private  var currentLatLng: LatLng= LatLng(0.0,0.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -186,9 +186,6 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     }
     fun readAll() {
         all_txt.setBackgroundResource(R.color.secondary)
-        cafe_txt.setBackgroundResource(R.color.white)
-        res_txt.setBackgroundResource(R.color.white)
-        des_txt.setBackgroundResource(R.color.white)
          db.collection("Restaurants")
             .get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
@@ -211,86 +208,82 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             }
 
     }
-    fun filterbyAll(view: View){
-        readAll()
-    }
-    fun filterbyCafe(view: View){
-        all_txt.setBackgroundResource(R.color.white)
-        cafe_txt.setBackgroundResource(R.color.secondary)
-        res_txt.setBackgroundResource(R.color.white)
-        des_txt.setBackgroundResource(R.color.white)
-        db.collection("Restaurants").whereEqualTo("Category","Cafe")
-            .get()
-            .addOnSuccessListener {
-            if (it != null) {
-                resdata.clear()
-                resdata = it.toObjects(Restaurants::class.java)
-                adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
-                resList.adapter=adapter
-            }
-
-        }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyRestaurant(view: View){
-        all_txt.setBackgroundResource(R.color.white)
-        cafe_txt.setBackgroundResource(R.color.white)
-        res_txt.setBackgroundResource(R.color.secondary)
-        des_txt.setBackgroundResource(R.color.white)
-        db.collection("Restaurants").whereEqualTo("Category","Restaurant")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    resdata.clear()
-                    resdata = it.toObjects(Restaurants::class.java)
-                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
-                    resList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyDessert(view: View){
+    fun filter(view: View) {
         all_txt.setBackgroundResource(R.color.white)
         cafe_txt.setBackgroundResource(R.color.white)
         res_txt.setBackgroundResource(R.color.white)
-        des_txt.setBackgroundResource(R.color.secondary)
-        db.collection("Restaurants").whereEqualTo("Category","Dessert")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    resdata.clear()
-                    resdata = it.toObjects(Restaurants::class.java)
-                    adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
-                    resList.adapter=adapter
-                }
+        des_txt.setBackgroundResource(R.color.white)
+        when(view.id){
+            R.id.all ->{readAll()}
+            R.id.filter_cafe ->{
+                cafe_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Restaurants").whereEqualTo("Category","Cafe")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            resdata.clear()
+                            resdata = it.toObjects(Restaurants::class.java)
+                            adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                            resList.adapter=adapter
+                        }
 
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
+                    }}
+            R.id.filter_dessert ->{
+                des_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Restaurants").whereEqualTo("Category","Dessert")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            resdata.clear()
+                            resdata = it.toObjects(Restaurants::class.java)
+                            adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                            resList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
             }
+            R.id.filter_res ->{
+                res_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Restaurants").whereEqualTo("Category","Restaurant")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            resdata.clear()
+                            resdata = it.toObjects(Restaurants::class.java)
+                            adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
+                            resList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+        }
     }
 
 

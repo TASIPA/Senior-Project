@@ -71,7 +71,7 @@
             android:background="@color/home_background">
             <androidx.cardview.widget.CardView
                 android:id="@+id/all"
-                android:onClick="filterbyAll"
+                android:onClick="filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -95,7 +95,7 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/filter_cafe"
-                android:onClick="filterbyCafe"
+                android:onClick="filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -124,7 +124,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyRestaurant"
+                android:onClick="filter"
                 android:layout_toRightOf="@+id/filter_cafe">
 
                 <TextView
@@ -148,7 +148,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyDessert"
+                android:onClick="filter"
                 android:layout_toRightOf="@+id/filter_res">
 
                 <TextView
