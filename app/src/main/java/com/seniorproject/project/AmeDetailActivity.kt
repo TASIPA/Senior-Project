@@ -212,7 +212,8 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
                         }
                         else{
-                            data?.add(Review(name,pic,rating))
+                            imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                            data?.add(Review(name,pic,rating,imgLink))
                         }
 
                     }
