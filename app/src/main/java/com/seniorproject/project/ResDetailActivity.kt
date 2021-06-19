@@ -207,6 +207,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
                             }
                             else{
+                                imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
                                 data?.add(Review(name,rev,rating,imgLink))
                             }
 
