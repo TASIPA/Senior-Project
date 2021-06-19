@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
+import com.squareup.picasso.Picasso
 
 class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<RestaurantAdapter.FeedViewHolders>() {
     private var filteredData=rssObject
@@ -32,7 +33,7 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
         holder.txtTitle1.text = filteredData[position].Category
         holder.txtTitle3.text = filteredData[position].Rating.toString()
         holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
-
+        Picasso.get().load(rssObject[position].imageURL).into(holder.img)
 //        var evelat = filteredData[position].Latitude.toString()
 //        var evelong = filteredData[position].Longitude.toString()
 //
@@ -49,14 +50,14 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
 
  //       holder.txtTitle2.text = distanceInKm.toString() + "km"
 
-        var result = when (filteredData[position].imageURL) {
-            "pic1" -> R.drawable.pic1
-            "pic2" -> R.drawable.pic2
-            "pic6" -> R.drawable.pic6
-            "pic7" -> R.drawable.pic7
-            else -> R.drawable.pic10
-        }
-        holder.img.setImageResource(result)
+//        var result = when (filteredData[position].imageURL) {
+//            "pic1" -> R.drawable.pic1
+//            "pic2" -> R.drawable.pic2
+//            "pic6" -> R.drawable.pic6
+//            "pic7" -> R.drawable.pic7
+//            else -> R.drawable.pic10
+//        }
+//        holder.img.setImageResource(result)
         //holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 

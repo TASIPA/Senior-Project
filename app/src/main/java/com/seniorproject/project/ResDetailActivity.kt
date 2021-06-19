@@ -22,8 +22,10 @@ import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
+import kotlinx.android.synthetic.main.activity_promo_detail.*
 
 import kotlinx.android.synthetic.main.activity_res_detail.*
 import java.lang.String.format
@@ -136,19 +138,20 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         res_name.text = obj.Name
         res_desc.text=obj.Description
-        //ResType.text = type
-        var result = when (obj.imageURL) {
-            "pic1" -> R.drawable.pic1
-            "pic2" -> R.drawable.pic2
-            "pic6" -> R.drawable.pic6
-            "pic7" -> R.drawable.pic7
-            else -> R.drawable.pic10
-        }
-        res_pic.setImageResource(result)
-        res_rat.rating=obj.Rating.toFloat()
-        res_ratVal.text=obj.Rating.toString()
-        res_type.text=obj.Category
-        res_loc.text=obj.Location
+
+        foodmenu1.text=obj.Menu1
+        foodmenu1price.text=obj.Price1
+        foodmenu2.text=obj.Menu2
+        foodmenu2price.text=obj.Price2
+        foodmenu3.text=obj.Menu3
+        foodmenu3price.text=obj.Price3
+
+        Picasso.get().load(obj.Menu1pic).into(menuimg1)
+        Picasso.get().load(obj.Menu2pic).into(menuimg2)
+        Picasso.get().load(obj.Menu3pic).into(menuimg3)
+
+        Picasso.get().load(obj.imageURL).into(res_pic)
+
     }
 
     fun onClick(v: View) {
