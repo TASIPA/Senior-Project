@@ -27,11 +27,14 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.Interface.onItemClickListener1
 import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
+import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_event.back_btn
 import kotlinx.android.synthetic.main.activity_event.search_button
 import kotlinx.android.synthetic.main.activity_event.search_view
 import kotlinx.android.synthetic.main.activity_restaurant.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class EventActivity : AppCompatActivity(), onItemClickListener1 {
@@ -40,9 +43,14 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
     lateinit var db: FirebaseFirestore
     lateinit var adapter:EventAdapter
 
+    lateinit var dataReference: FirebaseFirestore
+
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private  var currentLatLng: LatLng= LatLng(0.0,0.0)
+
+    lateinit var docID:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,16 +60,27 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
             finish()
         }
         db= FirebaseFirestore.getInstance()
+        dataReference = FirebaseFirestore.getInstance()
+
         evedata= mutableListOf()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         eveList.layoutManager = linearLayoutManager
         //replace with event adapter
         val docRef = db.collection("Events")
-        docRef.get()//ordering ...
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter)
+
+
+
+        docRef.whereGreaterThan("Date",formatted)
+            .get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     evedata.clear()
                     evedata = snapShot.toObjects(Events::class.java)
+
                     adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                     eveList.adapter=adapter
                 }
@@ -176,4 +195,27 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
         //intent.putExtra("rating",res[position].rating.toString())
         startActivity(intent)
     }
+
+//    fun time_sorting(view: View) {
+//        dialog.dismiss()
+//        var i=0
+//        for (eve in evedata ){
+//
+//            val loc1 = Location("")
+//            loc1.setLatitude(currentLatLng.latitude)
+//            loc1.setLongitude(currentLatLng.longitude)
+//
+//            val loc2 = Location("")
+//            loc2.setLatitude(ame.Latitude)
+//            loc2.setLongitude(ame.Longitude)
+//
+//            val distanceInMeters: Float = loc1.distanceTo(loc2)
+//            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+//            amedata[i].CalculatedDis=distanceInKm
+//            i+=1
+//        }
+//        evedata.sortBy { it.CalculatedDis }
+//        adapter = EventAdapter(currentLatLng, evedata, baseContext,this)
+//        eveList.adapter=adapter
+//    }
 }
