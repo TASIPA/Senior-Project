@@ -1,5 +1,6 @@
 package com.seniorproject.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,14 +8,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.PromoAdapter
-import com.seniorproject.project.Adapters.RailwayAdapter
+import com.seniorproject.project.Interface.onItemClickListener
+import com.seniorproject.project.Interface.onItemClickListener2
 import com.seniorproject.project.models.Promotions
-import com.seniorproject.project.models.RailwayData
+import kotlinx.android.synthetic.main.activity_attraction.*
 import kotlinx.android.synthetic.main.activity_promtion.*
-import kotlinx.android.synthetic.main.activity_railway.*
-import kotlinx.android.synthetic.main.activity_railway.RailList
+import kotlinx.android.synthetic.main.activity_promtion.back_btn
 
-class PromtionActivity : AppCompatActivity() {
+class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
 
     lateinit var promodata:MutableList<Promotions>
     lateinit var db: FirebaseFirestore
@@ -24,6 +25,10 @@ class PromtionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_promtion)
         supportActionBar?.hide()
+
+        back_btn.setOnClickListener {
+            finish()
+        }
 
         promodata= mutableListOf()
         db= FirebaseFirestore.getInstance()
@@ -36,7 +41,7 @@ class PromtionActivity : AppCompatActivity() {
                 if (snapShot != null) {
                     promodata!!.clear()
                     promodata = snapShot.toObjects(Promotions::class.java)
-                    adapter = PromoAdapter(promodata, baseContext)
+                    adapter = PromoAdapter(promodata, baseContext,this)
                     promoList.adapter=adapter
                 }
 
@@ -51,9 +56,15 @@ class PromtionActivity : AppCompatActivity() {
 
             }
 
-        val adapter = PromoAdapter(promodata,baseContext)
+        val adapter = PromoAdapter(promodata,baseContext,this)
 
         promoList.adapter = adapter
 
+    }
+
+    override fun onItemClick(position: Int, data: MutableList<Promotions>) {
+        var intent= Intent(this,PromoDetailActivity::class.java)
+        intent.putExtra("Obj",data[position])
+        startActivity(intent)
     }
 }

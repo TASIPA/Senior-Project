@@ -169,7 +169,7 @@
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toEndOf="@+id/res_button2"
-                    android:background="00FFFFFF"
+                    android:background="#00FFFFFF"
                     android:onClick="onClick"
                     android:text="Map"
                     android:textColor="@color/primary_dark"
@@ -289,7 +289,7 @@
                                     android:layout_toRightOf="@+id/foodmenu1lab"
                                     android:layout_marginLeft="50dp"
                                     android:textColor="@color/primary_dark"
-                                   />
+                                    />
                             </LinearLayout>
 
                             <RelativeLayout
@@ -667,8 +667,6 @@
                     android:scrollbars="none" />
             </LinearLayout>
         </ScrollView>
-
-
 
     </RelativeLayout>
 

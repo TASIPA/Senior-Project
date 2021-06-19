@@ -7,12 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import com.seniorproject.project.Adapters.AttractionAdapter
 import com.seniorproject.project.Adapters.RailwayAdapter
 import com.seniorproject.project.models.RailwayData
-import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_attraction.*
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_category.back_btn

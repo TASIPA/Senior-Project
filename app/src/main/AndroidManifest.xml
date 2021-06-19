@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Senior_project">
-        <activity android:name=".ReportSucess"></activity>
+        <activity android:name=".PromoDetailActivity"></activity>
+        <activity android:name=".ReportSucess" />
         <activity android:name=".AttDetailActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
