@@ -219,13 +219,11 @@ class HomeFragment : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 usernameShow.text = snapshot.child("username").value.toString()
-                var profilePic = snapshot.child("picurl").value.toString()
 
-                if (profilePic!=null){
-                    //profile_img.visibility = INVISIBLE
-                    Picasso.get().load(profilePic).into(profile_image)
+                if (snapshot.child("picurl").exists()){
+                    var profilePic = snapshot.child("picurl").value.toString()
+                    Picasso.get().load(profilePic).into(profile_img)
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
