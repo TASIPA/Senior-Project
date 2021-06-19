@@ -39,24 +39,24 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
 
     }
 
-    fun onClick(v: View) {
-        eve_detailLayout.visibility = View.GONE
-        eve_reviewLayout.visibility = View.GONE
-        eve_button3.setBackgroundResource(R.color.white)
-        eve_button2.setBackgroundResource(R.color.white)
-
-        when (v.id) {
-            R.id.eve_button2 -> {
-                eve_detailLayout.visibility = View.VISIBLE
-                eve_button2.setBackgroundResource(R.color.secondary)
-            }
-
-            R.id.eve_button3 -> {
-                eve_reviewLayout.visibility = View.VISIBLE
-                eve_button3.setBackgroundResource(R.color.secondary)
-            }
-
-        }
-
-    }
+//    fun onClick(v: View) {
+//        eve_detailLayout.visibility = View.GONE
+//        eve_reviewLayout.visibility = View.GONE
+//        eve_button3.setBackgroundResource(R.color.white)
+//        eve_button2.setBackgroundResource(R.color.white)
+//
+//        when (v.id) {
+//            R.id.eve_button2 -> {
+//                eve_detailLayout.visibility = View.VISIBLE
+//                eve_button2.setBackgroundResource(R.color.secondary)
+//            }
+//
+//            R.id.eve_button3 -> {
+//                eve_reviewLayout.visibility = View.VISIBLE
+//                eve_button3.setBackgroundResource(R.color.secondary)
+//            }
+//
+//        }
+//
+//    }
 }
