@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_att_detail.*
 import kotlinx.android.synthetic.main.activity_promo_detail.*
 
 import kotlinx.android.synthetic.main.activity_res_detail.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import java.lang.String.format
 import java.text.DecimalFormat
 
@@ -49,6 +50,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var checked: Boolean = false
     lateinit var obj: Restaurants
     var uname:String=""
+    var upic:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +77,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         userReference!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 uname = snapshot.child("username").value.toString()
+                if (snapshot.child("picurl").exists()){
+                    upic = snapshot.child("picurl").value.toString()
+                }
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("error", "username Error")
@@ -111,9 +116,8 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             var usrCmt = res_desTxt.text.toString()
             var userrate = res_usrRate.rating.toDouble()
             reviewReference!!.child(auth!!.currentUser!!.uid)
-                .setValue(Review(uname, usrCmt, userrate))
+                .setValue(Review(uname, usrCmt, userrate,upic))
             res_cmtSec.visibility = GONE
-
             var newRate = (((obj.Rating * obj.RatingNo) + res_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
             var newRating = String.format("%.2f",newRate).toDouble()
             //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
@@ -122,7 +126,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             dataReference = FirebaseFirestore.getInstance()
             //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
 
-            var query= dataReference.collection("Restaurants")!!.whereEqualTo("id",obj.id)
+            var query= dataReference.collection("Restaurants").whereEqualTo("id",obj.id)
                 .get()
                 .addOnSuccessListener {
                     for (document in it){
@@ -189,16 +193,21 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                             var name = it.child(i.key.toString()).child("username").value.toString()
                             var rev = it.child(i.key.toString()).child("comment").value.toString()
                             var rating = it.child(i.key.toString()).child("rating").value.toString().toDouble()
+                            var imgLink=""
                             if (i.key.toString().equals(auth!!.currentUser!!.uid)){
                                 res_cmtSec.visibility=GONE
                                 res_aftCmt.visibility=VISIBLE
                                 res_cmtUsrName.text=name
                                 res_cmtUsrReview.text=rev
                                 res_cmtUsrRatVal.rating=rating.toFloat()
+                                if (it.child(i.key.toString()).child("imageUrl").exists()){
+                                    imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                                    Picasso.get().load(imgLink).into(res_cmtUsrPic)
+                                }
 
                             }
                             else{
-                                data?.add(Review(name,rev,rating))
+                                data?.add(Review(name,rev,rating,imgLink))
                             }
 
                         }

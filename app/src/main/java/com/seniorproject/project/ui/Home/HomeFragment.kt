@@ -222,7 +222,7 @@ class HomeFragment : Fragment() {
 
                 if (snapshot.child("picurl").exists()){
                     var profilePic = snapshot.child("picurl").value.toString()
-                    Picasso.get().load(profilePic).into(profile_img)
+                    Picasso.get().load(profilePic).into(profile_image)
                 }
             }
 

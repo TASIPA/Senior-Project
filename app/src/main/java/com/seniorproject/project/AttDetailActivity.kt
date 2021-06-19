@@ -23,6 +23,7 @@ import com.seniorproject.project.R.color.*
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
 import kotlinx.android.synthetic.main.activity_res_detail.*
@@ -46,6 +47,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var checked: Boolean = false
     lateinit var obj: Restaurants
     var uname:String=""
+    var upic:String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +74,9 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         userReference!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 uname = snapshot.child("username").value.toString()
+                if (snapshot.child("picurl").exists()){
+                    upic = snapshot.child("picurl").value.toString()
+                }
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("error", "username Error")
@@ -109,7 +114,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
             var usrCmt= att_desTxt.text.toString()
             var userrate= att_usrRate.rating.toDouble()
-            reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
+            reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate,upic))
             att_cmtSec.visibility=GONE
 
             var newRate = (((obj.Rating * obj.RatingNo) + att_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
@@ -185,12 +190,17 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                             var name = it.child(i.key.toString()).child("username").value.toString()
                             var rev = it.child(i.key.toString()).child("comment").value.toString()
                             var rating = it.child(i.key.toString()).child("rating").value.toString().toDouble()
+                            var imgLink=""
                             if (i.key.toString().equals(auth!!.currentUser!!.uid)){
                                 att_cmtSec.visibility=GONE
                                 att_aftCmt.visibility=VISIBLE
                                 att_cmtUsrName.text=name
                                 att_cmtUsrReview.text=rev
                                 att_cmtUsrRatVal.rating=rating.toFloat()
+                                if (it.child(i.key.toString()).child("imageUrl").exists()){
+                                    imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                                    Picasso.get().load(imgLink).into(att_cmtUsrPic)
+                                }
 
                             }
                             else{

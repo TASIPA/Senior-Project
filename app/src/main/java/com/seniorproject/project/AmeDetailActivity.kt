@@ -20,10 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_ame_detail.send_btn
 import kotlinx.android.synthetic.main.activity_ame_detail.user_rate
 import kotlinx.android.synthetic.main.activity_att_detail.*
+import kotlinx.android.synthetic.main.activity_res_detail.*
 
 
 class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
@@ -44,6 +46,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
     var checked: Boolean=false
     var data: ArrayList<Review>? = ArrayList()
      var uname:String=""
+    var upic:String=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +76,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         userReference!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 uname = snapshot.child("username").value.toString()
+                if (snapshot.child("picurl").exists()){
+                    upic = snapshot.child("picurl").value.toString()
+                }
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("error", "username Error")
@@ -109,7 +115,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
             var usrCmt= desTxt.text.toString()
             var userrate= user_rate.rating.toDouble()
-             reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate))
+             reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate,upic))
             cmtSec.visibility=View.GONE
 
             var newRate = (((obj.Rating * obj.RatingNo) + user_rate.rating.toDouble()) / (obj.RatingNo + 1))
@@ -192,12 +198,17 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                         var name = it.child(i.key.toString()).child("username").value.toString()
                         var pic = it.child(i.key.toString()).child("comment").value.toString()
                         var rating = it.child(i.key.toString()).child("rating").value.toString().toDouble()
+                        var imgLink=""
                         if (i.key.toString().equals(auth!!.currentUser!!.uid)){
                             cmtSec.visibility=View.GONE
                             aft_cmtSec.visibility=View.VISIBLE
                             cmt_usrName.text=name
                             cmt_usrReview.text=pic
                             cmt_usrRatVal.rating=rating.toFloat()
+                            if (it.child(i.key.toString()).child("imageUrl").exists()){
+                                imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                                Picasso.get().load(imgLink).into(cmt_usrPic)
+                            }
 
                         }
                         else{

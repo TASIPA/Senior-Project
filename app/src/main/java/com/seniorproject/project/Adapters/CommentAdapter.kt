@@ -4,11 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Review
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_res_detail.*
 
 
 class CommentAdapter(private val rssObject: ArrayList<Review>, private val mContext: Context): RecyclerView.Adapter<CommentAdapter.FeedViewHolders>()
@@ -25,6 +28,10 @@ class CommentAdapter(private val rssObject: ArrayList<Review>, private val mCont
         holder.txtTitle.text = rssObject[position].username
         holder.txtTitle1.text = rssObject[position].comment
          holder.rate.rating = rssObject[position].rating.toFloat()
+        if (rssObject[position].imageUrl !=""){
+            var img=rssObject[position].imageUrl
+            Picasso.get().load(img).into(holder.img)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +42,8 @@ class CommentAdapter(private val rssObject: ArrayList<Review>, private val mCont
         var txtTitle: TextView = itemView.findViewById(R.id.cmt_username)
         var txtTitle1: TextView = itemView.findViewById(R.id.cmt_usrDes)
         var rate: RatingBar = itemView.findViewById(R.id.cmt_usrRat)
+        var img: ImageView = itemView.findViewById(R.id.cmt_proPic)
+
 
     }
 
