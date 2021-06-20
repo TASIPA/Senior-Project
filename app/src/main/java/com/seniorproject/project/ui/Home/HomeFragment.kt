@@ -4,18 +4,25 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FeedAdapter
+import com.seniorproject.project.Adapters.HomePromoAdapter
+import com.seniorproject.project.Adapters.PromoAdapter
 import com.seniorproject.project.R
+import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_promtion.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.json.JSONObject
@@ -29,6 +36,10 @@ class HomeFragment : Fragment() {
     private var SalayaLat = "13.800663"
     private var SalayaLong = "100.323823"
     private var API = "4282f657d89f45f71218e7bba5f90b1c"
+
+    lateinit var promodata:MutableList<Promotions>
+    lateinit var db: FirebaseFirestore
+    lateinit var adapter: HomePromoAdapter
 
     lateinit var auth: FirebaseAuth
     var database: FirebaseDatabase? = null
@@ -65,10 +76,6 @@ class HomeFragment : Fragment() {
             var intent= Intent(activity, Allcategories::class.java)
             startActivity(intent)
         }
-        all_fea.setOnClickListener {
-            var intent= Intent(activity, FeaturedActivity::class.java)
-            startActivity(intent)
-        }
         all_pro.setOnClickListener {
             var intent= Intent(activity, PromtionActivity::class.java)
             startActivity(intent)
@@ -94,18 +101,48 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        promodata= mutableListOf()
+        db= FirebaseFirestore.getInstance()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         recycler.layoutManager = linearLayoutManager
-        var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
-        var img= listOf<String>("pic7","pic2","pic1","pic10","pic6")
 
-        val adapter = context?.let {
-            FeedAdapter(
-                    random,img,
-                    it
-            )
-        }
+        val docRef = db.collection("Promotion")
+        docRef.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    promodata!!.clear()
+                    promodata = snapShot.toObjects(Promotions::class.java)
+                    adapter = context?.let { HomePromoAdapter(promodata, it) }!!
+                    recycler.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                //Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+
+        val adapter = context?.let { HomePromoAdapter(promodata, it) }
+
         recycler.adapter = adapter
+
+//        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+//        recycler.layoutManager = linearLayoutManager
+//        var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
+//        var img= listOf<String>("pic7","pic2","pic1","pic10","pic6")
+//
+//        val adapter = context?.let {
+//            FeedAdapter(
+//                    random,img,
+//                    it
+//            )
+//        }
+//        recycler.adapter = adapter
 
     }
     inner class weatherTask(): AsyncTask<String, Void, String>() {

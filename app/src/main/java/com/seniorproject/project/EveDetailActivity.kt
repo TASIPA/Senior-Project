@@ -6,9 +6,11 @@ import android.view.View
 
 import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
+import com.squareup.picasso.Picasso
 
 
 import kotlinx.android.synthetic.main.activity_eve_detail.*
+import kotlinx.android.synthetic.main.activity_res_detail.*
 
 class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
     lateinit var obj: Events
@@ -25,18 +27,19 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
 
         eve_name.text = obj.Name
         //EveType.text = type
-        var result=when (obj.imageURL) {
-            "epic1" -> R.drawable.epic1
-            "epic2" -> R.drawable.epic2
-            "epic3"-> R.drawable.epic3
-            "epic4"-> R.drawable.epic4
-            else -> R.drawable.epic5
-        }
+//        var result=when (obj.imageURL) {
+//            "epic1" -> R.drawable.epic1
+//            "epic2" -> R.drawable.epic2
+//            "epic3"-> R.drawable.epic3
+//            "epic4"-> R.drawable.epic4
+//            else -> R.drawable.epic5
+//        }
+//        eve_pic.setImageResource(result)
         eve_desc.text=obj.Description
         eve_loc.text=obj.Location
         eve_type.text=obj.Category
-        eve_pic.setImageResource(result)
 
+        Picasso.get().load(obj.imageURL).into(eve_pic)
     }
 
 //    fun onClick(v: View) {

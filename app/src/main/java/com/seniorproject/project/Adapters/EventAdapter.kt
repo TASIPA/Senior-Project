@@ -27,6 +27,7 @@ import com.seniorproject.project.Interface.onItemClickListener1
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
+import com.squareup.picasso.Picasso
 
 class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: MutableList<Events>, private val mContext: Context,private val listener: onItemClickListener1): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
 {   private var filteredData=rssObject
@@ -47,6 +48,7 @@ class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: Mut
         //holder.txtTitle4.text = filteredData[position].distance.toString()
         var evelat = filteredData[position].Latitude.toString()
         var evelong = filteredData[position].Longitude.toString()
+        Picasso.get().load(rssObject[position].imageURL).into(holder.img)
 
         val loc1 = Location("")
         loc1.setLatitude(currentLatLng.latitude)
@@ -61,14 +63,14 @@ class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: Mut
 
         holder.txtTitle4.text = distanceInKm.toString() + "km"
 
-        var result = when (filteredData[position].imageURL) {
-            "epic1" -> R.drawable.epic1
-            "epic2" -> R.drawable.epic2
-            "epic3" -> R.drawable.epic3
-            "epic4" -> R.drawable.epic4
-            else -> R.drawable.epic5
-        }
-        holder.img.setImageResource(result)
+//        var result = when (filteredData[position].imageURL) {
+//            "epic1" -> R.drawable.epic1
+//            "epic2" -> R.drawable.epic2
+//            "epic3" -> R.drawable.epic3
+//            "epic4" -> R.drawable.epic4
+//            else -> R.drawable.epic5
+//        }
+//        holder.img.setImageResource(result)
        // holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 

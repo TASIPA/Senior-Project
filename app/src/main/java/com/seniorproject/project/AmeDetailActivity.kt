@@ -141,18 +141,20 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         //AmeType.text = type
         ame_name.text = obj.Name
         ame_desc.text=obj.Description
-        var result = when (obj.imageURL) {
-            "apic1" -> R.drawable.apic1
-            "apic2" -> R.drawable.apic2
-            "apic3" -> R.drawable.apic3
-            "apic4" -> R.drawable.apic4
-            else -> R.drawable.epic2
-        }
-        ame_pic.setImageResource(result)
+//        var result = when (obj.imageURL) {
+//            "apic1" -> R.drawable.apic1
+//            "apic2" -> R.drawable.apic2
+//            "apic3" -> R.drawable.apic3
+//            "apic4" -> R.drawable.apic4
+//            else -> R.drawable.epic2
+//        }
+//        ame_pic.setImageResource(result)
         ame_rat.rating = obj.Rating.toFloat()
         ame_ratVal.text=obj.Rating.toString()
         ame_type.text=obj.Category
         ame_loc.text=obj.Location
+
+        Picasso.get().load(obj.imageURL).into(ame_pic)
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {

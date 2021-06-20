@@ -142,18 +142,20 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         att_name.text = obj.Name
         att_loc.text = obj.Location
         att_type.text = obj.Category
-        var result = when (obj.imageURL) {
-            "attpic1" -> R.drawable.attpic1
-            "attpic2" -> R.drawable.attpic2
-            "attpic3" -> R.drawable.attpic3
-            "attpic4" -> R.drawable.attpic5
-            else -> R.drawable.epic2
-        }
-        att_pic.setImageResource(result)
+//        var result = when (obj.imageURL) {
+//            "attpic1" -> R.drawable.attpic1
+//            "attpic2" -> R.drawable.attpic2
+//            "attpic3" -> R.drawable.attpic3
+//            "attpic4" -> R.drawable.attpic5
+//            else -> R.drawable.epic2
+//        }
+//        att_pic.setImageResource(result)
         att_rat.rating = obj.Rating.toFloat()
         att_ratVal.text=obj.Rating.toString()
         att_type.text=obj.Category
         att_loc.text=obj.Location
+
+        Picasso.get().load(obj.imageURL).into(att_pic)
     }
 
     fun onClick(v: View) {
