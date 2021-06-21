@@ -31,7 +31,8 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
-        holder.txtTitle3.text = filteredData[position].Rating.toString()
+        var newRating = String.format("%.2f",filteredData[position].Rating).toFloat()
+        holder.txtTitle3.text = newRating.toString()
         holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
         Picasso.get().load(rssObject[position].imageURL).into(holder.img)
 //        var evelat = filteredData[position].Latitude.toString()

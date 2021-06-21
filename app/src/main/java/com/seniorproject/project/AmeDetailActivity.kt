@@ -119,7 +119,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             cmtSec.visibility=View.GONE
 
             var newRate = (((obj.Rating * obj.RatingNo) + user_rate.rating.toDouble()) / (obj.RatingNo + 1))
-            var newRating = String.format("%.2f",newRate).toDouble()
+//            var newRating = String.format("%.2f",newRate).toDouble()
             //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
             var newRateNo = obj.RatingNo + 1
 
@@ -133,7 +133,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                         docID = document.id.toString()
                         //Log.d("Painty", "Rating = "+newRating.toString())
                         dataReference.collection("Amenities").document(docID).update("RatingNo", (newRateNo))
-                        dataReference.collection("Amenities").document(docID).update("Rating", (newRating))
+                        dataReference.collection("Amenities").document(docID).update("Rating", (newRate))
                     }
                 }
 
@@ -149,8 +149,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 //            else -> R.drawable.epic2
 //        }
 //        ame_pic.setImageResource(result)
-        ame_rat.rating = obj.Rating.toFloat()
-        ame_ratVal.text=obj.Rating.toString()
+        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        ame_rat.rating = newRating
+        ame_ratVal.text=newRating.toString()
         ame_type.text=obj.Category
         ame_loc.text=obj.Location
 

@@ -118,7 +118,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             att_cmtSec.visibility=GONE
 
             var newRate = (((obj.Rating * obj.RatingNo) + att_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
-            var newRating = String.format("%.2f",newRate).toDouble()
+//            var newRating = String.format("%.2f",newRate).toDouble()
             //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
             var newRateNo = obj.RatingNo + 1
 
@@ -133,15 +133,14 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                         //Log.d("Painty", "Rating = "+newRating.toString())
 
                         dataReference.collection("Attractions").document(docID).update("RatingNo", (newRateNo))
-                        dataReference.collection("Attractions").document(docID).update("Rating", (newRating))
+                        dataReference.collection("Attractions").document(docID).update("Rating", (newRate))
                     }
                 }
 
 
         }
         att_name.text = obj.Name
-        att_loc.text = obj.Location
-        att_type.text = obj.Category
+        att_desc.text=obj.Description
 //        var result = when (obj.imageURL) {
 //            "attpic1" -> R.drawable.attpic1
 //            "attpic2" -> R.drawable.attpic2
@@ -150,8 +149,9 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 //            else -> R.drawable.epic2
 //        }
 //        att_pic.setImageResource(result)
-        att_rat.rating = obj.Rating.toFloat()
-        att_ratVal.text=obj.Rating.toString()
+        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        att_rat.rating = newRating
+        att_ratVal.text = newRating.toString()
         att_type.text=obj.Category
         att_loc.text=obj.Location
 

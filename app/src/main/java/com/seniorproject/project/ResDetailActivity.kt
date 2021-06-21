@@ -119,7 +119,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 .setValue(Review(uname, usrCmt, userrate,upic))
             res_cmtSec.visibility = GONE
             var newRate = (((obj.Rating * obj.RatingNo) + res_usrRate.rating.toDouble()) / (obj.RatingNo + 1))
-            var newRating = String.format("%.2f",newRate).toDouble()
+//            var newRating = String.format("%.2f",newRate).toDouble()
             //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
             var newRateNo = obj.RatingNo + 1
 
@@ -134,7 +134,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                         //Log.d("Painty", "Rating = "+newRating.toString())
 
                         dataReference.collection("Restaurants").document(docID).update("RatingNo", (newRateNo))
-                        dataReference.collection("Restaurants").document(docID).update("Rating", (newRating))
+                        dataReference.collection("Restaurants").document(docID).update("Rating", (newRate))
                     }
                 }
 
@@ -142,6 +142,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         res_name.text = obj.Name
         res_desc.text=obj.Description
+        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        res_rat.rating = newRating
+        res_ratVal.text = newRating.toString()
 
         foodmenu1.text=obj.Menu1
         foodmenu1price.text=obj.Price1

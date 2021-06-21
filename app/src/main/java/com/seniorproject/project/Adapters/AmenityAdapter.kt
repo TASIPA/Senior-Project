@@ -14,6 +14,7 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_ame_detail.*
 
 class AmenityAdapter(private val currentLatLng: LatLng, private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<AmenityAdapter.FeedViewHolders>()
 {   private var filteredData=rssObject
@@ -33,7 +34,9 @@ class AmenityAdapter(private val currentLatLng: LatLng, private val rssObject: M
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
         holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
-        holder.txtTitle3.text = filteredData[position].Rating.toString()
+        var newRating = String.format("%.2f",filteredData[position].Rating).toFloat()
+        holder.txtTitle3.text=newRating.toString()
+        //holder.txtTitle3.text = filteredData[position].Rating.toString()
         Picasso.get().load(rssObject[position].imageURL).into(holder.img)
 //
 //        var evelat = filteredData[position].Latitude.toString()
