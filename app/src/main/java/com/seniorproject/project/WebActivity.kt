@@ -21,6 +21,6 @@ class WebActivity : AppCompatActivity() {
                 return true
             }
         }
-        Webview.loadUrl("https://www.thailandtrains.com")
+        Webview.loadUrl("https://dticket.railway.co.th/DTicketPublicWeb/home/Home")
     }
 }

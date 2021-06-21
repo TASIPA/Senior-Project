@@ -151,7 +151,7 @@
 
                 <Button
                     android:id="@+id/res_button3"
-                    android:layout_width="130dp"
+                    android:layout_width="135dp"
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
@@ -283,11 +283,12 @@
                                     android:layout_width="115dp"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/foodmenu1"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_toRightOf="@+id/foodmenu1lab"
                                     android:fontFamily="@font/brandon_grotesque_black"
                                     android:text="XXXXTHB"
                                     android:textSize="20dp"
-                                    android:layout_toRightOf="@+id/foodmenu1lab"
-
                                     android:textColor="@color/primary_dark"
                                     />
                             </RelativeLayout>
@@ -358,11 +359,13 @@
                                     android:id="@+id/foodmenu2price"
                                     android:layout_width="115dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="-30dp"
+                                    android:layout_below="@id/foodmenu2"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_toRightOf="@+id/foodmenu2lab"
                                     android:fontFamily="@font/brandon_grotesque_black"
                                     android:text="XXXXTHB"
                                     android:textSize="20dp"
-                                    android:layout_marginLeft="50dp"
                                     android:textColor="@color/primary_dark"
                                     />
                             </LinearLayout>
@@ -433,11 +436,13 @@
                                     android:id="@+id/foodmenu3price"
                                     android:layout_width="115dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="-30dp"
+                                    android:layout_below="@id/foodmenu3"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_toRightOf="@+id/foodmenu3lab"
                                     android:fontFamily="@font/brandon_grotesque_black"
                                     android:text="XXXXTHB"
                                     android:textSize="20dp"
-                                    android:layout_marginLeft="50dp"
                                     android:textColor="@color/primary_dark"
                                     />
                             </LinearLayout>

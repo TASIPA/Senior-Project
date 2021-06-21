@@ -25,14 +25,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-45dp"
         android:layout_below="@+id/promo_picholder"
         android:background="@drawable/detail_corner"
         android:backgroundTint="@color/white">
         <RelativeLayout
             android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="260dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/white">
