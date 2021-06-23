@@ -160,7 +160,7 @@
 
                 <Button
                     android:id="@+id/ame_button3"
-                    android:layout_width="130dp"
+                    android:layout_width="135dp"
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="0dp"
@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/brandon_grotesque_black"
                 android:gravity="center_vertical"

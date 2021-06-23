@@ -26,6 +26,7 @@ class PromoDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_promo_detail)
+        supportActionBar!!.hide()
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.promo_map) as SupportMapFragment
