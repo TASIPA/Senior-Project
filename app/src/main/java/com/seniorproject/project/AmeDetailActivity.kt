@@ -149,7 +149,7 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 //            else -> R.drawable.epic2
 //        }
 //        ame_pic.setImageResource(result)
-        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        var newRating = String.format("%.1f",obj.Rating).toFloat()
         ame_rat.rating = newRating
         ame_ratVal.text=newRating.toString()
         ame_type.text=obj.Category

@@ -149,7 +149,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 //            else -> R.drawable.epic2
 //        }
 //        att_pic.setImageResource(result)
-        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        var newRating = String.format("%.1f",obj.Rating).toFloat()
         att_rat.rating = newRating
         att_ratVal.text = newRating.toString()
         att_type.text=obj.Category

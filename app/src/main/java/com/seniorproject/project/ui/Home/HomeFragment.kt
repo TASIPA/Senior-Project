@@ -19,6 +19,7 @@ import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FeedAdapter
 import com.seniorproject.project.Adapters.HomePromoAdapter
 import com.seniorproject.project.Adapters.PromoAdapter
+import com.seniorproject.project.Interface.onItemClickListener2
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
@@ -30,7 +31,7 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), onItemClickListener2 {
 
     private lateinit var homeViewModel: HomeViewModel
     private var SalayaLat = "13.800663"
@@ -112,7 +113,7 @@ class HomeFragment : Fragment() {
                 if (snapShot != null) {
                     promodata!!.clear()
                     promodata = snapShot.toObjects(Promotions::class.java)
-                    adapter = context?.let { HomePromoAdapter(promodata, it) }!!
+                    adapter = context?.let { HomePromoAdapter(promodata, it, this) }!!
                     recycler.adapter=adapter
                 }
 
@@ -127,7 +128,7 @@ class HomeFragment : Fragment() {
 
             }
 
-        val adapter = context?.let { HomePromoAdapter(promodata, it) }
+        val adapter = context?.let { HomePromoAdapter(promodata, it, this) }
 
         recycler.adapter = adapter
 
@@ -267,5 +268,11 @@ class HomeFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    override fun onItemClick(position: Int, data: MutableList<Promotions>) {
+        var intent= Intent(activity,PromoDetailActivity::class.java)
+        intent.putExtra("Obj",data[position])
+        startActivity(intent)
     }
 }

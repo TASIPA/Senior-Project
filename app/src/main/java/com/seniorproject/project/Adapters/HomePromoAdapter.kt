@@ -14,7 +14,7 @@ import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 
-class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private val mContext: Context): RecyclerView.Adapter<HomePromoAdapter.HomePromotionViewHolder>()
+class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private val mContext: Context, private val listener2: onItemClickListener2): RecyclerView.Adapter<HomePromoAdapter.HomePromotionViewHolder>()
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePromotionViewHolder {
@@ -42,7 +42,8 @@ class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private v
         return rssObject.size
     }
 
-    inner class HomePromotionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    inner class HomePromotionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener,
+        View.OnLongClickListener
     {
 
         var redText: TextView
@@ -61,6 +62,15 @@ class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private v
             //itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
 
+        }
+
+        override fun onClick(v: View) {
+            listener2.onItemClick(adapterPosition,rssObject)
+        }
+
+        override fun onLongClick(v: View): Boolean {
+            //itemClickListener!!.onClick(v,adapterPosition,true)
+            return true
         }
 
     }

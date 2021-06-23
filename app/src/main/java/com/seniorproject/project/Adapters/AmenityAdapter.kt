@@ -34,7 +34,7 @@ class AmenityAdapter(private val currentLatLng: LatLng, private val rssObject: M
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
         holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
-        var newRating = String.format("%.2f",filteredData[position].Rating).toFloat()
+        var newRating = String.format("%.1f",filteredData[position].Rating).toFloat()
         holder.txtTitle3.text=newRating.toString()
         //holder.txtTitle3.text = filteredData[position].Rating.toString()
         Picasso.get().load(rssObject[position].imageURL).into(holder.img)

@@ -142,7 +142,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         res_name.text = obj.Name
         res_desc.text=obj.Description
-        var newRating = String.format("%.2f",obj.Rating).toFloat()
+        var newRating = String.format("%.1f",obj.Rating).toFloat()
         res_rat.rating = newRating
         res_ratVal.text = newRating.toString()
 

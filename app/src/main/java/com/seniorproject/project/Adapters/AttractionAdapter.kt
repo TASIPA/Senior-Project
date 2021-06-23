@@ -37,7 +37,7 @@ class AttractionAdapter(private val currentLatLng: LatLng, private val rssObject
         holder.txtTitle2.text = filteredData[position].Category
         //holder.txtTitle3.text = rssObject[position].date
         holder.txtTitle4.text = filteredData[position].CalculatedDis.toString()+" km"
-        var newRating = String.format("%.2f",filteredData[position].Rating).toFloat()
+        var newRating = String.format("%.1f",filteredData[position].Rating).toFloat()
         holder.txtTitle5.text = newRating.toString()
         //holder.txtTitle5.text = filteredData[position].Rating.toString()
         Picasso.get().load(rssObject[position].imageURL).into(holder.img)
