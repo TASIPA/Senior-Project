@@ -208,8 +208,8 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                             cmt_usrName.text=name
                             cmt_usrReview.text=pic
                             cmt_usrRatVal.rating=rating.toFloat()
-                            if (it.child(i.key.toString()).child("imageUrl").exists()){
-                                imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                            imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                            if (imgLink.isNotEmpty()){
                                 Picasso.get().load(imgLink).into(cmt_usrPic)
                             }
 

@@ -202,8 +202,8 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                                 res_cmtUsrName.text=name
                                 res_cmtUsrReview.text=rev
                                 res_cmtUsrRatVal.rating=rating.toFloat()
-                                if (it.child(i.key.toString()).child("imageUrl").exists()){
-                                    imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                                imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
+                                if (imgLink.isNotEmpty()){
                                     Picasso.get().load(imgLink).into(res_cmtUsrPic)
                                 }
 
