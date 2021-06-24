@@ -63,8 +63,17 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                    var tel= it.child(i.key.toString()).child("telephone").value.toString()
                    var loc= it.child(i.key.toString()).child("location").value.toString()
                    var ratNo= it.child(i.key.toString()).child("ratingNo").value.toString().toInt()
+                   var m1= it.child(i.key.toString()).child("menu1").value.toString()
+                   var m2= it.child(i.key.toString()).child("menu2").value.toString()
+                   var m3= it.child(i.key.toString()).child("menu3").value.toString()
+                   var mpic1= it.child(i.key.toString()).child("menu1pic").value.toString()
+                   var mpic2= it.child(i.key.toString()).child("menu2pic").value.toString()
+                   var mpic3= it.child(i.key.toString()).child("menu3pic").value.toString()
+                   var pr1= it.child(i.key.toString()).child("price1").value.toString()
+                   var pr2= it.child(i.key.toString()).child("price1").value.toString()
+                   var pr3= it.child(i.key.toString()).child("price1").value.toString()
 
-                data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel,ratNo))
+                data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel,ratNo,m1,mpic1,pr1,m2,mpic2,pr2,m3,mpic3,pr3))
             }
             if (data != null) {
                 val linearLayoutManager =
