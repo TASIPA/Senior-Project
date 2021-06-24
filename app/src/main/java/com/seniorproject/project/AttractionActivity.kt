@@ -49,7 +49,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
 
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
-    private  var currentLatLng: LatLng= LatLng(0.0,0.0)
+    var currentLatLng: LatLng= LatLng(0.0,0.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,9 +61,29 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         attdata= mutableListOf()
         db= FirebaseFirestore.getInstance()
         dialog = Dialog(this)
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationListener = object : LocationListener {
+            override fun onLocationChanged(location: Location) {
+                //textView1.text = location.latitude.toString() + ", " + location.longitude.toString()
+
+                if (location == null){
+                    Toast.makeText(applicationContext, "Location Not Found",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    currentLatLng = LatLng(location.latitude,location.longitude)
+
+                }
+            }
+
+            override fun onProviderDisabled(provider: String) {
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        }
+       requestLocation()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         attList.layoutManager = linearLayoutManager
-        readall()
+
         search_button.setOnClickListener {
             if (flag){
                 search_view.visibility= View.VISIBLE
@@ -105,26 +125,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
             }
         })
 
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationListener = object : LocationListener {
-            override fun onLocationChanged(location: Location) {
-                //textView1.text = location.latitude.toString() + ", " + location.longitude.toString()
-
-                if (location == null){
-                    Toast.makeText(applicationContext, "Location Not Found",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    currentLatLng = LatLng(location.latitude,location.longitude)
-
-                }
-            }
-
-            override fun onProviderDisabled(provider: String) {
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        }
-        requestLocation()
+        readall()
     }
 
     private fun requestLocation() {
@@ -134,6 +135,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
             }
             return
         }
+
         locationManager.requestLocationUpdates("gps",1000,0f,locationListener)
 //        gpsBtn.setOnClickListener{
 //            if (currentLatLng!=null){
@@ -141,6 +143,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
 //                longText.setText(currentLatLng.longitude.toString())
 //            }
 //        }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -181,6 +184,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
 
     }
     fun readall(){
+
         all_txt.setBackgroundResource(R.color.secondary)
         Ancient_txt.setBackgroundResource(R.color.white)
         Aquarium_txt.setBackgroundResource(R.color.white)
@@ -189,6 +193,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         Museum_txt.setBackgroundResource(R.color.white)
         Religious_txt.setBackgroundResource(R.color.white)
         Other_txt.setBackgroundResource(R.color.white)
+
         val docRef = db.collection("Attractions")
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot

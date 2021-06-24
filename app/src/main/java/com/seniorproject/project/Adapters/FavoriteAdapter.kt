@@ -12,6 +12,7 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
+import com.squareup.picasso.Picasso
 
 
 class FavoriteAdapter(private val rssObject: MutableList<Restaurants>, private val mContext: Context,private val listener: onItemClickListener): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
@@ -33,24 +34,8 @@ class FavoriteAdapter(private val rssObject: MutableList<Restaurants>, private v
         holder.txtTitle1.text = rssObject[position].Category
         holder.txtTitle2.text = rssObject[position].Rating.toString()
         // holder.rate.rating = rssObject[position].rating.toFloat()
-        var result = when (rssObject[position].imageURL) {
-            "apic1" -> R.drawable.apic1
-            "apic2" -> R.drawable.apic2
-            "apic3" -> R.drawable.apic3
-            "apic4" -> R.drawable.apic4
-            "apic5"-> R.drawable.apic5
-            "attpic1" -> R.drawable.attpic1
-            "attpic2" -> R.drawable.attpic2
-            "attpic3" -> R.drawable.attpic3
-            "attpic4" -> R.drawable.attpic5
-            "attpic5"-> R.drawable.epic2
-            "pic1" -> R.drawable.pic1
-            "pic2" -> R.drawable.pic2
-            "pic6" -> R.drawable.pic6
-            "pic7" -> R.drawable.pic7
-            else -> R.drawable.epic2
-        }
-        holder.img.setImageResource(result)
+        Picasso.get().load(rssObject[position].imageURL).into(holder.img)
+        //holder.img.setImageResource(result)
         //holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
