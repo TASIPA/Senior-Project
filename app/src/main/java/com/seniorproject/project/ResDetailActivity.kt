@@ -156,7 +156,6 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         Picasso.get().load(obj.Menu1pic).into(menuimg1)
         Picasso.get().load(obj.Menu2pic).into(menuimg2)
         Picasso.get().load(obj.Menu3pic).into(menuimg3)
-
         Picasso.get().load(obj.imageURL).into(res_pic)
 
     }
