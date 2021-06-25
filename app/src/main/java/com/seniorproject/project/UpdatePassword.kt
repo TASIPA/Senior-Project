@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_promtion.*
 import kotlinx.android.synthetic.main.activity_update_password.*
 
 class UpdatePassword : AppCompatActivity() {
@@ -20,6 +21,9 @@ class UpdatePassword : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         supportActionBar!!.hide()
 
+        Back_btn.setOnClickListener {
+            finish()
+        }
         set_new_password_btn.setOnClickListener {
 
             changePassword()
