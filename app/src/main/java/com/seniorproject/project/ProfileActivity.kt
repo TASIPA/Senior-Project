@@ -65,12 +65,32 @@ class ProfileActivity : AppCompatActivity() {
         }
         DoneBtn.setOnClickListener {
 
-            if (imageURL2 != null){
-                val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
-                currentUserDB.child("picurl").setValue(imageURL2)
+            if (Firstname.text.toString().isEmpty() || Lastname.text.toString().isEmpty() || username.text.toString().isEmpty() || phoneNum.text.toString().isEmpty()){
+                Toast.makeText(this,"Please do not leave the information empty",Toast.LENGTH_SHORT).show()
             }
-            finish()
+            else{
+                val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
+                currentUserDB.child("firstname").setValue(Firstname.text.toString())
+                currentUserDB.child("lastname").setValue(Lastname.text.toString())
+                currentUserDB.child("username").setValue(username.text.toString())
+                currentUserDB.child("phone").setValue(phoneNum.text.toString())
+                if (imageURL2 != null ){
+                    val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
+                    currentUserDB.child("picurl").setValue(imageURL2)
+                }
+                finish()
+            }
+
+//            if (imageURL2 != null ){
+//                val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
+//                currentUserDB.child("picurl").setValue(imageURL2)
+//                finish()
+//            }
+//            finish()
         }
+
+        //Firstname.hint = "fhsdofesf"
+
         loadProfile()
     }
     
@@ -83,10 +103,10 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                Firstname.text = snapshot.child("firstname").value.toString()
-                Lastname.text = snapshot.child("lastname").value.toString()
-                username.text = snapshot.child("username").value.toString()
-                phoneNum.text = snapshot.child("phone").value.toString()
+                Firstname.setText(snapshot.child("firstname").value.toString())
+                Lastname.setText(snapshot.child("lastname").value.toString())
+                username.setText(snapshot.child("username").value.toString())
+                phoneNum.setText(snapshot.child("phone").value.toString())
                 if (snapshot.child("picurl").exists()){
                     var profilePic = snapshot.child("picurl").value.toString()
                     Picasso.get().load(profilePic).into(proAct_img)
