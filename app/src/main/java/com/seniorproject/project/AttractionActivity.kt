@@ -184,38 +184,14 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
 
     }
     fun readall(){
-
         all_txt.setBackgroundResource(R.color.secondary)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-
         val docRef = db.collection("Attractions")
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     attdata.clear()
                     attdata = snapShot.toObjects(Restaurants::class.java)
-                    var i=0
-                    for (ame in attdata ){
-
-                        val loc1 = Location("")
-                        loc1.setLatitude(currentLatLng.latitude)
-                        loc1.setLongitude(currentLatLng.longitude)
-
-                        val loc2 = Location("")
-                        loc2.setLatitude(ame.Latitude)
-                        loc2.setLongitude(ame.Longitude)
-
-                        val distanceInMeters: Float = loc1.distanceTo(loc2)
-                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-                        attdata[i].CalculatedDis=distanceInKm
-                        i+=1
-                    }
+                    calculate_Distance()
                     adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                     attList.adapter=adapter
                 }
@@ -231,191 +207,7 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
 
             }
     }
-    fun att_All(view: View){
-        readall()
-    }
-
-    fun filterbyAncient(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.secondary)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","Ancient")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyAquarium(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.secondary)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","Aquarium")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyArtGallery(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.secondary)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","ArtGallery")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyEducational(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.secondary)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","Educational")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyMuseum(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.secondary)
-        Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","Museum")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyReligious(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Ancient_txt.setBackgroundResource(R.color.white)
-        Aquarium_txt.setBackgroundResource(R.color.white)
-        ArtGallery_txt.setBackgroundResource(R.color.white)
-        Educational_txt.setBackgroundResource(R.color.white)
-        Museum_txt.setBackgroundResource(R.color.white)
-        Religious_txt.setBackgroundResource(R.color.secondary)
-        Other_txt.setBackgroundResource(R.color.white)
-        db.collection("Attractions").whereEqualTo("Category","Religious")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyOther(view: View) {
+    fun filter_Att(view: View){
         all_txt.setBackgroundResource(R.color.white)
         Ancient_txt.setBackgroundResource(R.color.white)
         Aquarium_txt.setBackgroundResource(R.color.white)
@@ -423,27 +215,194 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         Educational_txt.setBackgroundResource(R.color.white)
         Museum_txt.setBackgroundResource(R.color.white)
         Religious_txt.setBackgroundResource(R.color.white)
-        Other_txt.setBackgroundResource(R.color.secondary)
-        db.collection("Attractions").whereEqualTo("Category","Other")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    attdata.clear()
-                    attdata = it.toObjects(Restaurants::class.java)
-                    adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
-                    attList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
+        Other_txt.setBackgroundResource(R.color.white)
+        when(view.id){
+            R.id.all->{
+                readall()
             }
+            R.id.filter_Ancient->{
+                Ancient_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Ancient")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_Aquarium->{
+                Aquarium_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Aquarium")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_ArtGallery->{ ArtGallery_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","ArtGallery")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_Educational->{
+                Educational_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Educational")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_Museum->{
+                Museum_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Museum")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_Religious->{
+                Religious_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Religious")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_Other->{
+                Other_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Attractions").whereEqualTo("Category","Other")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            attdata.clear()
+                            attdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            attList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+        }
     }
+
+    fun calculate_Distance(){    var i=0
+        for (ame in attdata ){
+
+            val loc1 = Location("")
+            loc1.setLatitude(currentLatLng.latitude)
+            loc1.setLongitude(currentLatLng.longitude)
+
+            val loc2 = Location("")
+            loc2.setLatitude(ame.Latitude)
+            loc2.setLongitude(ame.Longitude)
+
+            val distanceInMeters: Float = loc1.distanceTo(loc2)
+            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+            attdata[i].CalculatedDis=distanceInKm
+            i+=1
+        }}
 
 }
