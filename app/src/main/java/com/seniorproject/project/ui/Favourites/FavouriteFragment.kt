@@ -70,8 +70,8 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                    var mpic2= it.child(i.key.toString()).child("menu2pic").value.toString()
                    var mpic3= it.child(i.key.toString()).child("menu3pic").value.toString()
                    var pr1= it.child(i.key.toString()).child("price1").value.toString()
-                   var pr2= it.child(i.key.toString()).child("price1").value.toString()
-                   var pr3= it.child(i.key.toString()).child("price1").value.toString()
+                   var pr2= it.child(i.key.toString()).child("price2").value.toString()
+                   var pr3= it.child(i.key.toString()).child("price3").value.toString()
 
                 data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel,ratNo,m1,mpic1,pr1,m2,mpic2,pr2,m3,mpic3,pr3))
             }
