@@ -23,9 +23,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+
 import com.seniorproject.project.Adapters.AmenityAdapter
-import com.seniorproject.project.Adapters.RestaurantAdapter
+
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.activity_amenity.*
@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.activity_amenity.back_btn
 import kotlinx.android.synthetic.main.activity_amenity.search_button
 import kotlinx.android.synthetic.main.activity_amenity.search_view
 import kotlinx.android.synthetic.main.activity_amenity.sort_button
-import kotlinx.android.synthetic.main.activity_restaurant.*
+
 
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
@@ -152,40 +152,13 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
     }
     fun readAll(){
         all_txt.setBackgroundResource(R.color.secondary)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
         val docRef = db.collection("Amenities")
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     amedata.clear()
                     amedata = snapShot.toObjects(Restaurants::class.java)
-                    var i=0
-                    for (ame in amedata ){
-
-                        val loc1 = Location("")
-                        loc1.setLatitude(currentLatLng.latitude)
-                        loc1.setLongitude(currentLatLng.longitude)
-
-                        val loc2 = Location("")
-                        loc2.setLatitude(ame.Latitude)
-                        loc2.setLongitude(ame.Longitude)
-
-                        val distanceInMeters: Float = loc1.distanceTo(loc2)
-                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-                        amedata[i].CalculatedDis=distanceInKm
-                        i+=1
-                    }
+                    calculate_Distance()
                     adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                     amenList.adapter=adapter
                 }
@@ -223,396 +196,7 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
 
     }
 
-    fun filterbyAll(view: View) {
-        readAll()
-    }
-    fun filterbyBank(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.secondary)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Bank")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyBeautySalon(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.secondary)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Beauty Salon")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyCopyShop(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.secondary)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Copy Shop")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyClothingStore(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.secondary)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Clothing Store")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyDentalClinic(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.secondary)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Dental Clinic")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyFuel(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.secondary)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Fuel")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyHairSalon(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.secondary)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Hair Salon")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-
-    }
-    fun filterbyPharmacy(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.secondary)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Pharmacy")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyGameStore(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.secondary)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Game Store")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyMassageSpa(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.secondary)
-        PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Massage")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyPostOffice(view: View) {
-        all_txt.setBackgroundResource(R.color.white)
-        Bank_txt.setBackgroundResource(R.color.white)
-        BeautySalon_txt.setBackgroundResource(R.color.white)
-        CopyShop_txt.setBackgroundResource(R.color.white)
-        ClothingStore_txt.setBackgroundResource(R.color.white)
-        DentalClinic_txt.setBackgroundResource(R.color.white)
-        Fuel_txt.setBackgroundResource(R.color.white)
-        HairSalon_txt.setBackgroundResource(R.color.white)
-        Pharmacy_txt.setBackgroundResource(R.color.white)
-        GameStore_txt.setBackgroundResource(R.color.white)
-        MassageSpa_txt.setBackgroundResource(R.color.white)
-        PostOffice_txt.setBackgroundResource(R.color.secondary)
-        AmeOther_txt.setBackgroundResource(R.color.white)
-        db.collection("Amenities").whereEqualTo("Category","Post Office")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-    }
-    fun filterbyAmeOther(view: View) {
+    fun filter_Amen(view: View){
         all_txt.setBackgroundResource(R.color.white)
         Bank_txt.setBackgroundResource(R.color.white)
         BeautySalon_txt.setBackgroundResource(R.color.white)
@@ -625,27 +209,312 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         GameStore_txt.setBackgroundResource(R.color.white)
         MassageSpa_txt.setBackgroundResource(R.color.white)
         PostOffice_txt.setBackgroundResource(R.color.white)
-        AmeOther_txt.setBackgroundResource(R.color.secondary)
-        db.collection("Amenities").whereEqualTo("Category","Other")
-            .get()
-            .addOnSuccessListener {
-                if (it != null) {
-                    amedata.clear()
-                    amedata = it.toObjects(Restaurants::class.java)
-                    adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
-                    amenList.adapter=adapter
-                }
+        AmeOther_txt.setBackgroundResource(R.color.white)
+        when(view.id){
+            R.id.filter_AmeOther->{
+                AmeOther_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Other")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
 
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
+                    }}
+            R.id.filter_PostOffice->{
+                PostOffice_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Post Office")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_MassageSpa->{
+                MassageSpa_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Massage")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
             }
+            R.id.filter_GameStore->{
+                GameStore_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Game Store")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_Pharmacy->{
+                Pharmacy_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Pharmacy")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_HairSalon->{
+                HairSalon_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Hair Salon")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_Fuel->{
+                Fuel_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Fuel")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_DentalClinic->{
+                DentalClinic_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Dental Clinic")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_ClothingStore->{
+                ClothingStore_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Clothing Store")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_CopyShop->{
+                CopyShop_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Copy Shop")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_BeautySalon->{
+                BeautySalon_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Beauty Salon")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }}
+            R.id.filter_Bank->{
+                Bank_txt.setBackgroundResource(R.color.secondary)
+                db.collection("Amenities").whereEqualTo("Category","Bank")
+                    .get()
+                    .addOnSuccessListener {
+                        if (it != null) {
+                            amedata.clear()
+                            amedata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
+                            adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
+                            amenList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.all->{
+                readAll()
+            }
+        }
+    }
+    fun calculate_Distance(){
+        var i=0
+        for (ame in amedata ){
+
+            val loc1 = Location("")
+            loc1.setLatitude(currentLatLng.latitude)
+            loc1.setLongitude(currentLatLng.longitude)
+
+            val loc2 = Location("")
+            loc2.setLatitude(ame.Latitude)
+            loc2.setLongitude(ame.Longitude)
+
+            val distanceInMeters: Float = loc1.distanceTo(loc2)
+            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+            amedata[i].CalculatedDis=distanceInKm
+            i+=1
+        }
     }
 
 }

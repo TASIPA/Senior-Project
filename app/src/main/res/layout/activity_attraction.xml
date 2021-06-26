@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -67,7 +66,7 @@
             android:background="@color/home_background">
             <androidx.cardview.widget.CardView
                 android:id="@+id/all"
-                android:onClick="att_All"
+                android:onClick="filter_Att"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -91,7 +90,7 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/filter_Ancient"
-                android:onClick="filterbyAncient"
+                android:onClick="filter_Att"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -120,7 +119,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyAquarium"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_Ancient">
 
                 <TextView
@@ -144,7 +143,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyArtGallery"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_Aquarium">
 
                 <TextView
@@ -168,7 +167,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyEducational"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_ArtGallery">
 
                 <TextView
@@ -192,7 +191,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyMuseum"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_Educational">
 
                 <TextView
@@ -216,7 +215,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyReligious"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_Museum">
 
                 <TextView
@@ -240,7 +239,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyOther"
+                android:onClick="filter_Att"
                 android:layout_toRightOf="@+id/filter_Religious">
 
                 <TextView

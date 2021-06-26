@@ -176,22 +176,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                 if (snapShot != null) {
                     resdata.clear()
                     resdata = snapShot.toObjects(Restaurants::class.java)
-                    var i=0
-                    for (ame in resdata ){
-
-                        val loc1 = Location("")
-                        loc1.setLatitude(currentLatLng.latitude)
-                        loc1.setLongitude(currentLatLng.longitude)
-
-                        val loc2 = Location("")
-                        loc2.setLatitude(ame.Latitude)
-                        loc2.setLongitude(ame.Longitude)
-
-                        val distanceInMeters: Float = loc1.distanceTo(loc2)
-                        var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-                        resdata[i].CalculatedDis=distanceInKm
-                        i+=1
-                    }
+                    calculate_Distance()
                     adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                     resList.adapter=adapter
                 }
@@ -223,6 +208,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                         if (it != null) {
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
                         }
@@ -245,6 +231,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                         if (it != null) {
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
                         }
@@ -268,6 +255,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                         if (it != null) {
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
+                            calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
                         }
@@ -283,6 +271,24 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
                     }
             }
+        }
+    }
+    fun calculate_Distance(){
+        var i=0
+        for (ame in resdata ){
+
+            val loc1 = Location("")
+            loc1.setLatitude(currentLatLng.latitude)
+            loc1.setLongitude(currentLatLng.longitude)
+
+            val loc2 = Location("")
+            loc2.setLatitude(ame.Latitude)
+            loc2.setLongitude(ame.Longitude)
+
+            val distanceInMeters: Float = loc1.distanceTo(loc2)
+            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
+            resdata[i].CalculatedDis=distanceInKm
+            i+=1
         }
     }
 

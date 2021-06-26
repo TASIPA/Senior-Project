@@ -68,7 +68,7 @@
             android:background="@color/home_background">
             <androidx.cardview.widget.CardView
                 android:id="@+id/all"
-                android:onClick="filterbyAll"
+                android:onClick="filter_Amen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -92,7 +92,7 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/filter_Bank"
-                android:onClick="filterbyBank"
+                android:onClick="filter_Amen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/home_background"
@@ -121,7 +121,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyBeautySalon"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_Bank">
 
                 <TextView
@@ -145,7 +145,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyCopyShop"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_BeautySalon">
 
                 <TextView
@@ -169,7 +169,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyClothingStore"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_CopyShop">
 
                 <TextView
@@ -193,7 +193,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyDentalClinic"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_ClothingStore">
 
                 <TextView
@@ -217,7 +217,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyFuel"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_DentalClinic">
 
                 <TextView
@@ -241,7 +241,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyHairSalon"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_Fuel">
 
                 <TextView
@@ -265,7 +265,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyPharmacy"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_HairSalon">
 
                 <TextView
@@ -289,7 +289,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyGameStore"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_Pharmacy">
 
                 <TextView
@@ -313,7 +313,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyMassageSpa"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_GameStore">
 
                 <TextView
@@ -337,7 +337,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyPostOffice"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_MassageSpa">
 
                 <TextView
@@ -361,7 +361,7 @@
                 app:cardBackgroundColor="@color/home_background"
                 app:cardCornerRadius="16dp"
                 android:layout_marginLeft="10dp"
-                android:onClick="filterbyAmeOther"
+                android:onClick="filter_Amen"
                 android:layout_toRightOf="@+id/filter_PostOffice">
 
                 <TextView

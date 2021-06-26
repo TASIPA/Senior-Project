@@ -16,23 +16,19 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.*
-import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.Interface.onItemClickListener1
 import com.seniorproject.project.models.Events
-import com.seniorproject.project.models.Restaurants
-import kotlinx.android.synthetic.main.activity_amenity.*
 import kotlinx.android.synthetic.main.activity_event.*
+import kotlinx.android.synthetic.main.activity_event.all_txt
 import kotlinx.android.synthetic.main.activity_event.back_btn
 import kotlinx.android.synthetic.main.activity_event.search_button
 import kotlinx.android.synthetic.main.activity_event.search_view
-import kotlinx.android.synthetic.main.activity_restaurant.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -42,13 +38,10 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
     var flag=true
     lateinit var db: FirebaseFirestore
     lateinit var adapter:EventAdapter
-
     lateinit var dataReference: FirebaseFirestore
-
     private lateinit var locationManager: LocationManager
     private lateinit var locationListener: LocationListener
     private  var currentLatLng: LatLng= LatLng(0.0,0.0)
-
     lateinit var docID:String
 
 
@@ -60,43 +53,12 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
             finish()
         }
         db= FirebaseFirestore.getInstance()
-        dataReference = FirebaseFirestore.getInstance()
-
+        //dataReference = FirebaseFirestore.getInstance()
         evedata= mutableListOf()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         eveList.layoutManager = linearLayoutManager
         //replace with event adapter
-        val docRef = db.collection("Events")
-
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val formatted = current.format(formatter)
-
-
-
-        docRef.whereGreaterThan("Date",formatted)
-            .get()//ordering ...
-            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
-                if (snapShot != null) {
-                    evedata.clear()
-                    evedata = snapShot.toObjects(Events::class.java)
-
-                    adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
-                    eveList.adapter=adapter
-                }
-
-            }//in case it fails, it will toast failed
-            .addOnFailureListener { exception ->
-                Log.d(
-                    "FirebaseError",
-                    "Fail:",
-                    exception
-                )//this is kind a debugger to check whether working correctly or not
-                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
-
-            }
-        
-
+        readALL()
         search_button.setOnClickListener {
             if (flag){
                 search_view.visibility= View.VISIBLE
@@ -164,12 +126,6 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
             return
         }
         locationManager.requestLocationUpdates("gps",1000,0f,locationListener)
-//        gpsBtn.setOnClickListener{
-//            if (currentLatLng!=null){
-//                latText.setText(currentLatLng.latitude.toString())
-//                longText.setText(currentLatLng.longitude.toString())
-//            }
-//        }
     }
 
     override fun onRequestPermissionsResult(
@@ -195,27 +151,185 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
         //intent.putExtra("rating",res[position].rating.toString())
         startActivity(intent)
     }
+    fun readALL(){
+        all_txt.setBackgroundResource(R.color.secondary)
+        val docRef = db.collection("Events")
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter)
+        docRef.whereGreaterThan("Date",formatted)
+            .get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    evedata.clear()
+                    evedata = snapShot.toObjects(Events::class.java)
 
-//    fun time_sorting(view: View) {
-//        dialog.dismiss()
-//        var i=0
-//        for (eve in evedata ){
-//
-//            val loc1 = Location("")
-//            loc1.setLatitude(currentLatLng.latitude)
-//            loc1.setLongitude(currentLatLng.longitude)
-//
-//            val loc2 = Location("")
-//            loc2.setLatitude(ame.Latitude)
-//            loc2.setLongitude(ame.Longitude)
-//
-//            val distanceInMeters: Float = loc1.distanceTo(loc2)
-//            var distanceInKm = String.format("%.2f", (distanceInMeters / 1000)).toFloat()
-//            amedata[i].CalculatedDis=distanceInKm
-//            i+=1
-//        }
-//        evedata.sortBy { it.CalculatedDis }
-//        adapter = EventAdapter(currentLatLng, evedata, baseContext,this)
-//        eveList.adapter=adapter
-//    }
+                    adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                    eveList.adapter=adapter
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+    }
+
+    fun filter_Eve(view: View){
+        all_txt.setBackgroundResource(R.color.white)
+        official_txt.setBackgroundResource(R.color.white)
+        res_txt.setBackgroundResource(R.color.white)
+        music_txt.setBackgroundResource(R.color.white)
+        festival_txt.setBackgroundResource(R.color.white)
+        other_txt.setBackgroundResource(R.color.white)
+        when(view.id){
+            R.id.all->{
+                readALL()
+            }
+            R.id.filter_official->{
+                official_txt.setBackgroundResource(R.color.secondary)
+                val docRef = db.collection("Events")
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = current.format(formatter).toString()
+                docRef.whereEqualTo("Category","Official")
+                    .get()//ordering ...
+                    .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                        if (snapShot != null) {
+                            evedata.clear()
+                            evedata = snapShot.toObjects(Events::class.java)
+
+                            adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                            eveList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_religious->{
+                res_txt.setBackgroundResource(R.color.secondary)
+                val docRef = db.collection("Events")
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = current.format(formatter)
+                docRef.whereEqualTo("Category","Religious")
+                    .get()//ordering ...
+                    .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                        if (snapShot != null) {
+                            evedata.clear()
+                            evedata = snapShot.toObjects(Events::class.java)
+
+                            adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                            eveList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_music->{
+                music_txt.setBackgroundResource(R.color.secondary)
+                val docRef = db.collection("Events")
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = current.format(formatter)
+                docRef.whereEqualTo("Category","Music")
+                    .get()//ordering ...
+                    .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                        if (snapShot != null) {
+                            evedata.clear()
+                            evedata = snapShot.toObjects(Events::class.java)
+
+                            adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                            eveList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_festival->{
+                festival_txt.setBackgroundResource(R.color.secondary)
+                val docRef = db.collection("Events")
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = current.format(formatter)
+                docRef.whereEqualTo("Category","Festival")
+                    .get()//ordering ...
+                    .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                        if (snapShot != null) {
+                            evedata.clear()
+                            evedata = snapShot.toObjects(Events::class.java)
+
+                            adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                            eveList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+            R.id.filter_other->{
+                other_txt.setBackgroundResource(R.color.secondary)
+                val docRef = db.collection("Events")
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = current.format(formatter)
+                docRef.whereEqualTo("Category","Other")
+                    .get()//ordering ...
+                    .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                        if (snapShot != null) {
+                            evedata.clear()
+                            evedata = snapShot.toObjects(Events::class.java)
+                            adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
+                            eveList.adapter=adapter
+                        }
+
+                    }//in case it fails, it will toast failed
+                    .addOnFailureListener { exception ->
+                        Log.d(
+                            "FirebaseError",
+                            "Fail:",
+                            exception
+                        )//this is kind a debugger to check whether working correctly or not
+                        Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+        }
+    }
 }
