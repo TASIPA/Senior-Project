@@ -145,6 +145,8 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         var newRating = String.format("%.1f",obj.Rating).toFloat()
         res_rat.rating = newRating
         res_ratVal.text = newRating.toString()
+        res_type.text = obj.Category
+        res_phone.text = obj.Telephone
 
         foodmenu1.text=obj.Menu1
         foodmenu1price.text=obj.Price1

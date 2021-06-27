@@ -4,10 +4,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,13 +18,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.*
+import com.seniorproject.project.Adapters.AdverAdapter
 import com.seniorproject.project.Adapters.FeedAdapter
 import com.seniorproject.project.Adapters.HomePromoAdapter
 import com.seniorproject.project.Adapters.PromoAdapter
 import com.seniorproject.project.Interface.onItemClickListener2
 import com.seniorproject.project.R
+import com.seniorproject.project.models.Advertisements
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
+import com.synnapps.carouselview.CarouselView
+import com.synnapps.carouselview.ImageListener
 import kotlinx.android.synthetic.main.activity_promtion.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -30,8 +36,9 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class HomeFragment : Fragment(), onItemClickListener2 {
+class HomeFragment : Fragment(), onItemClickListener2{
 
     private lateinit var homeViewModel: HomeViewModel
     private var SalayaLat = "13.800663"
@@ -41,10 +48,16 @@ class HomeFragment : Fragment(), onItemClickListener2 {
     lateinit var promodata:MutableList<Promotions>
     lateinit var db: FirebaseFirestore
     lateinit var adapter: HomePromoAdapter
+    lateinit var adapter2: AdverAdapter
 
     lateinit var auth: FirebaseAuth
     var database: FirebaseDatabase? = null
     var dbReference: DatabaseReference? = null
+
+    var imagesArray: ArrayList<String> = ArrayList()
+  //  var carouselView: CarouselView? = null
+    lateinit var adverdata:MutableList<Advertisements>
+    //lateinit var imageListener:ImageListener
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -54,8 +67,8 @@ class HomeFragment : Fragment(), onItemClickListener2 {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        //showCarousel()
         //getProfile()
-
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         return root
     }
@@ -72,6 +85,7 @@ class HomeFragment : Fragment(), onItemClickListener2 {
         weatherTask().execute()
 
         getProfile()
+        //imagesArray.add("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg")
 
         all_cat.setOnClickListener {
             var intent= Intent(activity, Allcategories::class.java)
@@ -103,9 +117,70 @@ class HomeFragment : Fragment(), onItemClickListener2 {
         }
 
         promodata= mutableListOf()
+        adverdata= mutableListOf()
+     //   carouselView= view?.findViewById(R.id.carouselView)
         db= FirebaseFirestore.getInstance()
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        val linearLayoutManager2 = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         recycler.layoutManager = linearLayoutManager
+        recycler2.layoutManager = linearLayoutManager2
+
+//        val documenty = db.collection("Advertise")
+//        documenty.get()
+//            .addOnSuccessListener {
+//                for (document in it) {
+//                    //var docID = document.id.toString()
+//                    var img_url = document.get("Promotion_IMG").toString()
+//                    imagesArray.add(img_url)
+//                    Log.d("Hell",img_url)
+//
+//                }
+//                Log.d("Hell","size = "+imagesArray.size.toString())
+////                showCarousel()
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.d(
+//                    "FirebaseError",
+//                    "Fail:",
+//                    exception
+//                )//this is kind a debugger to check whether working correctly or not
+//                Toast.makeText(context,"Fail to read database", Toast.LENGTH_SHORT).show()
+//
+//            }
+            //.addOnCompleteListener { showCarousel() }
+
+        //Log.d("Hell","position1")
+//        Handler().postDelayed(Runnable {
+//            //anything you want to start after 3s
+//        }, 3000)
+        //showCarousel()
+
+        val docRef2 = db.collection("Advertise")
+        docRef2.get()//ordering ...
+            .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
+                if (snapShot != null) {
+                    adverdata!!.clear()
+                    adverdata = snapShot.toObjects(Advertisements::class.java)
+                    adapter2 = context?.let { AdverAdapter(adverdata, it) }!!
+                    recycler2.adapter=adapter2
+                }
+
+            }//in case it fails, it will toast failed
+            .addOnFailureListener { exception ->
+                Log.d(
+                    "FirebaseError",
+                    "Fail:",
+                    exception
+                )//this is kind a debugger to check whether working correctly or not
+                //Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
+
+            }
+
+        val adapter2 = activity?.let { AdverAdapter(adverdata, it) }
+
+        recycler2.adapter = adapter2
+
+        //imageListener = ImageListener{position, imageView -> Picasso.get().load(imagesArray[position]).into(imageView) }
 
         val docRef = db.collection("Promotion")
         docRef.get()//ordering ...
@@ -128,24 +203,17 @@ class HomeFragment : Fragment(), onItemClickListener2 {
 
             }
 
-        val adapter = context?.let { HomePromoAdapter(promodata, it, this) }
+        val adapter = activity?.let { HomePromoAdapter(promodata, it, this) }
 
         recycler.adapter = adapter
-
-//        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//        recycler.layoutManager = linearLayoutManager
-//        var random= listOf<String>("Kope Hya Tai Kee","Beef 35","Shindo Ramen","O Kra Joo NimCity","Yoi-Tenki Shabu")
-//        var img= listOf<String>("pic7","pic2","pic1","pic10","pic6")
-//
-//        val adapter = context?.let {
-//            FeedAdapter(
-//                    random,img,
-//                    it
-//            )
+//        carouselView.pageCount = imagesArray.size
+//        carouselView.setImageListener { position, imageView ->
+//            Log.d("Hell","position")
+//            Picasso.get().load(imagesArray[position]).into(imageView)
 //        }
-//        recycler.adapter = adapter
 
     }
+
     inner class weatherTask(): AsyncTask<String, Void, String>() {
 
         override fun onPreExecute() {
@@ -177,7 +245,6 @@ class HomeFragment : Fragment(), onItemClickListener2 {
 
                 val dateTimeText = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH).format(Date(dateTime*1000))
                 val tempNow = current.getString("temp")+"°C"
-
 
                 val next1hr = jsonObj.getJSONArray("hourly").getJSONObject(0)
                 val weather1hr = next1hr.getJSONArray("weather").getJSONObject(0)
@@ -244,6 +311,8 @@ class HomeFragment : Fragment(), onItemClickListener2 {
         }
 
     }
+
+
     private fun getProfile(){
 
         auth= FirebaseAuth.getInstance()
@@ -271,8 +340,19 @@ class HomeFragment : Fragment(), onItemClickListener2 {
     }
 
     override fun onItemClick(position: Int, data: MutableList<Promotions>) {
+        //Log.d("Clickyy","Clicked1")
         var intent= Intent(activity,PromoDetailActivity::class.java)
         intent.putExtra("Obj",data[position])
         startActivity(intent)
     }
+
+//    fun showCarousel() {
+//        carouselView.pageCount = imagesArray.size
+//        carouselView.setImageListener(imageListener)
+//    }
+//
+//    var imageListener = ImageListener{ position, imageView ->
+//        Log.d("Hell","url = "+imagesArray[position])
+//        Picasso.get().load(imagesArray[position]).into(imageView)
+//    }
 }

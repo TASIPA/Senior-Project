@@ -95,6 +95,7 @@
             android:textColor="@color/primary_dark"
             android:textSize="14dp" />
 
+
         <ImageView
             android:id="@+id/reddy"
             android:layout_width="60dp"
@@ -104,7 +105,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/flag"
-            android:src="@drawable/promo1" />
+            android:src="@drawable/promonew" />
 
         <TextView
             android:id="@+id/redTextShow"
@@ -114,7 +115,6 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="37dp"
             android:layout_marginEnd="22dp"
-            android:background="#F44336"
             android:text="50 %"
             android:textColor="@color/lightWhite"
             android:textSize="18dp" />

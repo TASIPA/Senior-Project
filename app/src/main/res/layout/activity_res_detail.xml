@@ -81,7 +81,7 @@
                 android:background="@color/lightWhite"
                 android:text="@string/amenity"/>
             <TextView
-                android:id="@+id/res_loc"
+                android:id="@+id/res_phone"
                 android:layout_toRightOf="@+id/res_type"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"

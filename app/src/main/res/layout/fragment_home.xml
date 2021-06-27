@@ -617,10 +617,38 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
+                android:layout_height="170dp"
                 android:layout_marginHorizontal="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_height="170dp" />
+                android:layout_marginBottom="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="7dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/brandon_grotesque_black"
+                    android:text="Advertisement"
+                    android:textAllCaps="true"
+                    android:textSize="20dp" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler2"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="10dp" />
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

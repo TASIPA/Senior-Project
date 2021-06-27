@@ -1,6 +1,7 @@
 package com.seniorproject.project.Adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,13 +60,14 @@ class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private v
             red=itemView.findViewById(R.id.red)
             redText=itemView.findViewById(R.id.redText)
 
-            //itemView.setOnClickListener(this)
-            //itemView.setOnLongClickListener(this)
+            itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
 
         }
 
         override fun onClick(v: View) {
             listener2.onItemClick(adapterPosition,rssObject)
+            //Log.d("Clickyy","Clicked2")
         }
 
         override fun onLongClick(v: View): Boolean {
