@@ -634,7 +634,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:fontFamily="@font/brandon_grotesque_black"
-                    android:text="Advertisement"
+                    android:text="What you may like..."
                     android:textAllCaps="true"
                     android:textSize="20dp" />
 
