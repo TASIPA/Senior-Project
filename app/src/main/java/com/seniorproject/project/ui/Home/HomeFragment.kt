@@ -32,6 +32,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -179,8 +181,12 @@ class HomeFragment : Fragment(), onItemClickListener2{
 
         //imageListener = ImageListener{position, imageView -> Picasso.get().load(imagesArray[position]).into(imageView) }
 
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter)
+
         val docRef = db.collection("Promotion")
-        docRef.orderBy("Discount",Query.Direction.DESCENDING ).limit(5).get() //ordering ...
+        docRef.whereGreaterThan("ValidTo",formatted).limit(5).get() //ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     promodata!!.clear()

@@ -14,6 +14,8 @@ import com.seniorproject.project.models.Promotions
 import kotlinx.android.synthetic.main.activity_attraction.*
 import kotlinx.android.synthetic.main.activity_promtion.*
 import kotlinx.android.synthetic.main.activity_promtion.back_btn
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
 
@@ -35,12 +37,17 @@ class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         promoList.layoutManager = linearLayoutManager
 
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formatted = current.format(formatter)
+
         val docRef = db.collection("Promotion")
-        docRef.get()//ordering ...
+        docRef.whereGreaterThan("ValidTo",formatted).get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     promodata!!.clear()
                     promodata = snapShot.toObjects(Promotions::class.java)
+                    Log.d("PAINTY",formatted)
                     adapter = PromoAdapter(promodata, baseContext,this)
                     promoList.adapter=adapter
                 }
