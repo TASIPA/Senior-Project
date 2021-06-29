@@ -40,7 +40,7 @@ class AttractionAdapter(private val currentLatLng: LatLng, private val rssObject
         var newRating = String.format("%.1f",filteredData[position].Rating).toFloat()
         holder.txtTitle5.text = newRating.toString()
         //holder.txtTitle5.text = filteredData[position].Rating.toString()
-        Picasso.get().load(rssObject[position].imageURL).into(holder.img)
+        Picasso.get().load(filteredData[position].imageURL).into(holder.img)
 
 //        var evelat = filteredData[position].Latitude.toString()
 //        var evelong = filteredData[position].Longitude.toString()

@@ -48,7 +48,7 @@ class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: Mut
         //holder.txtTitle4.text = filteredData[position].distance.toString()
         var evelat = filteredData[position].Latitude.toString()
         var evelong = filteredData[position].Longitude.toString()
-        Picasso.get().load(rssObject[position].imageURL).into(holder.img)
+        Picasso.get().load(filteredData[position].imageURL).into(holder.img)
 
         val loc1 = Location("")
         loc1.setLatitude(currentLatLng.latitude)

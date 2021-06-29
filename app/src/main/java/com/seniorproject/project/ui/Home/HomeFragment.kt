@@ -27,11 +27,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Advertisements
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
-import com.synnapps.carouselview.CarouselView
-import com.synnapps.carouselview.ImageListener
-import kotlinx.android.synthetic.main.activity_promtion.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -346,13 +342,4 @@ class HomeFragment : Fragment(), onItemClickListener2{
         startActivity(intent)
     }
 
-//    fun showCarousel() {
-//        carouselView.pageCount = imagesArray.size
-//        carouselView.setImageListener(imageListener)
-//    }
-//
-//    var imageListener = ImageListener{ position, imageView ->
-//        Log.d("Hell","url = "+imagesArray[position])
-//        Picasso.get().load(imagesArray[position]).into(imageView)
-//    }
 }
