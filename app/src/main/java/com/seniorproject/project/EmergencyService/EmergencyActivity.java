@@ -1,10 +1,12 @@
 package com.seniorproject.project.EmergencyService;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,12 +61,36 @@ public class EmergencyActivity extends FragmentActivity implements
     private int value=0;
     private int value1=0;
     Button btn,btn1;
+    ImageView FireCall;
+    ImageView PoliceCall;
     private int ProximityRadius = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
+
+        FireCall = findViewById(R.id.callFire);
+        FireCall.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:199"));
+                startActivity(intent);
+            }
+        });
+
+        PoliceCall = findViewById(R.id.callpolice);
+        PoliceCall.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Intent.ACTION_DIAL);
+                intent2.setData(Uri.parse("tel:191"));
+                startActivity(intent2);
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
