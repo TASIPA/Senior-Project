@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.AdverAdapter
 import com.seniorproject.project.Adapters.FeedAdapter
@@ -179,7 +180,7 @@ class HomeFragment : Fragment(), onItemClickListener2{
         //imageListener = ImageListener{position, imageView -> Picasso.get().load(imagesArray[position]).into(imageView) }
 
         val docRef = db.collection("Promotion")
-        docRef.get()//ordering ...
+        docRef.orderBy("Discount",Query.Direction.DESCENDING ).limit(10).get() //ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
                     promodata!!.clear()
