@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.activity_amenity.back_btn
 import kotlinx.android.synthetic.main.activity_amenity.search_button
 import kotlinx.android.synthetic.main.activity_amenity.search_view
 import kotlinx.android.synthetic.main.activity_amenity.sort_button
-
+import kotlinx.android.synthetic.main.activity_event.*
 
 
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
@@ -156,11 +156,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
+                    noItemShow3.visibility = View.GONE
+                    amenList.visibility = View.VISIBLE
                     amedata.clear()
                     amedata = snapShot.toObjects(Restaurants::class.java)
                     calculate_Distance()
                     adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                     amenList.adapter=adapter
+                    if (snapShot.size()==0){
+                        amenList.visibility = View.GONE
+                        noItemShow3.visibility = View.VISIBLE
+                    }
                 }
 
             }//in case it fails, it will toast failed
@@ -217,11 +223,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -240,11 +252,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -263,11 +281,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -287,11 +311,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -310,11 +340,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -334,11 +370,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -358,11 +400,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -381,11 +429,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -405,11 +459,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -429,11 +489,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -452,11 +518,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -475,11 +547,17 @@ class AmenityActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow3.visibility = View.GONE
+                            amenList.visibility = View.VISIBLE
                             amedata.clear()
                             amedata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = AmenityAdapter(currentLatLng, amedata, baseContext,this)
                             amenList.adapter=adapter
+                            if (it.size()==0){
+                                amenList.visibility = View.GONE
+                                noItemShow3.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed

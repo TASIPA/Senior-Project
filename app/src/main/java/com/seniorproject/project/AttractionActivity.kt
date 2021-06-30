@@ -29,6 +29,7 @@ import com.seniorproject.project.Adapters.RestaurantAdapter
 
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants
+import kotlinx.android.synthetic.main.activity_amenity.*
 
 
 import kotlinx.android.synthetic.main.activity_attraction.*
@@ -37,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_attraction.back_btn
 import kotlinx.android.synthetic.main.activity_attraction.search_button
 import kotlinx.android.synthetic.main.activity_attraction.search_view
 import kotlinx.android.synthetic.main.activity_attraction.sort_button
+import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
 
@@ -189,11 +191,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
         docRef.get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
+                    noItemShow4.visibility = View.GONE
+                    attList.visibility = View.VISIBLE
                     attdata.clear()
                     attdata = snapShot.toObjects(Restaurants::class.java)
                     calculate_Distance()
                     adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                     attList.adapter=adapter
+                    if (snapShot.size()==0){
+                        attList.visibility = View.GONE
+                        noItemShow4.visibility = View.VISIBLE
+                    }
                 }
 
             }//in case it fails, it will toast failed
@@ -226,11 +234,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -250,11 +264,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -273,11 +293,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -296,11 +322,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -320,11 +352,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -344,11 +382,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -368,11 +412,17 @@ class AttractionActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow4.visibility = View.GONE
+                            attList.visibility = View.VISIBLE
                             attdata.clear()
                             attdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
-                            adapter = AttractionAdapter(currentLatLng, attdata, baseContext,this)
+                            adapter = AttractionAdapter(currentLatLng,attdata, baseContext,this)
                             attList.adapter=adapter
+                            if (it.size()==0){
+                                attList.visibility = View.GONE
+                                noItemShow4.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed

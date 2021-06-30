@@ -410,4 +410,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/home_background" />
+
+    <RelativeLayout
+        android:id="@+id/noItemShow3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="100dp"
+            android:layout_marginTop="100dp"
+            app:srcCompat="@drawable/ic_baseline_coronavirus_24" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:text="No items to show"
+            android:textColor="@color/primary_dark"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
 </LinearLayout>

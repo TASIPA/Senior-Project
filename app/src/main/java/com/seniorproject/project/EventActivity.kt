@@ -15,6 +15,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 
@@ -27,8 +28,10 @@ import com.seniorproject.project.models.Events
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_event.all_txt
 import kotlinx.android.synthetic.main.activity_event.back_btn
+import kotlinx.android.synthetic.main.activity_event.res_txt
 import kotlinx.android.synthetic.main.activity_event.search_button
 import kotlinx.android.synthetic.main.activity_event.search_view
+import kotlinx.android.synthetic.main.activity_restaurant.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -161,11 +164,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
             .get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
+                    noItemShow2.visibility = GONE
+                    eveList.visibility = View.VISIBLE
                     evedata.clear()
                     evedata = snapShot.toObjects(Events::class.java)
 
                     adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                     eveList.adapter=adapter
+                    if (snapShot.size()==0){
+                        eveList.visibility = View.GONE
+                        noItemShow2.visibility = View.VISIBLE
+                    }
                 }
 
             }//in case it fails, it will toast failed
@@ -201,11 +210,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
                     .get()//ordering ...
                     .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                         if (snapShot != null) {
+                            noItemShow2.visibility = GONE
+                            eveList.visibility = View.VISIBLE
                             evedata.clear()
                             evedata = snapShot.toObjects(Events::class.java)
 
                             adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                             eveList.adapter=adapter
+                            if (snapShot.size()==0){
+                                eveList.visibility = View.GONE
+                                noItemShow2.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -229,11 +244,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
                     .get()//ordering ...
                     .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                         if (snapShot != null) {
+                            noItemShow2.visibility = GONE
+                            eveList.visibility = View.VISIBLE
                             evedata.clear()
                             evedata = snapShot.toObjects(Events::class.java)
 
                             adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                             eveList.adapter=adapter
+                            if (snapShot.size()==0){
+                                eveList.visibility = View.GONE
+                                noItemShow2.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -257,11 +278,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
                     .get()//ordering ...
                     .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                         if (snapShot != null) {
+                            noItemShow2.visibility = GONE
+                            eveList.visibility = View.VISIBLE
                             evedata.clear()
                             evedata = snapShot.toObjects(Events::class.java)
 
                             adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                             eveList.adapter=adapter
+                            if (snapShot.size()==0){
+                                eveList.visibility = View.GONE
+                                noItemShow2.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -285,11 +312,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
                     .get()//ordering ...
                     .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                         if (snapShot != null) {
+                            noItemShow2.visibility = GONE
+                            eveList.visibility = View.VISIBLE
                             evedata.clear()
                             evedata = snapShot.toObjects(Events::class.java)
 
                             adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                             eveList.adapter=adapter
+                            if (snapShot.size()==0){
+                                eveList.visibility = View.GONE
+                                noItemShow2.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -313,10 +346,17 @@ class EventActivity : AppCompatActivity(), onItemClickListener1 {
                     .get()//ordering ...
                     .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                         if (snapShot != null) {
+                            noItemShow2.visibility = GONE
+                            eveList.visibility = View.VISIBLE
                             evedata.clear()
                             evedata = snapShot.toObjects(Events::class.java)
+
                             adapter = EventAdapter(currentLatLng,evedata, baseContext,this)
                             eveList.adapter=adapter
+                            if (snapShot.size()==0){
+                                eveList.visibility = View.GONE
+                                noItemShow2.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
