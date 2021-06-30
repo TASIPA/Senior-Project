@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,11 +46,17 @@ class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
         docRef.whereGreaterThan("ValidTo",formatted).get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
+                    noItemShow5.visibility = View.GONE
+                    promoList.visibility = View.VISIBLE
                     promodata!!.clear()
                     promodata = snapShot.toObjects(Promotions::class.java)
                     Log.d("PAINTY",formatted)
                     adapter = PromoAdapter(promodata, baseContext,this)
                     promoList.adapter=adapter
+                    if (snapShot.size()==0){
+                        promoList.visibility = View.GONE
+                        noItemShow5.visibility = View.VISIBLE
+                    }
                 }
 
             }//in case it fails, it will toast failed

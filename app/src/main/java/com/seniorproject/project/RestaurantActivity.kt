@@ -17,6 +17,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,13 @@ import com.google.firebase.firestore.Query
 import com.seniorproject.project.Adapters.RestaurantAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.models.Restaurants
+import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_restaurant.*
+import kotlinx.android.synthetic.main.activity_restaurant.all_txt
+import kotlinx.android.synthetic.main.activity_restaurant.back_btn
+import kotlinx.android.synthetic.main.activity_restaurant.res_txt
+import kotlinx.android.synthetic.main.activity_restaurant.search_button
+import kotlinx.android.synthetic.main.activity_restaurant.search_view
 
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var resdata: MutableList<Restaurants>
@@ -174,11 +181,17 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             .get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
                 if (snapShot != null) {
+                    noItemShow.visibility = GONE
+                    resList.visibility = View.VISIBLE
                     resdata.clear()
                     resdata = snapShot.toObjects(Restaurants::class.java)
                     calculate_Distance()
                     adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                     resList.adapter=adapter
+                    if (snapShot.size()==0){
+                        resList.visibility = View.GONE
+                        noItemShow.visibility = View.VISIBLE
+                    }
                 }
 
             }//in case it fails, it will toast failed
@@ -206,11 +219,17 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow.visibility = GONE
+                            resList.visibility = View.VISIBLE
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
+                            if (it.size()==0){
+                                resList.visibility = View.GONE
+                                noItemShow.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -229,11 +248,17 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow.visibility = GONE
+                            resList.visibility = View.VISIBLE
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
+                            if (it.size()==0){
+                                resList.visibility = View.GONE
+                                noItemShow.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
@@ -253,11 +278,17 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     .get()
                     .addOnSuccessListener {
                         if (it != null) {
+                            noItemShow.visibility = GONE
+                            resList.visibility = View.VISIBLE
                             resdata.clear()
                             resdata = it.toObjects(Restaurants::class.java)
                             calculate_Distance()
                             adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
                             resList.adapter=adapter
+                            if (it.size()==0){
+                                resList.visibility = View.GONE
+                                noItemShow.visibility = View.VISIBLE
+                            }
                         }
 
                     }//in case it fails, it will toast failed
