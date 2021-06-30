@@ -75,8 +75,9 @@ public class EmergencyActivity extends FragmentActivity implements
 
             @Override
             public void onClick(View v) {
+                //local fire response unit
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:199"));
+                intent.setData(Uri.parse("tel:024313738"));
                 startActivity(intent);
             }
         });
@@ -86,8 +87,9 @@ public class EmergencyActivity extends FragmentActivity implements
 
             @Override
             public void onClick(View v) {
+                //local police dial number
                 Intent intent2 = new Intent(Intent.ACTION_DIAL);
-                intent2.setData(Uri.parse("tel:191"));
+                intent2.setData(Uri.parse("tel:024411010"));
                 startActivity(intent2);
             }
         });
