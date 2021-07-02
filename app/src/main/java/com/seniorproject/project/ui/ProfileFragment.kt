@@ -52,6 +52,10 @@ class ProfileFragment : Fragment() {
             var intent= Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
+        abt_us.setOnClickListener {
+            var intent= Intent(activity, AboutusActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     private fun getProfile(){
