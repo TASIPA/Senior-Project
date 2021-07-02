@@ -12,7 +12,7 @@ class AboutusActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aboutus)
-
+        supportActionBar?.hide()
         imagesArray.add(R.drawable.paint)
         imagesArray.add(R.drawable.jerry)
         imagesArray.add(R.drawable.tatsu)
