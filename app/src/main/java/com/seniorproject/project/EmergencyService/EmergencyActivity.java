@@ -56,11 +56,11 @@ public class EmergencyActivity extends FragmentActivity implements
     private Location lastlocation;
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
-    private double latitude,longitude,s_latitude,s_longitude;
+    private double latitude, longitude, s_latitude, s_longitude;
     private LatLng currentLatLng;
-    private int value=0;
-    private int value1=0;
-    Button btn,btn1;
+    private int value = 0;
+    private int value1 = 0;
+    Button btn, btn1;
     ImageView FireCall;
     ImageView PoliceCall;
     private int ProximityRadius = 10000;
@@ -71,7 +71,7 @@ public class EmergencyActivity extends FragmentActivity implements
         setContentView(R.layout.activity_emergency);
 
         FireCall = findViewById(R.id.callFire);
-        FireCall.setOnClickListener(new View.OnClickListener(){
+        FireCall.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -83,7 +83,7 @@ public class EmergencyActivity extends FragmentActivity implements
         });
 
         PoliceCall = findViewById(R.id.callpolice);
-        PoliceCall.setOnClickListener(new View.OnClickListener(){
+        PoliceCall.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -132,16 +132,16 @@ public class EmergencyActivity extends FragmentActivity implements
                             for (int i = 0; i < addressList.size(); i++) {
                                 Address userAddress = addressList.get(i);
                                 LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
-                                s_latitude=userAddress.getLatitude();
-                                s_longitude=userAddress.getLongitude();
-                                value=7;
-                                value1=7;
+                                s_latitude = userAddress.getLatitude();
+                                s_longitude = userAddress.getLongitude();
+                                value = 7;
+                                value1 = 7;
                                 userMarkerOptions.position(latLng);
                                 userMarkerOptions.title(address);
                                 userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
                                 mMap.addMarker(userMarkerOptions);
 
-                               mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0f));
 
                             }
                         } else {
@@ -161,16 +161,15 @@ public class EmergencyActivity extends FragmentActivity implements
 
                 btn1.setBackgroundResource(R.color.white);
                 btn.setBackgroundResource(R.color.secondary);
-                if(value==7){
-                    url = getUrl(s_latitude,s_longitude,hospital);
-                    value=0;
-                }
-                else{
-                    url = getUrl(latitude,longitude,hospital);
+                if (value == 7) {
+                    url = getUrl(s_latitude, s_longitude, hospital);
+                    value = 0;
+                } else {
+                    url = getUrl(latitude, longitude, hospital);
                 }
                 transferData[0] = mMap;
                 transferData[1] = url;
-                transferData[2]=hospital;
+                transferData[2] = hospital;
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching for nearby Hospitals", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Hospitals", Toast.LENGTH_SHORT).show();
@@ -181,16 +180,15 @@ public class EmergencyActivity extends FragmentActivity implements
                 btn.setBackgroundResource(R.color.white);
                 btn1.setBackgroundResource(R.color.secondary);
                 mMap.clear();
-                if(value1==7){
-                    url = getUrl(s_latitude,s_longitude,police);
-                    value1=0;
-                }
-                else{
-                    url = getUrl(latitude,longitude,police);
+                if (value1 == 7) {
+                    url = getUrl(s_latitude, s_longitude, police);
+                    value1 = 0;
+                } else {
+                    url = getUrl(latitude, longitude, police);
                 }
                 transferData[0] = mMap;
                 transferData[1] = url;
-                transferData[2]=police;
+                transferData[2] = police;
                 getNearbyPlaces.execute(transferData);
                 Toast.makeText(this, "Searching for nearby Police station", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Police station", Toast.LENGTH_SHORT).show();
@@ -201,15 +199,15 @@ public class EmergencyActivity extends FragmentActivity implements
         }
     }
 
-    private String getUrl(double latitude,double longitude,String nearbyPlace){
-        StringBuilder googleURL= new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        googleURL.append("location="+latitude+","+longitude);
-        googleURL.append("&radius="+ProximityRadius);
-        googleURL.append("&type="+nearbyPlace);
+    private String getUrl(double latitude, double longitude, String nearbyPlace) {
+        StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googleURL.append("location=" + latitude + "," + longitude);
+        googleURL.append("&radius=" + ProximityRadius);
+        googleURL.append("&type=" + nearbyPlace);
         googleURL.append("&sensor=true");
-        googleURL.append("&key=XX"+ getResources().getString(R.string.google_maps_key) );
+        googleURL.append("&key=XX" + getResources().getString(R.string.google_maps_key));
 
-        Log.d("GoogleMapsActivity","url = "+googleURL.toString());
+        Log.d("GoogleMapsActivity", "url = " + googleURL.toString());
 
         return googleURL.toString();
     }
@@ -284,10 +282,10 @@ public class EmergencyActivity extends FragmentActivity implements
         markerOptions.title("Your Location");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         currentUserLocationMarker = mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,14.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
 
         if (googleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,  this);
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
         }
 
     }

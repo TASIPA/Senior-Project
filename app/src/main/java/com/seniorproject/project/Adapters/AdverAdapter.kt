@@ -14,44 +14,42 @@ import com.seniorproject.project.models.Advertisements
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 
-class AdverAdapter (private val rssObject: MutableList<Advertisements>, private val mContext: Context): RecyclerView.Adapter<AdverAdapter.AdverViewHolder>()
-{
+class AdverAdapter(
+    private val rssObject: MutableList<Advertisements>,
+    private val mContext: Context
+) : RecyclerView.Adapter<AdverAdapter.AdverViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdverViewHolder {
 
-        val itemView = inflater.inflate(R.layout.card_adver,parent,false)
+        val itemView = inflater.inflate(R.layout.card_adver, parent, false)
         return AdverViewHolder(itemView)
     }
 
     private val inflater: LayoutInflater
 
-    init{
+    init {
         inflater = LayoutInflater.from(mContext)
     }
 
     override fun onBindViewHolder(holder: AdverViewHolder, position: Int) {
 
         Picasso.get().load(rssObject[position].Promotion_IMG).into(holder.prom_img2)
-        //holder.txtTitle.text = rssObject[position].toString()
-        Log.d("Painty","Hello!!")
-        //holder.img.setImageResource(result)
+
+        Log.d("Painty", "Hello!!")
 
     }
+
     override fun getItemCount(): Int {
         return rssObject.size
     }
 
-    inner class AdverViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
+    inner class AdverViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var prom_img2: ImageView
-//        var desFlag: ImageView
-//        var depFlag: ImageView
-
 
         init {
 
-            prom_img2=itemView.findViewById(R.id.prom_img2)
+            prom_img2 = itemView.findViewById(R.id.prom_img2)
 
         }
 

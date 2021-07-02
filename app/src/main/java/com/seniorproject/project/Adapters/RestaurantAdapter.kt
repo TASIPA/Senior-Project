@@ -18,11 +18,16 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
 
-class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject: MutableList<Restaurants>, private val mContext: Context, private val listener: onItemClickListener): RecyclerView.Adapter<RestaurantAdapter.FeedViewHolders>() {
-    private var filteredData=rssObject
+class RestaurantAdapter(
+    private val currentLatLng: LatLng,
+    private val rssObject: MutableList<Restaurants>,
+    private val mContext: Context,
+    private val listener: onItemClickListener
+) : RecyclerView.Adapter<RestaurantAdapter.FeedViewHolders>() {
+    private var filteredData = rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
-        val itemView = inflater.inflate(R.layout.card_restaurant,parent,false)
+        val itemView = inflater.inflate(R.layout.card_restaurant, parent, false)
         return FeedViewHolders(itemView)
     }
 
@@ -31,17 +36,18 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
-        var newRating = String.format("%.1f",filteredData[position].Rating).toFloat()
+        var newRating = String.format("%.1f", filteredData[position].Rating).toFloat()
         holder.txtTitle3.text = newRating.toString()
-        holder.txtTitle2.text = filteredData[position].CalculatedDis.toString()+" km"
+        holder.txtTitle2.text = filteredData[position].CalculatedDis.toString() + " km"
         Picasso.get().load(filteredData[position].imageURL).into(holder.img)
     }
 
     override fun getItemCount(): Int {
         return filteredData.size
     }
-    inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
-    {
+
+    inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         var txtTitle: TextView = itemView.findViewById(R.id.textView)
         var txtTitle1: TextView = itemView.findViewById(R.id.textView1)
@@ -49,52 +55,45 @@ class RestaurantAdapter(private val currentLatLng: LatLng, private val rssObject
         var txtTitle3: TextView = itemView.findViewById(R.id.vv12)
 
         //  var rate: RatingBar
-        var img:ImageView = itemView.findViewById(R.id.imageShow)
-       // var imgbtn:ImageView
+        var img: ImageView = itemView.findViewById(R.id.imageShow)
 
-
-        //private var itemClickListener: ItemClickListener? = null
 
         init {
 
-            //  rate= itemView.findViewById(R.id.ratingBar2)
-          //  imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
 
         }
 
         override fun onClick(v: View) {
-            listener.onItemClick(adapterPosition,filteredData)
+            listener.onItemClick(adapterPosition, filteredData)
         }
-
 
 
     }
 
-    fun getFilter():Filter{
-        return object: Filter() {
+    fun getFilter(): Filter {
+        return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                var st=constraint.toString()
-                if (st.isEmpty()){
-                    filteredData=rssObject
-                }
-                else{
-                    var lst= mutableListOf<Restaurants>()
-                    for (row in rssObject){
+                var st = constraint.toString()
+                if (st.isEmpty()) {
+                    filteredData = rssObject
+                } else {
+                    var lst = mutableListOf<Restaurants>()
+                    for (row in rssObject) {
                         if (row.Name.toLowerCase().contains(st.toLowerCase()))
                             lst.add(row)
                     }
-                    filteredData=lst
+                    filteredData = lst
                 }
 
-                var filterResults=FilterResults()
-                filterResults.values=filteredData
+                var filterResults = FilterResults()
+                filterResults.values = filteredData
                 return filterResults
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredData=results!!.values as MutableList<Restaurants>
+                filteredData = results!!.values as MutableList<Restaurants>
                 notifyDataSetChanged()
             }
         }

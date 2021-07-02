@@ -29,11 +29,16 @@ import com.seniorproject.project.models.Events
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
 
-class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: MutableList<Events>, private val mContext: Context,private val listener: onItemClickListener1): RecyclerView.Adapter<EventAdapter.FeedViewHolders>()
-{   private var filteredData=rssObject
+class EventAdapter(
+    private val currentLatLng: LatLng,
+    private val rssObject: MutableList<Events>,
+    private val mContext: Context,
+    private val listener: onItemClickListener1
+) : RecyclerView.Adapter<EventAdapter.FeedViewHolders>() {
+    private var filteredData = rssObject
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
-        val itemView = inflater.inflate(R.layout.card_event,parent,false)
+        val itemView = inflater.inflate(R.layout.card_event, parent, false)
         return FeedViewHolders(itemView)
     }
 
@@ -43,9 +48,8 @@ class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: Mut
 
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Location
-        //holder.txtTitle2.text = rssObject[position].category
-        holder.txtTitle3.text =filteredData[position].Date
-        //holder.txtTitle4.text = filteredData[position].distance.toString()
+
+        holder.txtTitle3.text = filteredData[position].Date
         var evelat = filteredData[position].Latitude.toString()
         var evelong = filteredData[position].Longitude.toString()
         Picasso.get().load(filteredData[position].imageURL).into(holder.img)
@@ -63,74 +67,58 @@ class EventAdapter(private val currentLatLng: LatLng ,private val rssObject: Mut
 
         holder.txtTitle4.text = distanceInKm.toString() + "km"
 
-//        var result = when (filteredData[position].imageURL) {
-//            "epic1" -> R.drawable.epic1
-//            "epic2" -> R.drawable.epic2
-//            "epic3" -> R.drawable.epic3
-//            "epic4" -> R.drawable.epic4
-//            else -> R.drawable.epic5
-//        }
-//        holder.img.setImageResource(result)
-       // holder.imgbtn.setImageResource(R.drawable.ic_heart)
-
 
     }
 
     override fun getItemCount(): Int {
         return filteredData.size
     }
-    inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
-    {
 
-        var txtTitle: TextView  = itemView.findViewById(R.id.textView)
-        var txtTitle1: TextView  = itemView.findViewById(R.id.textView1)
-       // var txtTitle2: TextView
+    inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+
+        var txtTitle: TextView = itemView.findViewById(R.id.textView)
+        var txtTitle1: TextView = itemView.findViewById(R.id.textView1)
+
+        // var txtTitle2: TextView
         var txtTitle3: TextView = itemView.findViewById(R.id.eventDate)
         var txtTitle4: TextView = itemView.findViewById(R.id.eventDistance)
-        var img:ImageView = itemView.findViewById(R.id.imageShow)
-       // var imgbtn:ImageView
+        var img: ImageView = itemView.findViewById(R.id.imageShow)
 
-
-        //private var itemClickListener: ItemClickListener? = null
 
         init {
-
-           // imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
-            //itemView.setOnLongClickListener(this)
-
         }
 
         override fun onClick(v: View) {
-           listener.onItemClick(adapterPosition,filteredData)
+            listener.onItemClick(adapterPosition, filteredData)
         }
 
 
-
     }
+
     fun getFilter(): Filter {
-        return object: Filter() {
+        return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                var st=constraint.toString()
-                if (st.isEmpty()){
-                    filteredData=rssObject
-                }
-                else{
-                    var lst= mutableListOf<Events>()
-                    for (row in rssObject){
+                var st = constraint.toString()
+                if (st.isEmpty()) {
+                    filteredData = rssObject
+                } else {
+                    var lst = mutableListOf<Events>()
+                    for (row in rssObject) {
                         if (row.Name.toLowerCase().contains(st.toLowerCase()))
                             lst.add(row)
                     }
-                    filteredData=lst
+                    filteredData = lst
                 }
 
-                var filterResults= FilterResults()
-                filterResults.values=filteredData
+                var filterResults = FilterResults()
+                filterResults.values = filteredData
                 return filterResults
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredData=results!!.values as MutableList<Events>
+                filteredData = results!!.values as MutableList<Events>
                 notifyDataSetChanged()
             }
         }

@@ -23,7 +23,7 @@ public class GetNearbyPlaces extends AsyncTask<Object, String, String> {
     protected String doInBackground(Object... objects) {
         mMap = (GoogleMap) objects[0];
         url = (String) objects[1];
-        btn=(String) objects[2];
+        btn = (String) objects[2];
         com.seniorproject.project.EmergencyService.DownloadUrl downloadUrl = new com.seniorproject.project.EmergencyService.DownloadUrl();
 
         try {
@@ -56,16 +56,15 @@ public class GetNearbyPlaces extends AsyncTask<Object, String, String> {
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
             markerOptions.title(nameOfPlace + " : " + vicinity);
-            if (btn=="hospital"){
+            if (btn == "hospital") {
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-            }
-            else{
+            } else {
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
             }
 
             mMap.addMarker(markerOptions);
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-           // mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+            // mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
 
         }
     }

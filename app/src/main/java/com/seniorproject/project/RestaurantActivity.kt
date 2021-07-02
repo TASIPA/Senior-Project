@@ -131,10 +131,6 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             return
         }
         locationManager.requestLocationUpdates("gps",1000,0f,locationListener)
-//        gpsBtn.setOnClickListener{
-//            if (currentLatLng!=null){
-//                latText.setText(currentLatLng.latitude.toString())
-//                longText.setText(currentLatLng.longitude.toString())
 //            }
 //        }
     }

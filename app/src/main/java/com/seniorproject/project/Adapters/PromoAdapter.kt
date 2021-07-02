@@ -14,41 +14,42 @@ import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 
-class PromoAdapter(private val rssObject: MutableList<Promotions>, private val mContext: Context, private val listener2: onItemClickListener2): RecyclerView.Adapter<PromoAdapter.PromotionViewHolder>()
-{
+class PromoAdapter(
+    private val rssObject: MutableList<Promotions>,
+    private val mContext: Context,
+    private val listener2: onItemClickListener2
+) : RecyclerView.Adapter<PromoAdapter.PromotionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PromotionViewHolder {
 
-        val itemView = inflater.inflate(R.layout.card_promotion,parent,false)
+        val itemView = inflater.inflate(R.layout.card_promotion, parent, false)
         return PromotionViewHolder(itemView)
     }
 
 
     private val inflater: LayoutInflater
 
-    init{
+    init {
         inflater = LayoutInflater.from(mContext)
     }
 
     override fun onBindViewHolder(holder: PromotionViewHolder, position: Int) {
-        holder.Category.text=rssObject[position].Category
-        holder.Discount.text=rssObject[position].Discount
-        holder.ProdName.text=rssObject[position].ProductName
-        holder.ShopName.text=rssObject[position].ShopName
-        holder.Valid.text=rssObject[position].ValidTo
+        holder.Category.text = rssObject[position].Category
+        holder.Discount.text = rssObject[position].Discount
+        holder.ProdName.text = rssObject[position].ProductName
+        holder.ShopName.text = rssObject[position].ShopName
+        holder.Valid.text = rssObject[position].ValidTo
         Picasso.get().load(rssObject[position].imageURL).into(holder.image)
-        //holder.txtTitle.text = rssObject[position].toString()
-
-        //holder.img.setImageResource(result)
 
     }
+
     override fun getItemCount(): Int {
         return rssObject.size
     }
 
-    inner class PromotionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener,
-        View.OnLongClickListener
-    {
+    inner class PromotionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener,
+        View.OnLongClickListener {
 
         var Category: TextView
         var Discount: TextView
@@ -65,11 +66,11 @@ class PromoAdapter(private val rssObject: MutableList<Promotions>, private val m
 
             Category = itemView.findViewById(R.id.categoryShow)
             Discount = itemView.findViewById(R.id.redTextShow)
-            ProdName= itemView.findViewById(R.id.productNameShow)
+            ProdName = itemView.findViewById(R.id.productNameShow)
             ShopName = itemView.findViewById(R.id.shopNameShow)
-            Valid= itemView.findViewById(R.id.promoTimeShow)
+            Valid = itemView.findViewById(R.id.promoTimeShow)
 
-            image=itemView.findViewById(R.id.shopPic)
+            image = itemView.findViewById(R.id.shopPic)
 
             itemView.setOnClickListener(this)
             //itemView.setOnLongClickListener(this)
@@ -77,7 +78,7 @@ class PromoAdapter(private val rssObject: MutableList<Promotions>, private val m
         }
 
         override fun onClick(v: View) {
-            listener2.onItemClick(adapterPosition,rssObject)
+            listener2.onItemClick(adapterPosition, rssObject)
         }
 
         override fun onLongClick(v: View): Boolean {

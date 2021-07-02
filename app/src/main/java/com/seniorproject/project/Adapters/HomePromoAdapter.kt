@@ -15,50 +15,47 @@ import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
 
-class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private val mContext: Context, private val listener2: onItemClickListener2): RecyclerView.Adapter<HomePromoAdapter.HomePromotionViewHolder>()
-{
+class HomePromoAdapter(
+    private val rssObject: MutableList<Promotions>,
+    private val mContext: Context,
+    private val listener2: onItemClickListener2
+) : RecyclerView.Adapter<HomePromoAdapter.HomePromotionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePromotionViewHolder {
 
-        val itemView = inflater.inflate(R.layout.card_home,parent,false)
+        val itemView = inflater.inflate(R.layout.card_home, parent, false)
         return HomePromotionViewHolder(itemView)
     }
 
 
     private val inflater: LayoutInflater
 
-    init{
+    init {
         inflater = LayoutInflater.from(mContext)
     }
 
     override fun onBindViewHolder(holder: HomePromotionViewHolder, position: Int) {
-        holder.redText.text="-"+rssObject[position].Discount
+        holder.redText.text = "-" + rssObject[position].Discount
         Picasso.get().load(rssObject[position].imageURL).into(holder.prom_img)
-        //holder.txtTitle.text = rssObject[position].toString()
-
-        //holder.img.setImageResource(result)
-
     }
+
     override fun getItemCount(): Int {
         return rssObject.size
     }
 
-    inner class HomePromotionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener,
-        View.OnLongClickListener
-    {
+    inner class HomePromotionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener,
+        View.OnLongClickListener {
 
         var redText: TextView
         var red: ImageView
         var prom_img: ImageView
-//        var desFlag: ImageView
-//        var depFlag: ImageView
-
 
         init {
 
-            prom_img=itemView.findViewById(R.id.prom_img)
-            red=itemView.findViewById(R.id.red)
-            redText=itemView.findViewById(R.id.redText)
+            prom_img = itemView.findViewById(R.id.prom_img)
+            red = itemView.findViewById(R.id.red)
+            redText = itemView.findViewById(R.id.redText)
 
             itemView.setOnClickListener(this)
             itemView.setOnLongClickListener(this)
@@ -66,7 +63,7 @@ class HomePromoAdapter(private val rssObject: MutableList<Promotions>, private v
         }
 
         override fun onClick(v: View) {
-            listener2.onItemClick(adapterPosition,rssObject)
+            listener2.onItemClick(adapterPosition, rssObject)
             //Log.d("Clickyy","Clicked2")
         }
 

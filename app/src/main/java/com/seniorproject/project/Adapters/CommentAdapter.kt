@@ -14,11 +14,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
 
-class CommentAdapter(private val rssObject: ArrayList<Review>, private val mContext: Context): RecyclerView.Adapter<CommentAdapter.FeedViewHolders>()
-{
+class CommentAdapter(private val rssObject: ArrayList<Review>, private val mContext: Context) :
+    RecyclerView.Adapter<CommentAdapter.FeedViewHolders>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
-        val itemView = inflater.inflate(R.layout.card_comment,parent,false)
+        val itemView = inflater.inflate(R.layout.card_comment, parent, false)
         return FeedViewHolders(itemView)
     }
 
@@ -27,19 +27,19 @@ class CommentAdapter(private val rssObject: ArrayList<Review>, private val mCont
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = rssObject[position].username
         holder.txtTitle1.text = rssObject[position].comment
-         holder.rate.rating = rssObject[position].rating.toFloat()
+        holder.rate.rating = rssObject[position].rating.toFloat()
         Picasso.get().load(rssObject[position].imageUrl).into(holder.img)
     }
 
     override fun getItemCount(): Int {
         return rssObject.size
     }
-    inner class FeedViewHolders(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
+
+    inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtTitle: TextView = itemView.findViewById(R.id.cmt_username)
         var txtTitle1: TextView = itemView.findViewById(R.id.cmt_usrDes)
         var rate: RatingBar = itemView.findViewById(R.id.cmt_usrRat)
-         var img: ImageView = itemView.findViewById(R.id.cmt_proPic)
+        var img: ImageView = itemView.findViewById(R.id.cmt_proPic)
 
 
     }

@@ -19,8 +19,7 @@ class FavoriteAdapter(
     private val rssObject: MutableList<Restaurants>,
     private val mContext: Context,
     private val listener: onItemClickListener
-): RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>()
-{
+) : RecyclerView.Adapter<FavoriteAdapter.FeedViewHolders>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
 
         val itemView = inflater.inflate(R.layout.card_restaurant, parent, false)
@@ -29,7 +28,7 @@ class FavoriteAdapter(
 
     private val inflater: LayoutInflater
 
-    init{
+    init {
         inflater = LayoutInflater.from(mContext)
     }
 
@@ -38,10 +37,7 @@ class FavoriteAdapter(
         holder.txtTitle1.text = rssObject[position].Category
         var newRating = String.format("%.1f", rssObject[position].Rating).toFloat()
         holder.txtTitle2.text = newRating.toString()
-        // holder.rate.rating = rssObject[position].rating.toFloat()
         Picasso.get().load(rssObject[position].imageURL).into(holder.img)
-        //holder.img.setImageResource(result)
-        //holder.imgbtn.setImageResource(R.drawable.ic_heart)
 
 
     }
@@ -50,15 +46,14 @@ class FavoriteAdapter(
         return rssObject.size
     }
 
-    inner class FeedViewHolders(itemView: View):RecyclerView.ViewHolder(itemView),View.OnClickListener
-    {
+    inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         var txtTitle: TextView
         var txtTitle1: TextView
         var txtTitle2: TextView
         var txtTitle3: TextView
-        //  var rate: RatingBar
-        var img:ImageView
+        var img: ImageView
 
 
         init {
@@ -67,11 +62,9 @@ class FavoriteAdapter(
             txtTitle1 = itemView.findViewById(R.id.textView1)
             txtTitle2 = itemView.findViewById(R.id.vv12)
             txtTitle3 = itemView.findViewById(R.id.resDistance)
-            //  rate= itemView.findViewById(R.id.ratingBar2)
-            img=itemView.findViewById(R.id.imageShow)
-            txtTitle3.visibility= INVISIBLE
+            img = itemView.findViewById(R.id.imageShow)
+            txtTitle3.visibility = INVISIBLE
             txtTitle2.marginTop
-            //  imgbtn=itemView.findViewById(R.id.imageButton)
             itemView.setOnClickListener(this)
 
         }
