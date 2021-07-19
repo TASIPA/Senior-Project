@@ -11,30 +11,19 @@ import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.activity_eve_detail.*
 import kotlinx.android.synthetic.main.activity_res_detail.*
-
+//This is detail page of event
+//This page is to show detail view of user's clicked event
 class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
     lateinit var obj: Events
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eve_detail)
         supportActionBar?.hide()
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        val mapFragment = supportFragmentManager
-//            .findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
+        //initialization
        obj= intent.getSerializableExtra("eveObj") as Events
 
-
+//showing value to app
         eve_name.text = obj.Name
-        //EveType.text = type
-//        var result=when (obj.imageURL) {
-//            "epic1" -> R.drawable.epic1
-//            "epic2" -> R.drawable.epic2
-//            "epic3"-> R.drawable.epic3
-//            "epic4"-> R.drawable.epic4
-//            else -> R.drawable.epic5
-//        }
-//        eve_pic.setImageResource(result)
         eve_desc.text=obj.Description
         eve_loc.text=obj.Location
         eve_type.text=obj.Category
@@ -42,24 +31,4 @@ class EveDetailActivity : AppCompatActivity()/*, OnMapReadyCallback*/ {
         Picasso.get().load(obj.imageURL).into(eve_pic)
     }
 
-//    fun onClick(v: View) {
-//        eve_detailLayout.visibility = View.GONE
-//        eve_reviewLayout.visibility = View.GONE
-//        eve_button3.setBackgroundResource(R.color.white)
-//        eve_button2.setBackgroundResource(R.color.white)
-//
-//        when (v.id) {
-//            R.id.eve_button2 -> {
-//                eve_detailLayout.visibility = View.VISIBLE
-//                eve_button2.setBackgroundResource(R.color.secondary)
-//            }
-//
-//            R.id.eve_button3 -> {
-//                eve_reviewLayout.visibility = View.VISIBLE
-//                eve_button3.setBackgroundResource(R.color.secondary)
-//            }
-//
-//        }
-//
-//    }
 }

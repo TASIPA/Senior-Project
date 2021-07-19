@@ -16,7 +16,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_att_detail.*
-
+//Adapter for Attraction section to give data to recycler view
 class AttractionAdapter(
     private val currentLatLng: LatLng,
     private val rssObject: MutableList<Restaurants>,
@@ -35,7 +35,7 @@ class AttractionAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+    //giving data to each card
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Location
@@ -52,7 +52,7 @@ class AttractionAdapter(
     override fun getItemCount(): Int {
         return filteredData.size
     }
-
+    //binding
     inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -72,14 +72,14 @@ class AttractionAdapter(
 
 
         }
-
+        //to get position of user's clicked data
         override fun onClick(v: View) {
             listener.onItemClick(adapterPosition, filteredData)
         }
 
 
     }
-
+    //this function is for searching and showing the searched data
     fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

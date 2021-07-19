@@ -1,7 +1,7 @@
 package com.seniorproject.project.models
 
 import java.io.Serializable
-
+//Model class for reading restaurant data from firebase
 data class Restaurants(
     val id: Int, val Name: String,
     val imageURL:String, val Category: String, val Rating: Double,

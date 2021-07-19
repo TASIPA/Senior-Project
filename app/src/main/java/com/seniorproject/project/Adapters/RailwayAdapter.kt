@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.seniorproject.project.R
 import com.seniorproject.project.models.RailwayData
-
+//this class is show train data section
 class RailwayAdapter(
     private val rssObject: MutableList<RailwayData>,
     private val mContext: Context
@@ -26,7 +26,7 @@ class RailwayAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+//giving data
     override fun onBindViewHolder(holder: RailwayViewHolder, position: Int) {
         holder.TrainNo.text = rssObject[position].TrainNo.toString()
         holder.TrainDetail.text = rssObject[position].Type
@@ -39,7 +39,7 @@ class RailwayAdapter(
     override fun getItemCount(): Int {
         return rssObject.size
     }
-
+//binding
     class RailwayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener, View.OnLongClickListener {
 

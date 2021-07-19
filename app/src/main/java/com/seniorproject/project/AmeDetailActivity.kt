@@ -27,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_ame_detail.user_rate
 import kotlinx.android.synthetic.main.activity_att_detail.*
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
+//This is detail page of amenity
+//This page is to show detail view of user's clicked amenity
 
 class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
 
@@ -57,20 +59,17 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.ame_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        //firebase hooks
         auth = FirebaseAuth.getInstance()
         var currentuser = auth!!.currentUser!!.uid
         rootNode = FirebaseDatabase.getInstance()
-
         obj= intent.getSerializableExtra("ameObj") as Restaurants
-
         reference = rootNode!!.getReference("favorite").child(currentuser)
         userReference=rootNode!!.getReference("profile").child(currentuser)
-
-
         reviewReference = rootNode!!.getReference("review").child(obj.id.toString())
         reference!!.child(obj.id.toString()).addListenerForSingleValueEvent(this)
 
- //       reviewReference!!.child(pic).addListenerForSingleValueEvent(this)
 
         //get username
         userReference!!.addValueEventListener(object : ValueEventListener {
@@ -84,7 +83,9 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 Log.d("error", "username Error")
             }
         })
-
+       //favorite button
+        // on click add data to real time database
+        //User's can un-fav from this button
         ame_favBtn.setOnClickListener {
             if (!checked) {
                 ame_favBtn.setColorFilter(
@@ -111,21 +112,17 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             }
         }
 
+        //this send user's comment to database
         send_btn.setOnClickListener {
-
             var usrCmt= desTxt.text.toString()
             var userrate= user_rate.rating.toDouble()
              reviewReference!!.child(auth!!.currentUser!!.uid).setValue(Review(uname,usrCmt,userrate,upic))
             cmtSec.visibility=View.GONE
-
             var newRate = (((obj.Rating * obj.RatingNo) + user_rate.rating.toDouble()) / (obj.RatingNo + 1))
-//            var newRating = String.format("%.2f",newRate).toDouble()
+
             //in this case the the calculation have minor diff, the number will round up to be the same number which wont change info of the db
             var newRateNo = obj.RatingNo + 1
-
             dataReference = FirebaseFirestore.getInstance()
-            //dataReference.collection("Restaurants").document("0VkpvEZXuxViOT15MfOC").update("RatingNo", (newRateNo))
-
              dataReference.collection("Amenities").whereEqualTo("id",obj.id)
                 .get()
                 .addOnSuccessListener {
@@ -138,26 +135,18 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 }
 
         }
-        //AmeType.text = type
+
+        //showing data to app
         ame_name.text = obj.Name
         ame_desc.text=obj.Description
-//        var result = when (obj.imageURL) {
-//            "apic1" -> R.drawable.apic1
-//            "apic2" -> R.drawable.apic2
-//            "apic3" -> R.drawable.apic3
-//            "apic4" -> R.drawable.apic4
-//            else -> R.drawable.epic2
-//        }
-//        ame_pic.setImageResource(result)
         var newRating = String.format("%.1f",obj.Rating).toFloat()
         ame_rat.rating = newRating
         ame_ratVal.text=newRating.toString()
         ame_type.text=obj.Category
         ame_loc.text=obj.Location
-
         Picasso.get().load(obj.imageURL).into(ame_pic)
     }
-
+    //change color of button on click
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.value !== null) {
             ame_favBtn.setColorFilter(
@@ -167,6 +156,8 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             checked=true
         }
     }
+
+    //this function is for user to navigate between detail, review and map layout
     fun onClick(v: View) {
         ame_detailLayout.visibility = View.GONE
         ame_reviewLayout.visibility = View.GONE
@@ -193,11 +184,11 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             R.id.ame_button3 -> {
                 ame_reviewLayout.visibility = View.VISIBLE
                 ame_button3.setBackgroundResource(R.color.secondary)
+                //this part of code is to get other user comment and show it through adapter
                 reviewReference!!.addValueEventListener(object: ValueEventListener{
                     override fun onDataChange(it: DataSnapshot) {
                         data?.clear()
                     it.children?.forEach { i ->
-
                         var name = it.child(i.key.toString()).child("username").value.toString()
                         var pic = it.child(i.key.toString()).child("comment").value.toString()
                         var rating = it.child(i.key.toString()).child("rating").value.toString().toDouble()
@@ -212,7 +203,6 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                             if (imgLink.isNotEmpty()){
                                 Picasso.get().load(imgLink).into(cmt_usrPic)
                             }
-
                         }
                         else{
                             imgLink=it.child(i.key.toString()).child("imageUrl").value.toString()
@@ -237,13 +227,11 @@ class AmeDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 })
             }
         }
-
-
     }
     override fun onCancelled(error: DatabaseError) {
         Log.d("Error","Failed to load")
     }
-
+//this function is to show map
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         latLng = LatLng(obj.Latitude,obj.Longitude)

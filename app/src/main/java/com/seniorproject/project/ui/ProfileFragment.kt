@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.proAct_img
 
-
+//This is user's profile fragment section present  in bottom navigation
 class ProfileFragment : Fragment() {
 
     lateinit var auth: FirebaseAuth
@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//we initialize firebase instance for futher use
         auth= FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         dbReference = database.reference.child("profile")
@@ -43,6 +43,8 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         getProfile()
+        //make all three button clickable and intent to desired page
+        //navigation
         proAct_img.setOnClickListener {
             var intent= Intent(activity, ProfileActivity::class.java)
             startActivity(intent)
@@ -58,6 +60,8 @@ class ProfileFragment : Fragment() {
         }
 
     }
+    //get user's info from firebase and store it and show it
+    //we get first and last name and profile pic
     private fun getProfile(){
 
         val user = auth.currentUser

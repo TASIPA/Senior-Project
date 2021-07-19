@@ -15,11 +15,11 @@ import com.seniorproject.project.*
 import com.seniorproject.project.Adapters.FavoriteAdapter
 import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
-import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
-
+//This is favorite fragment present in bottom navigation
+//Under this we show user's favorite restaurants, amenity, etc.
 class FavouriteFragment : Fragment(),onItemClickListener {
 
     lateinit var data: MutableList<Restaurants>
@@ -32,7 +32,7 @@ class FavouriteFragment : Fragment(),onItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+      //creating view and initializing firebase instance for further use
         val root = inflater.inflate(R.layout.fragment_favorite, container, false)
         rootNode = FirebaseDatabase.getInstance()
         user = FirebaseAuth.getInstance()
@@ -41,9 +41,12 @@ class FavouriteFragment : Fragment(),onItemClickListener {
         data= mutableListOf()
         return root
     }
-
+//this is main function in this frag
+    //All process are done under this section
     override fun onResume() {
         super.onResume()
+
+    //Here we get data from realtime database
         reference!!.get().addOnSuccessListener {
             data?.clear()
             it.children?.forEach { i ->
@@ -72,9 +75,10 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                    var pr1= it.child(i.key.toString()).child("price1").value.toString()
                    var pr2= it.child(i.key.toString()).child("price2").value.toString()
                    var pr3= it.child(i.key.toString()).child("price3").value.toString()
-
+                //add these data to mutable list for sending it to adapter class to show data on screen
                 data.add(Restaurants(id,name,img,category,rating,description,distance,lat,long,loc,tel,ratNo,m1,mpic1,pr1,m2,mpic2,pr2,m3,mpic3,pr3))
             }
+            //check if data is not null to send list to adapter
             if (data != null) {
                 val linearLayoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -87,7 +91,9 @@ class FavouriteFragment : Fragment(),onItemClickListener {
                 }!!
 
                 favList.adapter = adapter1
-            } else {
+            }
+            //if data is null we hide the recycler view
+            else {
                 favList.visibility= INVISIBLE
             }
 
@@ -95,7 +101,7 @@ class FavouriteFragment : Fragment(),onItemClickListener {
             Log.e("firebase", "Error getting data", it)
         }
     }
-
+    //this function get user's clicked data position and move to particular page accordingly
     override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
        when(data!![position].id/1000){
            1 -> {var intent=Intent(activity, ResDetailActivity::class.java)

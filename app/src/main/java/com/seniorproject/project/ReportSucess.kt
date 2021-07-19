@@ -3,8 +3,6 @@ package com.seniorproject.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.seniorproject.project.ui.Home.HomeFragment
-import com.seniorproject.project.ui.Home.HomeViewModel
 import kotlinx.android.synthetic.main.activity_report_sucess.*
 
 class ReportSucess : AppCompatActivity() {

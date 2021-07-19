@@ -18,17 +18,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
-import com.seniorproject.project.R.color
 import com.seniorproject.project.R.color.*
-import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_ame_detail.*
 import kotlinx.android.synthetic.main.activity_att_detail.*
-import kotlinx.android.synthetic.main.activity_res_detail.*
 
-
+//This is detail page of attraction
+//This page is to show detail view of user's clicked attraction
 class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
 
     private lateinit var mMap: GoogleMap
@@ -82,7 +79,9 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 Log.d("error", "username Error")
             }
         })
-
+        //favorite button
+        // on click add data to real time database
+        //User's can un-fav from this button
         att_favBtn.setOnClickListener {
             if (!checked) {
                 att_favBtn.setColorFilter(
@@ -110,6 +109,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 })
             }
         }
+        //this send user's comment to database
         att_sendBtn.setOnClickListener {
 
             var usrCmt= att_desTxt.text.toString()
@@ -139,16 +139,10 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
 
         }
+
+        //showing data to app
         att_name.text = obj.Name
         att_desc.text=obj.Description
-//        var result = when (obj.imageURL) {
-//            "attpic1" -> R.drawable.attpic1
-//            "attpic2" -> R.drawable.attpic2
-//            "attpic3" -> R.drawable.attpic3
-//            "attpic4" -> R.drawable.attpic5
-//            else -> R.drawable.epic2
-//        }
-//        att_pic.setImageResource(result)
         var newRating = String.format("%.1f",obj.Rating).toFloat()
         att_rat.rating = newRating
         att_ratVal.text = newRating.toString()
@@ -157,7 +151,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         Picasso.get().load(obj.imageURL).into(att_pic)
     }
-
+    //this function is for user to navigate between detail, review and map layout
     fun onClick(v: View) {
         attdetailLayout.visibility = GONE
         att_reviewLayout.visibility = GONE
@@ -184,6 +178,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             R.id.attbutton3 -> {
                 att_reviewLayout.visibility = VISIBLE
                 attbutton3.setBackgroundResource(secondary)
+                //this part of code is to get other user comment and show it through adapter
                 reviewReference!!.addValueEventListener(object: ValueEventListener{
                     override fun onDataChange(it: DataSnapshot) {
                         data?.clear()
@@ -230,7 +225,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
         }
     }
-
+    //this function is to show map
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         latLng = LatLng(obj.Latitude,obj.Longitude)
@@ -238,7 +233,7 @@ class AttDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         mMap.addMarker(MarkerOptions().position(latLng).title(obj.Name))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
     }
-
+    //change color of button on click
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.value !== null) {
             att_favBtn.setColorFilter(

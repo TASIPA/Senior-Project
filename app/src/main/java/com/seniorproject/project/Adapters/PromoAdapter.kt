@@ -13,7 +13,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
-
+//Adapter to show promotion list
 class PromoAdapter(
     private val rssObject: MutableList<Promotions>,
     private val mContext: Context,
@@ -32,7 +32,7 @@ class PromoAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+//giving data
     override fun onBindViewHolder(holder: PromotionViewHolder, position: Int) {
         holder.Category.text = rssObject[position].Category
         holder.Discount.text = rssObject[position].Discount
@@ -46,7 +46,7 @@ class PromoAdapter(
     override fun getItemCount(): Int {
         return rssObject.size
     }
-
+//binding
     inner class PromotionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener,
         View.OnLongClickListener {
@@ -76,7 +76,7 @@ class PromoAdapter(
             //itemView.setOnLongClickListener(this)
 
         }
-
+//to get user's clicked data position
         override fun onClick(v: View) {
             listener2.onItemClick(adapterPosition, rssObject)
         }

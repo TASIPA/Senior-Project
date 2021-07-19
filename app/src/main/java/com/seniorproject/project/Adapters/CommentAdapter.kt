@@ -13,7 +13,7 @@ import com.seniorproject.project.models.Review
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_res_detail.*
 
-
+//This class is show other users comment
 class CommentAdapter(private val rssObject: ArrayList<Review>, private val mContext: Context) :
     RecyclerView.Adapter<CommentAdapter.FeedViewHolders>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolders {
@@ -23,7 +23,7 @@ class CommentAdapter(private val rssObject: ArrayList<Review>, private val mCont
     }
 
     private val inflater: LayoutInflater = LayoutInflater.from(mContext)
-
+//giving data to card
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = rssObject[position].username
         holder.txtTitle1.text = rssObject[position].comment
@@ -34,7 +34,7 @@ class CommentAdapter(private val rssObject: ArrayList<Review>, private val mCont
     override fun getItemCount(): Int {
         return rssObject.size
     }
-
+//binding
     inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txtTitle: TextView = itemView.findViewById(R.id.cmt_username)
         var txtTitle1: TextView = itemView.findViewById(R.id.cmt_usrDes)

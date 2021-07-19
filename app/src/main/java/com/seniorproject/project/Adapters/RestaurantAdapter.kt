@@ -17,7 +17,7 @@ import com.seniorproject.project.Interface.onItemClickListener
 import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
-
+//Adapter to show Restaurant data on recycler view
 class RestaurantAdapter(
     private val currentLatLng: LatLng,
     private val rssObject: MutableList<Restaurants>,
@@ -32,7 +32,7 @@ class RestaurantAdapter(
     }
 
     private val inflater: LayoutInflater = LayoutInflater.from(mContext)
-
+//giving data to card
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
@@ -45,7 +45,7 @@ class RestaurantAdapter(
     override fun getItemCount(): Int {
         return filteredData.size
     }
-
+//binding
     inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -64,14 +64,15 @@ class RestaurantAdapter(
             //itemView.setOnLongClickListener(this)
 
         }
-
+//get users's clicked data position
         override fun onClick(v: View) {
             listener.onItemClick(adapterPosition, filteredData)
         }
 
 
     }
-
+//search user's searched keyword in restaurant
+    //filter
     fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

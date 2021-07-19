@@ -15,7 +15,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_ame_detail.*
-
+    //Adapter for Amenity section to give data to recycler view
 class AmenityAdapter(
     private val currentLatLng: LatLng,
     private val rssObject: MutableList<Restaurants>,
@@ -34,7 +34,7 @@ class AmenityAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+    //giving data to each card
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = filteredData[position].Name
         holder.txtTitle1.text = filteredData[position].Category
@@ -49,7 +49,7 @@ class AmenityAdapter(
     override fun getItemCount(): Int {
         return filteredData.size
     }
-
+    //binding
     inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -67,14 +67,14 @@ class AmenityAdapter(
             //itemView.setOnLongClickListener(this)
 
         }
-
+        //to get position of user's clicked data
         override fun onClick(v: View) {
             listener.onItemClick(adapterPosition, filteredData)
         }
 
 
     }
-
+    //this function is for searching and showing the searched data
     fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

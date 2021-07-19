@@ -14,7 +14,7 @@ import com.seniorproject.project.R
 import com.seniorproject.project.models.Restaurants
 import com.squareup.picasso.Picasso
 
-
+//Adapter for favorite section to give data to recycler view
 class FavoriteAdapter(
     private val rssObject: MutableList<Restaurants>,
     private val mContext: Context,
@@ -31,7 +31,7 @@ class FavoriteAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+//giving data to card
     override fun onBindViewHolder(holder: FeedViewHolders, position: Int) {
         holder.txtTitle.text = rssObject[position].Name
         holder.txtTitle1.text = rssObject[position].Category
@@ -45,7 +45,7 @@ class FavoriteAdapter(
     override fun getItemCount(): Int {
         return rssObject.size
     }
-
+//binding
     inner class FeedViewHolders(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
@@ -68,7 +68,7 @@ class FavoriteAdapter(
             itemView.setOnClickListener(this)
 
         }
-
+        //to get position of user's clicked data
         override fun onClick(v: View?) {
             listener.onItemClick(adapterPosition, rssObject)
         }

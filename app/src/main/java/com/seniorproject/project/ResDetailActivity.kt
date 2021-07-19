@@ -19,19 +19,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.seniorproject.project.Adapters.CommentAdapter
-import com.seniorproject.project.models.Favorite
 import com.seniorproject.project.models.Restaurants
 import com.seniorproject.project.models.Review
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_ame_detail.*
-import kotlinx.android.synthetic.main.activity_att_detail.*
-import kotlinx.android.synthetic.main.activity_promo_detail.*
 
 import kotlinx.android.synthetic.main.activity_res_detail.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import java.lang.String.format
-import java.text.DecimalFormat
 
+
+//This is detail page of Restaurant
+//This page is to show detail view of user's clicked Restaurant
 class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventListener {
 
     private lateinit var mMap: GoogleMap
@@ -85,6 +81,9 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 Log.d("error", "username Error")
             }
         })
+        //favorite button
+        // on click add data to real time database
+        //User's can un-fav from this button
         res_favBtn.setOnClickListener {
             if (!checked) {
                 res_favBtn.setColorFilter(
@@ -111,6 +110,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 })
             }
         }
+        //this send user's comment to database
         res_sendBtn.setOnClickListener {
 
             var usrCmt = res_desTxt.text.toString()
@@ -139,7 +139,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
                 }
 
         }
-
+        //showing data to app
         res_name.text = obj.Name
         res_desc.text=obj.Description
         var newRating = String.format("%.1f",obj.Rating).toFloat()
@@ -161,7 +161,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         Picasso.get().load(obj.imageURL).into(res_pic)
 
     }
-
+    //this function is for user to navigate between detail, review and map layout
     fun onClick(v: View) {
         res_detailLayout.visibility = GONE
         res_reviewLayout.visibility = GONE
@@ -189,6 +189,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
             R.id.res_button3 -> {
                 res_reviewLayout.visibility = VISIBLE
                 res_button3.setBackgroundResource(R.color.secondary)
+                //this part of code is to get other user comment and show it through adapter
                 reviewReference!!.addValueEventListener(object: ValueEventListener{
                     override fun onDataChange(it: DataSnapshot) {
                         data?.clear()
@@ -237,6 +238,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
 
 
     }
+    //this function is to show map
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         latLng = LatLng(obj.Latitude, obj.Longitude)
@@ -244,7 +246,7 @@ class ResDetailActivity : AppCompatActivity(), OnMapReadyCallback, ValueEventLis
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
 
     }
-
+    //change color of button on click
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.value !== null) {
             res_favBtn.setColorFilter(

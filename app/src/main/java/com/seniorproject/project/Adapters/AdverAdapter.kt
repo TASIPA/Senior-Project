@@ -14,6 +14,7 @@ import com.seniorproject.project.models.Advertisements
 import com.seniorproject.project.models.Promotions
 import com.squareup.picasso.Picasso
 
+//Adapter for advertisement section
 class AdverAdapter(
     private val rssObject: MutableList<Advertisements>,
     private val mContext: Context
@@ -30,7 +31,7 @@ class AdverAdapter(
     init {
         inflater = LayoutInflater.from(mContext)
     }
-
+//show the data in recyler view
     override fun onBindViewHolder(holder: AdverViewHolder, position: Int) {
 
         Picasso.get().load(rssObject[position].Promotion_IMG).into(holder.prom_img2)
@@ -48,7 +49,7 @@ class AdverAdapter(
         var prom_img2: ImageView
 
         init {
-
+        //binding
             prom_img2 = itemView.findViewById(R.id.prom_img2)
 
         }

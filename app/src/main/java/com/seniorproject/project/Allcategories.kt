@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.seniorproject.project.EmergencyService.EmergencyActivity
 
 import kotlinx.android.synthetic.main.activity_category.*
-
+//This class is to display all the categories of our app .
+//All categories can be accessed from this page
 class Allcategories : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +17,7 @@ class Allcategories : AppCompatActivity() {
         back_btn.setOnClickListener {
             finish()
         }
+        //building navigation to category's respective page
         cat_res.setOnClickListener {
             var intent= Intent(this,RestaurantActivity::class.java)
             startActivity(intent)
