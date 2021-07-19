@@ -10,6 +10,8 @@ class ReportSucess : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_sucess)
         supportActionBar?.hide()
+
+        //show that the report has been reported
         val ID = intent.getStringExtra("ReportID").toString()
         ReportID.text = ID
 
