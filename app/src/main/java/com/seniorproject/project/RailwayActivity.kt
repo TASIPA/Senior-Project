@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_category.back_btn
 import kotlinx.android.synthetic.main.activity_railway.RailList
 
-
+//This class is for displaying train data
+//This class uses recycler view to show list of data after getting from firebase
 class RailwayActivity : AppCompatActivity() {
 
     lateinit var traindata:MutableList<RailwayData>
@@ -26,7 +27,7 @@ class RailwayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_railway)
         supportActionBar?.hide()
-
+//binding and navigation
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             val intent = Intent(this, WebActivity::class.java)//back to the login page
             startActivity(intent)
@@ -35,12 +36,12 @@ class RailwayActivity : AppCompatActivity() {
         back_btn.setOnClickListener {
             finish()
         }
-
+//initialization
         traindata= mutableListOf()
         db= FirebaseFirestore.getInstance()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         RailList.layoutManager = linearLayoutManager
-
+//getting data from firebase on basis of dept time
         val docRef = db.collection("Train")
         docRef.orderBy("DepTime").get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
@@ -61,14 +62,7 @@ class RailwayActivity : AppCompatActivity() {
                 Toast.makeText(baseContext,"Fail to read database", Toast.LENGTH_SHORT).show()
 
             }
-
-//        var data= listOf<RailwayData>(RailwayData("356","Ordinary","Salaya","07:00 am","Bangkok","08:05 am"),
-//            RailwayData("84","Special Express","Salaya","07:34 am","Bangkok","08:20 am"),
-//            RailwayData("172","Rapid","Salaya","08:14 am","Bangkok","08:50 am"),
-//            RailwayData("38","Special Express","Salaya","09:10 am","Bangkok","10:10 am"),
-//            RailwayData("261","Ordinary","Salaya","10:15 am","Hua Hin","01:35 pm"),
-//            RailwayData("251","Ordinary","Salaya","01:33 pm","Phrachuchap Khiri Khan","05:20 pm")
-//        )
+        //passing value to adapter for showing data in card view on recycler view
         val adapter = RailwayAdapter(traindata,baseContext)
 
         RailList.adapter = adapter

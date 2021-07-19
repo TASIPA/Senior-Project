@@ -9,7 +9,7 @@ import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
-
+//This class is for login user to our app
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth //Declare the connection to firebase authentication
     private lateinit var dialog: ProgressDialog
@@ -19,17 +19,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar!!.hide()
-
+//firebase hooks
         auth = FirebaseAuth.getInstance()
         dialog = ProgressDialog(this)
-
         val currentUser = auth.currentUser
+        //checks
         if(currentUser != null){
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-
+       //binding and navigation
         LoginBtn.setOnClickListener {
             login()
         }
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent2)
         }
     }
-
+//check email and pass for letting user to enter our app
     private fun login() { //Login page
         var email = emailText.text.toString() //put the input data to email variable
         var pass = passText.text.toString() //put the input data to pass variable
@@ -62,6 +62,8 @@ class LoginActivity : AppCompatActivity() {
             dialog.setMessage("Please Wait..")
             dialog.show()
             dialog.setCanceledOnTouchOutside(false)
+            //checks whether user's enter pass and email is correct
+            // proceed them to home page if it they are valid user
             auth.signInWithEmailAndPassword(email, pass)//pass value to firebase authentication
                 .addOnCompleteListener(this, OnCompleteListener { task ->
                     if (task.isSuccessful) {//check if it contains this user in the authentication data

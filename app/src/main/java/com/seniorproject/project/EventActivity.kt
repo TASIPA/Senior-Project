@@ -36,6 +36,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
+//This is class is similiar to RestaurantActivity.kt
+//Please refer to comment on that file ,in case
 class EventActivity : AppCompatActivity(), onItemClickListener1 {
     lateinit var evedata:MutableList<Events>
     var flag=true

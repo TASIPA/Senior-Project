@@ -41,7 +41,8 @@ import kotlinx.android.synthetic.main.activity_attraction.sort_button
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
-
+//This is class is similiar to RestaurantActivity.kt
+//Please refer to comment on that file ,in case
 class AttractionActivity : AppCompatActivity(),onItemClickListener {
     lateinit var attdata:MutableList<Restaurants>
     lateinit var db: FirebaseFirestore

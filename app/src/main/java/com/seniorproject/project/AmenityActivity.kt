@@ -37,6 +37,8 @@ import kotlinx.android.synthetic.main.activity_amenity.sort_button
 import kotlinx.android.synthetic.main.activity_event.*
 
 
+//This is class is similiar to RestaurantActivity.kt
+//Please refer to comment on that file ,in case
 class AmenityActivity : AppCompatActivity(),onItemClickListener {
     lateinit var amedata:MutableList<Restaurants>
     lateinit var db: FirebaseFirestore

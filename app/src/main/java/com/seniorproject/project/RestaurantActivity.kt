@@ -34,7 +34,8 @@ import kotlinx.android.synthetic.main.activity_restaurant.back_btn
 import kotlinx.android.synthetic.main.activity_restaurant.res_txt
 import kotlinx.android.synthetic.main.activity_restaurant.search_button
 import kotlinx.android.synthetic.main.activity_restaurant.search_view
-
+//This class is for showing list of restaurant
+//This class reads data from firebase and display it on recycler view
 class RestaurantActivity : AppCompatActivity(),onItemClickListener {
     lateinit var resdata: MutableList<Restaurants>
 
@@ -55,13 +56,16 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         back_btn.setOnClickListener {
             finish()
         }
+        //Initialization
         resdata= mutableListOf()
         db= FirebaseFirestore.getInstance()
         dialog = Dialog(this)
        // mDatabase = FirebaseDatabase.getInstance().reference;
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         resList.layoutManager = linearLayoutManager
+
         readAll()
+        //dropdown search field to let user type and search in realtime
         search_button.setOnClickListener {
              if (flag){
                  search_view.visibility= View.VISIBLE
@@ -73,6 +77,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
              }
 
          }
+        //this part of code sends user's typed data to adapter to filter out according to user's searched character
         res_search.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(
                 s: CharSequence?,
@@ -96,12 +101,15 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
 
             }
         })
+        //this part of code is for showing available sorting and sort accordingly
         sort_button.setOnClickListener {
             dialog.setContentView(R.layout.sort_card)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
 
         }
+        //this part of code gets user's current location
+        //It ask user's permission to access location
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
@@ -151,19 +159,20 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         locationManager.removeUpdates(locationListener)
         Log.i("GPS Status","pause")
     }
-
+//Intent to detail page for detail view on user's clicked data
     override fun onItemClick(position: Int,data:MutableList<Restaurants>) {
         var intent= Intent(this,ResDetailActivity::class.java)
         intent.putExtra("Obj",data[position])
         startActivity(intent)
     }
-
+//for sorting by distance
     fun dis_sorting(view: View) {
         dialog.dismiss()
         resdata.sortBy { it.CalculatedDis }
         adapter = RestaurantAdapter(currentLatLng, resdata, baseContext,this)
         resList.adapter=adapter
     }
+    //for sorting by rating
     fun rat_sorting(view: View) {
         dialog.dismiss()
         resdata.sortByDescending { it.Rating }
@@ -171,6 +180,9 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
         resList.adapter=adapter
 
     }
+    //runs on start
+    //shows all data after reading from firestore
+    //no filter applied
     fun readAll() {
         all_txt.setBackgroundResource(R.color.secondary)
          db.collection("Restaurants")
@@ -202,6 +214,8 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             }
 
     }
+    //this function is used for filtering by category of data
+    //various filter available
     fun filter(view: View) {
         all_txt.setBackgroundResource(R.color.white)
         cafe_txt.setBackgroundResource(R.color.white)
@@ -211,6 +225,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             R.id.all ->{readAll()}
             R.id.filter_cafe ->{
                 cafe_txt.setBackgroundResource(R.color.secondary)
+                //filter by cafe
                 db.collection("Restaurants").whereEqualTo("Category","Cafe")
                     .get()
                     .addOnSuccessListener {
@@ -240,6 +255,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     }}
             R.id.filter_dessert ->{
                 des_txt.setBackgroundResource(R.color.secondary)
+                //filter by dessert
                 db.collection("Restaurants").whereEqualTo("Category","Dessert")
                     .get()
                     .addOnSuccessListener {
@@ -269,6 +285,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
                     }
             }
             R.id.filter_res ->{
+                //filter by restaurant
                 res_txt.setBackgroundResource(R.color.secondary)
                 db.collection("Restaurants").whereEqualTo("Category","Restaurant")
                     .get()
@@ -300,6 +317,7 @@ class RestaurantActivity : AppCompatActivity(),onItemClickListener {
             }
         }
     }
+    //this function calculate distance on basis of user's location
     fun calculate_Distance(){
         var i=0
         for (ame in resdata ){
