@@ -18,7 +18,7 @@ public class GetNearbyPlaces extends AsyncTask<Object, String, String> {
     private String googleplaceData, url;
     private GoogleMap mMap;
     private String btn;
-
+//download the API url
     @Override
     protected String doInBackground(Object... objects) {
         mMap = (GoogleMap) objects[0];
@@ -37,13 +37,13 @@ public class GetNearbyPlaces extends AsyncTask<Object, String, String> {
     @Override
     protected void onPostExecute(String s) {
         List<HashMap<String, String>> nearByPlacesList = null;
-
+//store all the nearby places into the list
         DataParser dataParser = new DataParser();
         nearByPlacesList = dataParser.parse(s);
-
+//call the function to display all the nearby places
         DisplayNearbyPlaces(nearByPlacesList);
     }
-
+//show the nearby places on the map
     private void DisplayNearbyPlaces(List<HashMap<String, String>> nearByPlacesList) {
         for (int i = 0; i < nearByPlacesList.size(); i++) {
             MarkerOptions markerOptions = new MarkerOptions();
@@ -63,8 +63,6 @@ public class GetNearbyPlaces extends AsyncTask<Object, String, String> {
             }
 
             mMap.addMarker(markerOptions);
-            //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            // mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
 
         }
     }

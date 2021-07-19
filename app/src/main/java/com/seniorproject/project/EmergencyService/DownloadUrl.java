@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DownloadUrl {
-
+//read the API url that we appended earlier
     public String RaedTheUrl(String placeUrl) throws IOException {
         String Data = "";
         InputStream inputStream = null;

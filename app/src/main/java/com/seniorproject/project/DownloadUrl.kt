@@ -17,13 +17,13 @@ class DownloadUrl {
         try {
             val url = URL(strUrl)
 
-            // Creating an http connection to communicate with url
+// Creating an http connection to communicate with url
             urlConnection = url.openConnection() as HttpURLConnection
 
-            // Connecting to url
+// Connecting to url
             urlConnection.connect()
 
-            // Reading data from url
+// Reading data from url
             iStream = urlConnection.getInputStream()
             val br = BufferedReader(InputStreamReader(iStream))
             val sb = StringBuffer()

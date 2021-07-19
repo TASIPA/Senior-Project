@@ -29,7 +29,8 @@ class UpdatePassword : AppCompatActivity() {
             changePassword()
         }
     }
-
+//check whether the user input the old password correctly or not
+//if yes, then we ask for the new password and confirm new password
     private fun changePassword() {
 
         var OldPass = old_pass.text.toString()

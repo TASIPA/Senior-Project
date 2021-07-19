@@ -17,7 +17,7 @@ public class DataParser {
         String latitude = "";
         String longitude = "";
         String reference = "";
-
+//read the data from json
         try {
             if (!googlePlaceJSON.isNull("name")) {
                 NameOfPlace = googlePlaceJSON.getString("name");
@@ -40,7 +40,7 @@ public class DataParser {
         }
         return googlePlaceMap;
     }
-
+//get all nearby places
     private List<HashMap<String, String>> getAllnearbyPlaces(JSONArray jsonArray) {
         int counter = jsonArray.length();
         List<HashMap<String, String>> NearbyPlacesList = new ArrayList<>();
@@ -55,11 +55,10 @@ public class DataParser {
         }
         return NearbyPlacesList;
     }
-
+//parse the data from json to be the hashmap
     public List<HashMap<String, String>> parse(String jSONdata) {
         JSONArray jsonArray = null;
         JSONObject jsonObject;
-
 
         try {
             jsonObject = new JSONObject(jSONdata);

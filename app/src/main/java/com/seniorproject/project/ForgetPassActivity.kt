@@ -13,11 +13,11 @@ class ForgetPassActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_forget_pass)
-
+//click on SubmitBtn button to send the link url to the email as user filled in the emailText text-input to set up a new password
         SubmitBtn.setOnClickListener {
             val email = emailText.text.toString()
             if (email.isEmpty()){
-                //emailText.error = "Please enter your email address"
+
                 Toast.makeText(this@ForgetPassActivity,"Please enter your email address",Toast.LENGTH_SHORT).show()
             }else{
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email)

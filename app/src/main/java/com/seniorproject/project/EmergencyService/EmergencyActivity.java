@@ -69,25 +69,25 @@ public class EmergencyActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
-
+//click the callFire button to instantly call the fire station
         FireCall = findViewById(R.id.callFire);
         FireCall.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                //local fire response unit
+
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:024313738"));
                 startActivity(intent);
             }
         });
-
+//click the callpolice button to instantly call the police station
         PoliceCall = findViewById(R.id.callpolice);
         PoliceCall.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                //local police dial number
+
                 Intent intent2 = new Intent(Intent.ACTION_DIAL);
                 intent2.setData(Uri.parse("tel:024411010"));
                 startActivity(intent2);
@@ -99,7 +99,7 @@ public class EmergencyActivity extends FragmentActivity implements
         }
         btn = (Button) findViewById(R.id.hospital_nearby);
         btn1 = (Button) findViewById(R.id.police_nearby);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+//obtain the SupportMapFragment and get notified when the map is ready to be used
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -108,11 +108,9 @@ public class EmergencyActivity extends FragmentActivity implements
 
     public void onClick(View v) {
 
-
         String hospital = "hospital", police = "police";
         Object transferData[] = new Object[3];
         GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces();
-
 
         switch (v.getId()) {
             case R.id.search_button:
@@ -154,7 +152,7 @@ public class EmergencyActivity extends FragmentActivity implements
                     Toast.makeText(this, "Please write the valid location name...", Toast.LENGTH_SHORT).show();
                 }
                 break;
-
+//show all nearby hospital on the map using Google maps API
             case R.id.hospital_nearby:
                 mMap.clear();
                 String url = "";
@@ -174,7 +172,7 @@ public class EmergencyActivity extends FragmentActivity implements
                 Toast.makeText(this, "Searching for nearby Hospitals", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing nearby Hospitals", Toast.LENGTH_SHORT).show();
                 break;
-
+//show all nearby police stations on the map using Google maps API
             case R.id.police_nearby:
 
                 btn.setBackgroundResource(R.color.white);
@@ -198,7 +196,7 @@ public class EmergencyActivity extends FragmentActivity implements
                 break;
         }
     }
-
+//append the url to specify the scope to search
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
         StringBuilder googleURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googleURL.append("location=" + latitude + "," + longitude);
@@ -222,7 +220,7 @@ public class EmergencyActivity extends FragmentActivity implements
 
         }
     }
-
+//ask for the user's permission to access the location of the user
     public boolean checkUserLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -238,7 +236,7 @@ public class EmergencyActivity extends FragmentActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         switch (requestCode) {
             case Request_User_Location_Code:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -253,7 +251,7 @@ public class EmergencyActivity extends FragmentActivity implements
                 }
         }
     }
-
+//build the Google map API
     protected synchronized void buildGoogleApiClient() {
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -263,7 +261,7 @@ public class EmergencyActivity extends FragmentActivity implements
         googleApiClient.connect();
 
     }
-
+//update the user's location periodically
     @Override
     public void onLocationChanged(Location location) {
 
@@ -289,7 +287,7 @@ public class EmergencyActivity extends FragmentActivity implements
         }
 
     }
-
+//set the time to update user's location
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();

@@ -88,6 +88,7 @@ class ReportActivity : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
 
+        //read current date and time and set them as our desired format
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm")
         val formatted = current.format(formatter)
@@ -109,7 +110,7 @@ class ReportActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(layout.custom_spinner_dropdown)
 
             spinner.adapter = adapter
-
+            //set on item click listener
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>,
@@ -165,7 +166,7 @@ class ReportActivity : AppCompatActivity() {
             }
         }
 
-        //dateShowReport.setInputType(InputType.TYPE_NULL)
+//create a date and tie picker for users so that they don't have to type it themselves
         dateShowReport.setOnClickListener {
             val now = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -191,7 +192,7 @@ class ReportActivity : AppCompatActivity() {
 
             },
                 now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
-            //datePicker.datePicker.minDate
+
             now.add(Calendar.DAY_OF_MONTH, -15)
             datePicker.getDatePicker().setMinDate(now.timeInMillis)
             now.add(Calendar.DAY_OF_MONTH, 15)
@@ -203,7 +204,7 @@ class ReportActivity : AppCompatActivity() {
             finish()
         }
     }
-
+//send the information of the report to the google script
     inner class SendRequest :
         AsyncTask<String?, Void?, String>() {
         override fun onPreExecute() {}
@@ -218,11 +219,9 @@ class ReportActivity : AppCompatActivity() {
             return try {
                 val url =
                     URL("https://script.google.com/macros/s/AKfycbxFPYDlxlvIsff8hRBVxyPSMoWA3ZhNIrPb1EgsmX-6phH4dbDHwIT3sv3DACfmwQx6fw/exec")
-                // https://script.google.com/macros/s/AKfycbyuAu6jWNYMiWt9X5yp63-hypxQPlg5JS8NimN6GEGmdKZcIFh0/exec
+
                 val postDataParams = JSONObject()
 
-
-                //    String usn = Integer.toString(i);
                 val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
                 val reportID = UUID.randomUUID().toString()
                 postDataParams.put("topic", topic)
@@ -274,7 +273,7 @@ class ReportActivity : AppCompatActivity() {
             }
         }
     }
-
+//append the url and return it as string
     @Throws(Exception::class)
     fun getPostDataString(params: JSONObject): String {
         val result = StringBuilder()
@@ -290,7 +289,7 @@ class ReportActivity : AppCompatActivity() {
         }
         return result.toString()
     }
-
+//upload the picture from the user's device to the Google Firebase Storage
     private fun uploadFile() {
         if (filePath != null){
             Toast.makeText(applicationContext, "Uploading...", Toast.LENGTH_SHORT).show()
@@ -312,7 +311,7 @@ class ReportActivity : AppCompatActivity() {
                 }
         }
     }
-
+//show all the pictures in user's device
     private fun showPhoto() {
         val intent = Intent()
         intent.type = "image/*"
@@ -332,7 +331,7 @@ class ReportActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
+//load the user's profile information
     private fun loadProfile(){
 
         val user = auth.currentUser

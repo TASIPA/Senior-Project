@@ -40,16 +40,6 @@ class PromoDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
         shop_name.text = obj.ShopName
         product_name.text=obj.ProductName
-        //ResType.text = type
-//        var result = when (obj.imageURL) {
-//            "pic1" -> R.drawable.pic1
-//            "pic2" -> R.drawable.pic2
-//            "pic6" -> R.drawable.pic6
-//            "pic7" -> R.drawable.pic7
-//            else -> R.drawable.pic10
-//        }
-//        res_pic.setImageResource(result)
-        //promoAddress.text=obj.AddressWord
 
         discountShow.text=obj.Discount + " DISCOUNT!!!"
         //typeShow.text=obj.Category
@@ -67,7 +57,6 @@ class PromoDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         latLng = LatLng(obj.Latitude,obj.Longitude)
-        // Add a marker in Sydney and move the camera
         mMap.addMarker(MarkerOptions().position(latLng).title(obj.ShopName))
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))
     }

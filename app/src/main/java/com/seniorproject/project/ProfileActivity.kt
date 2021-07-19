@@ -30,14 +30,13 @@ class ProfileActivity : AppCompatActivity() {
     var imageURL: String? = null
     var imageURL2: String? = null
     var ID:String?=null
-    var gg:String?=null
+
     internal var storage: FirebaseStorage? = null
     internal var storageReference: StorageReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         supportActionBar!!.hide()
 
         storage = FirebaseStorage.getInstance()
@@ -63,8 +62,8 @@ class ProfileActivity : AppCompatActivity() {
         proAct_img.setOnClickListener {
             showPhoto()
         }
+//read all the values from the provided text-input and update the values to the Google Firebase Realtime Database
         DoneBtn.setOnClickListener {
-
             if (Firstname.text.toString().isEmpty() || Lastname.text.toString().isEmpty() || username.text.toString().isEmpty() || phoneNum.text.toString().isEmpty()){
                 Toast.makeText(this,"Please do not leave the information empty",Toast.LENGTH_SHORT).show()
             }
@@ -81,19 +80,11 @@ class ProfileActivity : AppCompatActivity() {
                 finish()
             }
 
-//            if (imageURL2 != null ){
-//                val currentUserDB = dbReference.child(auth.currentUser!!.uid!!)
-//                currentUserDB.child("picurl").setValue(imageURL2)
-//                finish()
-//            }
-//            finish()
         }
-
-        //Firstname.hint = "fhsdofesf"
 
         loadProfile()
     }
-    
+//load the new profile picture to the imageView
     private fun loadProfile(){
         
         val user = auth.currentUser
@@ -118,41 +109,37 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
     }
-
+//upload the picture from the user's device to the Google Firebase Storage
     private fun uploadFile() {
         if (filePath != null){//so that know the picture location
-            //Toast.makeText(applicationContext, "Uploading...", Toast.LENGTH_SHORT).show()
             val imageRef = storageReference!!.child("profileimages/"+ ID)
-            //directory name on the firebase name image...+ the unique ID creation so make sure it is not having the same name
+
             imageRef.putFile(filePath!!)//upload file function!! "filepath" is the picture location
                 .addOnSuccessListener {
                     dialog.dismiss()
                     imageRef.downloadUrl.addOnSuccessListener {
                         imageURL2 = it.toString()
-//
+
                     }
                 }
                 .addOnFailureListener{
                     Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
                 }
                 .addOnProgressListener { taskSnapshot ->
-//                    val progress = 100.0 * taskSnapshot.bytesTransferred/taskSnapshot.totalByteCount //calculate the progress!
-//                    Toast.makeText(applicationContext, "Uploaded "+progress.toInt()+"%..", Toast.LENGTH_SHORT).show()
                     dialog.setMessage("Uploading...")
                     dialog.show()
                     dialog.setCanceledOnTouchOutside(false)
                 }
         }
     }
-
+//show all the pictures in user's device
     private fun showPhoto() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select a photo"),PICK_IMAGE_REQUEST)
-        //first argument = target (in this case, its var intent)
     }
-
+//check the filepath and call the uploadFile function
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {//picture return as the 'data'
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data!=null && data.data!=null)
