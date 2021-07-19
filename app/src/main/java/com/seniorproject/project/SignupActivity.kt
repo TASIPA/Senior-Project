@@ -37,23 +37,10 @@ class SignupActivity : AppCompatActivity() {
 
         dialog= ProgressDialog(this)
         supportActionBar!!.hide()
+
         nextBtn.setOnClickListener {
 
-//            database?.reference!!.orderByChild("username").equalTo(usernameText.text.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
-//
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    if(snapshot.exists()){
-//                        usernameText.error = "Please input the username"
-//                        SignupBtn.text = "PAINTTTTT"
-//                        //Toast.makeText(Context,"This Username already exists!!!",Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//
-//                }
-//            })
-
+            //check all the possible conditions of user errors
             if(firstnameText.text.toString().isEmpty())
             {
                 firstnameText.error = "Please input the firstname"
@@ -84,22 +71,24 @@ class SignupActivity : AppCompatActivity() {
                 phoneText.error = "Phone number must not exceed 10 characters!"
                 return@setOnClickListener
             }
+//switch between first layout and second layout
             else {
                 first.visibility = INVISIBLE
                 second.visibility = VISIBLE
             }
         }
-
+//call the register function
         SignupBtn.setOnClickListener {
             register()
         }
     }
+
     private fun register() {
         var email = emailSignupText.text.toString() //store the input
         var pass = passSignupText.text.toString() //store the input
         var cpass = repassSignupText.text.toString() //store the input
 
-        //check the possible condition of user errors
+        //check all the possible conditions of user errors
         if (email.isEmpty()) {
             emailSignupText.error = "Please enter your Email"
             return
@@ -126,20 +115,19 @@ class SignupActivity : AppCompatActivity() {
         }
 
         //check whether the checkBox is tick or not, if not user won't be able to register
-
         if(!checkBox.isChecked){
             Toast.makeText(this, "Agree & Read TOS", Toast.LENGTH_SHORT).show()
             return
         }
-        //set the dialog running to the user when it creating account to the firebase authentication
-
+//set the dialog running to the user when it creating account to the firebase authentication
         dialog.setMessage("..Creating Account..")
         dialog.show()
         dialog.setCanceledOnTouchOutside(true)
-
-        auth.createUserWithEmailAndPassword(email, pass) //function to create the account by passing the value that we collected
+//create the account by passing the values we collected inside the account
+        auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener(this, OnCompleteListener { task ->
                 if (task.isSuccessful) {
+
                     val currentUser = auth.currentUser
                     val currentUserDB = dbReference?.child(currentUser?.uid!!)
                     currentUserDB?.child("firstname")?.setValue(firstnameText.text.toString())
@@ -148,7 +136,8 @@ class SignupActivity : AppCompatActivity() {
                     currentUserDB?.child("email")?.setValue(emailSignupText.text.toString())
                     currentUserDB?.child("phone")?.setValue(phoneText.text.toString())
 
-                    dialog.cancel()//stop the dialog running when created account in the authentication successfully
+                    //stop the dialog running when created account in the authentication successfully
+                    dialog.cancel()
                     Toast.makeText(this, "Account Created", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, LoginActivity::class.java)//back to the login page
                     startActivity(intent)

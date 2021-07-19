@@ -32,16 +32,18 @@ class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
         back_btn.setOnClickListener {
             finish()
         }
-
+        //firebase hooks
         promodata= mutableListOf()
         db= FirebaseFirestore.getInstance()
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL,false)
         promoList.layoutManager = linearLayoutManager
 
+        //read current date and time and set them as our desired format
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formatted = current.format(formatter)
-
+        //later it will be used to filter out the promotion that has passed the due already
+        //showing data to app as an adapter
         val docRef = db.collection("Promotion")
         docRef.whereGreaterThan("ValidTo",formatted).get()//ordering ...
             .addOnSuccessListener { snapShot ->//this means if read is successful then this data will be loaded to snapshot
@@ -75,7 +77,7 @@ class PromtionActivity : AppCompatActivity(), onItemClickListener2 {
         promoList.adapter = adapter
 
     }
-
+//set on each items click listener to go to the detail page of the clicked item
     override fun onItemClick(position: Int, data: MutableList<Promotions>) {
         var intent= Intent(this,PromoDetailActivity::class.java)
         intent.putExtra("Obj",data[position])

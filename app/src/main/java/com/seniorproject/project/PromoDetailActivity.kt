@@ -38,11 +38,11 @@ class PromoDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
         obj= intent.getSerializableExtra("Obj") as Promotions
 
+        //showing data to app
         shop_name.text = obj.ShopName
         product_name.text=obj.ProductName
 
         discountShow.text=obj.Discount + " DISCOUNT!!!"
-        //typeShow.text=obj.Category
         validShow.text=obj.ValidTo
         InitPrice.text=obj.Ini_Price.toString()+" THB"
         FinalPrice.text=obj.Discount_price.toString()+" THB"
