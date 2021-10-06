@@ -222,7 +222,7 @@ class ReportActivity : AppCompatActivity() {
 
                 val postDataParams = JSONObject()
 
-                val id = "1CSlf7YjepuKrtKGuFr-GJU1azjcn5YV7YHEOUnxQqAQ"
+                val id = "YOUR_KEY"
                 val reportID = UUID.randomUUID().toString()
                 postDataParams.put("topic", topic)
                 postDataParams.put("timestamp", timestamp)
