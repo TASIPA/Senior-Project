@@ -6,6 +6,8 @@ We also implemented report feature where user can report any accidents, damaged 
 Not only that, we also emergency feature in our app which user can access in case of emergency.
 
 Other features:
+
        * User can add their liked places in their favourite tab for quick access
+       
        * User can review and comment on places (also can read other user's comment)
 
