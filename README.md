@@ -7,7 +7,11 @@ Not only that, we also emergency feature in our app which user can access in cas
 
 Other features:
 
-       * User can add their liked places in their favourite tab for quick access
+       * User can add their liked places in their favourite tab for quick access.
        
-       * User can review and comment on places (also can read other user's comment)
+       * User can review and comment on places (also can read other user's comment).
+       
+       * User can search and filter the data show through app.
+       
+       * User can see distance and rating of the place as well as they can sort too
 
