@@ -1,5 +1,5 @@
 # SmartCityApp
-This is mobile application created using Android Studio created using Kotlin programming language. 
+This is mobile application created on Android Studio using Kotlin and Java programming language. 
 It is agile app which can be implemented in other city by implementing database of that city.
 It is basically an application which contain information of almost everything(Restaurants ,Events,Tourist places, Shops, Hotels,Banks,Weather forecast) about particular city.
 We also implemented report feature where user can report any accidents, damaged road, unhygienic place to thier respective authority on Line App.
